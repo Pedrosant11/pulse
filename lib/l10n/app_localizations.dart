@@ -1,0 +1,3944 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart' as intl;
+
+import 'app_localizations_pt.dart';
+
+// ignore_for_file: type=lint
+
+/// Callers can lookup localized strings with an instance of AppLocalizations
+/// returned by `AppLocalizations.of(context)`.
+///
+/// Applications need to include `AppLocalizations.delegate()` in their app's
+/// `localizationDelegates` list, and the locales they support in the app's
+/// `supportedLocales` list. For example:
+///
+/// ```dart
+/// import 'l10n/app_localizations.dart';
+///
+/// return MaterialApp(
+///   localizationsDelegates: AppLocalizations.localizationsDelegates,
+///   supportedLocales: AppLocalizations.supportedLocales,
+///   home: MyApplicationHome(),
+/// );
+/// ```
+///
+/// ## Update pubspec.yaml
+///
+/// Please make sure to update your pubspec.yaml to include the following
+/// packages:
+///
+/// ```yaml
+/// dependencies:
+///   # Internationalization support.
+///   flutter_localizations:
+///     sdk: flutter
+///   intl: any # Use the pinned version from flutter_localizations
+///
+///   # Rest of dependencies
+/// ```
+///
+/// ## iOS Applications
+///
+/// iOS applications define key application metadata, including supported
+/// locales, in an Info.plist file that is built into the application bundle.
+/// To configure the locales supported by your app, you’ll need to edit this
+/// file.
+///
+/// First, open your project’s ios/Runner.xcworkspace Xcode workspace file.
+/// Then, in the Project Navigator, open the Info.plist file under the Runner
+/// project’s Runner folder.
+///
+/// Next, select the Information Property List item, select Add Item from the
+/// Editor menu, then select Localizations from the pop-up menu.
+///
+/// Select and expand the newly-created Localizations item then, for each
+/// locale your application supports, add a new item and select the locale
+/// you wish to add from the pop-up menu in the Value field. This list should
+/// be consistent with the languages listed in the AppLocalizations.supportedLocales
+/// property.
+abstract class AppLocalizations {
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+
+  final String localeName;
+
+  static AppLocalizations of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
+  }
+
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
+
+  /// A list of this localizations delegate along with the default localizations
+  /// delegates.
+  ///
+  /// Returns a list of localizations delegates containing this delegate along with
+  /// GlobalMaterialLocalizations.delegate, GlobalCupertinoLocalizations.delegate,
+  /// and GlobalWidgetsLocalizations.delegate.
+  ///
+  /// Additional delegates can be added by appending to this list in
+  /// MaterialApp. This list does not have to be used at all if a custom list
+  /// of delegates is preferred or required.
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
+
+  /// A list of this localizations delegate's supported locales.
+  static const List<Locale> supportedLocales = <Locale>[Locale('pt')];
+
+  /// No description provided for @appTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pulse'**
+  String get appTitle;
+
+  /// No description provided for @splashTagline.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seu match está na pista.'**
+  String get splashTagline;
+
+  /// No description provided for @navDiscover.
+  ///
+  /// In pt, this message translates to:
+  /// **'Descobrir'**
+  String get navDiscover;
+
+  /// No description provided for @navEvents.
+  ///
+  /// In pt, this message translates to:
+  /// **'Eventos'**
+  String get navEvents;
+
+  /// No description provided for @navChats.
+  ///
+  /// In pt, this message translates to:
+  /// **'Chats'**
+  String get navChats;
+
+  /// No description provided for @navItemWithBadge.
+  ///
+  /// In pt, this message translates to:
+  /// **'{label}, {count, plural, =1{1 novidade} other{{count} novidades}}'**
+  String navItemWithBadge(String label, int count);
+
+  /// No description provided for @navProfile.
+  ///
+  /// In pt, this message translates to:
+  /// **'Perfil'**
+  String get navProfile;
+
+  /// No description provided for @modeDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Date'**
+  String get modeDate;
+
+  /// No description provided for @modeCrew.
+  ///
+  /// In pt, this message translates to:
+  /// **'Crew'**
+  String get modeCrew;
+
+  /// No description provided for @loginTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Entrar'**
+  String get loginTitle;
+
+  /// No description provided for @forgotPasswordTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recuperar senha'**
+  String get forgotPasswordTitle;
+
+  /// No description provided for @onboardingTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seu perfil'**
+  String get onboardingTitle;
+
+  /// No description provided for @eventsTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Eventos'**
+  String get eventsTitle;
+
+  /// No description provided for @chatsTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Chats'**
+  String get chatsTitle;
+
+  /// No description provided for @profileTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Perfil'**
+  String get profileTitle;
+
+  /// No description provided for @settingsTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Configurações'**
+  String get settingsTitle;
+
+  /// No description provided for @adminTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Painel admin'**
+  String get adminTitle;
+
+  /// No description provided for @signOut.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sair'**
+  String get signOut;
+
+  /// No description provided for @signOutAllDevices.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sair de todos os dispositivos'**
+  String get signOutAllDevices;
+
+  /// No description provided for @signOutAllDevicesHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Encerra sua sessão em todos os celulares em que você entrou.'**
+  String get signOutAllDevicesHint;
+
+  /// No description provided for @goToSignup.
+  ///
+  /// In pt, this message translates to:
+  /// **'Criar conta'**
+  String get goToSignup;
+
+  /// No description provided for @goToForgotPassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esqueci minha senha'**
+  String get goToForgotPassword;
+
+  /// No description provided for @goToLogin.
+  ///
+  /// In pt, this message translates to:
+  /// **'Já tenho conta'**
+  String get goToLogin;
+
+  /// No description provided for @openSettings.
+  ///
+  /// In pt, this message translates to:
+  /// **'Configurações'**
+  String get openSettings;
+
+  /// No description provided for @openAdmin.
+  ///
+  /// In pt, this message translates to:
+  /// **'Painel admin'**
+  String get openAdmin;
+
+  /// No description provided for @suggestEvent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sugerir evento'**
+  String get suggestEvent;
+
+  /// No description provided for @stateErrorTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Algo deu errado'**
+  String get stateErrorTitle;
+
+  /// No description provided for @stateRetry.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tentar de novo'**
+  String get stateRetry;
+
+  /// No description provided for @stateLoading.
+  ///
+  /// In pt, this message translates to:
+  /// **'Carregando'**
+  String get stateLoading;
+
+  /// No description provided for @fieldFirstName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome'**
+  String get fieldFirstName;
+
+  /// No description provided for @fieldLastName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sobrenome'**
+  String get fieldLastName;
+
+  /// No description provided for @fieldEmail.
+  ///
+  /// In pt, this message translates to:
+  /// **'E-mail'**
+  String get fieldEmail;
+
+  /// No description provided for @fieldPassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'Senha'**
+  String get fieldPassword;
+
+  /// No description provided for @fieldNewPassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova senha'**
+  String get fieldNewPassword;
+
+  /// No description provided for @fieldConfirmPassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confirme a senha'**
+  String get fieldConfirmPassword;
+
+  /// No description provided for @fieldBirthDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Data de nascimento'**
+  String get fieldBirthDate;
+
+  /// No description provided for @fieldPhone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Celular'**
+  String get fieldPhone;
+
+  /// No description provided for @showPassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mostrar senha'**
+  String get showPassword;
+
+  /// No description provided for @hidePassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ocultar senha'**
+  String get hidePassword;
+
+  /// No description provided for @lastNamePrivacyHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seu sobrenome nunca aparece para outras pessoas.'**
+  String get lastNamePrivacyHint;
+
+  /// No description provided for @birthDatePrivacyHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Só sua idade aparece no perfil.'**
+  String get birthDatePrivacyHint;
+
+  /// No description provided for @validationRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'Campo obrigatório'**
+  String get validationRequired;
+
+  /// No description provided for @validationEmail.
+  ///
+  /// In pt, this message translates to:
+  /// **'Digite um e-mail válido'**
+  String get validationEmail;
+
+  /// No description provided for @validationPassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'Use pelo menos 8 caracteres, com letras e números'**
+  String get validationPassword;
+
+  /// No description provided for @validationPasswordMismatch.
+  ///
+  /// In pt, this message translates to:
+  /// **'As senhas não são iguais'**
+  String get validationPasswordMismatch;
+
+  /// No description provided for @validationUnderage.
+  ///
+  /// In pt, this message translates to:
+  /// **'O Pulse é só para maiores de 18 anos.'**
+  String get validationUnderage;
+
+  /// No description provided for @validationPhone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Digite um celular válido com DDD'**
+  String get validationPhone;
+
+  /// No description provided for @passwordStrengthWeak.
+  ///
+  /// In pt, this message translates to:
+  /// **'Senha fraca'**
+  String get passwordStrengthWeak;
+
+  /// No description provided for @passwordStrengthFair.
+  ///
+  /// In pt, this message translates to:
+  /// **'Senha razoável'**
+  String get passwordStrengthFair;
+
+  /// No description provided for @passwordStrengthGood.
+  ///
+  /// In pt, this message translates to:
+  /// **'Senha boa'**
+  String get passwordStrengthGood;
+
+  /// No description provided for @passwordStrengthStrong.
+  ///
+  /// In pt, this message translates to:
+  /// **'Senha forte'**
+  String get passwordStrengthStrong;
+
+  /// No description provided for @signupStep.
+  ///
+  /// In pt, this message translates to:
+  /// **'Etapa {current} de {total}'**
+  String signupStep(int current, int total);
+
+  /// No description provided for @signupAccountTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Bora começar'**
+  String get signupAccountTitle;
+
+  /// No description provided for @signupAccountSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seus dados de acesso. Você completa o perfil depois.'**
+  String get signupAccountSubtitle;
+
+  /// No description provided for @signupSubmit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Criar conta'**
+  String get signupSubmit;
+
+  /// No description provided for @checkEmailTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confirme seu e-mail'**
+  String get checkEmailTitle;
+
+  /// No description provided for @checkEmailBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Enviamos um link de confirmação para {email}. Abra o e-mail neste celular e toque no link para continuar.'**
+  String checkEmailBody(String email);
+
+  /// No description provided for @checkEmailSpamHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não chegou? Confira o spam ou reenvie.'**
+  String get checkEmailSpamHint;
+
+  /// No description provided for @resendEmail.
+  ///
+  /// In pt, this message translates to:
+  /// **'Reenviar e-mail'**
+  String get resendEmail;
+
+  /// No description provided for @resendEmailIn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Reenviar em {seconds}s'**
+  String resendEmailIn(int seconds);
+
+  /// No description provided for @emailResent.
+  ///
+  /// In pt, this message translates to:
+  /// **'E-mail reenviado.'**
+  String get emailResent;
+
+  /// No description provided for @loginSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Que bom te ver de novo.'**
+  String get loginSubtitle;
+
+  /// No description provided for @loginSubmit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Entrar'**
+  String get loginSubmit;
+
+  /// No description provided for @resendConfirmation.
+  ///
+  /// In pt, this message translates to:
+  /// **'Reenviar e-mail de confirmação'**
+  String get resendConfirmation;
+
+  /// No description provided for @forgotPasswordSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Informe seu e-mail e enviaremos um link para criar uma nova senha.'**
+  String get forgotPasswordSubtitle;
+
+  /// No description provided for @forgotPasswordSubmit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Enviar link'**
+  String get forgotPasswordSubmit;
+
+  /// No description provided for @forgotPasswordSent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Se existir uma conta com esse e-mail, você vai receber o link em instantes.'**
+  String get forgotPasswordSent;
+
+  /// No description provided for @resetPasswordTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova senha'**
+  String get resetPasswordTitle;
+
+  /// No description provided for @resetPasswordSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolha uma senha nova para sua conta.'**
+  String get resetPasswordSubtitle;
+
+  /// No description provided for @resetPasswordSubmit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Salvar senha'**
+  String get resetPasswordSubmit;
+
+  /// No description provided for @phoneStepTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seu celular'**
+  String get phoneStepTitle;
+
+  /// No description provided for @phoneStepSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cada número só pode ter uma conta. Ele nunca aparece no seu perfil.'**
+  String get phoneStepSubtitle;
+
+  /// No description provided for @callingCodeLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'País'**
+  String get callingCodeLabel;
+
+  /// No description provided for @termsStepTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quase lá'**
+  String get termsStepTitle;
+
+  /// No description provided for @termsStepSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Para usar o Pulse, precisamos do seu aceite.'**
+  String get termsStepSubtitle;
+
+  /// No description provided for @termsAcceptTerms.
+  ///
+  /// In pt, this message translates to:
+  /// **'Li e aceito os Termos de Uso e as Diretrizes da Comunidade.'**
+  String get termsAcceptTerms;
+
+  /// No description provided for @termsAcceptPrivacy.
+  ///
+  /// In pt, this message translates to:
+  /// **'Li e aceito a Política de Privacidade.'**
+  String get termsAcceptPrivacy;
+
+  /// No description provided for @termsAcceptLgpd.
+  ///
+  /// In pt, this message translates to:
+  /// **'Autorizo o tratamento dos meus dados pessoais para as finalidades do app, conforme a LGPD.'**
+  String get termsAcceptLgpd;
+
+  /// No description provided for @termsVersion.
+  ///
+  /// In pt, this message translates to:
+  /// **'Versão {version}'**
+  String termsVersion(String version);
+
+  /// No description provided for @termsSubmit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aceitar e continuar'**
+  String get termsSubmit;
+
+  /// No description provided for @splashLoadError.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não conseguimos carregar sua conta.'**
+  String get splashLoadError;
+
+  /// No description provided for @continueButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'Continuar'**
+  String get continueButton;
+
+  /// No description provided for @saveButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'Salvar'**
+  String get saveButton;
+
+  /// No description provided for @savedMessage.
+  ///
+  /// In pt, this message translates to:
+  /// **'Alterações salvas.'**
+  String get savedMessage;
+
+  /// No description provided for @skipForNow.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pular por enquanto'**
+  String get skipForNow;
+
+  /// No description provided for @finishOnboarding.
+  ///
+  /// In pt, this message translates to:
+  /// **'Concluir'**
+  String get finishOnboarding;
+
+  /// No description provided for @onboardingPhotosTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Suas fotos'**
+  String get onboardingPhotosTitle;
+
+  /// No description provided for @onboardingPhotosSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Adicione de 2 a 6 fotos. A primeira é a principal — segure e arraste para reordenar.'**
+  String get onboardingPhotosSubtitle;
+
+  /// No description provided for @photoMain.
+  ///
+  /// In pt, this message translates to:
+  /// **'Principal'**
+  String get photoMain;
+
+  /// No description provided for @photoAdd.
+  ///
+  /// In pt, this message translates to:
+  /// **'Adicionar foto'**
+  String get photoAdd;
+
+  /// No description provided for @photoFromGallery.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolher da galeria'**
+  String get photoFromGallery;
+
+  /// No description provided for @photoFromCamera.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tirar foto'**
+  String get photoFromCamera;
+
+  /// No description provided for @photoRemove.
+  ///
+  /// In pt, this message translates to:
+  /// **'Remover foto'**
+  String get photoRemove;
+
+  /// No description provided for @photoCropTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ajustar foto'**
+  String get photoCropTitle;
+
+  /// No description provided for @photosMinHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Adicione pelo menos {count} fotos para continuar.'**
+  String photosMinHint(int count);
+
+  /// No description provided for @photoSlotLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Foto {position}'**
+  String photoSlotLabel(int position);
+
+  /// No description provided for @onboardingBasicsTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'O básico'**
+  String get onboardingBasicsTitle;
+
+  /// No description provided for @onboardingBasicsSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Como você aparece para as pessoas.'**
+  String get onboardingBasicsSubtitle;
+
+  /// No description provided for @fieldCity.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cidade'**
+  String get fieldCity;
+
+  /// No description provided for @cityPickerTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sua cidade'**
+  String get cityPickerTitle;
+
+  /// No description provided for @citySearchHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Buscar cidade'**
+  String get citySearchHint;
+
+  /// No description provided for @useMyLocation.
+  ///
+  /// In pt, this message translates to:
+  /// **'Usar minha localização'**
+  String get useMyLocation;
+
+  /// No description provided for @locationPrivacyHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Usamos só a cidade. Sua localização exata nunca é salva.'**
+  String get locationPrivacyHint;
+
+  /// No description provided for @locationDenied.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem permissão de localização. Escolha sua cidade na lista.'**
+  String get locationDenied;
+
+  /// No description provided for @locationDisabled.
+  ///
+  /// In pt, this message translates to:
+  /// **'A localização do celular está desligada. Ative ou escolha na lista.'**
+  String get locationDisabled;
+
+  /// No description provided for @locationFailed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não conseguimos sua localização. Escolha na lista.'**
+  String get locationFailed;
+
+  /// No description provided for @fieldOccupation.
+  ///
+  /// In pt, this message translates to:
+  /// **'Área de atuação'**
+  String get fieldOccupation;
+
+  /// No description provided for @occupationHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ex.: Design, Saúde, Tecnologia'**
+  String get occupationHint;
+
+  /// No description provided for @fieldBio.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sobre você'**
+  String get fieldBio;
+
+  /// No description provided for @bioHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conte um pouco da sua vibe na pista.'**
+  String get bioHint;
+
+  /// No description provided for @fieldGender.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gênero'**
+  String get fieldGender;
+
+  /// No description provided for @fieldOrientation.
+  ///
+  /// In pt, this message translates to:
+  /// **'Orientação (opcional)'**
+  String get fieldOrientation;
+
+  /// No description provided for @showOrientation.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mostrar orientação no perfil'**
+  String get showOrientation;
+
+  /// No description provided for @notInformed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não informar'**
+  String get notInformed;
+
+  /// No description provided for @onboardingAboutTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sobre mim'**
+  String get onboardingAboutTitle;
+
+  /// No description provided for @onboardingAboutSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tudo opcional — preencha o que quiser.'**
+  String get onboardingAboutSubtitle;
+
+  /// No description provided for @fieldHeight.
+  ///
+  /// In pt, this message translates to:
+  /// **'Altura'**
+  String get fieldHeight;
+
+  /// No description provided for @heightValue.
+  ///
+  /// In pt, this message translates to:
+  /// **'{cm} cm'**
+  String heightValue(int cm);
+
+  /// No description provided for @fieldLanguages.
+  ///
+  /// In pt, this message translates to:
+  /// **'Idiomas'**
+  String get fieldLanguages;
+
+  /// No description provided for @fieldZodiac.
+  ///
+  /// In pt, this message translates to:
+  /// **'Signo'**
+  String get fieldZodiac;
+
+  /// No description provided for @fieldDrinks.
+  ///
+  /// In pt, this message translates to:
+  /// **'Bebida'**
+  String get fieldDrinks;
+
+  /// No description provided for @fieldSmokes.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fumo'**
+  String get fieldSmokes;
+
+  /// No description provided for @fieldPets.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pets'**
+  String get fieldPets;
+
+  /// No description provided for @onboardingMusicTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sua música'**
+  String get onboardingMusicTitle;
+
+  /// No description provided for @onboardingMusicSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolha seus gêneros favoritos e até 10 DJs.'**
+  String get onboardingMusicSubtitle;
+
+  /// No description provided for @fieldGenres.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gêneros favoritos'**
+  String get fieldGenres;
+
+  /// No description provided for @genresMinHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolha pelo menos 1 gênero.'**
+  String get genresMinHint;
+
+  /// No description provided for @fieldDjs.
+  ///
+  /// In pt, this message translates to:
+  /// **'DJs favoritos'**
+  String get fieldDjs;
+
+  /// No description provided for @djsHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome do DJ'**
+  String get djsHint;
+
+  /// No description provided for @addDj.
+  ///
+  /// In pt, this message translates to:
+  /// **'Adicionar'**
+  String get addDj;
+
+  /// No description provided for @removeDj.
+  ///
+  /// In pt, this message translates to:
+  /// **'Remover {name}'**
+  String removeDj(String name);
+
+  /// No description provided for @djsLimit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você já adicionou 10 DJs.'**
+  String get djsLimit;
+
+  /// No description provided for @onboardingModesTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Como você quer usar'**
+  String get onboardingModesTitle;
+
+  /// No description provided for @onboardingModesSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolha pelo menos um modo. Dá para mudar quando quiser.'**
+  String get onboardingModesSubtitle;
+
+  /// No description provided for @modeDateDescription.
+  ///
+  /// In pt, this message translates to:
+  /// **'Encontro, algo casual ou relacionamento.'**
+  String get modeDateDescription;
+
+  /// No description provided for @modeCrewDescription.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fazer amizades e montar a galera pra não ir sozinho.'**
+  String get modeCrewDescription;
+
+  /// No description provided for @modesMinHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolha pelo menos um modo.'**
+  String get modesMinHint;
+
+  /// No description provided for @dateLookingFor.
+  ///
+  /// In pt, this message translates to:
+  /// **'O que você busca'**
+  String get dateLookingFor;
+
+  /// No description provided for @dateShowMe.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mostrar para mim'**
+  String get dateShowMe;
+
+  /// No description provided for @showMeEveryone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Todo mundo'**
+  String get showMeEveryone;
+
+  /// No description provided for @showMeWomen.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mulheres'**
+  String get showMeWomen;
+
+  /// No description provided for @showMeMen.
+  ///
+  /// In pt, this message translates to:
+  /// **'Homens'**
+  String get showMeMen;
+
+  /// No description provided for @showMeNonBinary.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pessoas não binárias'**
+  String get showMeNonBinary;
+
+  /// No description provided for @dateAgeRange.
+  ///
+  /// In pt, this message translates to:
+  /// **'Idade: {min} a {max}'**
+  String dateAgeRange(int min, int max);
+
+  /// No description provided for @crewSameGender.
+  ///
+  /// In pt, this message translates to:
+  /// **'Crew só com pessoas do mesmo gênero'**
+  String get crewSameGender;
+
+  /// No description provided for @crewSameGenderHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ideal para quem quer, por exemplo, uma crew só de mulheres.'**
+  String get crewSameGenderHint;
+
+  /// No description provided for @crewSameGenderUnavailable.
+  ///
+  /// In pt, this message translates to:
+  /// **'Defina seu gênero no perfil para usar esta opção.'**
+  String get crewSameGenderUnavailable;
+
+  /// No description provided for @onboardingFirstEventTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seu primeiro rolê'**
+  String get onboardingFirstEventTitle;
+
+  /// No description provided for @onboardingFirstEventSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Marque presença em um evento para ver quem também vai.'**
+  String get onboardingFirstEventSubtitle;
+
+  /// No description provided for @attendButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'Eu vou'**
+  String get attendButton;
+
+  /// No description provided for @attendingButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vou!'**
+  String get attendingButton;
+
+  /// No description provided for @noUpcomingEvents.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ainda não há eventos cadastrados. Você vai poder sugerir um na aba Eventos.'**
+  String get noUpcomingEvents;
+
+  /// No description provided for @profileEdit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar perfil'**
+  String get profileEdit;
+
+  /// No description provided for @profilePreviewHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'É assim que as pessoas veem seu perfil.'**
+  String get profilePreviewHint;
+
+  /// No description provided for @profileVerified.
+  ///
+  /// In pt, this message translates to:
+  /// **'Verificado'**
+  String get profileVerified;
+
+  /// No description provided for @profileUpcomingEvents.
+  ///
+  /// In pt, this message translates to:
+  /// **'Próximos eventos'**
+  String get profileUpcomingEvents;
+
+  /// No description provided for @profileNoEvents.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você ainda não marcou presença em nenhum evento.'**
+  String get profileNoEvents;
+
+  /// No description provided for @profileNameAge.
+  ///
+  /// In pt, this message translates to:
+  /// **'{name}, {age}'**
+  String profileNameAge(String name, int age);
+
+  /// No description provided for @profileSectionMusic.
+  ///
+  /// In pt, this message translates to:
+  /// **'Música'**
+  String get profileSectionMusic;
+
+  /// No description provided for @profileSectionAbout.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sobre'**
+  String get profileSectionAbout;
+
+  /// No description provided for @nextPhoto.
+  ///
+  /// In pt, this message translates to:
+  /// **'Próxima foto'**
+  String get nextPhoto;
+
+  /// No description provided for @previousPhoto.
+  ///
+  /// In pt, this message translates to:
+  /// **'Foto anterior'**
+  String get previousPhoto;
+
+  /// No description provided for @editSectionPhotos.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fotos'**
+  String get editSectionPhotos;
+
+  /// No description provided for @editSectionBasics.
+  ///
+  /// In pt, this message translates to:
+  /// **'Básico'**
+  String get editSectionBasics;
+
+  /// No description provided for @editSectionAbout.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sobre mim'**
+  String get editSectionAbout;
+
+  /// No description provided for @editSectionMusic.
+  ///
+  /// In pt, this message translates to:
+  /// **'Música'**
+  String get editSectionMusic;
+
+  /// No description provided for @editSectionModes.
+  ///
+  /// In pt, this message translates to:
+  /// **'Modos e preferências'**
+  String get editSectionModes;
+
+  /// No description provided for @confirm.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confirmar'**
+  String get confirm;
+
+  /// No description provided for @cancel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cancelar'**
+  String get cancel;
+
+  /// No description provided for @approve.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aprovar'**
+  String get approve;
+
+  /// No description provided for @reject.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recusar'**
+  String get reject;
+
+  /// No description provided for @eventsTabUpcoming.
+  ///
+  /// In pt, this message translates to:
+  /// **'Próximos'**
+  String get eventsTabUpcoming;
+
+  /// No description provided for @eventsTabMine.
+  ///
+  /// In pt, this message translates to:
+  /// **'Meus eventos'**
+  String get eventsTabMine;
+
+  /// No description provided for @eventsSearchHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Buscar evento pelo nome'**
+  String get eventsSearchHint;
+
+  /// No description provided for @eventsSearchNationwide.
+  ///
+  /// In pt, this message translates to:
+  /// **'Buscando em todo o Brasil'**
+  String get eventsSearchNationwide;
+
+  /// No description provided for @eventsRadiusLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Até {km} km de {city}'**
+  String eventsRadiusLabel(int km, String city);
+
+  /// No description provided for @eventsRadiusTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Distância máxima'**
+  String get eventsRadiusTitle;
+
+  /// No description provided for @eventsRadiusHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Eventos e pessoas a até {km} km de você.'**
+  String eventsRadiusHint(int km);
+
+  /// No description provided for @filterAnyDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Qualquer data'**
+  String get filterAnyDate;
+
+  /// No description provided for @filterToday.
+  ///
+  /// In pt, this message translates to:
+  /// **'Hoje'**
+  String get filterToday;
+
+  /// No description provided for @filterWeekend.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fim de semana'**
+  String get filterWeekend;
+
+  /// No description provided for @filter30Days.
+  ///
+  /// In pt, this message translates to:
+  /// **'Próximos 30 dias'**
+  String get filter30Days;
+
+  /// No description provided for @eventsEmptyNearby.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum evento perto de você'**
+  String get eventsEmptyNearby;
+
+  /// No description provided for @eventsEmptyNearbyHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aumente a distância, busque pelo nome ou sugira um evento.'**
+  String get eventsEmptyNearbyHint;
+
+  /// No description provided for @eventsEmptySearch.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum evento encontrado'**
+  String get eventsEmptySearch;
+
+  /// No description provided for @eventsEmptyMine.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você ainda não marcou nenhum evento'**
+  String get eventsEmptyMine;
+
+  /// No description provided for @eventsEmptyMineHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ache um rolê em Próximos e toque em \"Eu vou\".'**
+  String get eventsEmptyMineHint;
+
+  /// No description provided for @eventsSeeUpcoming.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver próximos eventos'**
+  String get eventsSeeUpcoming;
+
+  /// No description provided for @goingCount.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =0{Seja a primeira pessoa a ir} =1{1 pessoa vai} other{{count} pessoas vão}}'**
+  String goingCount(int count);
+
+  /// No description provided for @distanceKm.
+  ///
+  /// In pt, this message translates to:
+  /// **'{km} km'**
+  String distanceKm(int km);
+
+  /// No description provided for @eventOfficial.
+  ///
+  /// In pt, this message translates to:
+  /// **'Oficial'**
+  String get eventOfficial;
+
+  /// No description provided for @statusPending.
+  ///
+  /// In pt, this message translates to:
+  /// **'Em análise'**
+  String get statusPending;
+
+  /// No description provided for @statusApproved.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aprovado'**
+  String get statusApproved;
+
+  /// No description provided for @statusRejected.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recusado'**
+  String get statusRejected;
+
+  /// No description provided for @statusCancelled.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cancelado'**
+  String get statusCancelled;
+
+  /// No description provided for @createEvent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Criar evento'**
+  String get createEvent;
+
+  /// No description provided for @moderationQueue.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fila de aprovação'**
+  String get moderationQueue;
+
+  /// No description provided for @eventWhen.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quando'**
+  String get eventWhen;
+
+  /// No description provided for @eventWhere.
+  ///
+  /// In pt, this message translates to:
+  /// **'Onde'**
+  String get eventWhere;
+
+  /// No description provided for @eventMinAge.
+  ///
+  /// In pt, this message translates to:
+  /// **'Classificação: {age}+'**
+  String eventMinAge(int age);
+
+  /// No description provided for @eventLineup.
+  ///
+  /// In pt, this message translates to:
+  /// **'Line-up'**
+  String get eventLineup;
+
+  /// No description provided for @eventAbout.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sobre o evento'**
+  String get eventAbout;
+
+  /// No description provided for @eventBuyTicket.
+  ///
+  /// In pt, this message translates to:
+  /// **'Comprar ingresso'**
+  String get eventBuyTicket;
+
+  /// No description provided for @eventGoing.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quem vai'**
+  String get eventGoing;
+
+  /// No description provided for @eventGoingCounts.
+  ///
+  /// In pt, this message translates to:
+  /// **'{date} no Date · {crew} no Crew'**
+  String eventGoingCounts(int date, int crew);
+
+  /// No description provided for @eventNobodyGoing.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ainda ninguém marcou presença.'**
+  String get eventNobodyGoing;
+
+  /// No description provided for @eventMatchHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Só seus matches aparecem com nome e foto.'**
+  String get eventMatchHint;
+
+  /// No description provided for @eventCrews.
+  ///
+  /// In pt, this message translates to:
+  /// **'Crews deste evento'**
+  String get eventCrews;
+
+  /// No description provided for @eventPendingNotice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Este evento está em análise pela curadoria.'**
+  String get eventPendingNotice;
+
+  /// No description provided for @eventRejectedReason.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recusado: {reason}'**
+  String eventRejectedReason(String reason);
+
+  /// No description provided for @eventCancelledNotice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Este evento foi cancelado.'**
+  String get eventCancelledNotice;
+
+  /// No description provided for @eventEdit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar'**
+  String get eventEdit;
+
+  /// No description provided for @eventCancel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cancelar evento'**
+  String get eventCancel;
+
+  /// No description provided for @eventCancelTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cancelar este evento?'**
+  String get eventCancelTitle;
+
+  /// No description provided for @eventCancelBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quem marcou presença vai ver o evento como cancelado.'**
+  String get eventCancelBody;
+
+  /// No description provided for @eventRejectTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recusar evento'**
+  String get eventRejectTitle;
+
+  /// No description provided for @eventRejectReasonHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Explique o motivo para quem sugeriu'**
+  String get eventRejectReasonHint;
+
+  /// No description provided for @eventLinkError.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não foi possível abrir o link.'**
+  String get eventLinkError;
+
+  /// No description provided for @eventAttendeeAnonymous.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pessoa que vai ao evento'**
+  String get eventAttendeeAnonymous;
+
+  /// No description provided for @eventCreatedBy.
+  ///
+  /// In pt, this message translates to:
+  /// **'Criado por'**
+  String get eventCreatedBy;
+
+  /// No description provided for @eventCreatorDeleted.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta excluída'**
+  String get eventCreatorDeleted;
+
+  /// No description provided for @creatorMemberSince.
+  ///
+  /// In pt, this message translates to:
+  /// **'Membro desde {date}'**
+  String creatorMemberSince(String date);
+
+  /// No description provided for @creatorEventsStats.
+  ///
+  /// In pt, this message translates to:
+  /// **'{created} eventos criados · {rejected} recusados'**
+  String creatorEventsStats(int created, int rejected);
+
+  /// No description provided for @creatorOnlyModerators.
+  ///
+  /// In pt, this message translates to:
+  /// **'Visível só para curadores e admins.'**
+  String get creatorOnlyModerators;
+
+  /// No description provided for @copyEmail.
+  ///
+  /// In pt, this message translates to:
+  /// **'Copiar e-mail'**
+  String get copyEmail;
+
+  /// No description provided for @emailCopied.
+  ///
+  /// In pt, this message translates to:
+  /// **'E-mail copiado.'**
+  String get emailCopied;
+
+  /// No description provided for @eventFormCreateTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Criar evento'**
+  String get eventFormCreateTitle;
+
+  /// No description provided for @eventFormSuggestTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sugerir evento'**
+  String get eventFormSuggestTitle;
+
+  /// No description provided for @eventFormEditTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar evento'**
+  String get eventFormEditTitle;
+
+  /// No description provided for @eventFormSuggestHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sua sugestão passa pela curadoria antes de aparecer para todo mundo.'**
+  String get eventFormSuggestHint;
+
+  /// No description provided for @fieldEventName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome do evento'**
+  String get fieldEventName;
+
+  /// No description provided for @fieldVenue.
+  ///
+  /// In pt, this message translates to:
+  /// **'Local'**
+  String get fieldVenue;
+
+  /// No description provided for @eventsViewMap.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver no mapa'**
+  String get eventsViewMap;
+
+  /// No description provided for @eventsViewList.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver em lista'**
+  String get eventsViewList;
+
+  /// No description provided for @mapUnavailable.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não foi possível carregar o mapa agora. Os eventos continuam marcados.'**
+  String get mapUnavailable;
+
+  /// No description provided for @mapNoEvents.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum evento no mapa com esses filtros.'**
+  String get mapNoEvents;
+
+  /// No description provided for @eventDirections.
+  ///
+  /// In pt, this message translates to:
+  /// **'Como chegar'**
+  String get eventDirections;
+
+  /// No description provided for @eventSecretLocation.
+  ///
+  /// In pt, this message translates to:
+  /// **'Local secreto'**
+  String get eventSecretLocation;
+
+  /// No description provided for @eventLocationRevealAt.
+  ///
+  /// In pt, this message translates to:
+  /// **'O endereço aparece em {date}.'**
+  String eventLocationRevealAt(String date);
+
+  /// No description provided for @eventLocationSearch.
+  ///
+  /// In pt, this message translates to:
+  /// **'Endereço do local'**
+  String get eventLocationSearch;
+
+  /// No description provided for @eventLocationSearchHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Rua e número (ex.: Rua Augusta 657) ou o CEP'**
+  String get eventLocationSearchHint;
+
+  /// No description provided for @eventSecretVisibleToYou.
+  ///
+  /// In pt, this message translates to:
+  /// **'Local secreto: só você e a moderação veem o endereço até {date}.'**
+  String eventSecretVisibleToYou(String date);
+
+  /// No description provided for @eventLocationNoResults.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nada encontrado. Confira o endereço ou marque no mapa.'**
+  String get eventLocationNoResults;
+
+  /// No description provided for @eventLocationPinHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Toque no mapa para ajustar o pin no local exato.'**
+  String get eventLocationPinHint;
+
+  /// No description provided for @eventSecretToggle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Local secreto'**
+  String get eventSecretToggle;
+
+  /// No description provided for @eventSecretHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'O endereço só aparece {hours} h antes. Até lá, o mapa mostra só a região.'**
+  String eventSecretHint(int hours);
+
+  /// No description provided for @eventRevealHours.
+  ///
+  /// In pt, this message translates to:
+  /// **'{hours} h antes'**
+  String eventRevealHours(int hours);
+
+  /// No description provided for @fieldDescription.
+  ///
+  /// In pt, this message translates to:
+  /// **'Descrição (opcional)'**
+  String get fieldDescription;
+
+  /// No description provided for @fieldStartsAt.
+  ///
+  /// In pt, this message translates to:
+  /// **'Início'**
+  String get fieldStartsAt;
+
+  /// No description provided for @fieldEndsAt.
+  ///
+  /// In pt, this message translates to:
+  /// **'Término'**
+  String get fieldEndsAt;
+
+  /// No description provided for @fieldTicketUrl.
+  ///
+  /// In pt, this message translates to:
+  /// **'Link do ingresso (opcional)'**
+  String get fieldTicketUrl;
+
+  /// No description provided for @fieldMinAge.
+  ///
+  /// In pt, this message translates to:
+  /// **'Classificação etária'**
+  String get fieldMinAge;
+
+  /// No description provided for @fieldLineup.
+  ///
+  /// In pt, this message translates to:
+  /// **'Line-up'**
+  String get fieldLineup;
+
+  /// No description provided for @lineupHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome do artista'**
+  String get lineupHint;
+
+  /// No description provided for @addArtist.
+  ///
+  /// In pt, this message translates to:
+  /// **'Adicionar'**
+  String get addArtist;
+
+  /// No description provided for @eventCoverAdd.
+  ///
+  /// In pt, this message translates to:
+  /// **'Adicionar capa'**
+  String get eventCoverAdd;
+
+  /// No description provided for @eventCoverChange.
+  ///
+  /// In pt, this message translates to:
+  /// **'Trocar capa'**
+  String get eventCoverChange;
+
+  /// No description provided for @validationEndsAfterStart.
+  ///
+  /// In pt, this message translates to:
+  /// **'O término precisa ser depois do início (até 7 dias).'**
+  String get validationEndsAfterStart;
+
+  /// No description provided for @validationUrl.
+  ///
+  /// In pt, this message translates to:
+  /// **'Use um link que comece com http:// ou https://'**
+  String get validationUrl;
+
+  /// No description provided for @validationFuture.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolha uma data futura.'**
+  String get validationFuture;
+
+  /// No description provided for @eventSaveSuggest.
+  ///
+  /// In pt, this message translates to:
+  /// **'Enviar sugestão'**
+  String get eventSaveSuggest;
+
+  /// No description provided for @eventSaveCreate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Publicar evento'**
+  String get eventSaveCreate;
+
+  /// No description provided for @eventSubmittedPending.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sugestão enviada! A curadoria vai analisar.'**
+  String get eventSubmittedPending;
+
+  /// No description provided for @eventPublished.
+  ///
+  /// In pt, this message translates to:
+  /// **'Evento publicado!'**
+  String get eventPublished;
+
+  /// No description provided for @similarTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esse evento já existe?'**
+  String get similarTitle;
+
+  /// No description provided for @similarBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Achamos eventos parecidos no mesmo dia e cidade:'**
+  String get similarBody;
+
+  /// No description provided for @similarUseExisting.
+  ///
+  /// In pt, this message translates to:
+  /// **'É este, marcar presença'**
+  String get similarUseExisting;
+
+  /// No description provided for @similarCreateAnyway.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não, é outro evento'**
+  String get similarCreateAnyway;
+
+  /// No description provided for @queueEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum evento aguardando aprovação.'**
+  String get queueEmpty;
+
+  /// No description provided for @roleRequestTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Curadoria e produção'**
+  String get roleRequestTitle;
+
+  /// No description provided for @roleRequestEntry.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quero ser curador ou produtor'**
+  String get roleRequestEntry;
+
+  /// No description provided for @roleCurator.
+  ///
+  /// In pt, this message translates to:
+  /// **'Curador'**
+  String get roleCurator;
+
+  /// No description provided for @roleCuratorDescription.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cadastra eventos e aprova as sugestões da comunidade.'**
+  String get roleCuratorDescription;
+
+  /// No description provided for @roleProducer.
+  ///
+  /// In pt, this message translates to:
+  /// **'Produtor'**
+  String get roleProducer;
+
+  /// No description provided for @roleProducerDescription.
+  ///
+  /// In pt, this message translates to:
+  /// **'Publica os próprios eventos com o selo Oficial.'**
+  String get roleProducerDescription;
+
+  /// No description provided for @roleUser.
+  ///
+  /// In pt, this message translates to:
+  /// **'Usuário'**
+  String get roleUser;
+
+  /// No description provided for @roleAdmin.
+  ///
+  /// In pt, this message translates to:
+  /// **'Admin'**
+  String get roleAdmin;
+
+  /// No description provided for @roleCurrent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seu papel atual: {role}'**
+  String roleCurrent(String role);
+
+  /// No description provided for @roleJustification.
+  ///
+  /// In pt, this message translates to:
+  /// **'Por que você quer esse papel?'**
+  String get roleJustification;
+
+  /// No description provided for @roleLinks.
+  ///
+  /// In pt, this message translates to:
+  /// **'Links (Instagram, site, Resident Advisor…)'**
+  String get roleLinks;
+
+  /// No description provided for @roleLinksHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Um link por linha'**
+  String get roleLinksHint;
+
+  /// No description provided for @roleSubmit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Enviar pedido'**
+  String get roleSubmit;
+
+  /// No description provided for @roleRequestSent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pedido enviado!'**
+  String get roleRequestSent;
+
+  /// No description provided for @roleRequestPending.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seu pedido para {role} está em análise.'**
+  String roleRequestPending(String role);
+
+  /// No description provided for @roleRequestRejected.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seu último pedido não foi aprovado. Você pode enviar outro.'**
+  String get roleRequestRejected;
+
+  /// No description provided for @validationJustification.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escreva pelo menos 10 caracteres.'**
+  String get validationJustification;
+
+  /// No description provided for @adminRoleRequests.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pedidos de papel'**
+  String get adminRoleRequests;
+
+  /// No description provided for @adminNoRoleRequests.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum pedido pendente.'**
+  String get adminNoRoleRequests;
+
+  /// No description provided for @stampLike.
+  ///
+  /// In pt, this message translates to:
+  /// **'CURTI'**
+  String get stampLike;
+
+  /// No description provided for @stampCrewLike.
+  ///
+  /// In pt, this message translates to:
+  /// **'BORA'**
+  String get stampCrewLike;
+
+  /// No description provided for @stampPass.
+  ///
+  /// In pt, this message translates to:
+  /// **'PASSO'**
+  String get stampPass;
+
+  /// No description provided for @discoverGoingTo.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vocês vão: {event}'**
+  String discoverGoingTo(String event);
+
+  /// No description provided for @discoverGoingToMore.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vocês vão: {event} +{count}'**
+  String discoverGoingToMore(String event, int count);
+
+  /// No description provided for @discoverCrewFor.
+  ///
+  /// In pt, this message translates to:
+  /// **'Procurando crew para: {event}'**
+  String discoverCrewFor(String event);
+
+  /// No description provided for @discoverCrewForMore.
+  ///
+  /// In pt, this message translates to:
+  /// **'Procurando crew para: {event} +{count}'**
+  String discoverCrewForMore(String event, int count);
+
+  /// No description provided for @discoverLookingFor.
+  ///
+  /// In pt, this message translates to:
+  /// **'Busca: {intent}'**
+  String discoverLookingFor(String intent);
+
+  /// No description provided for @discoverDjs.
+  ///
+  /// In pt, this message translates to:
+  /// **'Curte: {djs}'**
+  String discoverDjs(String djs);
+
+  /// No description provided for @discoverFallbackBanner.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você já viu todo mundo dos seus eventos por enquanto. Que tal essas pessoas perto de você com o mesmo gosto musical?'**
+  String get discoverFallbackBanner;
+
+  /// No description provided for @discoverSharedGenres.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vocês curtem: {genres}'**
+  String discoverSharedGenres(String genres);
+
+  /// No description provided for @discoverDistance.
+  ///
+  /// In pt, this message translates to:
+  /// **'a {km} km'**
+  String discoverDistance(int km);
+
+  /// No description provided for @discoverNoEventsTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Marque presença em um evento'**
+  String get discoverNoEventsTitle;
+
+  /// No description provided for @discoverNoEventsBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aqui aparecem as pessoas que vão aos mesmos eventos que você.'**
+  String get discoverNoEventsBody;
+
+  /// No description provided for @discoverGoToEvents.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver eventos'**
+  String get discoverGoToEvents;
+
+  /// No description provided for @discoverEmptyTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você viu todo mundo por enquanto'**
+  String get discoverEmptyTitle;
+
+  /// No description provided for @discoverEmptyBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Volte mais tarde ou marque presença em mais eventos.'**
+  String get discoverEmptyBody;
+
+  /// No description provided for @discoverModeOff.
+  ///
+  /// In pt, this message translates to:
+  /// **'O modo {mode} está desligado no seu perfil.'**
+  String discoverModeOff(String mode);
+
+  /// No description provided for @discoverEnableMode.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ativar nos modos'**
+  String get discoverEnableMode;
+
+  /// No description provided for @actionPass.
+  ///
+  /// In pt, this message translates to:
+  /// **'Passar'**
+  String get actionPass;
+
+  /// No description provided for @actionLike.
+  ///
+  /// In pt, this message translates to:
+  /// **'Curtir'**
+  String get actionLike;
+
+  /// No description provided for @actionUndo.
+  ///
+  /// In pt, this message translates to:
+  /// **'Voltar o último'**
+  String get actionUndo;
+
+  /// No description provided for @actionOpenProfile.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver perfil completo'**
+  String get actionOpenProfile;
+
+  /// No description provided for @undoNothing.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não dá para voltar esse.'**
+  String get undoNothing;
+
+  /// No description provided for @matchTitleDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'É MATCH!'**
+  String get matchTitleDate;
+
+  /// No description provided for @matchTitleCrew.
+  ///
+  /// In pt, this message translates to:
+  /// **'BORA JUNTOS!'**
+  String get matchTitleCrew;
+
+  /// No description provided for @matchSubtitleDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você e {name} se curtiram.'**
+  String matchSubtitleDate(String name);
+
+  /// No description provided for @matchSubtitleCrew.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você e {name} querem colar juntos no rolê.'**
+  String matchSubtitleCrew(String name);
+
+  /// No description provided for @matchSendMessage.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mandar mensagem'**
+  String get matchSendMessage;
+
+  /// No description provided for @matchContinue.
+  ///
+  /// In pt, this message translates to:
+  /// **'Continuar'**
+  String get matchContinue;
+
+  /// No description provided for @chatsTabGroups.
+  ///
+  /// In pt, this message translates to:
+  /// **'Grupos'**
+  String get chatsTabGroups;
+
+  /// No description provided for @chatsNewMatches.
+  ///
+  /// In pt, this message translates to:
+  /// **'Novos matches'**
+  String get chatsNewMatches;
+
+  /// No description provided for @chatsEmptyTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma conversa ainda'**
+  String get chatsEmptyTitle;
+
+  /// No description provided for @chatsEmptyBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quando der match, a conversa aparece aqui.'**
+  String get chatsEmptyBody;
+
+  /// No description provided for @chatsGoDiscover.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ir para Descobrir'**
+  String get chatsGoDiscover;
+
+  /// No description provided for @chatsGroupsEmptyTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Suas crews aparecem aqui'**
+  String get chatsGroupsEmptyTitle;
+
+  /// No description provided for @chatsGroupsEmptyBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Crie ou entre numa crew pela tela de um evento.'**
+  String get chatsGroupsEmptyBody;
+
+  /// No description provided for @chatsYouPrefix.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você: {message}'**
+  String chatsYouPrefix(String message);
+
+  /// No description provided for @chatsSayHi.
+  ///
+  /// In pt, this message translates to:
+  /// **'Diga oi 👋'**
+  String get chatsSayHi;
+
+  /// No description provided for @unreadCount.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count} não lidas'**
+  String unreadCount(int count);
+
+  /// No description provided for @chatTyping.
+  ///
+  /// In pt, this message translates to:
+  /// **'digitando…'**
+  String get chatTyping;
+
+  /// No description provided for @chatInputHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mensagem'**
+  String get chatInputHint;
+
+  /// No description provided for @chatSend.
+  ///
+  /// In pt, this message translates to:
+  /// **'Enviar'**
+  String get chatSend;
+
+  /// No description provided for @chatSending.
+  ///
+  /// In pt, this message translates to:
+  /// **'Enviando'**
+  String get chatSending;
+
+  /// No description provided for @chatSent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Enviada'**
+  String get chatSent;
+
+  /// No description provided for @chatRead.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lida'**
+  String get chatRead;
+
+  /// No description provided for @chatFailed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não enviada. Toque para tentar de novo.'**
+  String get chatFailed;
+
+  /// No description provided for @chatDeleted.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mensagem apagada'**
+  String get chatDeleted;
+
+  /// No description provided for @chatDeleteMessage.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apagar mensagem'**
+  String get chatDeleteMessage;
+
+  /// No description provided for @chatDeleteTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apagar esta mensagem?'**
+  String get chatDeleteTitle;
+
+  /// No description provided for @chatDeleteBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ela some para as duas pessoas.'**
+  String get chatDeleteBody;
+
+  /// No description provided for @chatToday.
+  ///
+  /// In pt, this message translates to:
+  /// **'Hoje'**
+  String get chatToday;
+
+  /// No description provided for @chatYesterday.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ontem'**
+  String get chatYesterday;
+
+  /// No description provided for @chatIcebreakersTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quebre o gelo'**
+  String get chatIcebreakersTitle;
+
+  /// No description provided for @icebreakerMeet.
+  ///
+  /// In pt, this message translates to:
+  /// **'Bora se encontrar na {event}?'**
+  String icebreakerMeet(String event);
+
+  /// No description provided for @icebreakerLineup.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quem do line-up da {event} você não perde?'**
+  String icebreakerLineup(String event);
+
+  /// No description provided for @icebreakerFirstTime.
+  ///
+  /// In pt, this message translates to:
+  /// **'Primeira vez na {event}?'**
+  String icebreakerFirstTime(String event);
+
+  /// No description provided for @icebreakerGenericParty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Qual foi a última festa que te marcou?'**
+  String get icebreakerGenericParty;
+
+  /// No description provided for @icebreakerGenericDj.
+  ///
+  /// In pt, this message translates to:
+  /// **'Qual DJ você mais quer ver ao vivo?'**
+  String get icebreakerGenericDj;
+
+  /// No description provided for @chatMenuProfile.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver perfil'**
+  String get chatMenuProfile;
+
+  /// No description provided for @chatMenuUnmatch.
+  ///
+  /// In pt, this message translates to:
+  /// **'Desfazer match'**
+  String get chatMenuUnmatch;
+
+  /// No description provided for @chatMenuBlock.
+  ///
+  /// In pt, this message translates to:
+  /// **'Bloquear'**
+  String get chatMenuBlock;
+
+  /// No description provided for @chatMenuReport.
+  ///
+  /// In pt, this message translates to:
+  /// **'Denunciar'**
+  String get chatMenuReport;
+
+  /// No description provided for @chatUnmatchTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Desfazer o match com {name}?'**
+  String chatUnmatchTitle(String name);
+
+  /// No description provided for @chatUnmatchBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'A conversa some para vocês dois e não dá para desfazer.'**
+  String get chatUnmatchBody;
+
+  /// No description provided for @chatUnavailable.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esta conversa não está mais disponível.'**
+  String get chatUnavailable;
+
+  /// No description provided for @crewTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Crew'**
+  String get crewTitle;
+
+  /// No description provided for @crewsSectionEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ninguém montou uma crew para esse evento ainda.'**
+  String get crewsSectionEmpty;
+
+  /// No description provided for @crewsSectionNotGoing.
+  ///
+  /// In pt, this message translates to:
+  /// **'Marque \"Eu vou\" para ver e montar crews deste evento.'**
+  String get crewsSectionNotGoing;
+
+  /// No description provided for @crewCreate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Montar crew'**
+  String get crewCreate;
+
+  /// No description provided for @crewFormTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova crew'**
+  String get crewFormTitle;
+
+  /// No description provided for @crewFormEditTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar crew'**
+  String get crewFormEditTitle;
+
+  /// No description provided for @crewFormFor.
+  ///
+  /// In pt, this message translates to:
+  /// **'Para: {event}'**
+  String crewFormFor(String event);
+
+  /// No description provided for @crewFormInviteNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'{name} vai receber o convite assim que a crew for criada.'**
+  String crewFormInviteNote(String name);
+
+  /// No description provided for @crewName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome da crew'**
+  String get crewName;
+
+  /// No description provided for @crewNameDefault.
+  ///
+  /// In pt, this message translates to:
+  /// **'Crew de {name}'**
+  String crewNameDefault(String name);
+
+  /// No description provided for @crewDescription.
+  ///
+  /// In pt, this message translates to:
+  /// **'Descrição (opcional)'**
+  String get crewDescription;
+
+  /// No description provided for @crewDescriptionHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ex.: Vamos juntos de metrô, encontro às 22h na entrada.'**
+  String get crewDescriptionHint;
+
+  /// No description provided for @crewOpen.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aberta'**
+  String get crewOpen;
+
+  /// No description provided for @crewOpenHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quem vai ao evento pode pedir para entrar. Desligada, só por convite.'**
+  String get crewOpenHint;
+
+  /// No description provided for @crewInviteOnly.
+  ///
+  /// In pt, this message translates to:
+  /// **'Só convite'**
+  String get crewInviteOnly;
+
+  /// No description provided for @crewSameGenderOnly.
+  ///
+  /// In pt, this message translates to:
+  /// **'Só pessoas do meu gênero'**
+  String get crewSameGenderOnly;
+
+  /// No description provided for @crewSameGenderLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mesmo gênero'**
+  String get crewSameGenderLabel;
+
+  /// No description provided for @crewMembersCount.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count}/{max} pessoas'**
+  String crewMembersCount(int count, int max);
+
+  /// No description provided for @crewFull.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lotada'**
+  String get crewFull;
+
+  /// No description provided for @crewByOwner.
+  ///
+  /// In pt, this message translates to:
+  /// **'de {name}'**
+  String crewByOwner(String name);
+
+  /// No description provided for @crewAskToJoin.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pedir pra entrar'**
+  String get crewAskToJoin;
+
+  /// No description provided for @crewRequested.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pedido enviado'**
+  String get crewRequested;
+
+  /// No description provided for @crewCancelRequest.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cancelar pedido'**
+  String get crewCancelRequest;
+
+  /// No description provided for @crewHasInvite.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você tem um convite para esta crew'**
+  String get crewHasInvite;
+
+  /// No description provided for @crewAcceptInvite.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aceitar convite'**
+  String get crewAcceptInvite;
+
+  /// No description provided for @crewDeclineInvite.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recusar'**
+  String get crewDeclineInvite;
+
+  /// No description provided for @crewOpenChat.
+  ///
+  /// In pt, this message translates to:
+  /// **'Abrir chat do grupo'**
+  String get crewOpenChat;
+
+  /// No description provided for @crewMembers.
+  ///
+  /// In pt, this message translates to:
+  /// **'Membros'**
+  String get crewMembers;
+
+  /// No description provided for @crewOwner.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dono(a)'**
+  String get crewOwner;
+
+  /// No description provided for @crewPendingRequests.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pedidos para entrar'**
+  String get crewPendingRequests;
+
+  /// No description provided for @crewPendingInvites.
+  ///
+  /// In pt, this message translates to:
+  /// **'Convites enviados'**
+  String get crewPendingInvites;
+
+  /// No description provided for @crewInvite.
+  ///
+  /// In pt, this message translates to:
+  /// **'Convidar'**
+  String get crewInvite;
+
+  /// No description provided for @crewInviteTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Convidar para a crew'**
+  String get crewInviteTitle;
+
+  /// No description provided for @crewInviteEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aqui aparecem as pessoas que deram match com você no Crew e vão a esse evento.'**
+  String get crewInviteEmpty;
+
+  /// No description provided for @crewInviteSent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Convite enviado!'**
+  String get crewInviteSent;
+
+  /// No description provided for @crewCancelInvite.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cancelar convite'**
+  String get crewCancelInvite;
+
+  /// No description provided for @crewRemoveMember.
+  ///
+  /// In pt, this message translates to:
+  /// **'Remover da crew'**
+  String get crewRemoveMember;
+
+  /// No description provided for @crewMakeOwner.
+  ///
+  /// In pt, this message translates to:
+  /// **'Passar a posse'**
+  String get crewMakeOwner;
+
+  /// No description provided for @crewLeave.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sair da crew'**
+  String get crewLeave;
+
+  /// No description provided for @crewLeaveTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sair de {name}?'**
+  String crewLeaveTitle(String name);
+
+  /// No description provided for @crewLeaveBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você sai do grupo e do chat.'**
+  String get crewLeaveBody;
+
+  /// No description provided for @crewOwnerLeaveHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Para sair, passe a posse para outra pessoa ou apague a crew.'**
+  String get crewOwnerLeaveHint;
+
+  /// No description provided for @crewDelete.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apagar crew'**
+  String get crewDelete;
+
+  /// No description provided for @crewDeleteTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apagar {name}?'**
+  String crewDeleteTitle(String name);
+
+  /// No description provided for @crewDeleteBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'O grupo e o chat somem para todo mundo.'**
+  String get crewDeleteBody;
+
+  /// No description provided for @crewTransferTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Passar a posse para {name}?'**
+  String crewTransferTitle(String name);
+
+  /// No description provided for @crewRemoveTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Remover {name} da crew?'**
+  String crewRemoveTitle(String name);
+
+  /// No description provided for @crewCreated.
+  ///
+  /// In pt, this message translates to:
+  /// **'Crew criada!'**
+  String get crewCreated;
+
+  /// No description provided for @crewJoined.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você entrou na crew!'**
+  String get crewJoined;
+
+  /// No description provided for @crewNotFound.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esta crew não existe mais.'**
+  String get crewNotFound;
+
+  /// No description provided for @crewInvitesTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Convites de crew'**
+  String get crewInvitesTitle;
+
+  /// No description provided for @crewInviteFrom.
+  ///
+  /// In pt, this message translates to:
+  /// **'{name} te convidou · {count}/8'**
+  String crewInviteFrom(String name, int count);
+
+  /// No description provided for @crewSolo.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vai sozinho(a)'**
+  String get crewSolo;
+
+  /// No description provided for @crewHasCrew.
+  ///
+  /// In pt, this message translates to:
+  /// **'Já tem crew de {count}'**
+  String crewHasCrew(int count);
+
+  /// No description provided for @crewMembersShort.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count} pessoas'**
+  String crewMembersShort(int count);
+
+  /// No description provided for @typingNamed.
+  ///
+  /// In pt, this message translates to:
+  /// **'{name} digitando…'**
+  String typingNamed(String name);
+
+  /// No description provided for @chatMenuViewCrew.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver crew'**
+  String get chatMenuViewCrew;
+
+  /// No description provided for @matchBuildCrew.
+  ///
+  /// In pt, this message translates to:
+  /// **'Montar crew para {event}'**
+  String matchBuildCrew(String event);
+
+  /// No description provided for @genderWoman.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mulher'**
+  String get genderWoman;
+
+  /// No description provided for @genderMan.
+  ///
+  /// In pt, this message translates to:
+  /// **'Homem'**
+  String get genderMan;
+
+  /// No description provided for @genderNonBinary.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pessoa não binária'**
+  String get genderNonBinary;
+
+  /// No description provided for @genderOther.
+  ///
+  /// In pt, this message translates to:
+  /// **'Outro'**
+  String get genderOther;
+
+  /// No description provided for @genderPreferNotSay.
+  ///
+  /// In pt, this message translates to:
+  /// **'Prefiro não dizer'**
+  String get genderPreferNotSay;
+
+  /// No description provided for @orientationStraight.
+  ///
+  /// In pt, this message translates to:
+  /// **'Hétero'**
+  String get orientationStraight;
+
+  /// No description provided for @orientationGay.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gay'**
+  String get orientationGay;
+
+  /// No description provided for @orientationLesbian.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lésbica'**
+  String get orientationLesbian;
+
+  /// No description provided for @orientationBisexual.
+  ///
+  /// In pt, this message translates to:
+  /// **'Bissexual'**
+  String get orientationBisexual;
+
+  /// No description provided for @orientationPansexual.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pansexual'**
+  String get orientationPansexual;
+
+  /// No description provided for @orientationAsexual.
+  ///
+  /// In pt, this message translates to:
+  /// **'Assexual'**
+  String get orientationAsexual;
+
+  /// No description provided for @orientationQueer.
+  ///
+  /// In pt, this message translates to:
+  /// **'Queer'**
+  String get orientationQueer;
+
+  /// No description provided for @orientationQuestioning.
+  ///
+  /// In pt, this message translates to:
+  /// **'Questionando'**
+  String get orientationQuestioning;
+
+  /// No description provided for @orientationOther.
+  ///
+  /// In pt, this message translates to:
+  /// **'Outra'**
+  String get orientationOther;
+
+  /// No description provided for @intentCasual.
+  ///
+  /// In pt, this message translates to:
+  /// **'Algo casual'**
+  String get intentCasual;
+
+  /// No description provided for @intentDating.
+  ///
+  /// In pt, this message translates to:
+  /// **'Encontros'**
+  String get intentDating;
+
+  /// No description provided for @intentRelationship.
+  ///
+  /// In pt, this message translates to:
+  /// **'Relacionamento'**
+  String get intentRelationship;
+
+  /// No description provided for @intentFiguringOut.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ainda descobrindo'**
+  String get intentFiguringOut;
+
+  /// No description provided for @habitNo.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não'**
+  String get habitNo;
+
+  /// No description provided for @habitSocially.
+  ///
+  /// In pt, this message translates to:
+  /// **'Socialmente'**
+  String get habitSocially;
+
+  /// No description provided for @habitYes.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sim'**
+  String get habitYes;
+
+  /// No description provided for @zodiacAries.
+  ///
+  /// In pt, this message translates to:
+  /// **'Áries'**
+  String get zodiacAries;
+
+  /// No description provided for @zodiacTaurus.
+  ///
+  /// In pt, this message translates to:
+  /// **'Touro'**
+  String get zodiacTaurus;
+
+  /// No description provided for @zodiacGemini.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gêmeos'**
+  String get zodiacGemini;
+
+  /// No description provided for @zodiacCancer.
+  ///
+  /// In pt, this message translates to:
+  /// **'Câncer'**
+  String get zodiacCancer;
+
+  /// No description provided for @zodiacLeo.
+  ///
+  /// In pt, this message translates to:
+  /// **'Leão'**
+  String get zodiacLeo;
+
+  /// No description provided for @zodiacVirgo.
+  ///
+  /// In pt, this message translates to:
+  /// **'Virgem'**
+  String get zodiacVirgo;
+
+  /// No description provided for @zodiacLibra.
+  ///
+  /// In pt, this message translates to:
+  /// **'Libra'**
+  String get zodiacLibra;
+
+  /// No description provided for @zodiacScorpio.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escorpião'**
+  String get zodiacScorpio;
+
+  /// No description provided for @zodiacSagittarius.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sagitário'**
+  String get zodiacSagittarius;
+
+  /// No description provided for @zodiacCapricorn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Capricórnio'**
+  String get zodiacCapricorn;
+
+  /// No description provided for @zodiacAquarius.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aquário'**
+  String get zodiacAquarius;
+
+  /// No description provided for @zodiacPisces.
+  ///
+  /// In pt, this message translates to:
+  /// **'Peixes'**
+  String get zodiacPisces;
+
+  /// No description provided for @genreTechno.
+  ///
+  /// In pt, this message translates to:
+  /// **'Techno'**
+  String get genreTechno;
+
+  /// No description provided for @genreHouse.
+  ///
+  /// In pt, this message translates to:
+  /// **'House'**
+  String get genreHouse;
+
+  /// No description provided for @genreTechHouse.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tech House'**
+  String get genreTechHouse;
+
+  /// No description provided for @genreMelodicTechno.
+  ///
+  /// In pt, this message translates to:
+  /// **'Melodic Techno'**
+  String get genreMelodicTechno;
+
+  /// No description provided for @genrePsytrance.
+  ///
+  /// In pt, this message translates to:
+  /// **'Psytrance'**
+  String get genrePsytrance;
+
+  /// No description provided for @genreTrance.
+  ///
+  /// In pt, this message translates to:
+  /// **'Trance'**
+  String get genreTrance;
+
+  /// No description provided for @genreDrumAndBass.
+  ///
+  /// In pt, this message translates to:
+  /// **'Drum & Bass'**
+  String get genreDrumAndBass;
+
+  /// No description provided for @genreDubstep.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dubstep'**
+  String get genreDubstep;
+
+  /// No description provided for @genreAfroHouse.
+  ///
+  /// In pt, this message translates to:
+  /// **'Afro House'**
+  String get genreAfroHouse;
+
+  /// No description provided for @genreMinimal.
+  ///
+  /// In pt, this message translates to:
+  /// **'Minimal'**
+  String get genreMinimal;
+
+  /// No description provided for @genreHardTechno.
+  ///
+  /// In pt, this message translates to:
+  /// **'Hard Techno'**
+  String get genreHardTechno;
+
+  /// No description provided for @genreDiscoNuDisco.
+  ///
+  /// In pt, this message translates to:
+  /// **'Disco / Nu-Disco'**
+  String get genreDiscoNuDisco;
+
+  /// No description provided for @genreEdm.
+  ///
+  /// In pt, this message translates to:
+  /// **'EDM'**
+  String get genreEdm;
+
+  /// No description provided for @genreOther.
+  ///
+  /// In pt, this message translates to:
+  /// **'Outros'**
+  String get genreOther;
+
+  /// No description provided for @petDog.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cachorro'**
+  String get petDog;
+
+  /// No description provided for @petCat.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gato'**
+  String get petCat;
+
+  /// No description provided for @petOther.
+  ///
+  /// In pt, this message translates to:
+  /// **'Outros pets'**
+  String get petOther;
+
+  /// No description provided for @petNone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não tenho'**
+  String get petNone;
+
+  /// No description provided for @petWant.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quero ter'**
+  String get petWant;
+
+  /// No description provided for @languagePt.
+  ///
+  /// In pt, this message translates to:
+  /// **'Português'**
+  String get languagePt;
+
+  /// No description provided for @languageEn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Inglês'**
+  String get languageEn;
+
+  /// No description provided for @languageEs.
+  ///
+  /// In pt, this message translates to:
+  /// **'Espanhol'**
+  String get languageEs;
+
+  /// No description provided for @languageFr.
+  ///
+  /// In pt, this message translates to:
+  /// **'Francês'**
+  String get languageFr;
+
+  /// No description provided for @languageIt.
+  ///
+  /// In pt, this message translates to:
+  /// **'Italiano'**
+  String get languageIt;
+
+  /// No description provided for @languageDe.
+  ///
+  /// In pt, this message translates to:
+  /// **'Alemão'**
+  String get languageDe;
+
+  /// No description provided for @languageJa.
+  ///
+  /// In pt, this message translates to:
+  /// **'Japonês'**
+  String get languageJa;
+
+  /// No description provided for @languageZh.
+  ///
+  /// In pt, this message translates to:
+  /// **'Chinês'**
+  String get languageZh;
+
+  /// No description provided for @languageKo.
+  ///
+  /// In pt, this message translates to:
+  /// **'Coreano'**
+  String get languageKo;
+
+  /// No description provided for @languageRu.
+  ///
+  /// In pt, this message translates to:
+  /// **'Russo'**
+  String get languageRu;
+
+  /// No description provided for @languageAr.
+  ///
+  /// In pt, this message translates to:
+  /// **'Árabe'**
+  String get languageAr;
+
+  /// No description provided for @languageHe.
+  ///
+  /// In pt, this message translates to:
+  /// **'Hebraico'**
+  String get languageHe;
+
+  /// No description provided for @languageNl.
+  ///
+  /// In pt, this message translates to:
+  /// **'Holandês'**
+  String get languageNl;
+
+  /// No description provided for @languageLibras.
+  ///
+  /// In pt, this message translates to:
+  /// **'Libras'**
+  String get languageLibras;
+
+  /// No description provided for @errorMinPhotos.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seu perfil precisa de pelo menos 2 fotos.'**
+  String get errorMinPhotos;
+
+  /// No description provided for @errorNetwork.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem conexão. Verifique sua internet e tente de novo.'**
+  String get errorNetwork;
+
+  /// No description provided for @errorSessionExpired.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sua sessão expirou. Entre novamente.'**
+  String get errorSessionExpired;
+
+  /// No description provided for @errorPermissionDenied.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você não tem permissão para fazer isso.'**
+  String get errorPermissionDenied;
+
+  /// No description provided for @errorNotFound.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não encontramos o que você procurou.'**
+  String get errorNotFound;
+
+  /// No description provided for @errorRateLimited.
+  ///
+  /// In pt, this message translates to:
+  /// **'Calma! Você está indo rápido demais. Tente de novo em instantes.'**
+  String get errorRateLimited;
+
+  /// No description provided for @errorInvalidCredentials.
+  ///
+  /// In pt, this message translates to:
+  /// **'E-mail ou senha incorretos.'**
+  String get errorInvalidCredentials;
+
+  /// No description provided for @errorEmailNotConfirmed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confirme seu e-mail pelo link que enviamos antes de entrar.'**
+  String get errorEmailNotConfirmed;
+
+  /// No description provided for @errorEmailInUse.
+  ///
+  /// In pt, this message translates to:
+  /// **'Já existe uma conta com esse e-mail.'**
+  String get errorEmailInUse;
+
+  /// No description provided for @errorWeakPassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'Essa senha é fraca. Use pelo menos 8 caracteres, com letras e números.'**
+  String get errorWeakPassword;
+
+  /// No description provided for @errorSamePassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'A nova senha precisa ser diferente da atual.'**
+  String get errorSamePassword;
+
+  /// No description provided for @errorPhoneInUse.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esse celular já está vinculado a outra conta.'**
+  String get errorPhoneInUse;
+
+  /// No description provided for @errorUnknown.
+  ///
+  /// In pt, this message translates to:
+  /// **'Algo deu errado. Tente novamente.'**
+  String get errorUnknown;
+
+  /// No description provided for @errorWrongPassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'Senha incorreta.'**
+  String get errorWrongPassword;
+
+  /// No description provided for @blockTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Bloquear {name}?'**
+  String blockTitle(String name);
+
+  /// No description provided for @blockBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vocês deixam de se ver em todo o app: feed, eventos, crews e conversas. A pessoa não é avisada.'**
+  String get blockBody;
+
+  /// No description provided for @blockAction.
+  ///
+  /// In pt, this message translates to:
+  /// **'Bloquear'**
+  String get blockAction;
+
+  /// No description provided for @blockDone.
+  ///
+  /// In pt, this message translates to:
+  /// **'{name} foi bloqueado(a).'**
+  String blockDone(String name);
+
+  /// No description provided for @safetyMenuTooltip.
+  ///
+  /// In pt, this message translates to:
+  /// **'Opções de segurança'**
+  String get safetyMenuTooltip;
+
+  /// No description provided for @reportUserTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Denunciar {name}'**
+  String reportUserTitle(String name);
+
+  /// No description provided for @reportMessageTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Denunciar mensagem'**
+  String get reportMessageTitle;
+
+  /// No description provided for @reportEventTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Denunciar evento'**
+  String get reportEventTitle;
+
+  /// No description provided for @reportIntro.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conte o que aconteceu. A pessoa não fica sabendo quem denunciou.'**
+  String get reportIntro;
+
+  /// No description provided for @reportReasonLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Motivo'**
+  String get reportReasonLabel;
+
+  /// No description provided for @reportDetails.
+  ///
+  /// In pt, this message translates to:
+  /// **'Detalhes (opcional)'**
+  String get reportDetails;
+
+  /// No description provided for @reportDetailsHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'O que aconteceu, quando, onde…'**
+  String get reportDetailsHint;
+
+  /// No description provided for @reportAlsoBlock.
+  ///
+  /// In pt, this message translates to:
+  /// **'Também bloquear {name}'**
+  String reportAlsoBlock(String name);
+
+  /// No description provided for @reportSubmit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Enviar denúncia'**
+  String get reportSubmit;
+
+  /// No description provided for @reportSent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Denúncia enviada. Obrigado por ajudar a manter a pista segura.'**
+  String get reportSent;
+
+  /// No description provided for @reportEventAction.
+  ///
+  /// In pt, this message translates to:
+  /// **'Denunciar evento'**
+  String get reportEventAction;
+
+  /// No description provided for @reportReasonHarassment.
+  ///
+  /// In pt, this message translates to:
+  /// **'Assédio ou ameaça'**
+  String get reportReasonHarassment;
+
+  /// No description provided for @reportReasonInappropriateContent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conteúdo impróprio'**
+  String get reportReasonInappropriateContent;
+
+  /// No description provided for @reportReasonFakeProfile.
+  ///
+  /// In pt, this message translates to:
+  /// **'Perfil falso'**
+  String get reportReasonFakeProfile;
+
+  /// No description provided for @reportReasonFakeEvent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Evento falso ou duplicado'**
+  String get reportReasonFakeEvent;
+
+  /// No description provided for @reportReasonScam.
+  ///
+  /// In pt, this message translates to:
+  /// **'Golpe ou venda'**
+  String get reportReasonScam;
+
+  /// No description provided for @reportReasonScamEvent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Golpe ou ingresso falso'**
+  String get reportReasonScamEvent;
+
+  /// No description provided for @reportReasonSpam.
+  ///
+  /// In pt, this message translates to:
+  /// **'Spam'**
+  String get reportReasonSpam;
+
+  /// No description provided for @reportReasonUnderage.
+  ///
+  /// In pt, this message translates to:
+  /// **'Menor de idade'**
+  String get reportReasonUnderage;
+
+  /// No description provided for @reportReasonSafetyConcern.
+  ///
+  /// In pt, this message translates to:
+  /// **'Risco à segurança de alguém'**
+  String get reportReasonSafetyConcern;
+
+  /// No description provided for @reportReasonOther.
+  ///
+  /// In pt, this message translates to:
+  /// **'Outro motivo'**
+  String get reportReasonOther;
+
+  /// No description provided for @settingsAccountSection.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta'**
+  String get settingsAccountSection;
+
+  /// No description provided for @settingsSafetySection.
+  ///
+  /// In pt, this message translates to:
+  /// **'Segurança'**
+  String get settingsSafetySection;
+
+  /// No description provided for @settingsSessionSection.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sessão'**
+  String get settingsSessionSection;
+
+  /// No description provided for @settingsDangerSection.
+  ///
+  /// In pt, this message translates to:
+  /// **'Zona de perigo'**
+  String get settingsDangerSection;
+
+  /// No description provided for @blockedUsersTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Bloqueados'**
+  String get blockedUsersTitle;
+
+  /// No description provided for @blockedUsersEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você não bloqueou ninguém.'**
+  String get blockedUsersEmpty;
+
+  /// No description provided for @blockedUsersHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ao desbloquear, a pessoa volta a aparecer para você, mas matches e conversas antigas não voltam.'**
+  String get blockedUsersHint;
+
+  /// No description provided for @unblockAction.
+  ///
+  /// In pt, this message translates to:
+  /// **'Desbloquear'**
+  String get unblockAction;
+
+  /// No description provided for @unblockTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Desbloquear {name}?'**
+  String unblockTitle(String name);
+
+  /// No description provided for @safetyTipsTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dicas de segurança'**
+  String get safetyTipsTitle;
+
+  /// No description provided for @safetyTipsEntry.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dicas de segurança na festa'**
+  String get safetyTipsEntry;
+
+  /// No description provided for @safetyTipsIntro.
+  ///
+  /// In pt, this message translates to:
+  /// **'A noite é pra curtir. Algumas combinações ajudam a voltar bem pra casa.'**
+  String get safetyTipsIntro;
+
+  /// No description provided for @safetyTipPublicTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Encontre em público'**
+  String get safetyTipPublicTitle;
+
+  /// No description provided for @safetyTipPublicBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Combine o primeiro encontro num lugar movimentado, de preferência no próprio evento.'**
+  String get safetyTipPublicBody;
+
+  /// No description provided for @safetyTipFriendTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Avise alguém'**
+  String get safetyTipFriendTitle;
+
+  /// No description provided for @safetyTipFriendBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conte a um amigo com quem você vai sair e compartilhe sua localização em tempo real.'**
+  String get safetyTipFriendBody;
+
+  /// No description provided for @safetyTipDrinkTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cuide do seu copo'**
+  String get safetyTipDrinkTitle;
+
+  /// No description provided for @safetyTipDrinkBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não aceite bebida de desconhecidos e não deixe seu copo sozinho. Se algo parecer estranho, peça ajuda.'**
+  String get safetyTipDrinkBody;
+
+  /// No description provided for @safetyTipLimitsTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Hidrate-se e respeite seus limites'**
+  String get safetyTipLimitsTitle;
+
+  /// No description provided for @safetyTipLimitsBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Beba água, faça pausas e, se passar mal ou vir alguém passando mal, procure a equipe médica do evento.'**
+  String get safetyTipLimitsBody;
+
+  /// No description provided for @safetyTipConsentTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Consentimento sempre'**
+  String get safetyTipConsentTitle;
+
+  /// No description provided for @safetyTipConsentBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não é não. Se algo te deixar desconfortável, saia da situação e chame a segurança do evento.'**
+  String get safetyTipConsentBody;
+
+  /// No description provided for @safetyTipRideTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Planeje a volta'**
+  String get safetyTipRideTitle;
+
+  /// No description provided for @safetyTipRideBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Defina como vai voltar antes de sair e use transporte confiável.'**
+  String get safetyTipRideBody;
+
+  /// No description provided for @safetyTipDataTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Proteja seus dados'**
+  String get safetyTipDataTitle;
+
+  /// No description provided for @safetyTipDataBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não passe endereço, documentos ou dados bancários. O Pulse nunca pede sua senha por mensagem.'**
+  String get safetyTipDataBody;
+
+  /// No description provided for @safetyTipReportTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Denuncie e bloqueie'**
+  String get safetyTipReportTitle;
+
+  /// No description provided for @safetyTipReportBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Use Denunciar e Bloquear em qualquer perfil, mensagem ou evento. Nossa equipe analisa cada denúncia.'**
+  String get safetyTipReportBody;
+
+  /// No description provided for @safetyEmergency.
+  ///
+  /// In pt, this message translates to:
+  /// **'Em emergência'**
+  String get safetyEmergency;
+
+  /// No description provided for @safetyCallPolice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Polícia · 190'**
+  String get safetyCallPolice;
+
+  /// No description provided for @safetyCallAmbulance.
+  ///
+  /// In pt, this message translates to:
+  /// **'SAMU · 192'**
+  String get safetyCallAmbulance;
+
+  /// No description provided for @matchSafetyTips.
+  ///
+  /// In pt, this message translates to:
+  /// **'Antes de se encontrar, veja as dicas de segurança'**
+  String get matchSafetyTips;
+
+  /// No description provided for @deleteAccountEntry.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir conta'**
+  String get deleteAccountEntry;
+
+  /// No description provided for @deleteAccountTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir conta'**
+  String get deleteAccountTitle;
+
+  /// No description provided for @deleteAccountWarning.
+  ///
+  /// In pt, this message translates to:
+  /// **'Isso apaga para sempre seu perfil, fotos, matches, conversas e crews. Não dá para desfazer.'**
+  String get deleteAccountWarning;
+
+  /// No description provided for @deleteAccountCrewsNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'Crews que você criou passam para o membro mais antigo.'**
+  String get deleteAccountCrewsNote;
+
+  /// No description provided for @deleteAccountPassword.
+  ///
+  /// In pt, this message translates to:
+  /// **'Digite sua senha para confirmar'**
+  String get deleteAccountPassword;
+
+  /// No description provided for @deleteAccountButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir minha conta'**
+  String get deleteAccountButton;
+
+  /// No description provided for @deleteAccountConfirmTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir sua conta agora?'**
+  String get deleteAccountConfirmTitle;
+
+  /// No description provided for @deleteAccountConfirmBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sua conta e seus dados serão apagados na hora.'**
+  String get deleteAccountConfirmBody;
+
+  /// No description provided for @deleteAccountDone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sua conta foi excluída.'**
+  String get deleteAccountDone;
+
+  /// No description provided for @restrictedSuspendedTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta suspensa'**
+  String get restrictedSuspendedTitle;
+
+  /// No description provided for @restrictedBannedTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta banida'**
+  String get restrictedBannedTitle;
+
+  /// No description provided for @restrictedSuspendedBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Durante a suspensão você não aparece para ninguém e não pode curtir, conversar ou criar eventos.'**
+  String get restrictedSuspendedBody;
+
+  /// No description provided for @restrictedBannedBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sua conta foi encerrada por violar as regras da comunidade.'**
+  String get restrictedBannedBody;
+
+  /// No description provided for @restrictedUntil.
+  ///
+  /// In pt, this message translates to:
+  /// **'Até {date}'**
+  String restrictedUntil(String date);
+
+  /// No description provided for @restrictedReason.
+  ///
+  /// In pt, this message translates to:
+  /// **'Motivo: {reason}'**
+  String restrictedReason(String reason);
+
+  /// No description provided for @restrictedCheckAgain.
+  ///
+  /// In pt, this message translates to:
+  /// **'Verificar de novo'**
+  String get restrictedCheckAgain;
+
+  /// No description provided for @warningNoticeTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aviso da moderação'**
+  String get warningNoticeTitle;
+
+  /// No description provided for @warningNoticeBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recebemos denúncias sobre a sua conta: {reason}\n\nSe acontecer de novo, a conta pode ser suspensa.'**
+  String warningNoticeBody(String reason);
+
+  /// No description provided for @warningNoticeOk.
+  ///
+  /// In pt, this message translates to:
+  /// **'Entendi'**
+  String get warningNoticeOk;
+
+  /// No description provided for @adminReports.
+  ///
+  /// In pt, this message translates to:
+  /// **'Denúncias'**
+  String get adminReports;
+
+  /// No description provided for @adminReportsEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma denúncia pendente.'**
+  String get adminReportsEmpty;
+
+  /// No description provided for @adminRestrictedUsers.
+  ///
+  /// In pt, this message translates to:
+  /// **'Contas suspensas e banidas'**
+  String get adminRestrictedUsers;
+
+  /// No description provided for @adminRestrictedEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma conta restrita.'**
+  String get adminRestrictedEmpty;
+
+  /// No description provided for @adminReportBy.
+  ///
+  /// In pt, this message translates to:
+  /// **'Denunciado por {name}'**
+  String adminReportBy(String name);
+
+  /// No description provided for @adminReportTargetUser.
+  ///
+  /// In pt, this message translates to:
+  /// **'Perfil'**
+  String get adminReportTargetUser;
+
+  /// No description provided for @adminReportTargetMessage.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mensagem'**
+  String get adminReportTargetMessage;
+
+  /// No description provided for @adminReportTargetEvent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Evento'**
+  String get adminReportTargetEvent;
+
+  /// No description provided for @adminReportedUser.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conta denunciada: {name}'**
+  String adminReportedUser(String name);
+
+  /// No description provided for @adminReportedGone.
+  ///
+  /// In pt, this message translates to:
+  /// **'A conta denunciada não existe mais.'**
+  String get adminReportedGone;
+
+  /// No description provided for @adminReportHistory.
+  ///
+  /// In pt, this message translates to:
+  /// **'{reports, plural, =1{1 denúncia} other{{reports} denúncias}} · {actions, plural, =0{nenhuma punição} =1{1 punição} other{{actions} punições}}'**
+  String adminReportHistory(int reports, int actions);
+
+  /// No description provided for @adminReportDetails.
+  ///
+  /// In pt, this message translates to:
+  /// **'Relato: {details}'**
+  String adminReportDetails(String details);
+
+  /// No description provided for @adminDecision.
+  ///
+  /// In pt, this message translates to:
+  /// **'Decisão'**
+  String get adminDecision;
+
+  /// No description provided for @adminOutcomeDismiss.
+  ///
+  /// In pt, this message translates to:
+  /// **'Arquivar'**
+  String get adminOutcomeDismiss;
+
+  /// No description provided for @adminOutcomeResolve.
+  ///
+  /// In pt, this message translates to:
+  /// **'Só resolver'**
+  String get adminOutcomeResolve;
+
+  /// No description provided for @adminOutcomeWarning.
+  ///
+  /// In pt, this message translates to:
+  /// **'Advertir'**
+  String get adminOutcomeWarning;
+
+  /// No description provided for @adminOutcomeSuspension.
+  ///
+  /// In pt, this message translates to:
+  /// **'Suspender'**
+  String get adminOutcomeSuspension;
+
+  /// No description provided for @adminOutcomeBan.
+  ///
+  /// In pt, this message translates to:
+  /// **'Banir'**
+  String get adminOutcomeBan;
+
+  /// No description provided for @adminNote.
+  ///
+  /// In pt, this message translates to:
+  /// **'Motivo (a pessoa vai ver)'**
+  String get adminNote;
+
+  /// No description provided for @adminNoteInternal.
+  ///
+  /// In pt, this message translates to:
+  /// **'Observação (opcional)'**
+  String get adminNoteInternal;
+
+  /// No description provided for @adminSuspensionDays.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dias de suspensão'**
+  String get adminSuspensionDays;
+
+  /// No description provided for @adminSuspensionDaysValue.
+  ///
+  /// In pt, this message translates to:
+  /// **'{days, plural, =1{1 dia} other{{days} dias}}'**
+  String adminSuspensionDaysValue(int days);
+
+  /// No description provided for @adminRemoveMessage.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apagar a mensagem'**
+  String get adminRemoveMessage;
+
+  /// No description provided for @adminRemoveEvent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tirar o evento do ar'**
+  String get adminRemoveEvent;
+
+  /// No description provided for @adminApply.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aplicar'**
+  String get adminApply;
+
+  /// No description provided for @adminReportHandled.
+  ///
+  /// In pt, this message translates to:
+  /// **'Denúncia resolvida.'**
+  String get adminReportHandled;
+
+  /// No description provided for @adminReactivate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Reativar'**
+  String get adminReactivate;
+
+  /// No description provided for @adminReactivateTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Reativar {name}?'**
+  String adminReactivateTitle(String name);
+
+  /// No description provided for @adminReactivateReason.
+  ///
+  /// In pt, this message translates to:
+  /// **'Motivo da reativação'**
+  String get adminReactivateReason;
+
+  /// No description provided for @accountStatusSuspended.
+  ///
+  /// In pt, this message translates to:
+  /// **'Suspensa'**
+  String get accountStatusSuspended;
+
+  /// No description provided for @accountStatusBanned.
+  ///
+  /// In pt, this message translates to:
+  /// **'Banida'**
+  String get accountStatusBanned;
+
+  /// No description provided for @badgeTeam.
+  ///
+  /// In pt, this message translates to:
+  /// **'Equipe Pulse'**
+  String get badgeTeam;
+
+  /// No description provided for @badgeDj.
+  ///
+  /// In pt, this message translates to:
+  /// **'DJ'**
+  String get badgeDj;
+
+  /// No description provided for @badgePublicFigure.
+  ///
+  /// In pt, this message translates to:
+  /// **'Figura pública'**
+  String get badgePublicFigure;
+
+  /// No description provided for @badgeProducer.
+  ///
+  /// In pt, this message translates to:
+  /// **'Produtor'**
+  String get badgeProducer;
+
+  /// No description provided for @badgeSemantics.
+  ///
+  /// In pt, this message translates to:
+  /// **'Selo: {label}'**
+  String badgeSemantics(String label);
+
+  /// No description provided for @badgeRequestEntry.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pedir selo de DJ ou figura pública'**
+  String get badgeRequestEntry;
+
+  /// No description provided for @badgeRequestTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Selos'**
+  String get badgeRequestTitle;
+
+  /// No description provided for @badgeRequestIntro.
+  ///
+  /// In pt, this message translates to:
+  /// **'Selos mostram para todo mundo quem você é na cena. A equipe confere cada pedido.'**
+  String get badgeRequestIntro;
+
+  /// No description provided for @badgeYours.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seus selos'**
+  String get badgeYours;
+
+  /// No description provided for @badgeRequestPending.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seu pedido do selo {badge} está em análise.'**
+  String badgeRequestPending(String badge);
+
+  /// No description provided for @badgeNothingToRequest.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você já tem ou já pediu todos os selos disponíveis.'**
+  String get badgeNothingToRequest;
+
+  /// No description provided for @badgeJustification.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conte quem você é'**
+  String get badgeJustification;
+
+  /// No description provided for @badgeJustificationHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Onde toca, há quanto tempo, por que é conhecido(a)…'**
+  String get badgeJustificationHint;
+
+  /// No description provided for @badgeLinksHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Instagram, SoundCloud, Resident Advisor… (um por linha)'**
+  String get badgeLinksHint;
+
+  /// No description provided for @badgeRequestSent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pedido enviado! Você será avisado(a) quando for analisado.'**
+  String get badgeRequestSent;
+
+  /// No description provided for @adminBadges.
+  ///
+  /// In pt, this message translates to:
+  /// **'Selos'**
+  String get adminBadges;
+
+  /// No description provided for @adminBadgeRequests.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pedidos de selo'**
+  String get adminBadgeRequests;
+
+  /// No description provided for @adminNoBadgeRequests.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum pedido de selo.'**
+  String get adminNoBadgeRequests;
+
+  /// No description provided for @adminGiveBadge.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dar selo'**
+  String get adminGiveBadge;
+
+  /// No description provided for @adminSearchPeople.
+  ///
+  /// In pt, this message translates to:
+  /// **'Buscar pessoa pelo nome'**
+  String get adminSearchPeople;
+
+  /// No description provided for @adminBadgesOf.
+  ///
+  /// In pt, this message translates to:
+  /// **'Selos de {name}'**
+  String adminBadgesOf(String name);
+
+  /// No description provided for @adminProducerFromRole.
+  ///
+  /// In pt, this message translates to:
+  /// **'Produtor vem do papel e não é editado aqui.'**
+  String get adminProducerFromRole;
+
+  /// No description provided for @adminBadgeTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Título (opcional)'**
+  String get adminBadgeTitle;
+
+  /// No description provided for @adminBadgeTitleHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ex.: Residente D-Edge'**
+  String get adminBadgeTitleHint;
+
+  /// No description provided for @adminBadgeTitleTeamHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ex.: CEO, Moderação'**
+  String get adminBadgeTitleTeamHint;
+
+  /// No description provided for @adminManageBadges.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gerenciar selos'**
+  String get adminManageBadges;
+
+  /// No description provided for @legalTerms.
+  ///
+  /// In pt, this message translates to:
+  /// **'Termos de Uso'**
+  String get legalTerms;
+
+  /// No description provided for @legalPrivacy.
+  ///
+  /// In pt, this message translates to:
+  /// **'Política de Privacidade'**
+  String get legalPrivacy;
+
+  /// No description provided for @legalGuidelines.
+  ///
+  /// In pt, this message translates to:
+  /// **'Diretrizes da Comunidade'**
+  String get legalGuidelines;
+
+  /// No description provided for @legalDeleteAccount.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir conta'**
+  String get legalDeleteAccount;
+
+  /// No description provided for @legalRead.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ler'**
+  String get legalRead;
+
+  /// No description provided for @settingsPrivacySection.
+  ///
+  /// In pt, this message translates to:
+  /// **'Privacidade e termos'**
+  String get settingsPrivacySection;
+
+  /// No description provided for @exportDataEntry.
+  ///
+  /// In pt, this message translates to:
+  /// **'Baixar meus dados'**
+  String get exportDataEntry;
+
+  /// No description provided for @exportDataHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Um arquivo com tudo o que o Pulse guarda sobre você.'**
+  String get exportDataHint;
+
+  /// No description provided for @orientationConsent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Autorizo o Pulse a usar minha orientação sexual (dado sensível) para mostrar perfis compatíveis. Posso remover quando quiser.'**
+  String get orientationConsent;
+
+  /// No description provided for @orientationConsentRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'Para salvar a orientação, marque a autorização ou deixe sem informar.'**
+  String get orientationConsentRequired;
+}
+
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
+  const _AppLocalizationsDelegate();
+
+  @override
+  Future<AppLocalizations> load(Locale locale) {
+    return SynchronousFuture<AppLocalizations>(lookupAppLocalizations(locale));
+  }
+
+  @override
+  bool isSupported(Locale locale) =>
+      <String>['pt'].contains(locale.languageCode);
+
+  @override
+  bool shouldReload(_AppLocalizationsDelegate old) => false;
+}
+
+AppLocalizations lookupAppLocalizations(Locale locale) {
+  // Lookup logic when only language code is specified.
+  switch (locale.languageCode) {
+    case 'pt':
+      return AppLocalizationsPt();
+  }
+
+  throw FlutterError(
+    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.',
+  );
+}

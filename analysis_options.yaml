@@ -1,0 +1,20 @@
+include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - lib/l10n/app_localizations*.dart
+  errors:
+    # Generated code (freezed/json_serializable) uses these annotations.
+    invalid_annotation_target: ignore
+
+linter:
+  rules:
+    public_member_api_docs: false
+
+plugins:
+  riverpod_lint: ^3.1.9

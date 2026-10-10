@@ -1,0 +1,55 @@
+-- Shared helpers for the pgTAP suites. Each suite runs inside a transaction
+-- (begin ... rollback) and includes this file first:
+--   \ir helpers.psql
+--
+-- tests.login(n)  → act as seed user n (role authenticated + JWT claims)
+-- tests.logout()  → back to the superuser (bypasses RLS)
+-- tests.uid(n)    → seed user uuid
+-- tests.event(n)  → seed event uuid
+
+create extension if not exists pgtap with schema extensions;
+
+create schema if not exists tests;
+grant usage on schema tests to authenticated;
+
+create or replace function tests.uid(p_n int)
+returns uuid
+language sql
+immutable
+as $$
+  select format('00000000-0000-4000-a000-%s', lpad(p_n::text, 12, '0'))::uuid;
+$$;
+
+create or replace function tests.event(p_n int)
+returns uuid
+language sql
+immutable
+as $$
+  select format('00000000-0000-4000-b000-%s', lpad(p_n::text, 12, '0'))::uuid;
+$$;
+
+create or replace function tests.login(p_n int)
+returns void
+language plpgsql
+as $$
+begin
+  perform set_config('role', 'authenticated', true);
+  perform set_config(
+    'request.jwt.claims',
+    json_build_object('sub', tests.uid(p_n), 'role', 'authenticated')::text,
+    true
+  );
+end;
+$$;
+
+create or replace function tests.logout()
+returns void
+language plpgsql
+as $$
+begin
+  perform set_config('role', 'postgres', true);
+  perform set_config('request.jwt.claims', '', true);
+end;
+$$;
+
+grant execute on all functions in schema tests to authenticated;
