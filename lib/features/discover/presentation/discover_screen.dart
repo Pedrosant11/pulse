@@ -6,8 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:pulse/app/routes.dart';
+import 'package:pulse/core/errors/app_failure.dart';
 import 'package:pulse/core/errors/app_failure_message.dart';
 import 'package:pulse/core/extensions/context_extensions.dart';
 import 'package:pulse/core/models/app_mode.dart';
@@ -20,6 +22,10 @@ import 'package:pulse/features/discover/presentation/widgets/candidate_profile_p
 import 'package:pulse/features/discover/presentation/widgets/discover_widgets.dart';
 import 'package:pulse/features/discover/presentation/widgets/swipe_card.dart';
 import 'package:pulse/features/onboarding/presentation/activate_modes_screen.dart';
+import 'package:pulse/features/plans/domain/plan_models.dart';
+import 'package:pulse/features/plans/presentation/plans_providers.dart';
+import 'package:pulse/features/plans/presentation/widgets/plans_prompt.dart';
+import 'package:pulse/features/plans/presentation/widgets/travel_sheet.dart';
 import 'package:pulse/features/profile/domain/profile_enums.dart';
 import 'package:pulse/features/profile/presentation/edit_profile_screen.dart';
 import 'package:pulse/features/profile/presentation/profile_providers.dart';
@@ -35,6 +41,9 @@ class DiscoverScreen extends ConsumerStatefulWidget {
 class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
   final _card = SwipeCardController();
   final _precached = <String>{};
+
+  /// The next like comes from the superlike button.
+  bool _pendingSuper = false;
 
   static const _preloadCount = 3;
 
@@ -63,12 +72,14 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
     DiscoverCandidate candidate,
     SwipeDirection direction,
   ) async {
+    final superLike = _pendingSuper && direction == SwipeDirection.like;
+    _pendingSuper = false;
     if (direction == SwipeDirection.like) {
       unawaited(HapticFeedback.lightImpact());
     }
     final result = await ref
         .read(discoverDeckProvider(mode).notifier)
-        .swipe(candidate, direction);
+        .swipe(candidate, direction, superLike: superLike);
     if (result == null || !result.matched || !mounted) return;
     unawaited(HapticFeedback.heavyImpact());
     unawaited(
@@ -98,7 +109,67 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
     if (decision != null) await _card.swipe(decision);
   }
 
-  Future<void> _undo(AppMode mode) async {
+  void _superLike(Entitlements? me) {
+    if ((me?.superlikesLeft ?? 0) == 0) {
+      unawaited(showPlansPrompt(context, PlanFeature.superlikes));
+      return;
+    }
+    _pendingSuper = true;
+    unawaited(_card.swipe(SwipeDirection.like));
+  }
+
+  Future<void> _boost(Entitlements? me) async {
+    final l10n = context.l10n;
+    if (me == null) return;
+    final endsAt = me.boostEndsAt;
+    if (me.boostRunning(DateTime.now())) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            l10n.boostRunningUntil(DateFormat.Hm().format(endsAt!.toLocal())),
+          ),
+        ),
+      );
+      return;
+    }
+    if (me.boostsLeft == 0) {
+      await showPlansPrompt(context, PlanFeature.boost);
+      return;
+    }
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        icon: Icon(Icons.rocket_launch_rounded, color: context.colors.lime),
+        title: Text(l10n.boostConfirmTitle),
+        content: Text(l10n.boostConfirmBody(me.boostsLeft)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text(l10n.notNow),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(l10n.boostActivate),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !mounted) return;
+    final ends = await ref.read(planActionsProvider.notifier).activateBoost();
+    if (ends != null && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.boostRunningUntil(DateFormat.Hm().format(ends))),
+        ),
+      );
+    }
+  }
+
+  Future<void> _undo(AppMode mode, Entitlements? me) async {
+    if (!(me?.canRewind ?? false)) {
+      await showPlansPrompt(context, PlanFeature.rewind);
+      return;
+    }
     final undone = await ref.read(discoverDeckProvider(mode).notifier).undo();
     if (!undone && mounted) {
       ScaffoldMessenger.of(context)
@@ -136,13 +207,33 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
     final deck = modeOn ? ref.watch(discoverDeckProvider(mode)) : null;
     final cards = deck?.value?.cards ?? const <DiscoverCandidate>[];
 
+    final plan = ref.watch(entitlementsProvider).value;
+
     ref.listen(discoverDeckProvider(mode), (_, next) {
       final error = next.value?.error;
       if (error == null) return;
+      ref.read(discoverDeckProvider(mode).notifier).clearError();
+      // Plan limits open the plans prompt instead of an error.
+      final feature = switch (AppFailure.from(error)) {
+        LikeLimitFailure() => PlanFeature.likes,
+        SuperlikeLimitFailure() => PlanFeature.superlikes,
+        PlanRequiredFailure() => PlanFeature.rewind,
+        _ => null,
+      };
+      if (feature != null) {
+        unawaited(showPlansPrompt(context, feature));
+        return;
+      }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(friendlyErrorMessage(error, l10n))),
       );
-      ref.read(discoverDeckProvider(mode).notifier).clearError();
+    });
+    ref.listen(planActionsProvider, (_, next) {
+      if (next case AsyncError(:final error)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(friendlyErrorMessage(error, l10n))),
+        );
+      }
     });
     if (cards.isNotEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) => _precacheNext(cards));
@@ -197,10 +288,49 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
         child: Column(
           children: [
             SizedBox(height: spacing.sm),
-            ModeSelector(
-              selected: mode,
-              onChanged: ref.read(discoverModeProvider.notifier).select,
+            Row(
+              children: [
+                SizedBox(width: spacing.xs),
+                IconButton(
+                  tooltip: l10n.travelTitle,
+                  onPressed: plan == null
+                      ? null
+                      : () => showTravelSheet(context, plan),
+                  icon: Icon(
+                    Icons.flight_takeoff_rounded,
+                    color: (plan?.isTraveling ?? false)
+                        ? colors.lime
+                        : colors.textSecondary,
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: ModeSelector(
+                      selected: mode,
+                      onChanged: ref.read(discoverModeProvider.notifier).select,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  tooltip: l10n.boostTitle,
+                  onPressed: plan == null ? null : () => _boost(plan),
+                  icon: Icon(
+                    Icons.rocket_launch_rounded,
+                    color: (plan?.boostRunning(DateTime.now()) ?? false)
+                        ? colors.lime
+                        : colors.textSecondary,
+                  ),
+                ),
+                SizedBox(width: spacing.xs),
+              ],
             ),
+            if (plan?.isTraveling ?? false)
+              Text(
+                l10n.travelBanner('${plan!.travelCity}, ${plan.travelState}'),
+                style: context.textTheme.labelSmall?.copyWith(
+                  color: colors.lime,
+                ),
+              ),
             SizedBox(height: spacing.sm),
             Expanded(
               // Switching Date/Crew glitches the deck (SPEC 12).
@@ -228,15 +358,34 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                         ? null
                         : () => _card.swipe(SwipeDirection.pass),
                   ),
-                  SizedBox(width: spacing.lg),
+                  SizedBox(width: spacing.md),
                   RoundAction(
-                    icon: Icons.replay_rounded,
+                    // Locked without a plan: tapping explains the plans.
+                    icon: (plan?.canRewind ?? true)
+                        ? Icons.replay_rounded
+                        : Icons.lock_rounded,
                     label: l10n.actionUndo,
                     color: colors.lime,
                     size: 48,
-                    onPressed: canUndo ? () => _undo(mode) : null,
+                    onPressed: canUndo || !(plan?.canRewind ?? true)
+                        ? () => _undo(mode, plan)
+                        : null,
                   ),
-                  SizedBox(width: spacing.lg),
+                  SizedBox(width: spacing.md),
+                  Badge(
+                    isLabelVisible: (plan?.superlikesLeft ?? 0) > 0,
+                    label: Text('${plan?.superlikesLeft ?? 0}'),
+                    backgroundColor: colors.lime,
+                    textColor: colors.background,
+                    child: RoundAction(
+                      icon: Icons.star_rounded,
+                      label: l10n.superlikeLabel,
+                      color: colors.lime,
+                      size: 48,
+                      onPressed: top == null ? null : () => _superLike(plan),
+                    ),
+                  ),
+                  SizedBox(width: spacing.md),
                   RoundAction(
                     icon: mode == AppMode.date
                         ? Icons.favorite_rounded

@@ -83,7 +83,20 @@ Leia as **Dicas de segurança** no app: combine encontros em locais públicos, a
 
 ## 10. Recursos pagos
 
-Hoje o Pulse é gratuito. Se recursos pagos forem lançados (como planos ou créditos), eles serão vendidos **somente pelas lojas de aplicativos** (App Store e Google Play), com preço, condições e regras de cancelamento e reembolso informados antes da compra, seguindo também as regras de cada loja e o Código de Defesa do Consumidor.
+O Pulse pode ser usado de graça, com limites (por exemplo, um número de likes por dia). Também oferecemos recursos pagos, vendidos **somente pelas lojas de aplicativos** (App Store e Google Play):
+
+- **Assinaturas** (Pulse+ e Pulse Black): liberam benefícios como likes ilimitados, voltar o último swipe, modo viagem, ver quem curtiu você, boost mensal e modo discreto. Os benefícios de cada plano e o preço aparecem na tela de planos antes da compra.
+- **Avulsos**: pacotes de superlikes e de boosts, que ficam no seu saldo até serem usados.
+
+Sobre as assinaturas:
+
+- A cobrança é feita pela loja, na conta que você usa nela. **A assinatura renova automaticamente** a cada período (mensal), até você cancelar.
+- Você pode **cancelar a qualquer momento** nas configurações de assinaturas da loja. O cancelamento vale para as próximas renovações; os benefícios continuam até o fim do período já pago.
+- Excluir o app ou a conta **não cancela** a assinatura na loja: cancele por lá.
+- **Reembolsos** seguem as regras de cada loja e o Código de Defesa do Consumidor. O direito de arrependimento (art. 49 do CDC) pode ser pedido à loja em até 7 dias da compra.
+- Os limites e benefícios podem ser ajustados. Se uma mudança reduzir o que você já pagou, avisaremos antes e ela só valerá a partir da renovação seguinte.
+
+Itens avulsos não usados não são devolvidos em dinheiro, exceto quando a lei ou a loja exigir. Se a conta for banida por violar estes Termos, os benefícios pagos deixam de valer, sem prejuízo dos direitos previstos em lei.
 
 ## 11. Propriedade intelectual
 

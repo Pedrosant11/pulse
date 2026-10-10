@@ -83,6 +83,20 @@ class PulseColors extends ThemeExtension<PulseColors> {
     colors: [violet, cyan],
   );
 
+  /// Pulse+ plan: cyan → violet.
+  LinearGradient get plusGradient => LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [cyan, violet],
+  );
+
+  /// Pulse Black plan: magenta → lime.
+  LinearGradient get blackGradient => LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [magenta, lime],
+  );
+
   /// Accent color for a discovery mode (Date: magenta, Crew: cyan).
   Color accentOf(AppMode mode) => switch (mode) {
     AppMode.date => magenta,

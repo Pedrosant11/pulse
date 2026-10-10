@@ -53,6 +53,10 @@ select ok(
 
 -- Swipes, undo and fallback ---------------------------------------------
 
+-- Rewind is a plan benefit (monetization migration).
+select tests.logout();
+insert into public.subscriptions (user_id, tier, source)
+values (tests.uid(1), 'plus', 'admin');
 select tests.login(1);
 insert into public.swipes (swiper_id, swiped_id, mode, direction)
 values (tests.uid(1), tests.uid(12), 'date', 'pass');

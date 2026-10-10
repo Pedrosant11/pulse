@@ -26,6 +26,7 @@ class FakeDiscoverRepository implements DiscoverRepository {
     required String targetId,
     required AppMode mode,
     required SwipeDirection direction,
+    bool superLike = false,
   }) async {
     if (swipeError case final error?) throw error;
     swipes.add((targetId, direction));

@@ -45,6 +45,9 @@ abstract class DiscoverCandidate with _$DiscoverCandidate {
     /// Crew mode: size of their crew for the first common event (null =
     /// going solo).
     int? crewSize,
+
+    /// They superliked the viewer (plans).
+    @Default(false) bool superLikedMe,
   }) = _DiscoverCandidate;
 
   const new _();

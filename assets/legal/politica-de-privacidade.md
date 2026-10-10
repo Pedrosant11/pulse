@@ -28,6 +28,7 @@ Use esse canal para qualquer pedido ou dúvida sobre seus dados.
 - **Localização aproximada:** guardamos apenas as coordenadas da **sua cidade** (precisão de cerca de 1 km), usadas para calcular distâncias. Se você permitir, o app consulta a localização do aparelho **uma vez**, para sugerir sua cidade. **Não guardamos sua localização exata e não acompanhamos seus deslocamentos.**
 - **Atividade:** última vez em que você usou o app, confirmação de leitura das mensagens e registros de moderação sobre a sua conta (advertências, suspensões e banimentos).
 - **Dados técnicos:** endereço IP, data e hora de acesso, tipo de dispositivo e sistema, e registros de erro.
+- **Compras:** plano assinado, validade, itens avulsos comprados e saldo (superlikes e boosts). O pagamento é feito na loja (Google Play ou App Store); **não recebemos dados do seu cartão**. Se você usar o modo viagem, guardamos a cidade escolhida.
 
 ### 2.3 O que não coletamos
 
@@ -50,6 +51,7 @@ Não acessamos seus contatos, não rastreamos sua localização em segundo plano
 | Tratar sua orientação sexual para mostrar e encontrar perfis compatíveis | Consentimento específico e destacado (art. 11, I) |
 | Segurança, prevenção a fraudes, spam e abuso, limites de uso, moderação e análise de denúncias | Legítimo interesse (art. 7º, IX) e proteção da vida e da incolumidade física (art. 7º, VII) |
 | Enviar e-mails de confirmação de conta e recuperação de senha | Execução de contrato (art. 7º, V) |
+| Processar compras e assinaturas e liberar os benefícios pagos | Execução de contrato (art. 7º, V) |
 | Guardar registros de acesso pelo prazo exigido em lei | Cumprimento de obrigação legal (art. 7º, II, e art. 15 do Marco Civil) |
 | Defender direitos em processos judiciais ou administrativos | Exercício regular de direitos (art. 7º, VI) |
 
@@ -66,6 +68,7 @@ A ordem em que os perfis aparecem é definida automaticamente, considerando even
 | Supabase | Banco de dados, autenticação, armazenamento de fotos e funções do servidor | Todos os dados da conta | Brasil (São Paulo) |
 | Resend | Envio de e-mails de confirmação e recuperação de senha | E-mail e conteúdo da mensagem | Estados Unidos |
 | Google (Firebase Cloud Messaging) | Entrega das notificações no celular | Identificador de notificação do aparelho e um texto genérico (sem nomes nem conteúdo das conversas) | Estados Unidos |
+| RevenueCat | Confirmação das compras e assinaturas feitas nas lojas | Identificador da conta no Pulse, produtos comprados, datas e status da assinatura (sem dados de cartão) | Estados Unidos |
 | OpenFreeMap | Imagens do mapa de eventos | Endereço IP e área do mapa visualizada | Europa |
 | Photon (komoot) | Busca de endereço ao cadastrar um evento | Texto buscado e endereço IP | Alemanha |
 | ViaCEP | Busca de endereço por CEP | CEP digitado e endereço IP | Brasil |
@@ -75,7 +78,7 @@ Também podemos compartilhar dados com **autoridades públicas**, quando houver 
 
 ### Transferência internacional
 
-Os dados principais ficam no Brasil. Alguns fornecedores acima (Resend, Google, OpenFreeMap e Photon) estão fora do país. Essas transferências são necessárias para executar o serviço que você contratou (art. 33, IX, combinado com o art. 7º, V, da LGPD) e envolvem apenas os dados indicados na tabela.
+Os dados principais ficam no Brasil. Alguns fornecedores acima (Resend, Google, RevenueCat, OpenFreeMap e Photon) estão fora do país. Essas transferências são necessárias para executar o serviço que você contratou (art. 33, IX, combinado com o art. 7º, V, da LGPD) e envolvem apenas os dados indicados na tabela.
 
 ## 6. Por quanto tempo guardamos
 
@@ -88,6 +91,7 @@ Os dados principais ficam no Brasil. Alguns fornecedores acima (Resend, Google, 
 | Denúncias que você fez | Mantidas sem identificar você, para histórico de moderação. |
 | Denúncias sobre o seu conteúdo | Uma cópia do conteúdo denunciado pode ser mantida, desvinculada da sua conta, por até **5 anos**, para segurança da comunidade e defesa em eventuais processos. |
 | Registros de acesso (IP, data e hora) | **6 meses**, conforme o art. 15 do Marco Civil da Internet. |
+| Registros de compras (produto, data e identificador da conta) | **5 anos** após a compra, para atender o Código de Defesa do Consumidor e obrigações fiscais, mesmo após a exclusão da conta. |
 | Cópias de segurança (backups) | Os dados excluídos podem permanecer em backups por até **[PRAZO DE BACKUP] dias**, até serem sobrescritos. |
 
 ## 7. Moderação e denúncias

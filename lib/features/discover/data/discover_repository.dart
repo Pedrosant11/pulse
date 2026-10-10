@@ -28,6 +28,7 @@ class DiscoverRepository {
     required String targetId,
     required AppMode mode,
     required SwipeDirection direction,
+    bool superLike = false,
   }) => guardFailures(() async {
     final rows = await _client.rpc<List<dynamic>>(
       'swipe',
@@ -35,6 +36,7 @@ class DiscoverRepository {
         'p_target': targetId,
         'p_mode': mode.name,
         'p_direction': direction.name,
+        'p_super': superLike,
       },
     );
     return SwipeResult.fromJson(rows.first as Map<String, dynamic>);

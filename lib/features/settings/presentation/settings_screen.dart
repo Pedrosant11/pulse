@@ -10,6 +10,9 @@ import 'package:pulse/features/events/presentation/events_providers.dart';
 import 'package:pulse/features/legal/domain/legal_document.dart';
 import 'package:pulse/features/legal/presentation/legal_document_screen.dart';
 import 'package:pulse/features/legal/presentation/privacy_providers.dart';
+import 'package:pulse/features/plans/domain/plan_models.dart';
+import 'package:pulse/features/plans/presentation/plans_providers.dart';
+import 'package:pulse/features/plans/presentation/widgets/plans_prompt.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const new({super.key});
@@ -23,6 +26,7 @@ class SettingsScreen extends ConsumerWidget {
     final controller = ref.read(signOutControllerProvider.notifier);
     final role = ref.watch(currentRoleProvider);
     final dataExport = ref.watch(dataExportProvider);
+    final plan = ref.watch(entitlementsProvider).value;
 
     Widget section(String title, List<Widget> tiles) => Padding(
       padding: EdgeInsets.only(bottom: spacing.lg),
@@ -46,6 +50,35 @@ class SettingsScreen extends ConsumerWidget {
         child: ListView(
           padding: EdgeInsets.all(spacing.md),
           children: [
+            section(l10n.settingsPlanSection, [
+              ListTile(
+                leading: Icon(
+                  Icons.workspace_premium_rounded,
+                  color: colors.lime,
+                ),
+                title: Text(l10n.settingsMyPlan),
+                subtitle: Text(switch (plan?.tier) {
+                  final tier? => l10n.planName(tier.name),
+                  null => l10n.planFree,
+                }),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.push(AppRoutes.plans),
+              ),
+              // Incognito works with Black; others see the plans.
+              SwitchListTile(
+                secondary: const Icon(Icons.visibility_off_outlined),
+                title: Text(l10n.incognitoTitle),
+                subtitle: Text(l10n.incognitoSubtitle),
+                value: (plan?.isBlack ?? false) && plan!.incognito,
+                onChanged: plan == null
+                    ? null
+                    : (enabled) => plan.isBlack
+                          ? ref
+                                .read(planActionsProvider.notifier)
+                                .setIncognito(enabled: enabled)
+                          : showPlansPrompt(context, PlanFeature.incognito),
+              ),
+            ]),
             section(l10n.settingsAccountSection, [
               ListTile(
                 leading: const Icon(Icons.workspace_premium_outlined),

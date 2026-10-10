@@ -259,3 +259,20 @@ select
   format('00000000-0000-4000-b000-%s', lpad(event_n::text, 12, '0'))::uuid
 from picks
 on conflict do nothing;
+
+-- Plans (monetization): Elisa (5) has Pulse Black with some packs, Felipe
+-- (6) has Pulse+. Granted by "admin", so no store is needed locally.
+insert into public.subscriptions (user_id, tier, source) values
+  ('00000000-0000-4000-a000-000000000005', 'black', 'admin'),
+  ('00000000-0000-4000-a000-000000000006', 'plus', 'admin');
+insert into public.wallets (user_id, superlikes, boosts) values
+  ('00000000-0000-4000-a000-000000000005', 3, 1);
+
+-- Pending likes for "who liked you": Elisa (Black) sees who they are, Ana
+-- (free) only how many.
+insert into public.swipes (swiper_id, swiped_id, mode, direction, is_super) values
+  ('00000000-0000-4000-a000-000000000002', '00000000-0000-4000-a000-000000000005', 'date', 'like', false),
+  ('00000000-0000-4000-a000-000000000024', '00000000-0000-4000-a000-000000000005', 'date', 'like', false),
+  ('00000000-0000-4000-a000-000000000022', '00000000-0000-4000-a000-000000000005', 'crew', 'like', true),
+  ('00000000-0000-4000-a000-000000000002', '00000000-0000-4000-a000-000000000001', 'date', 'like', false),
+  ('00000000-0000-4000-a000-000000000004', '00000000-0000-4000-a000-000000000001', 'date', 'like', false);

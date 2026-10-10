@@ -1,5 +1,6 @@
 import 'package:pulse/features/auth/domain/session_status.dart';
 import 'package:pulse/features/legal/domain/legal_document.dart';
+import 'package:pulse/features/plans/domain/plan_models.dart';
 
 /// Route paths. Use the helpers for paths with parameters.
 abstract final class AppRoutes {
@@ -27,6 +28,8 @@ abstract final class AppRoutes {
   static const blockedUsers = '/settings/blocked';
   static const deleteAccount = '/settings/delete-account';
   static const activateModes = '/activate-modes';
+  static const plans = '/plans';
+  static const likesYou = '/likes';
   static const safetyTips = '/safety-tips';
   static const accountRestricted = '/account-restricted';
   static const admin = '/admin';
@@ -56,6 +59,8 @@ abstract final class AppRoutes {
     },
   ).toString();
   static String legal(LegalDocument doc) => '$legalPrefix/${doc.slug}';
+  static String plansFor(PlanFeature feature) =>
+      Uri(path: plans, queryParameters: {'feature': feature.name}).toString();
   static String checkEmailFor(String email) =>
       Uri(path: checkEmail, queryParameters: {'email': email}).toString();
 

@@ -4035,6 +4035,390 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Para salvar a orientação, marque a autorização ou deixe sem informar.'**
   String get orientationConsentRequired;
+
+  /// No description provided for @errorLikeLimit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seus likes de hoje acabaram. Amanhã tem mais, ou assine para curtir sem limite.'**
+  String get errorLikeLimit;
+
+  /// No description provided for @errorSuperlikeLimit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seus superlikes acabaram.'**
+  String get errorSuperlikeLimit;
+
+  /// No description provided for @errorPlanRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'Isso faz parte dos planos do Pulse.'**
+  String get errorPlanRequired;
+
+  /// No description provided for @errorBoostUnavailable.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você não tem boosts disponíveis.'**
+  String get errorBoostUnavailable;
+
+  /// No description provided for @errorBoostActive.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seu boost já está ativo.'**
+  String get errorBoostActive;
+
+  /// No description provided for @plansTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Planos'**
+  String get plansTitle;
+
+  /// No description provided for @plansPurchaseDone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compra concluída. Aproveite!'**
+  String get plansPurchaseDone;
+
+  /// No description provided for @plansStoreUnavailable.
+  ///
+  /// In pt, this message translates to:
+  /// **'As compras ainda não estão disponíveis nesta versão do app.'**
+  String get plansStoreUnavailable;
+
+  /// No description provided for @plansSoon.
+  ///
+  /// In pt, this message translates to:
+  /// **'Em breve'**
+  String get plansSoon;
+
+  /// No description provided for @plansSee.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver planos'**
+  String get plansSee;
+
+  /// No description provided for @plansRestore.
+  ///
+  /// In pt, this message translates to:
+  /// **'Restaurar compras'**
+  String get plansRestore;
+
+  /// No description provided for @plansLegal.
+  ///
+  /// In pt, this message translates to:
+  /// **'A assinatura é cobrada na sua conta da Google Play ou da App Store e renova sozinha todo mês, até você cancelar. Dá para cancelar a qualquer momento nas assinaturas da loja; o plano continua até o fim do período pago.'**
+  String get plansLegal;
+
+  /// No description provided for @plansPacksTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Avulsos'**
+  String get plansPacksTitle;
+
+  /// No description provided for @plansWallet.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seu saldo: {superlikes, plural, =1{1 superlike} other{{superlikes} superlikes}} e {boosts, plural, =1{1 boost} other{{boosts} boosts}}.'**
+  String plansWallet(int superlikes, int boosts);
+
+  /// No description provided for @packSuperlikes.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count} superlikes'**
+  String packSuperlikes(int count);
+
+  /// No description provided for @packBoosts.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =1{1 boost} other{{count} boosts}}'**
+  String packBoosts(int count);
+
+  /// No description provided for @planName.
+  ///
+  /// In pt, this message translates to:
+  /// **'{tier, select, plus{Pulse+} black{Pulse Black} other{Pulse}}'**
+  String planName(String tier);
+
+  /// No description provided for @planFree.
+  ///
+  /// In pt, this message translates to:
+  /// **'Grátis'**
+  String get planFree;
+
+  /// No description provided for @planYours.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você tem o {plan}'**
+  String planYours(String plan);
+
+  /// No description provided for @planGrantedByTeam.
+  ///
+  /// In pt, this message translates to:
+  /// **'Liberado pela equipe Pulse'**
+  String get planGrantedByTeam;
+
+  /// No description provided for @planRenewsOn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Renova em {date}'**
+  String planRenewsOn(String date);
+
+  /// No description provided for @planEndsOn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Válido até {date}'**
+  String planEndsOn(String date);
+
+  /// No description provided for @planPricePerMonth.
+  ///
+  /// In pt, this message translates to:
+  /// **'{price}/mês'**
+  String planPricePerMonth(String price);
+
+  /// No description provided for @planCurrent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seu plano atual'**
+  String get planCurrent;
+
+  /// No description provided for @planSubscribe.
+  ///
+  /// In pt, this message translates to:
+  /// **'Assinar'**
+  String get planSubscribe;
+
+  /// No description provided for @planBenefitUnlimitedLikes.
+  ///
+  /// In pt, this message translates to:
+  /// **'Likes ilimitados'**
+  String get planBenefitUnlimitedLikes;
+
+  /// No description provided for @planBenefitRewind.
+  ///
+  /// In pt, this message translates to:
+  /// **'Voltar o último swipe'**
+  String get planBenefitRewind;
+
+  /// No description provided for @planBenefitTravel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Modo viagem: descubra gente em outra cidade ou festival'**
+  String get planBenefitTravel;
+
+  /// No description provided for @planBenefitSuperlikes.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count} superlikes por semana'**
+  String planBenefitSuperlikes(int count);
+
+  /// No description provided for @planBenefitEverythingPlus.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tudo do Pulse+'**
+  String get planBenefitEverythingPlus;
+
+  /// No description provided for @planBenefitLikedYou.
+  ///
+  /// In pt, this message translates to:
+  /// **'Veja quem já curtiu você'**
+  String get planBenefitLikedYou;
+
+  /// No description provided for @planBenefitBoost.
+  ///
+  /// In pt, this message translates to:
+  /// **'1 boost por mês: apareça primeiro por 30 minutos'**
+  String get planBenefitBoost;
+
+  /// No description provided for @planBenefitIncognito.
+  ///
+  /// In pt, this message translates to:
+  /// **'Modo discreto: só te vê quem você curtiu'**
+  String get planBenefitIncognito;
+
+  /// No description provided for @planFeatureHeadline.
+  ///
+  /// In pt, this message translates to:
+  /// **'{feature, select, likes{Curta sem limite} rewind{Voltar é do Pulse+} superlikes{Mais superlikes} travel{Vai viajar? Chegue conhecendo gente} likedYou{Veja quem curtiu você} boost{Apareça primeiro} incognito{Modo discreto} other{Pulse+ e Pulse Black}}'**
+  String planFeatureHeadline(String feature);
+
+  /// No description provided for @planFeaturePitch.
+  ///
+  /// In pt, this message translates to:
+  /// **'{feature, select, likes{Seus likes de hoje acabaram. Com o Pulse+ você curte quantas pessoas quiser.} rewind{Passou sem querer? Com o Pulse+ você volta o último swipe.} superlikes{Superlikes avisam que você curtiu e te colocam no topo. Assine ou compre um pacote.} travel{Com o modo viagem você descobre gente da cidade ou do festival antes de chegar.} likedYou{Com o Pulse Black você vê quem já curtiu você e dá match na hora.} boost{O boost te coloca no topo do Descobrir por 30 minutos, ideal na noite da festa.} incognito{Com o Pulse Black só te vê quem você curtiu.} other{Conheça os planos do Pulse.}}'**
+  String planFeaturePitch(String feature);
+
+  /// No description provided for @likesYouTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quem curtiu você'**
+  String get likesYouTitle;
+
+  /// No description provided for @likesYouNoneYet.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ninguém novo por enquanto. Marque presença em eventos para aparecer para mais gente.'**
+  String get likesYouNoneYet;
+
+  /// No description provided for @likesYouCount.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =1{1 pessoa curtiu você} other{{count} pessoas curtiram você}}'**
+  String likesYouCount(int count);
+
+  /// No description provided for @likesYouUnlock.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver quem são com o Pulse Black'**
+  String get likesYouUnlock;
+
+  /// No description provided for @likesYouMatched.
+  ///
+  /// In pt, this message translates to:
+  /// **'Deu match com {name}!'**
+  String likesYouMatched(String name);
+
+  /// No description provided for @likesYouOpenChats.
+  ///
+  /// In pt, this message translates to:
+  /// **'Abrir conversas'**
+  String get likesYouOpenChats;
+
+  /// No description provided for @superlikeLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Superlike'**
+  String get superlikeLabel;
+
+  /// No description provided for @discoverSuperLikedYou.
+  ///
+  /// In pt, this message translates to:
+  /// **'Te deu superlike'**
+  String get discoverSuperLikedYou;
+
+  /// No description provided for @travelTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Modo viagem'**
+  String get travelTitle;
+
+  /// No description provided for @travelExplain.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolha a cidade para onde você vai e descubra gente de lá antes de chegar.'**
+  String get travelExplain;
+
+  /// No description provided for @travelActive.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você está descobrindo gente em {city}.'**
+  String travelActive(String city);
+
+  /// No description provided for @travelBanner.
+  ///
+  /// In pt, this message translates to:
+  /// **'Modo viagem: {city}'**
+  String travelBanner(String city);
+
+  /// No description provided for @travelPick.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolher cidade'**
+  String get travelPick;
+
+  /// No description provided for @travelChange.
+  ///
+  /// In pt, this message translates to:
+  /// **'Trocar cidade'**
+  String get travelChange;
+
+  /// No description provided for @travelBackHome.
+  ///
+  /// In pt, this message translates to:
+  /// **'Voltar para minha cidade'**
+  String get travelBackHome;
+
+  /// No description provided for @boostTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Boost'**
+  String get boostTitle;
+
+  /// No description provided for @boostConfirmTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ativar boost?'**
+  String get boostConfirmTitle;
+
+  /// No description provided for @boostConfirmBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você aparece primeiro no Descobrir por 30 minutos. {count, plural, =1{Você tem 1 boost.} other{Você tem {count} boosts.}}'**
+  String boostConfirmBody(int count);
+
+  /// No description provided for @boostActivate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ativar'**
+  String get boostActivate;
+
+  /// No description provided for @boostRunningUntil.
+  ///
+  /// In pt, this message translates to:
+  /// **'Boost ativo até {time}'**
+  String boostRunningUntil(String time);
+
+  /// No description provided for @settingsPlanSection.
+  ///
+  /// In pt, this message translates to:
+  /// **'Plano'**
+  String get settingsPlanSection;
+
+  /// No description provided for @settingsMyPlan.
+  ///
+  /// In pt, this message translates to:
+  /// **'Meu plano'**
+  String get settingsMyPlan;
+
+  /// No description provided for @incognitoTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Modo discreto'**
+  String get incognitoTitle;
+
+  /// No description provided for @incognitoSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Só te vê quem você curtiu (Pulse Black).'**
+  String get incognitoSubtitle;
+
+  /// No description provided for @adminPlanTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Plano e avulsos'**
+  String get adminPlanTitle;
+
+  /// No description provided for @adminGrantPlan.
+  ///
+  /// In pt, this message translates to:
+  /// **'Liberar {plan} (30 dias)'**
+  String adminGrantPlan(String plan);
+
+  /// No description provided for @adminRemovePlan.
+  ///
+  /// In pt, this message translates to:
+  /// **'Remover plano liberado'**
+  String get adminRemovePlan;
+
+  /// No description provided for @adminGiveSuperlikes.
+  ///
+  /// In pt, this message translates to:
+  /// **'+{count} superlikes'**
+  String adminGiveSuperlikes(int count);
+
+  /// No description provided for @adminGiveBoosts.
+  ///
+  /// In pt, this message translates to:
+  /// **'+{count} boost'**
+  String adminGiveBoosts(int count);
 }
 
 class _AppLocalizationsDelegate

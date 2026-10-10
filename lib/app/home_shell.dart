@@ -12,6 +12,8 @@ import 'package:pulse/features/crews/presentation/crews_providers.dart';
 import 'package:pulse/features/notifications/data/push_messaging.dart';
 import 'package:pulse/features/notifications/domain/push_route.dart';
 import 'package:pulse/features/notifications/presentation/push_registration.dart';
+import 'package:pulse/features/plans/data/store_purchases.dart';
+import 'package:pulse/features/plans/presentation/plans_providers.dart';
 import 'package:pulse/features/safety/domain/safety_models.dart';
 import 'package:pulse/features/safety/presentation/safety_providers.dart';
 
@@ -37,12 +39,16 @@ class _HomeShellState extends ConsumerState<HomeShell> {
     super.initState();
     unawaited(_logAccess());
     unawaited(_setUpPush());
+    unawaited(_linkStore());
     _lifecycle = AppLifecycleListener(
       onResume: () {
         ref
           ..invalidate(accountProvider)
           ..invalidate(moderationNoticeProvider)
-          ..invalidate(myCrewInvitesProvider);
+          ..invalidate(myCrewInvitesProvider)
+          // Plans may change outside the app (renewal, cancellation).
+          ..invalidate(entitlementsProvider)
+          ..invalidate(likesReceivedCountProvider);
         unawaited(_logAccess());
       },
     );
@@ -54,6 +60,17 @@ class _HomeShellState extends ConsumerState<HomeShell> {
       await ref.read(accountRepositoryProvider).logAccess();
     } on Object catch (error) {
       debugPrint('Access log failed: $error');
+    }
+  }
+
+  /// Store purchases belong to this account (RevenueCat app user id).
+  Future<void> _linkStore() async {
+    final userId = ref.read(currentUserIdProvider);
+    if (userId == null) return;
+    try {
+      await ref.read(storePurchasesProvider).logIn(userId);
+    } on Object catch (error) {
+      debugPrint('Store login failed: $error');
     }
   }
 

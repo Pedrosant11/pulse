@@ -20,6 +20,11 @@ extension AppFailureMessage on AppFailure {
       PhoneInUseFailure() => l10n.errorPhoneInUse,
       MinPhotosFailure() => l10n.errorMinPhotos,
       CrewModeRequiredFailure() => l10n.errorCrewModeRequired,
+      LikeLimitFailure() => l10n.errorLikeLimit,
+      SuperlikeLimitFailure() => l10n.errorSuperlikeLimit,
+      PlanRequiredFailure() => l10n.errorPlanRequired,
+      BoostUnavailableFailure() => l10n.errorBoostUnavailable,
+      BoostActiveFailure() => l10n.errorBoostActive,
       UnknownFailure() => l10n.errorUnknown,
     };
   }

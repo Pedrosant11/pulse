@@ -2248,4 +2248,299 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get orientationConsentRequired =>
       'Para salvar a orientação, marque a autorização ou deixe sem informar.';
+
+  @override
+  String get errorLikeLimit =>
+      'Seus likes de hoje acabaram. Amanhã tem mais, ou assine para curtir sem limite.';
+
+  @override
+  String get errorSuperlikeLimit => 'Seus superlikes acabaram.';
+
+  @override
+  String get errorPlanRequired => 'Isso faz parte dos planos do Pulse.';
+
+  @override
+  String get errorBoostUnavailable => 'Você não tem boosts disponíveis.';
+
+  @override
+  String get errorBoostActive => 'Seu boost já está ativo.';
+
+  @override
+  String get plansTitle => 'Planos';
+
+  @override
+  String get plansPurchaseDone => 'Compra concluída. Aproveite!';
+
+  @override
+  String get plansStoreUnavailable =>
+      'As compras ainda não estão disponíveis nesta versão do app.';
+
+  @override
+  String get plansSoon => 'Em breve';
+
+  @override
+  String get plansSee => 'Ver planos';
+
+  @override
+  String get plansRestore => 'Restaurar compras';
+
+  @override
+  String get plansLegal =>
+      'A assinatura é cobrada na sua conta da Google Play ou da App Store e renova sozinha todo mês, até você cancelar. Dá para cancelar a qualquer momento nas assinaturas da loja; o plano continua até o fim do período pago.';
+
+  @override
+  String get plansPacksTitle => 'Avulsos';
+
+  @override
+  String plansWallet(int superlikes, int boosts) {
+    String _temp0 = intl.Intl.pluralLogic(
+      superlikes,
+      locale: localeName,
+      other: '$superlikes superlikes',
+      one: '1 superlike',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      boosts,
+      locale: localeName,
+      other: '$boosts boosts',
+      one: '1 boost',
+    );
+    return 'Seu saldo: $_temp0 e $_temp1.';
+  }
+
+  @override
+  String packSuperlikes(int count) {
+    return '$count superlikes';
+  }
+
+  @override
+  String packBoosts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count boosts',
+      one: '1 boost',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String planName(String tier) {
+    String _temp0 = intl.Intl.selectLogic(tier, {
+      'plus': 'Pulse+',
+      'black': 'Pulse Black',
+      'other': 'Pulse',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get planFree => 'Grátis';
+
+  @override
+  String planYours(String plan) {
+    return 'Você tem o $plan';
+  }
+
+  @override
+  String get planGrantedByTeam => 'Liberado pela equipe Pulse';
+
+  @override
+  String planRenewsOn(String date) {
+    return 'Renova em $date';
+  }
+
+  @override
+  String planEndsOn(String date) {
+    return 'Válido até $date';
+  }
+
+  @override
+  String planPricePerMonth(String price) {
+    return '$price/mês';
+  }
+
+  @override
+  String get planCurrent => 'Seu plano atual';
+
+  @override
+  String get planSubscribe => 'Assinar';
+
+  @override
+  String get planBenefitUnlimitedLikes => 'Likes ilimitados';
+
+  @override
+  String get planBenefitRewind => 'Voltar o último swipe';
+
+  @override
+  String get planBenefitTravel =>
+      'Modo viagem: descubra gente em outra cidade ou festival';
+
+  @override
+  String planBenefitSuperlikes(int count) {
+    return '$count superlikes por semana';
+  }
+
+  @override
+  String get planBenefitEverythingPlus => 'Tudo do Pulse+';
+
+  @override
+  String get planBenefitLikedYou => 'Veja quem já curtiu você';
+
+  @override
+  String get planBenefitBoost =>
+      '1 boost por mês: apareça primeiro por 30 minutos';
+
+  @override
+  String get planBenefitIncognito => 'Modo discreto: só te vê quem você curtiu';
+
+  @override
+  String planFeatureHeadline(String feature) {
+    String _temp0 = intl.Intl.selectLogic(feature, {
+      'likes': 'Curta sem limite',
+      'rewind': 'Voltar é do Pulse+',
+      'superlikes': 'Mais superlikes',
+      'travel': 'Vai viajar? Chegue conhecendo gente',
+      'likedYou': 'Veja quem curtiu você',
+      'boost': 'Apareça primeiro',
+      'incognito': 'Modo discreto',
+      'other': 'Pulse+ e Pulse Black',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String planFeaturePitch(String feature) {
+    String _temp0 = intl.Intl.selectLogic(feature, {
+      'likes': 'Seus likes de hoje acabaram. Com o Pulse+ você curte quantas pessoas quiser.',
+      'rewind': 'Passou sem querer? Com o Pulse+ você volta o último swipe.',
+      'superlikes': 'Superlikes avisam que você curtiu e te colocam no topo. Assine ou compre um pacote.',
+      'travel': 'Com o modo viagem você descobre gente da cidade ou do festival antes de chegar.',
+      'likedYou':
+          'Com o Pulse Black você vê quem já curtiu você e dá match na hora.',
+      'boost': 'O boost te coloca no topo do Descobrir por 30 minutos, ideal na noite da festa.',
+      'incognito': 'Com o Pulse Black só te vê quem você curtiu.',
+      'other': 'Conheça os planos do Pulse.',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get likesYouTitle => 'Quem curtiu você';
+
+  @override
+  String get likesYouNoneYet =>
+      'Ninguém novo por enquanto. Marque presença em eventos para aparecer para mais gente.';
+
+  @override
+  String likesYouCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pessoas curtiram você',
+      one: '1 pessoa curtiu você',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get likesYouUnlock => 'Ver quem são com o Pulse Black';
+
+  @override
+  String likesYouMatched(String name) {
+    return 'Deu match com $name!';
+  }
+
+  @override
+  String get likesYouOpenChats => 'Abrir conversas';
+
+  @override
+  String get superlikeLabel => 'Superlike';
+
+  @override
+  String get discoverSuperLikedYou => 'Te deu superlike';
+
+  @override
+  String get travelTitle => 'Modo viagem';
+
+  @override
+  String get travelExplain =>
+      'Escolha a cidade para onde você vai e descubra gente de lá antes de chegar.';
+
+  @override
+  String travelActive(String city) {
+    return 'Você está descobrindo gente em $city.';
+  }
+
+  @override
+  String travelBanner(String city) {
+    return 'Modo viagem: $city';
+  }
+
+  @override
+  String get travelPick => 'Escolher cidade';
+
+  @override
+  String get travelChange => 'Trocar cidade';
+
+  @override
+  String get travelBackHome => 'Voltar para minha cidade';
+
+  @override
+  String get boostTitle => 'Boost';
+
+  @override
+  String get boostConfirmTitle => 'Ativar boost?';
+
+  @override
+  String boostConfirmBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Você tem $count boosts.',
+      one: 'Você tem 1 boost.',
+    );
+    return 'Você aparece primeiro no Descobrir por 30 minutos. $_temp0';
+  }
+
+  @override
+  String get boostActivate => 'Ativar';
+
+  @override
+  String boostRunningUntil(String time) {
+    return 'Boost ativo até $time';
+  }
+
+  @override
+  String get settingsPlanSection => 'Plano';
+
+  @override
+  String get settingsMyPlan => 'Meu plano';
+
+  @override
+  String get incognitoTitle => 'Modo discreto';
+
+  @override
+  String get incognitoSubtitle => 'Só te vê quem você curtiu (Pulse Black).';
+
+  @override
+  String get adminPlanTitle => 'Plano e avulsos';
+
+  @override
+  String adminGrantPlan(String plan) {
+    return 'Liberar $plan (30 dias)';
+  }
+
+  @override
+  String get adminRemovePlan => 'Remover plano liberado';
+
+  @override
+  String adminGiveSuperlikes(int count) {
+    return '+$count superlikes';
+  }
+
+  @override
+  String adminGiveBoosts(int count) {
+    return '+$count boost';
+  }
 }

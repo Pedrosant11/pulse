@@ -3,6 +3,7 @@ import 'package:pulse/features/auth/data/account_repository.dart';
 import 'package:pulse/features/auth/data/auth_repository.dart';
 import 'package:pulse/features/auth/presentation/session_providers.dart';
 import 'package:pulse/features/notifications/presentation/push_registration.dart';
+import 'package:pulse/features/plans/data/store_purchases.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_controllers.g.dart';
@@ -119,6 +120,11 @@ class SignOutController extends _$SignOutController {
         await ref
             .read(pushRegistrationProvider.notifier)
             .disable(allDevices: allDevices);
+        try {
+          await ref.read(storePurchasesProvider).logOut();
+        } on Object {
+          // Never blocks signing out.
+        }
         await ref.read(authRepositoryProvider).signOut(allDevices: allDevices);
         return true;
       });

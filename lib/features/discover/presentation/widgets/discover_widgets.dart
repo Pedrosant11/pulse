@@ -63,6 +63,17 @@ class CandidateCard extends StatelessWidget {
           )
         : null;
 
+    // They superliked the viewer (shown first in the deck).
+    final superChip = c.superLikedMe
+        ? Padding(
+            padding: EdgeInsets.only(bottom: spacing.sm),
+            child: _EventChip(
+              accent: colors.lime,
+              text: l10n.discoverSuperLikedYou,
+            ),
+          )
+        : null;
+
     final location = Text(
       [
         if (c.city != null) c.city!,
@@ -101,6 +112,7 @@ class CandidateCard extends StatelessWidget {
     final crewSize = c.crewSize;
     final details = isCrew
         ? <Widget>[
+            ?superChip,
             ?vibeChip,
             nameRow,
             badges,
@@ -158,6 +170,7 @@ class CandidateCard extends StatelessWidget {
             ],
           ]
         : <Widget>[
+            ?superChip,
             ?vibeChip,
             if (firstEvent != null)
               Padding(

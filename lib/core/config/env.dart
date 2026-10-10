@@ -3,7 +3,12 @@
 ///
 /// Only public values belong here. Never put the service role key in the app.
 class Env {
-  const new({required this.supabaseUrl, required this.supabasePublishableKey});
+  const new({
+    required this.supabaseUrl,
+    required this.supabasePublishableKey,
+    this.revenueCatGoogleKey,
+    this.revenueCatAppleKey,
+  });
 
   /// Reads and validates the values compiled into the app.
   factory fromEnvironment() => Env.parse(
@@ -11,12 +16,16 @@ class Env {
     supabasePublishableKey: const String.fromEnvironment(
       'SUPABASE_PUBLISHABLE_KEY',
     ),
+    revenueCatGoogleKey: const String.fromEnvironment('REVENUECAT_GOOGLE_KEY'),
+    revenueCatAppleKey: const String.fromEnvironment('REVENUECAT_APPLE_KEY'),
   );
 
   /// Validates raw values, failing fast with a message aimed at developers.
   factory parse({
     required String supabaseUrl,
     required String supabasePublishableKey,
+    String? revenueCatGoogleKey,
+    String? revenueCatAppleKey,
   }) {
     final missing = [
       if (supabaseUrl.trim().isEmpty) 'SUPABASE_URL',
@@ -33,12 +42,21 @@ class Env {
     if (uri == null || !uri.hasScheme || uri.host.isEmpty) {
       throw StateError('SUPABASE_URL inválida: "$supabaseUrl".');
     }
+    String? optional(String? value) =>
+        (value ?? '').trim().isEmpty ? null : value!.trim();
     return Env(
       supabaseUrl: supabaseUrl.trim(),
       supabasePublishableKey: supabasePublishableKey.trim(),
+      revenueCatGoogleKey: optional(revenueCatGoogleKey),
+      revenueCatAppleKey: optional(revenueCatAppleKey),
     );
   }
 
   final String supabaseUrl;
   final String supabasePublishableKey;
+
+  /// RevenueCat public SDK keys (safe in the app). Without them the plans
+  /// screen shows the plans but purchases are unavailable.
+  final String? revenueCatGoogleKey;
+  final String? revenueCatAppleKey;
 }

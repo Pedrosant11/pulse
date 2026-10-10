@@ -2,6 +2,7 @@ import 'package:pulse/core/models/app_mode.dart';
 import 'package:pulse/features/auth/presentation/session_providers.dart';
 import 'package:pulse/features/discover/data/discover_repository.dart';
 import 'package:pulse/features/discover/domain/discover_models.dart';
+import 'package:pulse/features/plans/presentation/plans_providers.dart';
 import 'package:pulse/features/profile/presentation/profile_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -44,8 +45,9 @@ class DiscoverDeck extends _$DiscoverDeck {
   /// back and the error goes to `state.error`).
   Future<SwipeResult?> swipe(
     DiscoverCandidate candidate,
-    SwipeDirection direction,
-  ) async {
+    SwipeDirection direction, {
+    bool superLike = false,
+  }) async {
     final current = state.value;
     if (current == null) return null;
     final remaining = [
@@ -61,8 +63,11 @@ class DiscoverDeck extends _$DiscoverDeck {
         targetId: candidate.id,
         mode: mode,
         direction: direction,
+        superLike: superLike,
       );
       if (!ref.mounted) return result;
+      // Likes and superlikes left (free limits, wallet).
+      ref.invalidate(entitlementsProvider);
       if (result.matched) {
         // A swipe that matched can't be undone.
         state = AsyncData(state.requireValue.copyWith(lastSwiped: null));
@@ -84,7 +89,7 @@ class DiscoverDeck extends _$DiscoverDeck {
     }
   }
 
-  /// Brings the last swiped card back (SPEC 8.2; premium after SPEC 15).
+  /// Brings the last swiped card back (SPEC 8.2; a plan benefit).
   Future<bool> undo() async {
     final current = state.value;
     final last = current?.lastSwiped;

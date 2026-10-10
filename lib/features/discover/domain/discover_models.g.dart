@@ -58,6 +58,7 @@ _DiscoverCandidate _$DiscoverCandidateFromJson(Map<String, dynamic> json) =>
         json['date_looking_for'],
       ),
       crewSize: (json['crew_size'] as num?)?.toInt(),
+      superLikedMe: json['super_liked_me'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$DiscoverCandidateToJson(_DiscoverCandidate instance) =>
@@ -82,6 +83,7 @@ Map<String, dynamic> _$DiscoverCandidateToJson(_DiscoverCandidate instance) =>
       'favorite_djs': instance.favoriteDjs,
       'date_looking_for': _$DateIntentEnumMap[instance.dateLookingFor],
       'crew_size': instance.crewSize,
+      'super_liked_me': instance.superLikedMe,
     };
 
 const _$GenderEnumMap = {

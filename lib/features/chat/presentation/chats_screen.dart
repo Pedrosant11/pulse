@@ -13,6 +13,7 @@ import 'package:pulse/features/chat/presentation/chat_providers.dart';
 import 'package:pulse/features/chat/presentation/widgets/chat_avatar.dart';
 import 'package:pulse/features/crews/presentation/crews_providers.dart';
 import 'package:pulse/features/events/presentation/widgets/event_visuals.dart';
+import 'package:pulse/features/plans/presentation/plans_providers.dart';
 
 /// Inbox (SPEC 9.1): Date / Crew / Grupos tabs; new matches in a horizontal
 /// strip on top.
@@ -24,6 +25,7 @@ class ChatsScreen extends ConsumerWidget {
     final l10n = context.l10n;
     final colors = context.colors;
     final conversations = ref.watch(conversationsProvider);
+    final likedYou = ref.watch(likesReceivedCountProvider).value ?? 0;
 
     return DefaultTabController(
       length: 3,
@@ -31,6 +33,19 @@ class ChatsScreen extends ConsumerWidget {
         backgroundColor: colors.background,
         appBar: AppBar(
           title: Text(l10n.chatsTitle.toUpperCase()),
+          actions: [
+            // Who liked you (count for everyone, people with Black).
+            IconButton(
+              tooltip: l10n.likesYouTitle,
+              onPressed: () => context.push(AppRoutes.likesYou),
+              icon: Badge(
+                isLabelVisible: likedYou > 0,
+                label: Text('$likedYou'),
+                backgroundColor: colors.magenta,
+                child: Icon(Icons.favorite_rounded, color: colors.magenta),
+              ),
+            ),
+          ],
           bottom: TabBar(
             indicatorColor: colors.magenta,
             labelStyle: context.textTheme.labelLarge,

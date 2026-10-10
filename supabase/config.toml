@@ -427,6 +427,10 @@ verify_jwt = false
 [functions.send-push]
 verify_jwt = false
 
+# Called by RevenueCat with its own shared secret.
+[functions.revenuecat-webhook]
+verify_jwt = false
+
 [analytics]
 enabled = true
 port = 54327

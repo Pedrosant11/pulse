@@ -67,6 +67,12 @@ sealed class AppFailure implements Exception {
       ('P0001', 'min_photos') => MinPhotosFailure(error),
       // Crews without Crew mode ("events only" migration).
       ('P0001', 'crew_mode_required') => CrewModeRequiredFailure(error),
+      // Plans (monetization migration).
+      ('P0001', 'like_limit') => LikeLimitFailure(error),
+      ('P0001', 'superlike_limit') => SuperlikeLimitFailure(error),
+      ('P0001', 'plan_required') => PlanRequiredFailure(error),
+      ('P0001', 'boost_unavailable') => BoostUnavailableFailure(error),
+      ('P0001', 'boost_active') => BoostActiveFailure(error),
       // Sexual orientation without consent (lgpd migration).
       ('22023', 'sensitive_consent') => SensitiveConsentFailure(error),
       // unique_violation on user_private.phone.
@@ -169,5 +175,28 @@ final class UnknownFailure extends AppFailure {
 
 /// Creating or joining a crew without Crew mode on.
 final class CrewModeRequiredFailure extends AppFailure {
+  const new([super.cause]);
+}
+
+/// Free daily likes used up.
+final class LikeLimitFailure extends AppFailure {
+  const new([super.cause]);
+}
+
+/// No weekly superlike left and none in the wallet.
+final class SuperlikeLimitFailure extends AppFailure {
+  const new([super.cause]);
+}
+
+/// A plan benefit (rewind, who liked you).
+final class PlanRequiredFailure extends AppFailure {
+  const new([super.cause]);
+}
+
+final class BoostUnavailableFailure extends AppFailure {
+  const new([super.cause]);
+}
+
+final class BoostActiveFailure extends AppFailure {
   const new([super.cause]);
 }

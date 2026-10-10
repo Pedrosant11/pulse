@@ -11,6 +11,7 @@ import 'package:pulse/features/badges/domain/badge_models.dart';
 import 'package:pulse/features/badges/presentation/badges_providers.dart';
 import 'package:pulse/features/badges/presentation/widgets/profile_badges.dart';
 import 'package:pulse/features/chat/presentation/widgets/chat_avatar.dart';
+import 'package:pulse/features/plans/presentation/widgets/admin_plan_section.dart';
 
 /// Admin panel → Selos (SPEC 6.4): pending requests and granting badges to
 /// anyone found by name.
@@ -332,6 +333,8 @@ class _ManageBadgesSheetState extends ConsumerState<_ManageBadgesSheet> {
                     ),
                   ),
                 ),
+              // Plan and packs (tests, partners, support).
+              AdminPlanSection(userId: widget.userId),
             ],
           );
         },
