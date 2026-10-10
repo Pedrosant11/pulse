@@ -1030,6 +1030,12 @@ abstract class AppLocalizations {
   /// **'Ative o modo Crew no seu perfil para usar as crews.'**
   String get errorCrewModeRequired;
 
+  /// No description provided for @errorCrewNeedsEvent.
+  ///
+  /// In pt, this message translates to:
+  /// **'No Crew, você só curte quem vai a alguma festa com você.'**
+  String get errorCrewNeedsEvent;
+
   /// No description provided for @dateLookingFor.
   ///
   /// In pt, this message translates to:

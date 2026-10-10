@@ -1,6 +1,6 @@
 begin;
 \ir helpers.psql
-select plan(5);
+select plan(6);
 
 -- No superlikes in Crew: it becomes a normal like.
 select tests.login(5);
@@ -12,6 +12,15 @@ select is(
   false,
   'a superlike in Crew is stored as a normal like'
 );
+
+-- Crew likes need a party in common (Elisa, SP, and Xavier, Rio).
+select tests.login(5);
+select throws_ok(
+  $$ select public.swipe(tests.uid(22), 'crew', 'like') $$,
+  'P0001', 'Crew likes need a party in common',
+  'no party in common, no like in Crew'
+);
+select tests.logout();
 
 -- Crews of up to 15.
 select lives_ok(

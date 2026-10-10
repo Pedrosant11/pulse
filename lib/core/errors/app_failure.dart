@@ -67,6 +67,7 @@ sealed class AppFailure implements Exception {
       ('P0001', 'min_photos') => MinPhotosFailure(error),
       // Crews without Crew mode ("events only" migration).
       ('P0001', 'crew_mode_required') => CrewModeRequiredFailure(error),
+      ('P0001', 'crew_needs_event') => CrewNeedsEventFailure(error),
       // Plans (monetization migration).
       ('P0001', 'like_limit') => LikeLimitFailure(error),
       ('P0001', 'superlike_limit') => SuperlikeLimitFailure(error),
@@ -198,5 +199,10 @@ final class BoostUnavailableFailure extends AppFailure {
 }
 
 final class BoostActiveFailure extends AppFailure {
+  const new([super.cause]);
+}
+
+/// A Crew like without a party in common.
+final class CrewNeedsEventFailure extends AppFailure {
   const new([super.cause]);
 }

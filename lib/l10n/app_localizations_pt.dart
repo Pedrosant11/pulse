@@ -528,6 +528,10 @@ class AppLocalizationsPt extends AppLocalizations {
       'Ative o modo Crew no seu perfil para usar as crews.';
 
   @override
+  String get errorCrewNeedsEvent =>
+      'No Crew, você só curte quem vai a alguma festa com você.';
+
+  @override
   String get dateLookingFor => 'O que você busca';
 
   @override

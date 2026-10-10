@@ -207,6 +207,7 @@
   "crewsSectionNeedsMode": "As crews fazem parte do modo Crew. Ative para criar ou entrar numa crew deste evento.",
   "crewsSectionEnableMode": "Ativar o modo Crew",
   "errorCrewModeRequired": "Ative o modo Crew no seu perfil para usar as crews.",
+  "errorCrewNeedsEvent": "No Crew, você só curte quem vai a alguma festa com você.",
   "dateLookingFor": "O que você busca",
   "dateShowMe": "Mostrar para mim",
   "showMeEveryone": "Todo mundo",

@@ -98,7 +98,7 @@ select tests.login(5);
 select results_eq(
   $$ select user_id, is_super from public.get_likes_received()
      order by is_super desc, user_id $$,
-  $$ values (tests.uid(27), true), (tests.uid(2), false), (tests.uid(22), false),
+  $$ values (tests.uid(27), true), (tests.uid(2), false), (tests.uid(8), false),
             (tests.uid(24), false) $$,
   'Black sees who liked them, superlikes first'
 );

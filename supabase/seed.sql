@@ -268,12 +268,13 @@ insert into public.subscriptions (user_id, tier, source) values
 insert into public.wallets (user_id, superlikes, boosts) values
   ('00000000-0000-4000-a000-000000000005', 3, 1);
 
--- Pending likes for "who liked you": Elisa (Black) sees who they are, Ana
+-- Pending likes for "who liked you" (Crew likes need a party in common:
+-- Hugo and Elisa share one): Elisa (Black) sees who they are, Ana
 -- (free) only how many.
 insert into public.swipes (swiper_id, swiped_id, mode, direction, is_super) values
   ('00000000-0000-4000-a000-000000000002', '00000000-0000-4000-a000-000000000005', 'date', 'like', false),
   ('00000000-0000-4000-a000-000000000024', '00000000-0000-4000-a000-000000000005', 'date', 'like', false),
-  ('00000000-0000-4000-a000-000000000022', '00000000-0000-4000-a000-000000000005', 'crew', 'like', false),
+  ('00000000-0000-4000-a000-000000000008', '00000000-0000-4000-a000-000000000005', 'crew', 'like', false),
   ('00000000-0000-4000-a000-000000000027', '00000000-0000-4000-a000-000000000005', 'date', 'like', true),
   ('00000000-0000-4000-a000-000000000002', '00000000-0000-4000-a000-000000000001', 'date', 'like', false),
   ('00000000-0000-4000-a000-000000000004', '00000000-0000-4000-a000-000000000001', 'date', 'like', false);

@@ -301,3 +301,80 @@ $$;
 
 revoke execute on function public.get_common_events(uuid) from public, anon;
 grant execute on function public.get_common_events(uuid) to authenticated;
+
+-- ---------------------------------------------------------------------------
+-- Crew likes need a party in common
+-- ---------------------------------------------------------------------------
+
+-- Upcoming approved event both people go to.
+create function private.share_upcoming_event(p_a uuid, p_b uuid)
+returns boolean
+language sql
+stable
+security definer
+set search_path = ''
+as $$
+  select exists (
+    select 1
+    from public.event_attendance a
+    join public.event_attendance b on b.event_id = a.event_id
+    join public.events e on e.id = a.event_id
+    where a.user_id = p_a
+      and b.user_id = p_b
+      and e.status = 'approved'
+      and e.ends_at > now()
+  );
+$$;
+
+-- Crew is about going to a party together: liking someone there needs a
+-- party in common (the feed only shows those; this closes other paths).
+create function private.guard_crew_like()
+returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $$
+begin
+  if new.mode = 'crew' and new.direction = 'like'
+     and not private.share_upcoming_event(new.swiper_id, new.swiped_id) then
+    raise exception 'Crew likes need a party in common'
+      using errcode = 'P0001', hint = 'crew_needs_event';
+  end if;
+  return new;
+end;
+$$;
+
+create trigger swipes_guard_crew_event
+  before insert on public.swipes
+  for each row execute function private.guard_crew_like();
+
+-- "Who liked you": Crew likes only while there is still a party in common
+-- (so answering one can always become a crew).
+create or replace function private.likes_received(p_uid uuid)
+returns table (
+  user_id uuid,
+  mode public.app_mode,
+  is_super boolean,
+  liked_at timestamptz
+)
+language sql
+stable
+security definer
+set search_path = ''
+as $$
+  select s.swiper_id, s.mode, s.is_super, s.created_at
+  from public.swipes s
+  join public.profiles p on p.id = s.swiper_id
+  join public.profiles me on me.id = p_uid
+  where s.swiped_id = p_uid
+    and s.direction = 'like'
+    and p.status = 'active'
+    and s.mode = any (p.modes)
+    and s.mode = any (me.modes)
+    and (s.mode = 'date' or private.share_upcoming_event(p_uid, p.id))
+    and not private.is_blocked(p_uid, p.id)
+    and not exists (
+      select 1 from public.swipes r
+      where r.swiper_id = p_uid and r.swiped_id = s.swiper_id and r.mode = s.mode
+    );
+$$;
