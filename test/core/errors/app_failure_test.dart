@@ -81,6 +81,20 @@ void main() {
       expect(auth('something_new'), isA<UnknownFailure>());
     });
 
+    test('only a fetch error without status is a network failure', () {
+      expect(
+        AppFailure.from(AuthRetryableFetchException(message: 'offline')),
+        isA<NetworkFailure>(),
+      );
+      // e.g. "Error sending confirmation email" answered with HTTP 500.
+      expect(
+        AppFailure.from(
+          AuthRetryableFetchException(message: 'smtp', statusCode: '500'),
+        ),
+        isA<UnknownFailure>(),
+      );
+    });
+
     test('maps the unique phone error', () {
       expect(
         AppFailure.from(

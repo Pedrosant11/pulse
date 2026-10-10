@@ -50,7 +50,12 @@ sealed class AppFailure implements Exception {
       _ => switch (error.statusCode) {
         '401' => SessionExpiredFailure(error),
         '429' => RateLimitedFailure(error),
-        _ when error is AuthRetryableFetchException => NetworkFailure(error),
+        // gotrue also wraps 5xx answers in this exception; only the ones
+        // without a status are real network failures.
+        _
+            when error is AuthRetryableFetchException &&
+                error.statusCode == null =>
+          NetworkFailure(error),
         _ => UnknownFailure(error),
       },
     };
