@@ -136,4 +136,15 @@ void main() {
     expect(uri.path, AppRoutes.checkEmail);
     expect(uri.queryParameters['email'], 'ana+teste@pulse.app');
   });
+
+  test('"events only" profiles land on Events', () {
+    expect(
+      resolveRedirect(
+        status: SessionStatus.ready,
+        location: AppRoutes.onboarding,
+        home: AppRoutes.events,
+      ),
+      AppRoutes.events,
+    );
+  });
 }

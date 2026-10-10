@@ -77,6 +77,8 @@ class ProfileEditor extends _$ProfileEditor {
         ref
           ..invalidate(myProfileProvider)
           ..invalidate(myPublicProfileProvider);
+        // Turning modes on/off ("events only") changes where the app opens.
+        if (fields.containsKey('modes')) ref.invalidate(accountProvider);
         return true;
       });
 

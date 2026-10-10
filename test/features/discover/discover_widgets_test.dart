@@ -124,11 +124,12 @@ void main() {
       List<DiscoverCandidate> cards, {
       bool hasEvents = true,
       AppMode mode = AppMode.date,
+      List<AppMode>? modes,
     }) => [
       myProfileProvider.overrideWith(
         (ref) async => MyProfile(
           id: 'me',
-          modes: [mode],
+          modes: modes ?? [mode],
           musicGenres: const [MusicGenre.techno, MusicGenre.house],
         ),
       ),
@@ -228,6 +229,18 @@ void main() {
         find.text('O modo Crew está desligado no seu perfil.'),
         findsOneWidget,
       );
+    });
+
+    testWidgets('"events only" sees an invite instead of the deck', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _app(const DiscoverScreen(), overrides: overrides([ana], modes: [])),
+      );
+      await settle(tester);
+      expect(find.text('Conheça gente nas festas'), findsOneWidget);
+      expect(find.text('Ativar Date ou Crew'), findsOneWidget);
+      expect(find.text('CREW'), findsNothing);
     });
   });
 }

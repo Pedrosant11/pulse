@@ -15,9 +15,10 @@ import 'package:pulse/features/profile/presentation/profile_providers.dart';
 import 'package:pulse/features/profile/presentation/widgets/photo_grid_editor.dart';
 import 'package:pulse/features/profile/presentation/widgets/profile_forms.dart';
 
-/// Profile onboarding (SPEC 6.2): photos → basics → about me → music →
-/// modes and preferences → first event. Progress is saved after each step,
-/// so the user resumes where they stopped.
+/// Profile onboarding (SPEC 6.2). First the person picks Date, Crew or only
+/// events; then [onboardingPath] decides the rest (photos → basics → about
+/// me → music → preferences → first event, or just city → music → first
+/// event). Progress is saved after each step, so the user resumes there.
 class OnboardingScreen extends ConsumerStatefulWidget {
   const new({super.key});
 
@@ -28,27 +29,46 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   OnboardingStep? _step;
 
-  static final OnboardingStep _lastStep = OnboardingStep.values.last;
+  /// Path chosen in this session; the profile reloads a moment later.
+  List<OnboardingStep>? _chosenPath;
+
+  List<OnboardingStep> _path(List<Object?> modes) =>
+      onboardingPath(eventsOnly: modes.isEmpty);
 
   OnboardingStep _resumeStep(MyProfile profile) {
-    final saved = profile.onboardingStep.clamp(0, _lastStep.index);
-    return OnboardingStep.values[saved];
+    final index = profile.onboardingStep;
+    final saved = index >= 0 && index < OnboardingStep.values.length
+        ? OnboardingStep.values[index]
+        : OnboardingStep.intent;
+    // A step from the other path (the choice changed) restarts the choice.
+    return _path(profile.modes).contains(saved) ? saved : OnboardingStep.intent;
   }
 
   Future<void> _saveAndAdvance(
+    MyProfile profile,
     OnboardingStep current,
     Map<String, Object?> fields,
   ) async {
-    final next = OnboardingStep.values[current.index + 1];
+    final path = switch (fields['modes']) {
+      final List<Object?> modes => _path(modes),
+      _ => _chosenPath ?? _path(profile.modes),
+    };
+    final next = path[path.indexOf(current) + 1];
     final saved = await ref
         .read(profileEditorProvider.notifier)
         .save(fields, nextStep: next);
-    if (saved == true && mounted) setState(() => _step = next);
+    if (saved == true && mounted) {
+      setState(() {
+        _chosenPath = path;
+        _step = next;
+      });
+    }
   }
 
-  void _back(OnboardingStep current) {
-    if (current.index == 0) return;
-    setState(() => _step = OnboardingStep.values[current.index - 1]);
+  void _back(List<OnboardingStep> path, OnboardingStep current) {
+    final index = path.indexOf(current);
+    if (index <= 0) return;
+    setState(() => _step = path[index - 1]);
   }
 
   @override
@@ -78,7 +98,16 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       ),
       data: (profile) {
         final step = _step ??= _resumeStep(profile);
+        final path = _chosenPath ?? _path(profile.modes);
         final (title, subtitle) = switch (step) {
+          OnboardingStep.intent => (
+            l10n.onboardingIntentTitle,
+            l10n.onboardingIntentSubtitle,
+          ),
+          OnboardingStep.location => (
+            l10n.onboardingLocationTitle,
+            l10n.onboardingLocationSubtitle,
+          ),
           OnboardingStep.photos => (
             l10n.onboardingPhotosTitle,
             l10n.onboardingPhotosSubtitle,
@@ -105,19 +134,32 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           ),
         };
         Future<void> submit(Map<String, Object?> fields) =>
-            _saveAndAdvance(step, fields);
+            _saveAndAdvance(profile, step, fields);
+        final position = path.indexOf(step);
 
         return FlowScaffold(
           key: ValueKey(step),
           title: title,
           subtitle: subtitle,
-          step: step.index + 1,
-          totalSteps: OnboardingStep.values.length,
-          onBack: step.index == 0 ? null : () => _back(step),
+          // The choice comes first; the total depends on it.
+          step: step == OnboardingStep.intent ? null : position + 1,
+          totalSteps: path.length,
+          onBack: position <= 0 ? null : () => _back(path, step),
           actions: [signOut],
           children: [
             switch (step) {
-              OnboardingStep.photos => _PhotosStep(
+              OnboardingStep.intent => IntentForm(
+                initial: profile,
+                submitLabel: l10n.continueButton,
+                onSubmit: submit,
+              ),
+              OnboardingStep.location => BasicsForm(
+                initial: profile,
+                minimal: true,
+                submitLabel: l10n.continueButton,
+                onSubmit: submit,
+              ),
+              OnboardingStep.photos => PhotosStep(
                 onContinue: () => submit(const {}),
               ),
               OnboardingStep.basics => BasicsForm(
@@ -151,8 +193,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   }
 }
 
-class _PhotosStep extends ConsumerWidget {
-  const new({required this.onContinue});
+/// Photo grid with the 2-photo minimum (onboarding and mode activation).
+class PhotosStep extends ConsumerWidget {
+  const new({required this.onContinue, super.key});
 
   final VoidCallback onContinue;
 

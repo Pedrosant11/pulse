@@ -26,6 +26,7 @@ abstract final class AppRoutes {
   static const badgeRequest = '/settings/badge-request';
   static const blockedUsers = '/settings/blocked';
   static const deleteAccount = '/settings/delete-account';
+  static const activateModes = '/activate-modes';
   static const safetyTips = '/safety-tips';
   static const accountRestricted = '/account-restricted';
   static const admin = '/admin';
@@ -68,10 +69,12 @@ abstract final class AppRoutes {
 }
 
 /// Pure redirect rule, kept apart from GoRouter so it can be unit tested.
-/// Returns the path to go to, or `null` to stay on [location].
+/// Returns the path to go to, or `null` to stay on [location]. [home] is
+/// where a ready user lands (Events for "events only" profiles).
 String? resolveRedirect({
   required SessionStatus status,
   required String location,
+  String home = AppRoutes.discover,
 }) {
   // Legal documents are readable in any state (sign-up terms step, stores).
   if (location.startsWith('${AppRoutes.legalPrefix}/')) return null;
@@ -102,6 +105,6 @@ String? resolveRedirect({
           location == AppRoutes.accountRestricted ||
           location == AppRoutes.accountSetup ||
           location == AppRoutes.onboarding;
-      return isEntryFlow ? AppRoutes.discover : null;
+      return isEntryFlow ? home : null;
   }
 }

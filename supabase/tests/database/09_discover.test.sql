@@ -39,7 +39,7 @@ select ok(
 );
 
 select results_eq(
-  $$ select matched from public.swipe(tests.uid(9), 'crew', 'pass') $$,
+  $$ select matched from public.swipe(tests.uid(8), 'crew', 'pass') $$,
   $$ values (false) $$,
   'passing never matches'
 );

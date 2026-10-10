@@ -147,7 +147,14 @@ Não criar nenhum campo relacionado a uso de drogas.
 
 ### 6.2 Onboarding de perfil
 
-Após o cadastro, fluxo em etapas: fotos → básico → sobre mim → música → modos e preferências → primeiro evento (convite para marcar presença em algum evento já cadastrado). Salvar progresso a cada etapa. O usuário só aparece no feed quando `onboarding_completed = true` e tem pelo menos 2 fotos.
+Após o cadastro, a primeira etapa pergunta o que a pessoa busca: **Date**, **Crew** (pode os dois) ou **Só eventos**.
+
+- **Date/Crew**: fotos → básico → sobre mim → música → modos e preferências → primeiro evento (convite para marcar presença em algum evento já cadastrado).
+- **Só eventos** (`modes` vazio): nome e cidade → música → primeiro evento. Sem fotos, gênero nem "sobre mim".
+
+Salvar progresso a cada etapa. O usuário só aparece no feed quando `onboarding_completed = true`, tem o modo ligado e pelo menos 2 fotos.
+
+**Só eventos** (migration `events_only`): a pessoa fica invisível. Não aparece no Descobrir nem na lista de quem vai ao evento, não pode ser curtida, não cria, não entra e não é convidada para crews. Ela entra só na contagem total de quem vai. O app abre em Eventos, e o Descobrir mostra um convite "Ativar Date ou Crew". Ativar depois pede só o que falta (2 fotos e gênero), e o banco confere as duas coisas. Desligar todos os modos na edição do perfil volta para "só eventos".
 
 ### 6.3 Tela de perfil
 

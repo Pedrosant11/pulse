@@ -916,6 +916,120 @@ abstract class AppLocalizations {
   /// **'Escolha pelo menos um modo.'**
   String get modesMinHint;
 
+  /// No description provided for @onboardingIntentTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'O que você busca'**
+  String get onboardingIntentTitle;
+
+  /// No description provided for @onboardingIntentSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dá pra mudar quando quiser no seu perfil.'**
+  String get onboardingIntentSubtitle;
+
+  /// No description provided for @onboardingLocationTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sua cidade'**
+  String get onboardingLocationTitle;
+
+  /// No description provided for @onboardingLocationSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pra gente mostrar as festas perto de você.'**
+  String get onboardingLocationSubtitle;
+
+  /// No description provided for @intentEventsOnly.
+  ///
+  /// In pt, this message translates to:
+  /// **'Só eventos'**
+  String get intentEventsOnly;
+
+  /// No description provided for @intentEventsOnlyDescription.
+  ///
+  /// In pt, this message translates to:
+  /// **'Só quero achar festas. Sem fotos e sem aparecer para ninguém.'**
+  String get intentEventsOnlyDescription;
+
+  /// No description provided for @intentHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pode escolher Date e Crew juntos.'**
+  String get intentHint;
+
+  /// No description provided for @intentRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolha uma opção para continuar.'**
+  String get intentRequired;
+
+  /// No description provided for @modesNoneHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem nenhum modo, você fica só com os eventos: sai do Descobrir e ninguém te encontra.'**
+  String get modesNoneHint;
+
+  /// No description provided for @discoverEventsOnlyTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conheça gente nas festas'**
+  String get discoverEventsOnlyTitle;
+
+  /// No description provided for @discoverEventsOnlyBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ative o Date para dar match ou o Crew para achar galera pro rolê. As fotos e alguns dados só são pedidos na hora de ativar.'**
+  String get discoverEventsOnlyBody;
+
+  /// No description provided for @discoverEventsOnlyAction.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ativar Date ou Crew'**
+  String get discoverEventsOnlyAction;
+
+  /// No description provided for @activateModesTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ativar Date ou Crew'**
+  String get activateModesTitle;
+
+  /// No description provided for @activateModesButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ativar'**
+  String get activateModesButton;
+
+  /// No description provided for @activateModesDone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pronto! Agora você aparece no Descobrir.'**
+  String get activateModesDone;
+
+  /// No description provided for @notNow.
+  ///
+  /// In pt, this message translates to:
+  /// **'Agora não'**
+  String get notNow;
+
+  /// No description provided for @crewsSectionNeedsMode.
+  ///
+  /// In pt, this message translates to:
+  /// **'As crews fazem parte do modo Crew. Ative para criar ou entrar numa crew deste evento.'**
+  String get crewsSectionNeedsMode;
+
+  /// No description provided for @crewsSectionEnableMode.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ativar o modo Crew'**
+  String get crewsSectionEnableMode;
+
+  /// No description provided for @errorCrewModeRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ative o modo Crew no seu perfil para usar as crews.'**
+  String get errorCrewModeRequired;
+
   /// No description provided for @dateLookingFor.
   ///
   /// In pt, this message translates to:

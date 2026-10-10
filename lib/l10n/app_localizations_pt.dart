@@ -464,6 +464,70 @@ class AppLocalizationsPt extends AppLocalizations {
   String get modesMinHint => 'Escolha pelo menos um modo.';
 
   @override
+  String get onboardingIntentTitle => 'O que você busca';
+
+  @override
+  String get onboardingIntentSubtitle =>
+      'Dá pra mudar quando quiser no seu perfil.';
+
+  @override
+  String get onboardingLocationTitle => 'Sua cidade';
+
+  @override
+  String get onboardingLocationSubtitle =>
+      'Pra gente mostrar as festas perto de você.';
+
+  @override
+  String get intentEventsOnly => 'Só eventos';
+
+  @override
+  String get intentEventsOnlyDescription =>
+      'Só quero achar festas. Sem fotos e sem aparecer para ninguém.';
+
+  @override
+  String get intentHint => 'Pode escolher Date e Crew juntos.';
+
+  @override
+  String get intentRequired => 'Escolha uma opção para continuar.';
+
+  @override
+  String get modesNoneHint =>
+      'Sem nenhum modo, você fica só com os eventos: sai do Descobrir e ninguém te encontra.';
+
+  @override
+  String get discoverEventsOnlyTitle => 'Conheça gente nas festas';
+
+  @override
+  String get discoverEventsOnlyBody =>
+      'Ative o Date para dar match ou o Crew para achar galera pro rolê. As fotos e alguns dados só são pedidos na hora de ativar.';
+
+  @override
+  String get discoverEventsOnlyAction => 'Ativar Date ou Crew';
+
+  @override
+  String get activateModesTitle => 'Ativar Date ou Crew';
+
+  @override
+  String get activateModesButton => 'Ativar';
+
+  @override
+  String get activateModesDone => 'Pronto! Agora você aparece no Descobrir.';
+
+  @override
+  String get notNow => 'Agora não';
+
+  @override
+  String get crewsSectionNeedsMode =>
+      'As crews fazem parte do modo Crew. Ative para criar ou entrar numa crew deste evento.';
+
+  @override
+  String get crewsSectionEnableMode => 'Ativar o modo Crew';
+
+  @override
+  String get errorCrewModeRequired =>
+      'Ative o modo Crew no seu perfil para usar as crews.';
+
+  @override
   String get dateLookingFor => 'O que você busca';
 
   @override

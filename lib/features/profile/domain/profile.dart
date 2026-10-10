@@ -89,5 +89,34 @@ abstract class ProfilePhoto with _$ProfilePhoto {
   factory fromJson(Map<String, dynamic> json) => _$ProfilePhotoFromJson(json);
 }
 
-/// Onboarding steps, in order (`profiles.onboarding_step`).
-enum OnboardingStep { photos, basics, about, music, modes, firstEvent }
+/// Onboarding steps (`profiles.onboarding_step` stores the index; the length
+/// means done). Each person walks one of the [onboardingPath]s.
+enum OnboardingStep {
+  intent,
+  photos,
+  basics,
+  location,
+  about,
+  music,
+  modes,
+  firstEvent,
+}
+
+/// Steps for what the person chose first. "Events only" (no mode) skips the
+/// dating profile: no photos, gender or "about me".
+List<OnboardingStep> onboardingPath({required bool eventsOnly}) => eventsOnly
+    ? const [
+        OnboardingStep.intent,
+        OnboardingStep.location,
+        OnboardingStep.music,
+        OnboardingStep.firstEvent,
+      ]
+    : const [
+        OnboardingStep.intent,
+        OnboardingStep.photos,
+        OnboardingStep.basics,
+        OnboardingStep.about,
+        OnboardingStep.music,
+        OnboardingStep.modes,
+        OnboardingStep.firstEvent,
+      ];

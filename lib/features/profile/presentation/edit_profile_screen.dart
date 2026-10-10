@@ -6,6 +6,7 @@ import 'package:pulse/core/extensions/context_extensions.dart';
 import 'package:pulse/core/widgets/glass_card.dart';
 import 'package:pulse/core/widgets/neon_button.dart';
 import 'package:pulse/core/widgets/state_views.dart';
+import 'package:pulse/features/onboarding/presentation/activate_modes_screen.dart';
 import 'package:pulse/features/profile/presentation/profile_providers.dart';
 import 'package:pulse/features/profile/presentation/widgets/photo_grid_editor.dart';
 import 'package:pulse/features/profile/presentation/widgets/profile_forms.dart';
@@ -13,13 +14,14 @@ import 'package:pulse/features/profile/presentation/widgets/profile_forms.dart';
 /// Editable sections — the same widgets as the onboarding steps.
 enum ProfileSection { photos, basics, about, music, modes }
 
-class EditProfileScreen extends StatelessWidget {
+class EditProfileScreen extends ConsumerWidget {
   const new({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final spacing = context.spacing;
+    final me = ref.watch(myProfileProvider).value;
     final sections = [
       (
         ProfileSection.photos,
@@ -48,9 +50,13 @@ class EditProfileScreen extends StatelessWidget {
                     leading: Icon(icon, color: context.colors.magenta),
                     title: Text(label),
                     trailing: const Icon(Icons.chevron_right),
-                    onTap: () => context.push(
-                      AppRoutes.editProfileSection(section.name),
-                    ),
+                    // "Events only" turns a mode on through the short
+                    // activation flow (photos and gender first).
+                    onTap: section == ProfileSection.modes
+                        ? () => openEnableModes(context, me)
+                        : () => context.push(
+                            AppRoutes.editProfileSection(section.name),
+                          ),
                   ),
                 ),
               ),
@@ -126,6 +132,7 @@ class EditProfileSectionScreen extends ConsumerWidget {
               ),
               ProfileSection.modes => ModesForm(
                 initial: profile,
+                allowNone: true,
                 submitLabel: l10n.saveButton,
                 onSubmit: save,
               ),

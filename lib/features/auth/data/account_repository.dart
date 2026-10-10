@@ -18,7 +18,7 @@ class AccountRepository {
       final results = await Future.wait([
         _client
             .from('profiles')
-            .select('terms_version, onboarding_completed, status')
+            .select('terms_version, onboarding_completed, status, modes')
             .eq('id', userId)
             .single(),
         _client
@@ -34,6 +34,7 @@ class AccountRepository {
         hasPhone: private['phone'] != null,
         termsAccepted: profile['terms_version'] == AppConstants.termsVersion,
         onboardingCompleted: profile['onboarding_completed'] as bool,
+        eventsOnly: (profile['modes'] as List).isEmpty,
         status: AccountStatus.values.byName(profile['status'] as String),
       );
     });

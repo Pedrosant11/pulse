@@ -65,6 +65,8 @@ sealed class AppFailure implements Exception {
     return switch ((error.code, error.hint)) {
       // Profile photo rules (onboarding migration).
       ('P0001', 'min_photos') => MinPhotosFailure(error),
+      // Crews without Crew mode ("events only" migration).
+      ('P0001', 'crew_mode_required') => CrewModeRequiredFailure(error),
       // Sexual orientation without consent (lgpd migration).
       ('22023', 'sensitive_consent') => SensitiveConsentFailure(error),
       // unique_violation on user_private.phone.
@@ -162,5 +164,10 @@ final class MinPhotosFailure extends AppFailure {
 }
 
 final class UnknownFailure extends AppFailure {
+  const new([super.cause]);
+}
+
+/// Creating or joining a crew without Crew mode on.
+final class CrewModeRequiredFailure extends AppFailure {
   const new([super.cause]);
 }

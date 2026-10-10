@@ -19,6 +19,7 @@ extension AppFailureMessage on AppFailure {
       SamePasswordFailure() => l10n.errorSamePassword,
       PhoneInUseFailure() => l10n.errorPhoneInUse,
       MinPhotosFailure() => l10n.errorMinPhotos,
+      CrewModeRequiredFailure() => l10n.errorCrewModeRequired,
       UnknownFailure() => l10n.errorUnknown,
     };
   }

@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:pulse/app/app.dart';
+import 'package:pulse/core/models/app_mode.dart';
 import 'package:pulse/core/widgets/pulse_bottom_nav.dart';
 import 'package:pulse/features/auth/domain/session_status.dart';
 import 'package:pulse/features/auth/presentation/session_providers.dart';
@@ -39,7 +40,11 @@ void main() {
           sessionStatusProvider.overrideWith((ref) => ref.watch(session)),
           // Tabs that load data get fake backends.
           myProfileProvider.overrideWith(
-            (ref) async => const MyProfile(id: 'u1', city: 'Rio de Janeiro'),
+            (ref) async => const MyProfile(
+              id: 'u1',
+              city: 'Rio de Janeiro',
+              modes: [AppMode.date],
+            ),
           ),
           for (final scope in EventListScope.values)
             eventListProvider(scope).overrideWith((ref) async => const []),

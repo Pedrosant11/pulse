@@ -19,6 +19,7 @@ import 'package:pulse/features/discover/presentation/discover_providers.dart';
 import 'package:pulse/features/discover/presentation/widgets/candidate_profile_page.dart';
 import 'package:pulse/features/discover/presentation/widgets/discover_widgets.dart';
 import 'package:pulse/features/discover/presentation/widgets/swipe_card.dart';
+import 'package:pulse/features/onboarding/presentation/activate_modes_screen.dart';
 import 'package:pulse/features/profile/domain/profile_enums.dart';
 import 'package:pulse/features/profile/presentation/edit_profile_screen.dart';
 import 'package:pulse/features/profile/presentation/profile_providers.dart';
@@ -110,6 +111,24 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
     final l10n = context.l10n;
     final colors = context.colors;
     final spacing = context.spacing;
+    // "Events only": an invite instead of the deck (checked on the loaded
+    // profile, so it doesn't flash while loading).
+    final me = ref.watch(myProfileProvider).value;
+    if (me != null && me.modes.isEmpty) {
+      return Scaffold(
+        backgroundColor: colors.background,
+        body: SafeArea(
+          child: EmptyView(
+            icon: Icons.nightlife_rounded,
+            title: l10n.discoverEventsOnlyTitle,
+            message: l10n.discoverEventsOnlyBody,
+            actionLabel: l10n.discoverEventsOnlyAction,
+            onAction: () => openEnableModes(context, me),
+          ),
+        ),
+      );
+    }
+
     final mode = ref.watch(discoverModeProvider);
     final enabled = ref.watch(enabledModesProvider);
     final accent = colors.accentOf(mode);

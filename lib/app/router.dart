@@ -30,6 +30,7 @@ import 'package:pulse/features/events/presentation/events_screen.dart';
 import 'package:pulse/features/events/presentation/moderation_queue_screen.dart';
 import 'package:pulse/features/legal/domain/legal_document.dart';
 import 'package:pulse/features/legal/presentation/legal_document_screen.dart';
+import 'package:pulse/features/onboarding/presentation/activate_modes_screen.dart';
 import 'package:pulse/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:pulse/features/profile/presentation/edit_profile_screen.dart';
 import 'package:pulse/features/profile/presentation/profile_screen.dart';
@@ -58,8 +59,13 @@ GoRouter router(Ref ref) {
     initialLocation: AppRoutes.splash,
     refreshListenable: session,
     debugLogDiagnostics: kDebugMode,
-    redirect: (context, state) =>
-        resolveRedirect(status: session.value, location: state.uri.path),
+    redirect: (context, state) => resolveRedirect(
+      status: session.value,
+      location: state.uri.path,
+      home: (ref.read(accountProvider).value?.eventsOnly ?? false)
+          ? AppRoutes.events
+          : AppRoutes.discover,
+    ),
     routes: [
       GoRoute(path: AppRoutes.splash, builder: (_, _) => const SplashScreen()),
       GoRoute(path: AppRoutes.login, builder: (_, _) => const LoginScreen()),
@@ -262,6 +268,10 @@ GoRouter router(Ref ref) {
         builder: (_, state) => LegalDocumentScreen(
           document: LegalDocument.fromSlug(state.pathParameters['doc']!)!,
         ),
+      ),
+      GoRoute(
+        path: AppRoutes.activateModes,
+        builder: (_, _) => const ActivateModesScreen(),
       ),
       GoRoute(
         path: AppRoutes.safetyTips,

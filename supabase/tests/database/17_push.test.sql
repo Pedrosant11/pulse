@@ -196,6 +196,7 @@ select is(
 update public.profiles set status = 'active' where id = tests.uid(26);
 
 -- Crew owned by 26: a join request from 21, then accepted.
+update public.profiles set modes = '{date,crew}' where id = tests.uid(26);
 insert into public.event_attendance (event_id, user_id)
 values (tests.event(1), tests.uid(21)), (tests.event(1), tests.uid(26))
 on conflict do nothing;

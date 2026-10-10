@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:pulse/app/routes.dart';
 import 'package:pulse/core/extensions/context_extensions.dart';
+import 'package:pulse/core/models/app_mode.dart';
 import 'package:pulse/core/widgets/form_error_text.dart';
 import 'package:pulse/core/widgets/glass_card.dart';
 import 'package:pulse/core/widgets/neon_button.dart';
@@ -14,6 +15,8 @@ import 'package:pulse/features/crews/domain/crew_models.dart';
 import 'package:pulse/features/crews/presentation/crews_providers.dart';
 import 'package:pulse/features/crews/presentation/widgets/crew_card.dart';
 import 'package:pulse/features/events/presentation/widgets/event_visuals.dart';
+import 'package:pulse/features/onboarding/presentation/activate_modes_screen.dart';
+import 'package:pulse/features/profile/presentation/profile_providers.dart';
 import 'package:pulse/features/profile/presentation/widgets/user_profile_sheet.dart';
 
 /// A crew (SPEC 9.2): members, chat, requests/invites and owner actions.
@@ -562,6 +565,20 @@ class EventCrewsSection extends ConsumerWidget {
       return Text(
         l10n.crewsSectionNotGoing,
         style: context.textTheme.bodySmall,
+      );
+    }
+    // Crews are part of Crew mode ("events only" stays invisible).
+    final me = ref.watch(myProfileProvider).value;
+    if (me != null && !me.modes.contains(AppMode.crew)) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(l10n.crewsSectionNeedsMode, style: context.textTheme.bodySmall),
+          TextButton(
+            onPressed: () => openEnableModes(context, me),
+            child: Text(l10n.crewsSectionEnableMode),
+          ),
+        ],
       );
     }
     final crews = ref.watch(eventCrewsProvider(eventId));

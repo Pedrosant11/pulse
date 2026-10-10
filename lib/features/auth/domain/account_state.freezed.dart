@@ -17,7 +17,8 @@ mixin _$AccountState {
 
  String get userId;/// A phone number is saved (required, unique per account; no code).
  bool get hasPhone;/// Accepted the current terms version (AppConstants.termsVersion).
- bool get termsAccepted; bool get onboardingCompleted; AccountStatus get status;
+ bool get termsAccepted; bool get onboardingCompleted; AccountStatus get status;/// No Date or Crew mode: the app opens on Events.
+ bool get eventsOnly;
 /// Create a copy of AccountState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,20 +30,20 @@ $AccountStateCopyWith<AccountState> get copyWith => _$AccountStateCopyWithImpl<A
 @override
 bool operator ==(Object other) {
   final _this = this as AccountState;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AccountState&&(identical(other.userId, _this.userId) || other.userId == _this.userId)&&(identical(other.hasPhone, _this.hasPhone) || other.hasPhone == _this.hasPhone)&&(identical(other.termsAccepted, _this.termsAccepted) || other.termsAccepted == _this.termsAccepted)&&(identical(other.onboardingCompleted, _this.onboardingCompleted) || other.onboardingCompleted == _this.onboardingCompleted)&&(identical(other.status, _this.status) || other.status == _this.status));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AccountState&&(identical(other.userId, _this.userId) || other.userId == _this.userId)&&(identical(other.hasPhone, _this.hasPhone) || other.hasPhone == _this.hasPhone)&&(identical(other.termsAccepted, _this.termsAccepted) || other.termsAccepted == _this.termsAccepted)&&(identical(other.onboardingCompleted, _this.onboardingCompleted) || other.onboardingCompleted == _this.onboardingCompleted)&&(identical(other.status, _this.status) || other.status == _this.status)&&(identical(other.eventsOnly, _this.eventsOnly) || other.eventsOnly == _this.eventsOnly));
 }
 
 
 @override
 int get hashCode {
   final _this = this as AccountState;
-  return Object.hash(runtimeType,_this.userId,_this.hasPhone,_this.termsAccepted,_this.onboardingCompleted,_this.status);
+  return Object.hash(runtimeType,_this.userId,_this.hasPhone,_this.termsAccepted,_this.onboardingCompleted,_this.status,_this.eventsOnly);
 }
 
 @override
 String toString() {
   final _this = this as AccountState;
-  return 'AccountState(userId: ${_this.userId}, hasPhone: ${_this.hasPhone}, termsAccepted: ${_this.termsAccepted}, onboardingCompleted: ${_this.onboardingCompleted}, status: ${_this.status})';
+  return 'AccountState(userId: ${_this.userId}, hasPhone: ${_this.hasPhone}, termsAccepted: ${_this.termsAccepted}, onboardingCompleted: ${_this.onboardingCompleted}, status: ${_this.status}, eventsOnly: ${_this.eventsOnly})';
 }
 
 
@@ -53,7 +54,7 @@ abstract mixin class $AccountStateCopyWith<$Res>  {
   factory $AccountStateCopyWith(AccountState value, $Res Function(AccountState) _then) = _$AccountStateCopyWithImpl;
 @useResult
 $Res call({
- String userId, bool hasPhone, bool termsAccepted, bool onboardingCompleted, AccountStatus status
+ String userId, bool hasPhone, bool termsAccepted, bool onboardingCompleted, AccountStatus status, bool eventsOnly
 });
 
 
@@ -70,14 +71,15 @@ class _$AccountStateCopyWithImpl<$Res>
 
 /// Create a copy of AccountState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? hasPhone = null,Object? termsAccepted = null,Object? onboardingCompleted = null,Object? status = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? hasPhone = null,Object? termsAccepted = null,Object? onboardingCompleted = null,Object? status = null,Object? eventsOnly = null,}) {
   return _then(AccountState(
 userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,hasPhone: null == hasPhone ? _self.hasPhone : hasPhone // ignore: cast_nullable_to_non_nullable
 as bool,termsAccepted: null == termsAccepted ? _self.termsAccepted : termsAccepted // ignore: cast_nullable_to_non_nullable
 as bool,onboardingCompleted: null == onboardingCompleted ? _self.onboardingCompleted : onboardingCompleted // ignore: cast_nullable_to_non_nullable
 as bool,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as AccountStatus,
+as AccountStatus,eventsOnly: null == eventsOnly ? _self.eventsOnly : eventsOnly // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -162,10 +164,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userId,  bool hasPhone,  bool termsAccepted,  bool onboardingCompleted,  AccountStatus status)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userId,  bool hasPhone,  bool termsAccepted,  bool onboardingCompleted,  AccountStatus status,  bool eventsOnly)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AccountState() when $default != null:
-return $default(_that.userId,_that.hasPhone,_that.termsAccepted,_that.onboardingCompleted,_that.status);case _:
+return $default(_that.userId,_that.hasPhone,_that.termsAccepted,_that.onboardingCompleted,_that.status,_that.eventsOnly);case _:
   return orElse();
 
 }
@@ -183,10 +185,10 @@ return $default(_that.userId,_that.hasPhone,_that.termsAccepted,_that.onboarding
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userId,  bool hasPhone,  bool termsAccepted,  bool onboardingCompleted,  AccountStatus status)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userId,  bool hasPhone,  bool termsAccepted,  bool onboardingCompleted,  AccountStatus status,  bool eventsOnly)  $default,) {final _that = this;
 switch (_that) {
 case _AccountState():
-return $default(_that.userId,_that.hasPhone,_that.termsAccepted,_that.onboardingCompleted,_that.status);case _:
+return $default(_that.userId,_that.hasPhone,_that.termsAccepted,_that.onboardingCompleted,_that.status,_that.eventsOnly);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -203,10 +205,10 @@ return $default(_that.userId,_that.hasPhone,_that.termsAccepted,_that.onboarding
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userId,  bool hasPhone,  bool termsAccepted,  bool onboardingCompleted,  AccountStatus status)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userId,  bool hasPhone,  bool termsAccepted,  bool onboardingCompleted,  AccountStatus status,  bool eventsOnly)?  $default,) {final _that = this;
 switch (_that) {
 case _AccountState() when $default != null:
-return $default(_that.userId,_that.hasPhone,_that.termsAccepted,_that.onboardingCompleted,_that.status);case _:
+return $default(_that.userId,_that.hasPhone,_that.termsAccepted,_that.onboardingCompleted,_that.status,_that.eventsOnly);case _:
   return null;
 
 }
@@ -218,7 +220,7 @@ return $default(_that.userId,_that.hasPhone,_that.termsAccepted,_that.onboarding
 
 
 class _AccountState implements AccountState {
-  const _AccountState({required this.userId, required this.hasPhone, required this.termsAccepted, required this.onboardingCompleted, required this.status});
+  const _AccountState({required this.userId, required this.hasPhone, required this.termsAccepted, required this.onboardingCompleted, required this.status, this.eventsOnly = false});
   
 
 @override final  String userId;
@@ -228,6 +230,8 @@ class _AccountState implements AccountState {
 @override final  bool termsAccepted;
 @override final  bool onboardingCompleted;
 @override final  AccountStatus status;
+/// No Date or Crew mode: the app opens on Events.
+@override@JsonKey() final  bool eventsOnly;
 
 /// Create a copy of AccountState
 /// with the given fields replaced by the non-null parameter values.
@@ -239,18 +243,18 @@ _$AccountStateCopyWith<_AccountState> get copyWith => __$AccountStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AccountState&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.hasPhone, hasPhone) || other.hasPhone == hasPhone)&&(identical(other.termsAccepted, termsAccepted) || other.termsAccepted == termsAccepted)&&(identical(other.onboardingCompleted, onboardingCompleted) || other.onboardingCompleted == onboardingCompleted)&&(identical(other.status, status) || other.status == status));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AccountState&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.hasPhone, hasPhone) || other.hasPhone == hasPhone)&&(identical(other.termsAccepted, termsAccepted) || other.termsAccepted == termsAccepted)&&(identical(other.onboardingCompleted, onboardingCompleted) || other.onboardingCompleted == onboardingCompleted)&&(identical(other.status, status) || other.status == status)&&(identical(other.eventsOnly, eventsOnly) || other.eventsOnly == eventsOnly));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,userId,hasPhone,termsAccepted,onboardingCompleted,status);
+    return Object.hash(runtimeType,userId,hasPhone,termsAccepted,onboardingCompleted,status,eventsOnly);
 }
 
 @override
 String toString() {
-    return 'AccountState(userId: $userId, hasPhone: $hasPhone, termsAccepted: $termsAccepted, onboardingCompleted: $onboardingCompleted, status: $status)';
+    return 'AccountState(userId: $userId, hasPhone: $hasPhone, termsAccepted: $termsAccepted, onboardingCompleted: $onboardingCompleted, status: $status, eventsOnly: $eventsOnly)';
 }
 
 
@@ -261,7 +265,7 @@ abstract mixin class _$AccountStateCopyWith<$Res> implements $AccountStateCopyWi
   factory _$AccountStateCopyWith(_AccountState value, $Res Function(_AccountState) _then) = __$AccountStateCopyWithImpl;
 @override @useResult
 $Res call({
- String userId, bool hasPhone, bool termsAccepted, bool onboardingCompleted, AccountStatus status
+ String userId, bool hasPhone, bool termsAccepted, bool onboardingCompleted, AccountStatus status, bool eventsOnly
 });
 
 
@@ -278,14 +282,15 @@ class __$AccountStateCopyWithImpl<$Res>
 
 /// Create a copy of AccountState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? hasPhone = null,Object? termsAccepted = null,Object? onboardingCompleted = null,Object? status = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? hasPhone = null,Object? termsAccepted = null,Object? onboardingCompleted = null,Object? status = null,Object? eventsOnly = null,}) {
   return _then(_AccountState(
 userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,hasPhone: null == hasPhone ? _self.hasPhone : hasPhone // ignore: cast_nullable_to_non_nullable
 as bool,termsAccepted: null == termsAccepted ? _self.termsAccepted : termsAccepted // ignore: cast_nullable_to_non_nullable
 as bool,onboardingCompleted: null == onboardingCompleted ? _self.onboardingCompleted : onboardingCompleted // ignore: cast_nullable_to_non_nullable
 as bool,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as AccountStatus,
+as AccountStatus,eventsOnly: null == eventsOnly ? _self.eventsOnly : eventsOnly // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

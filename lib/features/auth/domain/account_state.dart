@@ -18,5 +18,8 @@ abstract class AccountState with _$AccountState {
     required bool termsAccepted,
     required bool onboardingCompleted,
     required AccountStatus status,
+
+    /// No Date or Crew mode: the app opens on Events.
+    @Default(false) bool eventsOnly,
   }) = _AccountState;
 }
