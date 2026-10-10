@@ -1930,6 +1930,18 @@ abstract class AppLocalizations {
   /// **'Pedidos de papel'**
   String get adminRoleRequests;
 
+  /// No description provided for @requesterUnknown.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pessoa sem nome'**
+  String get requesterUnknown;
+
+  /// No description provided for @requesterViewProfile.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver perfil'**
+  String get requesterViewProfile;
+
   /// No description provided for @adminNoRoleRequests.
   ///
   /// In pt, this message translates to:

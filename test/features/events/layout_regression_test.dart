@@ -45,7 +45,7 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('admin sees pending role requests with actions', (tester) async {
+  testWidgets('admin sees who asks for a role, with actions', (tester) async {
     await pump(
       tester,
       const AdminScreen(),
@@ -60,6 +60,8 @@ void main() {
               justification: 'Produzo festas há 5 anos.',
               status: RequestStatus.pending,
               createdAt: DateTime(2026, 10, 3),
+              requesterName: 'Carla Mendes',
+              requesterPlace: 'São Paulo, SP',
             ),
           ],
         ),
@@ -67,6 +69,9 @@ void main() {
       ],
     );
     expect(tester.takeException(), isNull);
+    expect(find.text('Carla Mendes'), findsOneWidget);
+    expect(find.text('São Paulo, SP'), findsOneWidget);
+    expect(find.text('Ver perfil').hitTestable(), findsOneWidget);
     expect(find.text('Produzo festas há 5 anos.'), findsOneWidget);
     expect(find.text('Aprovar').hitTestable(), findsOneWidget);
     expect(find.text('Recusar').hitTestable(), findsOneWidget);

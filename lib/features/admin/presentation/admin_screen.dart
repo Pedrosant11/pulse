@@ -8,6 +8,7 @@ import 'package:pulse/core/widgets/glass_card.dart';
 import 'package:pulse/core/widgets/state_views.dart';
 import 'package:pulse/features/admin/presentation/moderation_providers.dart';
 import 'package:pulse/features/admin/presentation/role_request_providers.dart';
+import 'package:pulse/features/admin/presentation/widgets/requester_header.dart';
 import 'package:pulse/features/badges/presentation/badges_providers.dart';
 import 'package:pulse/features/events/presentation/events_providers.dart';
 import 'package:pulse/features/events/presentation/widgets/event_visuals.dart';
@@ -115,11 +116,16 @@ class AdminScreen extends ConsumerWidget {
                                   crossAxisAlignment:
                                       CrossAxisAlignment.stretch,
                                   children: [
-                                    Text(
-                                      l10n.role(request.requestedRole),
-                                      style: context.textTheme.titleMedium,
+                                    RequesterHeader(
+                                      userId: request.userId,
+                                      name: request.requesterName,
+                                      place: request.requesterPlace,
+                                      trailing: Chip(
+                                        label: Text(
+                                          l10n.role(request.requestedRole),
+                                        ),
+                                      ),
                                     ),
-                                    SizedBox(height: spacing.xs),
                                     Text(request.justification),
                                     for (final link in request.links)
                                       Text(

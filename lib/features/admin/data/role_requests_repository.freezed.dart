@@ -16,7 +16,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RoleRequest {
 
- String get id; String get userId; UserRole get requestedRole; String get justification; RequestStatus get status; DateTime get createdAt; List<String> get links;
+ String get id; String get userId; UserRole get requestedRole; String get justification; RequestStatus get status; DateTime get createdAt; List<String> get links;/// Filled for admins: who is asking (name and "City, UF").
+ String? get requesterName; String? get requesterPlace;
 /// Create a copy of RoleRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,20 +31,20 @@ $RoleRequestCopyWith<RoleRequest> get copyWith => _$RoleRequestCopyWithImpl<Role
 @override
 bool operator ==(Object other) {
   final _this = this as RoleRequest;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RoleRequest&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.userId, _this.userId) || other.userId == _this.userId)&&(identical(other.requestedRole, _this.requestedRole) || other.requestedRole == _this.requestedRole)&&(identical(other.justification, _this.justification) || other.justification == _this.justification)&&(identical(other.status, _this.status) || other.status == _this.status)&&(identical(other.createdAt, _this.createdAt) || other.createdAt == _this.createdAt)&&const DeepCollectionEquality().equals(other.links, _this.links));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RoleRequest&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.userId, _this.userId) || other.userId == _this.userId)&&(identical(other.requestedRole, _this.requestedRole) || other.requestedRole == _this.requestedRole)&&(identical(other.justification, _this.justification) || other.justification == _this.justification)&&(identical(other.status, _this.status) || other.status == _this.status)&&(identical(other.createdAt, _this.createdAt) || other.createdAt == _this.createdAt)&&const DeepCollectionEquality().equals(other.links, _this.links)&&(identical(other.requesterName, _this.requesterName) || other.requesterName == _this.requesterName)&&(identical(other.requesterPlace, _this.requesterPlace) || other.requesterPlace == _this.requesterPlace));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as RoleRequest;
-  return Object.hash(runtimeType,_this.id,_this.userId,_this.requestedRole,_this.justification,_this.status,_this.createdAt,const DeepCollectionEquality().hash(_this.links));
+  return Object.hash(runtimeType,_this.id,_this.userId,_this.requestedRole,_this.justification,_this.status,_this.createdAt,const DeepCollectionEquality().hash(_this.links),_this.requesterName,_this.requesterPlace);
 }
 
 @override
 String toString() {
   final _this = this as RoleRequest;
-  return 'RoleRequest(id: ${_this.id}, userId: ${_this.userId}, requestedRole: ${_this.requestedRole}, justification: ${_this.justification}, status: ${_this.status}, createdAt: ${_this.createdAt}, links: ${_this.links})';
+  return 'RoleRequest(id: ${_this.id}, userId: ${_this.userId}, requestedRole: ${_this.requestedRole}, justification: ${_this.justification}, status: ${_this.status}, createdAt: ${_this.createdAt}, links: ${_this.links}, requesterName: ${_this.requesterName}, requesterPlace: ${_this.requesterPlace})';
 }
 
 
@@ -54,7 +55,7 @@ abstract mixin class $RoleRequestCopyWith<$Res>  {
   factory $RoleRequestCopyWith(RoleRequest value, $Res Function(RoleRequest) _then) = _$RoleRequestCopyWithImpl;
 @useResult
 $Res call({
- String id, String userId, UserRole requestedRole, String justification, RequestStatus status, DateTime createdAt, List<String> links
+ String id, String userId, UserRole requestedRole, String justification, RequestStatus status, DateTime createdAt, List<String> links, String? requesterName, String? requesterPlace
 });
 
 
@@ -71,7 +72,7 @@ class _$RoleRequestCopyWithImpl<$Res>
 
 /// Create a copy of RoleRequest
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? userId = null,Object? requestedRole = null,Object? justification = null,Object? status = null,Object? createdAt = null,Object? links = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? userId = null,Object? requestedRole = null,Object? justification = null,Object? status = null,Object? createdAt = null,Object? links = null,Object? requesterName = freezed,Object? requesterPlace = freezed,}) {
   return _then(RoleRequest(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
@@ -80,7 +81,9 @@ as UserRole,justification: null == justification ? _self.justification : justifi
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as RequestStatus,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,links: null == links ? _self.links : links // ignore: cast_nullable_to_non_nullable
-as List<String>,
+as List<String>,requesterName: freezed == requesterName ? _self.requesterName : requesterName // ignore: cast_nullable_to_non_nullable
+as String?,requesterPlace: freezed == requesterPlace ? _self.requesterPlace : requesterPlace // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -165,10 +168,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String userId,  UserRole requestedRole,  String justification,  RequestStatus status,  DateTime createdAt,  List<String> links)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String userId,  UserRole requestedRole,  String justification,  RequestStatus status,  DateTime createdAt,  List<String> links,  String? requesterName,  String? requesterPlace)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RoleRequest() when $default != null:
-return $default(_that.id,_that.userId,_that.requestedRole,_that.justification,_that.status,_that.createdAt,_that.links);case _:
+return $default(_that.id,_that.userId,_that.requestedRole,_that.justification,_that.status,_that.createdAt,_that.links,_that.requesterName,_that.requesterPlace);case _:
   return orElse();
 
 }
@@ -186,10 +189,10 @@ return $default(_that.id,_that.userId,_that.requestedRole,_that.justification,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String userId,  UserRole requestedRole,  String justification,  RequestStatus status,  DateTime createdAt,  List<String> links)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String userId,  UserRole requestedRole,  String justification,  RequestStatus status,  DateTime createdAt,  List<String> links,  String? requesterName,  String? requesterPlace)  $default,) {final _that = this;
 switch (_that) {
 case _RoleRequest():
-return $default(_that.id,_that.userId,_that.requestedRole,_that.justification,_that.status,_that.createdAt,_that.links);case _:
+return $default(_that.id,_that.userId,_that.requestedRole,_that.justification,_that.status,_that.createdAt,_that.links,_that.requesterName,_that.requesterPlace);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -206,10 +209,10 @@ return $default(_that.id,_that.userId,_that.requestedRole,_that.justification,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String userId,  UserRole requestedRole,  String justification,  RequestStatus status,  DateTime createdAt,  List<String> links)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String userId,  UserRole requestedRole,  String justification,  RequestStatus status,  DateTime createdAt,  List<String> links,  String? requesterName,  String? requesterPlace)?  $default,) {final _that = this;
 switch (_that) {
 case _RoleRequest() when $default != null:
-return $default(_that.id,_that.userId,_that.requestedRole,_that.justification,_that.status,_that.createdAt,_that.links);case _:
+return $default(_that.id,_that.userId,_that.requestedRole,_that.justification,_that.status,_that.createdAt,_that.links,_that.requesterName,_that.requesterPlace);case _:
   return null;
 
 }
@@ -221,7 +224,7 @@ return $default(_that.id,_that.userId,_that.requestedRole,_that.justification,_t
 @JsonSerializable()
 
 class _RoleRequest implements RoleRequest {
-  const _RoleRequest({required this.id, required this.userId, required this.requestedRole, required this.justification, required this.status, required this.createdAt,  List<String> links = const []}): _links = links;
+  const _RoleRequest({required this.id, required this.userId, required this.requestedRole, required this.justification, required this.status, required this.createdAt,  List<String> links = const [], this.requesterName, this.requesterPlace}): _links = links;
   factory _RoleRequest.fromJson(Map<String, dynamic> json) => _$RoleRequestFromJson(json);
 
 @override final  String id;
@@ -237,6 +240,9 @@ class _RoleRequest implements RoleRequest {
   return EqualUnmodifiableListView(_links);
 }
 
+/// Filled for admins: who is asking (name and "City, UF").
+@override final  String? requesterName;
+@override final  String? requesterPlace;
 
 /// Create a copy of RoleRequest
 /// with the given fields replaced by the non-null parameter values.
@@ -251,18 +257,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _RoleRequest&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.requestedRole, requestedRole) || other.requestedRole == requestedRole)&&(identical(other.justification, justification) || other.justification == justification)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&const DeepCollectionEquality().equals(other.links, _links));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _RoleRequest&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.requestedRole, requestedRole) || other.requestedRole == requestedRole)&&(identical(other.justification, justification) || other.justification == justification)&&(identical(other.status, status) || other.status == status)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&const DeepCollectionEquality().equals(other.links, _links)&&(identical(other.requesterName, requesterName) || other.requesterName == requesterName)&&(identical(other.requesterPlace, requesterPlace) || other.requesterPlace == requesterPlace));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,id,userId,requestedRole,justification,status,createdAt,const DeepCollectionEquality().hash(_links));
+    return Object.hash(runtimeType,id,userId,requestedRole,justification,status,createdAt,const DeepCollectionEquality().hash(_links),requesterName,requesterPlace);
 }
 
 @override
 String toString() {
-    return 'RoleRequest(id: $id, userId: $userId, requestedRole: $requestedRole, justification: $justification, status: $status, createdAt: $createdAt, links: $links)';
+    return 'RoleRequest(id: $id, userId: $userId, requestedRole: $requestedRole, justification: $justification, status: $status, createdAt: $createdAt, links: $links, requesterName: $requesterName, requesterPlace: $requesterPlace)';
 }
 
 
@@ -273,7 +279,7 @@ abstract mixin class _$RoleRequestCopyWith<$Res> implements $RoleRequestCopyWith
   factory _$RoleRequestCopyWith(_RoleRequest value, $Res Function(_RoleRequest) _then) = __$RoleRequestCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String userId, UserRole requestedRole, String justification, RequestStatus status, DateTime createdAt, List<String> links
+ String id, String userId, UserRole requestedRole, String justification, RequestStatus status, DateTime createdAt, List<String> links, String? requesterName, String? requesterPlace
 });
 
 
@@ -290,7 +296,7 @@ class __$RoleRequestCopyWithImpl<$Res>
 
 /// Create a copy of RoleRequest
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? userId = null,Object? requestedRole = null,Object? justification = null,Object? status = null,Object? createdAt = null,Object? links = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? userId = null,Object? requestedRole = null,Object? justification = null,Object? status = null,Object? createdAt = null,Object? links = null,Object? requesterName = freezed,Object? requesterPlace = freezed,}) {
   return _then(_RoleRequest(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
@@ -299,7 +305,9 @@ as UserRole,justification: null == justification ? _self.justification : justifi
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as RequestStatus,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,links: null == links ? _self._links : links // ignore: cast_nullable_to_non_nullable
-as List<String>,
+as List<String>,requesterName: freezed == requesterName ? _self.requesterName : requesterName // ignore: cast_nullable_to_non_nullable
+as String?,requesterPlace: freezed == requesterPlace ? _self.requesterPlace : requesterPlace // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

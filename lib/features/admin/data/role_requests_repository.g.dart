@@ -16,6 +16,8 @@ _RoleRequest _$RoleRequestFromJson(Map<String, dynamic> json) => _RoleRequest(
   links:
       (json['links'] as List<dynamic>?)?.map((e) => e as String).toList() ??
       const [],
+  requesterName: json['requester_name'] as String?,
+  requesterPlace: json['requester_place'] as String?,
 );
 
 Map<String, dynamic> _$RoleRequestToJson(_RoleRequest instance) =>
@@ -27,6 +29,8 @@ Map<String, dynamic> _$RoleRequestToJson(_RoleRequest instance) =>
       'status': _$RequestStatusEnumMap[instance.status]!,
       'created_at': instance.createdAt.toIso8601String(),
       'links': instance.links,
+      'requester_name': instance.requesterName,
+      'requester_place': instance.requesterPlace,
     };
 
 const _$UserRoleEnumMap = {

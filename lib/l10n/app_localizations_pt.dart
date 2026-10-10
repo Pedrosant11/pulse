@@ -1038,6 +1038,12 @@ class AppLocalizationsPt extends AppLocalizations {
   String get adminRoleRequests => 'Pedidos de papel';
 
   @override
+  String get requesterUnknown => 'Pessoa sem nome';
+
+  @override
+  String get requesterViewProfile => 'Ver perfil';
+
+  @override
   String get adminNoRoleRequests => 'Nenhum pedido pendente.';
 
   @override

@@ -22,6 +22,10 @@ abstract class RoleRequest with _$RoleRequest {
     required RequestStatus status,
     required DateTime createdAt,
     @Default([]) List<String> links,
+
+    /// Filled for admins: who is asking (name and "City, UF").
+    String? requesterName,
+    String? requesterPlace,
   }) = _RoleRequest;
 
   factory fromJson(Map<String, dynamic> json) => _$RoleRequestFromJson(json);
@@ -59,14 +63,36 @@ class RoleRequestsRepository {
     }),
   );
 
-  /// Pending requests (admins only, enforced by RLS).
+  /// Pending requests with who is asking (admins only, enforced by RLS).
   Future<List<RoleRequest>> pending() => guardFailures(() async {
     final rows = await _client
         .from('role_requests')
-        .select(_columns)
+        .select(
+          '$_columns, '
+          'requester:profiles!role_requests_user_id_fkey'
+          '(first_name, last_name, city, state)',
+        )
         .eq('status', 'pending')
         .order('created_at');
-    return rows.map(RoleRequest.fromJson).toList();
+    return [
+      for (final row in rows)
+        RoleRequest.fromJson({
+          ...row,
+          ...switch (row['requester']) {
+            {
+              'first_name': final String? first,
+              'last_name': final String? last,
+              'city': final String? city,
+              'state': final String? state,
+            } =>
+              {
+                'requester_name': [?first, ?last].join(' '),
+                'requester_place': city == null ? null : '$city, $state',
+              },
+            _ => const <String, Object?>{},
+          },
+        }),
+    ];
   });
 
   /// Approving grants the role (database trigger).

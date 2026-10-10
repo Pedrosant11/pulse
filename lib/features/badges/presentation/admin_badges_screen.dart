@@ -6,6 +6,7 @@ import 'package:pulse/core/extensions/context_extensions.dart';
 import 'package:pulse/core/widgets/form_error_text.dart';
 import 'package:pulse/core/widgets/glass_card.dart';
 import 'package:pulse/core/widgets/state_views.dart';
+import 'package:pulse/features/admin/presentation/widgets/requester_header.dart';
 import 'package:pulse/features/badges/domain/badge_models.dart';
 import 'package:pulse/features/badges/presentation/badges_providers.dart';
 import 'package:pulse/features/badges/presentation/widgets/profile_badges.dart';
@@ -154,18 +155,14 @@ class _RequestCard extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  request.requesterName ?? '—',
-                  style: context.textTheme.titleMedium,
-                ),
-              ),
-              BadgeChip(badge: UserBadge(badge: request.badge), dense: true),
-            ],
+          RequesterHeader(
+            userId: request.userId,
+            name: request.requesterName,
+            trailing: BadgeChip(
+              badge: UserBadge(badge: request.badge),
+              dense: true,
+            ),
           ),
-          SizedBox(height: spacing.xs),
           Text(request.justification),
           for (final link in request.links)
             Text(

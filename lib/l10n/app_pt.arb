@@ -381,6 +381,8 @@
   "roleRequestRejected": "Seu último pedido não foi aprovado. Você pode enviar outro.",
   "validationJustification": "Escreva pelo menos 10 caracteres.",
   "adminRoleRequests": "Pedidos de papel",
+  "requesterUnknown": "Pessoa sem nome",
+  "requesterViewProfile": "Ver perfil",
   "adminNoRoleRequests": "Nenhum pedido pendente.",
 
   "stampLike": "CURTI",
