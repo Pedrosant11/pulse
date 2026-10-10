@@ -160,7 +160,7 @@ final class DiscoverDeckProvider
   }
 }
 
-String _$discoverDeckHash() => r'5edbb9d99afa1a465ad69187674856a56dbc5fbc';
+String _$discoverDeckHash() => r'cf1282ea35b838acab41513f9a48173d03bca3a0';
 
 /// The card deck of one mode. Swipes are optimistic: the card leaves at
 /// once and comes back if the server refuses (e.g. rate limit).

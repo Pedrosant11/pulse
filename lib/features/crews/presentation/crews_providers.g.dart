@@ -8,6 +8,91 @@ part of 'crews_providers.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// Parties both go to, to start a crew with a Crew match.
+
+@ProviderFor(commonEvents)
+final commonEventsProvider = CommonEventsFamily._();
+
+/// Parties both go to, to start a crew with a Crew match.
+
+final class CommonEventsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<CommonEvent>>,
+          List<CommonEvent>,
+          FutureOr<List<CommonEvent>>
+        >
+    with
+        $FutureModifier<List<CommonEvent>>,
+        $FutureProvider<List<CommonEvent>> {
+  /// Parties both go to, to start a crew with a Crew match.
+  CommonEventsProvider._({
+    required CommonEventsFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'commonEventsProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$commonEventsHash();
+
+  @override
+  String toString() {
+    return r'commonEventsProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<List<CommonEvent>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<CommonEvent>> create(Ref ref) {
+    final argument = this.argument as String;
+    return commonEvents(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is CommonEventsProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$commonEventsHash() => r'5b8bc1f4745a3cc68ea34f1640adba3fa6a39e68';
+
+/// Parties both go to, to start a crew with a Crew match.
+
+final class CommonEventsFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<List<CommonEvent>>, String> {
+  CommonEventsFamily._()
+    : super(
+        retry: null,
+        name: r'commonEventsProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// Parties both go to, to start a crew with a Crew match.
+
+  CommonEventsProvider call(String userId) =>
+      CommonEventsProvider._(argument: userId, from: this);
+
+  @override
+  String toString() => r'commonEventsProvider';
+}
 
 @ProviderFor(eventCrews)
 final eventCrewsProvider = EventCrewsFamily._();

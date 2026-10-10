@@ -262,6 +262,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
         ),
         data: (state) => state.cards.isEmpty
             ? _EmptyDeck(
+                mode: mode,
                 onRetry: () => ref.invalidate(discoverDeckProvider(mode)),
               )
             : _CardStack(
@@ -371,20 +372,23 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                         ? () => _undo(mode, plan)
                         : null,
                   ),
-                  SizedBox(width: spacing.md),
-                  Badge(
-                    isLabelVisible: (plan?.superlikesLeft ?? 0) > 0,
-                    label: Text('${plan?.superlikesLeft ?? 0}'),
-                    backgroundColor: colors.lime,
-                    textColor: colors.background,
-                    child: RoundAction(
-                      icon: Icons.star_rounded,
-                      label: l10n.superlikeLabel,
-                      color: colors.lime,
-                      size: 48,
-                      onPressed: top == null ? null : () => _superLike(plan),
+                  // Superlikes are for Date (Crew is about friendship).
+                  if (mode == AppMode.date) ...[
+                    SizedBox(width: spacing.md),
+                    Badge(
+                      isLabelVisible: (plan?.superlikesLeft ?? 0) > 0,
+                      label: Text('${plan?.superlikesLeft ?? 0}'),
+                      backgroundColor: colors.lime,
+                      textColor: colors.background,
+                      child: RoundAction(
+                        icon: Icons.star_rounded,
+                        label: l10n.superlikeLabel,
+                        color: colors.lime,
+                        size: 48,
+                        onPressed: top == null ? null : () => _superLike(plan),
+                      ),
                     ),
-                  ),
+                  ],
                   SizedBox(width: spacing.md),
                   RoundAction(
                     icon: mode == AppMode.date
@@ -514,15 +518,29 @@ class _CardStack extends StatelessWidget {
 }
 
 class _EmptyDeck extends ConsumerWidget {
-  const new({required this.onRetry});
+  const new({required this.mode, required this.onRetry});
 
+  final AppMode mode;
   final VoidCallback onRetry;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    // Date also shows people nearby, so events are only a suggestion there.
+    if (mode == AppMode.date) {
+      final view = EmptyView(
+        icon: Icons.favorite_border_rounded,
+        title: l10n.discoverDateEmptyTitle,
+        message: l10n.discoverDateEmptyBody,
+        actionLabel: l10n.discoverGoToEvents,
+        onAction: () => context.go(AppRoutes.events),
+      );
+      return context.reduceMotion
+          ? view
+          : view.animate().fadeIn(duration: 300.ms);
+    }
     final attending = ref.watch(myAttendingEventsProvider).value;
-    // No upcoming events → the feed can't show anyone (SPEC 8.1).
+    // Crew is only people from the same parties (SPEC 8.1).
     if (attending != null && attending.isEmpty) {
       return EmptyView(
         icon: Icons.event_available_outlined,

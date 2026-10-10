@@ -1,17 +1,24 @@
 begin;
 \ir helpers.psql
-select plan(19);
+select plan(21);
 
 -- Seed: Ana (1) goes to events 1 and 4 (+ a past one). See seed.sql.
 select tests.login(1);
 
 -- Date feed --------------------------------------------------------------
 
-select results_eq(
-  $$ select first_name, common_event_count, is_fallback
-     from public.get_discover_feed('date') $$,
-  $$ values ('Diego', 1, false), ('Marcos', 1, false) $$,
-  'Date feed: men going to Ana''s events who want women, most recent first'
+select set_eq(
+  $$ select first_name, common_event_count
+     from public.get_discover_feed('date') where not is_fallback $$,
+  $$ values ('Diego', 1), ('Marcos', 1) $$,
+  'Date feed: men going to Ana''s events who want women'
+);
+
+select is(
+  (select bool_and(not is_fallback) from (
+     select is_fallback from public.get_discover_feed('date') limit 2) f),
+  true,
+  'Date: people from the events come before people nearby'
 );
 
 select is(
@@ -33,6 +40,12 @@ select results_eq(
      from public.get_discover_feed('crew') $$,
   $$ values ('Elisa', 2), ('Natália', 2), ('Hugo', 1) $$,
   'Crew feed: ordered by events in common; past events do not count'
+);
+
+select is(
+  (select count(*)::int from public.get_discover_feed('crew') where is_fallback),
+  0,
+  'Crew only shows people going to the same parties'
 );
 
 -- Same-gender crews: Larissa (11) only wants women.
@@ -73,8 +86,8 @@ values (tests.uid(1), tests.uid(12), 'date', 'pass'),
 
 select results_eq(
   $$ select first_name, is_fallback from public.get_discover_feed('date') $$,
-  $$ values ('Felipe', true), ('Otávio', true) $$,
-  'fallback: same city and shared genres when nobody from the events is left'
+  $$ values ('Felipe', true), ('Otávio', true), ('Bruno', true), ('João', true) $$,
+  'Date: then people nearby, shared genres first'
 );
 
 select throws_ok(

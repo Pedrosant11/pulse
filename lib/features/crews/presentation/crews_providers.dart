@@ -3,6 +3,7 @@ import 'package:pulse/features/auth/presentation/session_providers.dart';
 import 'package:pulse/features/chat/presentation/chat_providers.dart';
 import 'package:pulse/features/crews/data/crews_repository.dart';
 import 'package:pulse/features/crews/domain/crew_models.dart';
+import 'package:pulse/features/discover/domain/discover_models.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'crews_providers.g.dart';
@@ -12,6 +13,11 @@ String _requireUserId(Ref ref) {
   if (userId == null) throw StateError('No signed-in user');
   return userId;
 }
+
+/// Parties both go to, to start a crew with a Crew match.
+@riverpod
+Future<List<CommonEvent>> commonEvents(Ref ref, String userId) =>
+    ref.watch(crewsRepositoryProvider).commonEvents(userId);
 
 @riverpod
 Future<List<CrewSummary>> eventCrews(Ref ref, String eventId) =>

@@ -14,7 +14,7 @@ abstract final class AppConstants {
   static const maxProfilePhotos = 6;
   static const maxBioLength = 500;
   static const maxFavoriteDjs = 10;
-  static const maxCrewMembers = 8;
+  static const maxCrewMembers = 15;
   static const maxMessageLength = 2000;
   static const messagesPageSize = 30;
 

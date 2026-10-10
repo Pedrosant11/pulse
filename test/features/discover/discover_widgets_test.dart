@@ -204,7 +204,27 @@ void main() {
       expect(find.textContaining('Você já viu todo mundo'), findsOneWidget);
     });
 
-    testWidgets('without events it points to the Events tab', (tester) async {
+    testWidgets('Crew without events points to the Events tab', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _app(
+          const DiscoverScreen(),
+          overrides: overrides(
+            const [],
+            hasEvents: false,
+            mode: AppMode.crew,
+          ),
+        ),
+      );
+      await settle(tester);
+      expect(find.text('Marque presença em um evento'), findsOneWidget);
+      expect(find.text('Ver eventos'), findsOneWidget);
+    });
+
+    testWidgets('Date has its own empty message (no events needed)', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _app(
           const DiscoverScreen(),
@@ -212,8 +232,19 @@ void main() {
         ),
       );
       await settle(tester);
-      expect(find.text('Marque presença em um evento'), findsOneWidget);
-      expect(find.text('Ver eventos'), findsOneWidget);
+      expect(find.text('Ninguém novo por perto agora'), findsOneWidget);
+      expect(find.text('Marque presença em um evento'), findsNothing);
+    });
+
+    testWidgets('Crew has no superlike button', (tester) async {
+      await tester.pumpWidget(
+        _app(
+          const DiscoverScreen(),
+          overrides: overrides([ana], mode: AppMode.crew),
+        ),
+      );
+      await settle(tester);
+      expect(find.byTooltip('Superlike'), findsNothing);
     });
 
     testWidgets('mode off in the profile explains how to enable it', (

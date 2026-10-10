@@ -66,8 +66,12 @@ class DiscoverDeck extends _$DiscoverDeck {
         superLike: superLike,
       );
       if (!ref.mounted) return result;
-      // Likes and superlikes left (free limits, wallet).
-      ref.invalidate(entitlementsProvider);
+      // Likes and superlikes left (free limits, wallet), and "who liked
+      // you" (answering someone here removes them from it).
+      ref
+        ..invalidate(entitlementsProvider)
+        ..invalidate(likesReceivedCountProvider)
+        ..invalidate(likesReceivedProvider);
       if (result.matched) {
         // A swipe that matched can't be undone.
         state = AsyncData(state.requireValue.copyWith(lastSwiped: null));

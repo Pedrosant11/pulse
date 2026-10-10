@@ -14,6 +14,7 @@ import 'package:pulse/features/badges/presentation/widgets/profile_badges.dart';
 import 'package:pulse/features/chat/domain/chat_models.dart';
 import 'package:pulse/features/chat/presentation/chat_providers.dart';
 import 'package:pulse/features/chat/presentation/widgets/chat_avatar.dart';
+import 'package:pulse/features/crews/presentation/widgets/start_crew_sheet.dart';
 import 'package:pulse/features/profile/presentation/widgets/user_profile_sheet.dart';
 import 'package:pulse/features/safety/domain/safety_models.dart';
 import 'package:pulse/features/safety/presentation/safety_actions.dart';
@@ -322,6 +323,17 @@ class _ConversationState extends ConsumerState<_Conversation> {
                     ),
                   ),
                 ),
+                // Crew match: start a crew for a party you both go to.
+                if (!isGroup && mode == AppMode.crew && otherId != null)
+                  IconButton(
+                    tooltip: l10n.startCrewAction,
+                    onPressed: () => showStartCrewSheet(
+                      context,
+                      userId: otherId,
+                      name: header.otherFirstName ?? '',
+                    ),
+                    icon: Icon(Icons.group_add_rounded, color: accent),
+                  ),
                 PopupMenuButton<_MenuAction>(
                   onSelected: _onMenu,
                   itemBuilder: (_) => [

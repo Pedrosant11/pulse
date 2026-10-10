@@ -220,7 +220,9 @@ RPC `get_discover_feed(p_mode text, p_limit int)` que retorna perfis que:
 
 Ordenação: quantidade de eventos em comum (desc), depois o evento em comum mais próximo, depois atividade recente. Retornar junto a lista de eventos em comum de cada perfil.
 
-**Fallback**: se não houver ninguém, retornar perfis **dentro do raio do usuário** com gêneros musicais em comum (mais próximos primeiro), marcados com `is_fallback = true`, e a UI mostra um aviso "Você já viu todo mundo dos seus eventos por enquanto. Que tal essas pessoas perto de você com o mesmo gosto musical?"; nesses cards o chip do evento dá lugar a "Vocês curtem: [gêneros em comum]". Se o usuário não marcou nenhum evento, mostrar um estado vazio que leva para a aba Eventos.
+**Date** (migration `discover_rules`): primeiro quem vai aos mesmos eventos; depois **pessoas dentro do raio** (sem exigir evento marcado), com gêneros em comum primeiro e as mais próximas em seguida, marcadas com `is_fallback = true` (o chip do evento dá lugar a "Vocês curtem: [gêneros em comum]"). Sem ninguém, o estado vazio do Date convida a marcar presença em eventos.
+
+**Crew**: **só** quem vai às mesmas festas (sem fallback), porque o objetivo é ir junto à festa. Sem evento marcado, o estado vazio leva para a aba Eventos; com eventos e ninguém novo, "Você viu todo mundo dos seus eventos". Superlike não existe no Crew (é amizade).
 
 ### 8.2 UI
 
@@ -255,7 +257,7 @@ Fora do MVP: envio de fotos, áudio e GIFs.
 
 ### 9.2 Crews (grupos)
 
-- Crew é sempre ligada a **um evento**. Máximo de 8 membros.
+- Crew é sempre ligada a **um evento**. Máximo de 15 membros. Dá para montar uma crew a partir da conversa com um match de Crew (escolhendo uma festa em comum).
 - Qualquer usuário que vai ao evento pode criar uma crew (nome, descrição curta, só mesmo gênero sim/não, aberta ou só convite).
 - O dono pode convidar pessoas com quem tem match no modo Crew e que vão ao mesmo evento.
 - Crews abertas aparecem no detalhe do evento com botão "Pedir pra entrar"; o dono aprova ou recusa.
@@ -291,7 +293,7 @@ Criar em `supabase/migrations/` com **RLS ativado em todas as tabelas**. Ativar 
 - `conversations`: `id`, `type` (`direct`/`crew`), `match_id`, `crew_id`, `last_message_at`.
 - `conversation_members`: `conversation_id`, `user_id`, `last_read_at`, `joined_at`.
 - `messages`: `id`, `conversation_id`, `sender_id`, `content` (máx. 2000), `created_at`, `deleted_at`.
-- `crews`: `id`, `event_id`, `owner_id`, `name`, `description`, `max_members` (default 8, máx. 8), `is_open`, `same_gender_only`, `conversation_id`, `created_at`.
+- `crews`: `id`, `event_id`, `owner_id`, `name`, `description`, `max_members` (default 15, máx. 15), `is_open`, `same_gender_only`, `conversation_id`, `created_at`.
 - `crew_members`: `crew_id`, `user_id`, `role` (`owner`/`member`), `joined_at`.
 - `crew_join_requests`: `id`, `crew_id`, `user_id`, `status`, `created_at`.
 - `blocks`: `blocker_id`, `blocked_id`, `created_at`.

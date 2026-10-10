@@ -1930,6 +1930,30 @@ abstract class AppLocalizations {
   /// **'Pedidos de papel'**
   String get adminRoleRequests;
 
+  /// No description provided for @startCrewAction.
+  ///
+  /// In pt, this message translates to:
+  /// **'Montar crew'**
+  String get startCrewAction;
+
+  /// No description provided for @startCrewTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Montar uma crew com {name}'**
+  String startCrewTitle(String name);
+
+  /// No description provided for @startCrewSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolha uma festa que vocês dois vão. A crew já é criada com o convite.'**
+  String get startCrewSubtitle;
+
+  /// No description provided for @startCrewNoEvents.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vocês ainda não têm festa em comum. Marquem presença no mesmo evento para montar uma crew com {name}.'**
+  String startCrewNoEvents(String name);
+
   /// No description provided for @requesterUnknown.
   ///
   /// In pt, this message translates to:
@@ -2029,7 +2053,7 @@ abstract class AppLocalizations {
   /// No description provided for @discoverNoEventsBody.
   ///
   /// In pt, this message translates to:
-  /// **'Aqui aparecem as pessoas que vão aos mesmos eventos que você.'**
+  /// **'No Crew aparecem só as pessoas que vão às mesmas festas que você.'**
   String get discoverNoEventsBody;
 
   /// No description provided for @discoverGoToEvents.
@@ -2041,14 +2065,26 @@ abstract class AppLocalizations {
   /// No description provided for @discoverEmptyTitle.
   ///
   /// In pt, this message translates to:
-  /// **'Você viu todo mundo por enquanto'**
+  /// **'Você viu todo mundo dos seus eventos'**
   String get discoverEmptyTitle;
 
   /// No description provided for @discoverEmptyBody.
   ///
   /// In pt, this message translates to:
-  /// **'Volte mais tarde ou marque presença em mais eventos.'**
+  /// **'Volte mais tarde ou marque presença em mais festas para achar sua crew.'**
   String get discoverEmptyBody;
+
+  /// No description provided for @discoverDateEmptyTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ninguém novo por perto agora'**
+  String get discoverDateEmptyTitle;
+
+  /// No description provided for @discoverDateEmptyBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Volte mais tarde ou marque presença em eventos: quem vai às mesmas festas que você aparece primeiro.'**
+  String get discoverDateEmptyBody;
 
   /// No description provided for @discoverModeOff.
   ///
@@ -4252,11 +4288,35 @@ abstract class AppLocalizations {
   /// **'Quem curtiu você'**
   String get likesYouTitle;
 
+  /// No description provided for @likesYouNoneYetTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ninguém novo por enquanto'**
+  String get likesYouNoneYetTitle;
+
   /// No description provided for @likesYouNoneYet.
   ///
   /// In pt, this message translates to:
-  /// **'Ninguém novo por enquanto. Marque presença em eventos para aparecer para mais gente.'**
+  /// **'Marque presença em eventos e complete o perfil para aparecer para mais gente.'**
   String get likesYouNoneYet;
+
+  /// No description provided for @likesYouLockedBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Com o Pulse Black você vê quem são e dá match na hora, sem esperar aparecer no Descobrir.'**
+  String get likesYouLockedBody;
+
+  /// No description provided for @likesYouHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Curta de volta para dar match na hora. Toque na foto para ver o perfil.'**
+  String get likesYouHint;
+
+  /// No description provided for @likesYouAll.
+  ///
+  /// In pt, this message translates to:
+  /// **'Todos'**
+  String get likesYouAll;
 
   /// No description provided for @likesYouCount.
   ///

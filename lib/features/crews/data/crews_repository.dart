@@ -1,12 +1,13 @@
 import 'package:pulse/core/errors/app_failure.dart';
 import 'package:pulse/core/supabase/supabase_providers.dart';
 import 'package:pulse/features/crews/domain/crew_models.dart';
+import 'package:pulse/features/discover/domain/discover_models.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'crews_repository.g.dart';
 
-/// Crews (SPEC 9.2). Membership rules (8 max, same gender, attendance,
+/// Crews (SPEC 9.2). Membership rules (15 max, same gender, attendance,
 /// Crew-match invites) are enforced by the database.
 class CrewsRepository {
   new(this._client);
@@ -50,6 +51,10 @@ class CrewsRepository {
 
   Future<List<MyCrewInvite>> myInvites() =>
       _rpcList('list_my_crew_invites', MyCrewInvite.fromJson);
+
+  /// Upcoming parties both go to (Crew matches only), to start a crew.
+  Future<List<CommonEvent>> commonEvents(String userId) =>
+      _rpcList('get_common_events', CommonEvent.fromJson, {'p_user': userId});
 
   /// The database adds the owner and creates the group chat.
   Future<String> create({

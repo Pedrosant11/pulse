@@ -1038,6 +1038,23 @@ class AppLocalizationsPt extends AppLocalizations {
   String get adminRoleRequests => 'Pedidos de papel';
 
   @override
+  String get startCrewAction => 'Montar crew';
+
+  @override
+  String startCrewTitle(String name) {
+    return 'Montar uma crew com $name';
+  }
+
+  @override
+  String get startCrewSubtitle =>
+      'Escolha uma festa que vocês dois vão. A crew já é criada com o convite.';
+
+  @override
+  String startCrewNoEvents(String name) {
+    return 'Vocês ainda não têm festa em comum. Marquem presença no mesmo evento para montar uma crew com $name.';
+  }
+
+  @override
   String get requesterUnknown => 'Pessoa sem nome';
 
   @override
@@ -1104,17 +1121,24 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get discoverNoEventsBody =>
-      'Aqui aparecem as pessoas que vão aos mesmos eventos que você.';
+      'No Crew aparecem só as pessoas que vão às mesmas festas que você.';
 
   @override
   String get discoverGoToEvents => 'Ver eventos';
 
   @override
-  String get discoverEmptyTitle => 'Você viu todo mundo por enquanto';
+  String get discoverEmptyTitle => 'Você viu todo mundo dos seus eventos';
 
   @override
   String get discoverEmptyBody =>
-      'Volte mais tarde ou marque presença em mais eventos.';
+      'Volte mais tarde ou marque presença em mais festas para achar sua crew.';
+
+  @override
+  String get discoverDateEmptyTitle => 'Ninguém novo por perto agora';
+
+  @override
+  String get discoverDateEmptyBody =>
+      'Volte mais tarde ou marque presença em eventos: quem vai às mesmas festas que você aparece primeiro.';
 
   @override
   String discoverModeOff(String mode) {
@@ -2429,8 +2453,22 @@ class AppLocalizationsPt extends AppLocalizations {
   String get likesYouTitle => 'Quem curtiu você';
 
   @override
+  String get likesYouNoneYetTitle => 'Ninguém novo por enquanto';
+
+  @override
   String get likesYouNoneYet =>
-      'Ninguém novo por enquanto. Marque presença em eventos para aparecer para mais gente.';
+      'Marque presença em eventos e complete o perfil para aparecer para mais gente.';
+
+  @override
+  String get likesYouLockedBody =>
+      'Com o Pulse Black você vê quem são e dá match na hora, sem esperar aparecer no Descobrir.';
+
+  @override
+  String get likesYouHint =>
+      'Curta de volta para dar match na hora. Toque na foto para ver o perfil.';
+
+  @override
+  String get likesYouAll => 'Todos';
 
   @override
   String likesYouCount(int count) {
