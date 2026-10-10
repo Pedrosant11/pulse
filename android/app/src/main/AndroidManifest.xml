@@ -41,6 +41,17 @@
             <!-- go_router must not treat auth links as routes. -->
             <meta-data android:name="flutter_deeplinking_enabled" android:value="false"/>
         </activity>
+        <!-- Push notifications (FCM). Channels are created in MainActivity;
+             the channel id comes with each message (send-push function). -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification"/>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/notification_accent"/>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="messages"/>
         <!-- Photo cropping (image_cropper). -->
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"

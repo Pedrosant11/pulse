@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Status bar icon for notifications: the Pulse mark (ring + heartbeat) in
+     a single color, as Android requires. Same geometry as PulseMark. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:pathData="M12,3a9,9 0,1 0,0.001 0z"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="1.8" />
+    <path
+        android:pathData="M5.52,12L8.58,12L9.66,10.56L10.74,12L11.64,13.08L12.72,6.78L13.98,15.78L14.88,12L18.48,12"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="1.6"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+</vector>

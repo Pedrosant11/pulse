@@ -391,7 +391,7 @@ Toda tela precisa de estados de carregando, vazio (com ilustração ou animaçã
 10. **Lançamento** (decidido em 2026-10-10, Android primeiro):
     - **Verificação de celular sem código**: só o e-mail é confirmado. O celular continua obrigatório e único por conta (constraint no banco), mas sem OTP; remover a etapa de código e a RPC mock. Twilio/2FA ficam para depois.
     - **Login com Google e Apple** (Supabase `signInWithIdToken`), pedindo no app os dados que faltarem (nascimento 18+, celular, termos).
-    - **Notificações push antes do lançamento**: FCM (Firebase só como entrega; dados continuam no Supabase), disparadas pelo banco em match, mensagem e convite de crew; incluir o Google/Firebase na Política de Privacidade.
+    - **Notificações push** (feito): FCM só como entrega; tokens em `push_tokens` no Supabase. Gatilhos do banco (match, mensagem, convite e pedido de crew, aceite) chamam a Edge Function `send-push` via pg_net, com URL e segredo no Vault. Texto genérico, sem nomes nem conteúdo. Canais Android: matches, messages, crews. Ver `docs/PUSH.md`.
     - **Feito**: registros de acesso por 6 meses (`private.access_logs`, `log_access()`), e-mails do Auth em português (`supabase/templates/`, guia em `docs/EMAILS.md`).
     - **Infra e lojas**: primeiro commit e repositório privado no GitHub; chave de assinatura Android (upload key) fora do git; plano Pro do Supabase; domínio próprio no Resend; colar os modelos de e-mail no painel; Site URL do Auth; teste fechado do Google Play (12 testadores, 14 dias); iOS depois (Mac ou build na nuvem + conta Apple).
     - **Documentos legais**: preencher os marcadores (seção 5.5), revisão por advogado, publicar o site (GitHub Pages) e cadastrar as URLs nas lojas.

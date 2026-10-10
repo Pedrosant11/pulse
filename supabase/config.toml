@@ -423,6 +423,10 @@ deno_version = 2
 [functions.delete-account]
 verify_jwt = false
 
+# Called only by the database (pg_net) with its own shared secret.
+[functions.send-push]
+verify_jwt = false
+
 [analytics]
 enabled = true
 port = 54327

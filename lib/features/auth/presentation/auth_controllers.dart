@@ -2,6 +2,7 @@ import 'package:pulse/core/utils/run_action.dart';
 import 'package:pulse/features/auth/data/account_repository.dart';
 import 'package:pulse/features/auth/data/auth_repository.dart';
 import 'package:pulse/features/auth/presentation/session_providers.dart';
+import 'package:pulse/features/notifications/presentation/push_registration.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_controllers.g.dart';
@@ -114,6 +115,10 @@ class SignOutController extends _$SignOutController {
 
   Future<bool?> signOut({bool allDevices = false}) =>
       runAction(ref, (s) => state = s, () async {
+        // While still signed in (the RPC needs the session).
+        await ref
+            .read(pushRegistrationProvider.notifier)
+            .disable(allDevices: allDevices);
         await ref.read(authRepositoryProvider).signOut(allDevices: allDevices);
         return true;
       });

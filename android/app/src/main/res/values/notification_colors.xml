@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tint of the notification icon (PulseColors.magenta). -->
+    <color name="notification_accent">#FF2BD6</color>
+</resources>

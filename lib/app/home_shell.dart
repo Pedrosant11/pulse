@@ -9,6 +9,9 @@ import 'package:pulse/features/auth/data/account_repository.dart';
 import 'package:pulse/features/auth/presentation/session_providers.dart';
 import 'package:pulse/features/chat/presentation/chat_providers.dart';
 import 'package:pulse/features/crews/presentation/crews_providers.dart';
+import 'package:pulse/features/notifications/data/push_messaging.dart';
+import 'package:pulse/features/notifications/domain/push_route.dart';
+import 'package:pulse/features/notifications/presentation/push_registration.dart';
 import 'package:pulse/features/safety/domain/safety_models.dart';
 import 'package:pulse/features/safety/presentation/safety_providers.dart';
 
@@ -26,12 +29,14 @@ class HomeShell extends ConsumerStatefulWidget {
 
 class _HomeShellState extends ConsumerState<HomeShell> {
   late final AppLifecycleListener _lifecycle;
+  final _pushSubscriptions = <StreamSubscription<Map<String, dynamic>>>[];
   bool _showingNotice = false;
 
   @override
   void initState() {
     super.initState();
     unawaited(_logAccess());
+    unawaited(_setUpPush());
     _lifecycle = AppLifecycleListener(
       onResume: () {
         ref
@@ -52,8 +57,37 @@ class _HomeShellState extends ConsumerState<HomeShell> {
     }
   }
 
+  /// Opens the screen of a tapped notification and registers this device.
+  Future<void> _setUpPush() async {
+    final messaging = ref.read(pushMessagingProvider);
+    _pushSubscriptions
+      ..add(messaging.onMessageOpened.listen(_openFromPush))
+      ..add(
+        messaging.onForegroundMessage.listen((data) {
+          // Invites have no realtime feed; matches and messages do.
+          if (data['kind'] == 'crew_invite') {
+            ref.invalidate(myCrewInvitesProvider);
+          }
+        }),
+      );
+    try {
+      final initial = await messaging.initialMessageData();
+      if (initial != null) _openFromPush(initial);
+    } on Object catch (error) {
+      debugPrint('Push initial message failed: $error');
+    }
+    await ref.read(pushRegistrationProvider.notifier).enable();
+  }
+
+  void _openFromPush(Map<String, dynamic> data) {
+    if (mounted) context.go(routeFromPushData(data));
+  }
+
   @override
   void dispose() {
+    for (final subscription in _pushSubscriptions) {
+      unawaited(subscription.cancel());
+    }
     _lifecycle.dispose();
     super.dispose();
   }

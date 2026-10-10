@@ -8,6 +8,8 @@ environment:
 
 dependencies:
   cached_network_image: ^4.0.4
+  firebase_core: ^4.15.0
+  firebase_messaging: ^16.7.0
   flutter:
     sdk: flutter
   flutter_animate: ^4.5.2

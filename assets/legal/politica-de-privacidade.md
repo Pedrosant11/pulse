@@ -65,6 +65,7 @@ A ordem em que os perfis aparecem é definida automaticamente, considerando even
 |---|---|---|---|
 | Supabase | Banco de dados, autenticação, armazenamento de fotos e funções do servidor | Todos os dados da conta | Brasil (São Paulo) |
 | Resend | Envio de e-mails de confirmação e recuperação de senha | E-mail e conteúdo da mensagem | Estados Unidos |
+| Google (Firebase Cloud Messaging) | Entrega das notificações no celular | Identificador de notificação do aparelho e um texto genérico (sem nomes nem conteúdo das conversas) | Estados Unidos |
 | OpenFreeMap | Imagens do mapa de eventos | Endereço IP e área do mapa visualizada | Europa |
 | Photon (komoot) | Busca de endereço ao cadastrar um evento | Texto buscado e endereço IP | Alemanha |
 | ViaCEP | Busca de endereço por CEP | CEP digitado e endereço IP | Brasil |
@@ -74,7 +75,7 @@ Também podemos compartilhar dados com **autoridades públicas**, quando houver 
 
 ### Transferência internacional
 
-Os dados principais ficam no Brasil. Alguns fornecedores acima (Resend, OpenFreeMap e Photon) estão fora do país. Essas transferências são necessárias para executar o serviço que você contratou (art. 33, IX, combinado com o art. 7º, V, da LGPD) e envolvem apenas os dados indicados na tabela.
+Os dados principais ficam no Brasil. Alguns fornecedores acima (Resend, Google, OpenFreeMap e Photon) estão fora do país. Essas transferências são necessárias para executar o serviço que você contratou (art. 33, IX, combinado com o art. 7º, V, da LGPD) e envolvem apenas os dados indicados na tabela.
 
 ## 6. Por quanto tempo guardamos
 
