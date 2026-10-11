@@ -2690,4 +2690,105 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get emergencyCvv => 'CVV (apoio emocional)';
+
+  @override
+  String get verificationTitle => 'Verificar perfil';
+
+  @override
+  String get verificationIntro =>
+      'Tire uma selfie fazendo a pose pedida. A equipe do Pulse compara com as fotos do seu perfil e libera o selo de verificado.';
+
+  @override
+  String get verificationPrivacy =>
+      'A selfie é usada só para isso e apagada logo depois da análise. Ela não aparece no seu perfil.';
+
+  @override
+  String get verificationPoseTitle => 'Faça esta pose';
+
+  @override
+  String get poseThumbsUp => 'Polegar para cima ao lado do rosto';
+
+  @override
+  String get posePeaceSign => 'Sinal de paz com uma das mãos';
+
+  @override
+  String get poseHandOnHead => 'As duas mãos em cima da cabeça';
+
+  @override
+  String get posePointUp => 'Apontando para cima com o indicador';
+
+  @override
+  String get poseHandOnChin => 'Mão no queixo';
+
+  @override
+  String get verificationOtherPose => 'Sortear outra pose';
+
+  @override
+  String get verificationConsent =>
+      'Autorizo o uso desta selfie apenas para verificar meu perfil.';
+
+  @override
+  String get verificationTakeSelfie => 'Tirar selfie';
+
+  @override
+  String get verificationRetake => 'Tirar outra';
+
+  @override
+  String get verificationSend => 'Enviar para análise';
+
+  @override
+  String get verificationSent =>
+      'Selfie enviada! Você recebe um aviso quando for analisada.';
+
+  @override
+  String get verificationPendingTitle => 'Em análise';
+
+  @override
+  String get verificationPendingBody =>
+      'Recebemos sua selfie. Você recebe um aviso quando a equipe analisar.';
+
+  @override
+  String get verificationApprovedTitle => 'Perfil verificado';
+
+  @override
+  String get verificationApprovedBody =>
+      'O selo de verificado aparece no seu perfil e nos cards do Descobrir.';
+
+  @override
+  String get verificationRejectedTitle => 'Verificação não aprovada';
+
+  @override
+  String verificationRejectedReason(String reason) {
+    return 'Motivo: $reason';
+  }
+
+  @override
+  String get verificationNeedsPhotos =>
+      'Para verificar, seu perfil precisa de pelo menos 2 fotos.';
+
+  @override
+  String get verificationAddPhotos => 'Adicionar fotos';
+
+  @override
+  String get verificationStatusVerified => 'Verificado';
+
+  @override
+  String get verificationStatusPending => 'Em análise';
+
+  @override
+  String get verificationStatusNone => 'Ganhe o selo de verificado';
+
+  @override
+  String get adminVerifications => 'Verificações';
+
+  @override
+  String get adminVerificationEmpty => 'Nenhuma verificação pendente.';
+
+  @override
+  String adminVerificationPose(String pose) {
+    return 'Pose pedida: $pose';
+  }
+
+  @override
+  String get adminVerificationRejectHint => 'Motivo (a pessoa vê)';
 }

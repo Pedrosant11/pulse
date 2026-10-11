@@ -436,8 +436,8 @@ Regras:
 Baseado na pesquisa de mercado (apps de relacionamento migrando para eventos presenciais, Radiate/FestivalMates/Shotgun). Uma fase por vez:
 
 1. **Ingressos e Rolê seguro** (feito): cupom de afiliado/promoter no evento (botão copiar), contagem de toques em "Comprar ingresso" para o produtor; "Compartilhar meu rolê"/"Compartilhar encontro" (texto pelo WhatsApp etc., nada vai ao servidor), dicas da noite e números de emergência.
-2. **"Cheguei bem"** (check-in com prazo; se não confirmar, avisa um contato de confiança). Depende do canal do aviso (e-mail, WhatsApp/SMS pago ou push para outro usuário do Pulse).
-3. **Verificação por selfie** (antes do lançamento): selo de verificado grátis.
+2. ~~"Cheguei bem"~~ (descartado em 2026-10-10: complexo demais para o ganho).
+3. **Verificação por selfie** (feito): pose sorteada + selfie pela câmera, análise manual pelo admin (Painel → Verificações), selfie apagada após a decisão, aviso por push. Automatizar com reconhecimento facial depois, se o volume pedir.
 4. **Modo Hoje**: check-in na festa, quem do Pulse está lá agora (opt-in), ponto de encontro da crew; "Você esteve no mesmo rolê que…" nas 24 h seguintes (Black).
 5. **Produtores**: evento em destaque (Pix, fora da loja), painel do produtor com números agregados (presenças, toques no ingresso, gêneros, cidades).
 6. **Planos**: semanal e anual com desconto, 3 dias de Black grátis no primeiro match. Sem curtidas falsas.

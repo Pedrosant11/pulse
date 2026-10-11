@@ -69,6 +69,9 @@ void main() {
       ],
     );
     expect(tester.takeException(), isNull);
+    // The admin list grew (Verificações); bring the request into view.
+    await tester.ensureVisible(find.text('Aprovar'));
+    await tester.pumpAndSettle();
     expect(find.text('Carla Mendes'), findsOneWidget);
     expect(find.text('São Paulo, SP'), findsOneWidget);
     expect(find.text('Ver perfil').hitTestable(), findsOneWidget);

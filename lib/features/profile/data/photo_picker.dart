@@ -88,6 +88,22 @@ class PhotoPicker {
       quality: _quality,
     );
   }
+
+  /// Live selfie from the front camera (verification): no gallery, no crop.
+  /// Compressed to ≤1080px and stripped of EXIF.
+  Future<Uint8List?> selfie() async {
+    final picked = await _picker.pickImage(
+      source: ImageSource.camera,
+      preferredCameraDevice: CameraDevice.front,
+      requestFullMetadata: false,
+    );
+    if (picked == null) return null;
+    return await FlutterImageCompress.compressWithFile(
+      picked.path,
+      minWidth: 1080,
+      quality: _quality,
+    );
+  }
 }
 
 @Riverpod(keepAlive: true)

@@ -5,6 +5,7 @@ import 'package:pulse/app/routes.dart';
 import 'package:pulse/core/extensions/context_extensions.dart';
 import 'package:pulse/core/widgets/form_error_text.dart';
 import 'package:pulse/core/widgets/glass_card.dart';
+import 'package:pulse/features/admin/data/role_requests_repository.dart';
 import 'package:pulse/features/auth/presentation/auth_controllers.dart';
 import 'package:pulse/features/events/presentation/events_providers.dart';
 import 'package:pulse/features/legal/domain/legal_document.dart';
@@ -13,7 +14,9 @@ import 'package:pulse/features/legal/presentation/privacy_providers.dart';
 import 'package:pulse/features/plans/domain/plan_models.dart';
 import 'package:pulse/features/plans/presentation/plans_providers.dart';
 import 'package:pulse/features/plans/presentation/widgets/plans_prompt.dart';
+import 'package:pulse/features/profile/presentation/profile_providers.dart';
 import 'package:pulse/features/safety/presentation/widgets/night_safety.dart';
+import 'package:pulse/features/verification/presentation/verification_providers.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const new({super.key});
@@ -81,6 +84,21 @@ class SettingsScreen extends ConsumerWidget {
               ),
             ]),
             section(l10n.settingsAccountSection, [
+              ListTile(
+                leading: Icon(Icons.verified_rounded, color: colors.lime),
+                title: Text(l10n.verificationTitle),
+                subtitle: Text(
+                  (ref.watch(myProfileProvider).value?.isVerified ?? false)
+                      ? l10n.verificationStatusVerified
+                      : switch (ref.watch(myVerificationProvider).value) {
+                          final r? when r.status == RequestStatus.pending =>
+                            l10n.verificationStatusPending,
+                          _ => l10n.verificationStatusNone,
+                        },
+                ),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.push(AppRoutes.verification),
+              ),
               ListTile(
                 leading: const Icon(Icons.workspace_premium_outlined),
                 title: Text(l10n.roleRequestEntry),

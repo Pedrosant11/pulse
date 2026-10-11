@@ -8,4 +8,6 @@
     <string name="channel_messages_description">Novas mensagens nas conversas e nas crews.</string>
     <string name="channel_crews">Crews</string>
     <string name="channel_crews_description">Convites e pedidos para entrar nas crews.</string>
+    <string name="channel_account">Conta</string>
+    <string name="channel_account_description">Verificação do perfil e avisos da conta.</string>
 </resources>

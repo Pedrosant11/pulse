@@ -25,6 +25,7 @@ abstract final class AppRoutes {
   static const settings = '/settings';
   static const roleRequest = '/settings/role-request';
   static const badgeRequest = '/settings/badge-request';
+  static const verification = '/settings/verification';
   static const blockedUsers = '/settings/blocked';
   static const deleteAccount = '/settings/delete-account';
   static const activateModes = '/activate-modes';
@@ -36,6 +37,7 @@ abstract final class AppRoutes {
   static const adminReports = '/admin/reports';
   static const adminRestricted = '/admin/restricted';
   static const adminBadges = '/admin/badges';
+  static const adminVerifications = '/admin/verifications';
   static const legalPrefix = '/legal';
 
   static String eventDetail(String eventId) => '$events/$eventId';

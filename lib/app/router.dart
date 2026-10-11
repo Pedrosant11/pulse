@@ -42,6 +42,8 @@ import 'package:pulse/features/safety/presentation/blocked_users_screen.dart';
 import 'package:pulse/features/safety/presentation/safety_tips_screen.dart';
 import 'package:pulse/features/settings/presentation/delete_account_screen.dart';
 import 'package:pulse/features/settings/presentation/settings_screen.dart';
+import 'package:pulse/features/verification/presentation/admin_verifications_screen.dart';
+import 'package:pulse/features/verification/presentation/verification_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.g.dart';
@@ -253,6 +255,10 @@ GoRouter router(Ref ref) {
             builder: (_, _) => const BadgeRequestScreen(),
           ),
           GoRoute(
+            path: 'verification',
+            builder: (_, _) => const VerificationScreen(),
+          ),
+          GoRoute(
             path: 'blocked',
             builder: (_, _) => const BlockedUsersScreen(),
           ),
@@ -302,6 +308,10 @@ GoRouter router(Ref ref) {
         routes: [
           GoRoute(path: 'reports', builder: (_, _) => const ReportsScreen()),
           GoRoute(path: 'badges', builder: (_, _) => const AdminBadgesScreen()),
+          GoRoute(
+            path: 'verifications',
+            builder: (_, _) => const AdminVerificationsScreen(),
+          ),
           GoRoute(
             path: 'restricted',
             builder: (_, _) => const RestrictedUsersScreen(),

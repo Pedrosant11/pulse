@@ -12,6 +12,7 @@ import 'package:pulse/features/admin/presentation/widgets/requester_header.dart'
 import 'package:pulse/features/badges/presentation/badges_providers.dart';
 import 'package:pulse/features/events/presentation/events_providers.dart';
 import 'package:pulse/features/events/presentation/widgets/event_visuals.dart';
+import 'package:pulse/features/verification/presentation/verification_providers.dart';
 
 /// Admin panel (SPEC 10): event queue (curators too), reports, restricted
 /// accounts and role requests. Data access is enforced by RLS and RPCs.
@@ -31,6 +32,9 @@ class AdminScreen extends ConsumerWidget {
         : null;
     final pendingBadges = role.isAdmin
         ? ref.watch(pendingBadgeRequestsProvider).value?.length
+        : null;
+    final pendingVerifications = role.isAdmin
+        ? ref.watch(pendingVerificationsProvider).value?.length
         : null;
 
     return Scaffold(
@@ -91,6 +95,20 @@ class AdminScreen extends ConsumerWidget {
                     child: const Icon(Icons.chevron_right),
                   ),
                   onTap: () => context.push(AppRoutes.adminBadges),
+                ),
+              ),
+              SizedBox(height: spacing.sm),
+              GlassCard(
+                padding: EdgeInsets.zero,
+                child: ListTile(
+                  leading: const Icon(Icons.face_retouching_natural_outlined),
+                  title: Text(l10n.adminVerifications),
+                  trailing: Badge(
+                    isLabelVisible: (pendingVerifications ?? 0) > 0,
+                    label: Text('${pendingVerifications ?? 0}'),
+                    child: const Icon(Icons.chevron_right),
+                  ),
+                  onTap: () => context.push(AppRoutes.adminVerifications),
                 ),
               ),
               SizedBox(height: spacing.lg),

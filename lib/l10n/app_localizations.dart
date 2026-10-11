@@ -4653,6 +4653,186 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'CVV (apoio emocional)'**
   String get emergencyCvv;
+
+  /// No description provided for @verificationTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Verificar perfil'**
+  String get verificationTitle;
+
+  /// No description provided for @verificationIntro.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tire uma selfie fazendo a pose pedida. A equipe do Pulse compara com as fotos do seu perfil e libera o selo de verificado.'**
+  String get verificationIntro;
+
+  /// No description provided for @verificationPrivacy.
+  ///
+  /// In pt, this message translates to:
+  /// **'A selfie é usada só para isso e apagada logo depois da análise. Ela não aparece no seu perfil.'**
+  String get verificationPrivacy;
+
+  /// No description provided for @verificationPoseTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Faça esta pose'**
+  String get verificationPoseTitle;
+
+  /// No description provided for @poseThumbsUp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Polegar para cima ao lado do rosto'**
+  String get poseThumbsUp;
+
+  /// No description provided for @posePeaceSign.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sinal de paz com uma das mãos'**
+  String get posePeaceSign;
+
+  /// No description provided for @poseHandOnHead.
+  ///
+  /// In pt, this message translates to:
+  /// **'As duas mãos em cima da cabeça'**
+  String get poseHandOnHead;
+
+  /// No description provided for @posePointUp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apontando para cima com o indicador'**
+  String get posePointUp;
+
+  /// No description provided for @poseHandOnChin.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mão no queixo'**
+  String get poseHandOnChin;
+
+  /// No description provided for @verificationOtherPose.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sortear outra pose'**
+  String get verificationOtherPose;
+
+  /// No description provided for @verificationConsent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Autorizo o uso desta selfie apenas para verificar meu perfil.'**
+  String get verificationConsent;
+
+  /// No description provided for @verificationTakeSelfie.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tirar selfie'**
+  String get verificationTakeSelfie;
+
+  /// No description provided for @verificationRetake.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tirar outra'**
+  String get verificationRetake;
+
+  /// No description provided for @verificationSend.
+  ///
+  /// In pt, this message translates to:
+  /// **'Enviar para análise'**
+  String get verificationSend;
+
+  /// No description provided for @verificationSent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Selfie enviada! Você recebe um aviso quando for analisada.'**
+  String get verificationSent;
+
+  /// No description provided for @verificationPendingTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Em análise'**
+  String get verificationPendingTitle;
+
+  /// No description provided for @verificationPendingBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recebemos sua selfie. Você recebe um aviso quando a equipe analisar.'**
+  String get verificationPendingBody;
+
+  /// No description provided for @verificationApprovedTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Perfil verificado'**
+  String get verificationApprovedTitle;
+
+  /// No description provided for @verificationApprovedBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'O selo de verificado aparece no seu perfil e nos cards do Descobrir.'**
+  String get verificationApprovedBody;
+
+  /// No description provided for @verificationRejectedTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Verificação não aprovada'**
+  String get verificationRejectedTitle;
+
+  /// No description provided for @verificationRejectedReason.
+  ///
+  /// In pt, this message translates to:
+  /// **'Motivo: {reason}'**
+  String verificationRejectedReason(String reason);
+
+  /// No description provided for @verificationNeedsPhotos.
+  ///
+  /// In pt, this message translates to:
+  /// **'Para verificar, seu perfil precisa de pelo menos 2 fotos.'**
+  String get verificationNeedsPhotos;
+
+  /// No description provided for @verificationAddPhotos.
+  ///
+  /// In pt, this message translates to:
+  /// **'Adicionar fotos'**
+  String get verificationAddPhotos;
+
+  /// No description provided for @verificationStatusVerified.
+  ///
+  /// In pt, this message translates to:
+  /// **'Verificado'**
+  String get verificationStatusVerified;
+
+  /// No description provided for @verificationStatusPending.
+  ///
+  /// In pt, this message translates to:
+  /// **'Em análise'**
+  String get verificationStatusPending;
+
+  /// No description provided for @verificationStatusNone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ganhe o selo de verificado'**
+  String get verificationStatusNone;
+
+  /// No description provided for @adminVerifications.
+  ///
+  /// In pt, this message translates to:
+  /// **'Verificações'**
+  String get adminVerifications;
+
+  /// No description provided for @adminVerificationEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma verificação pendente.'**
+  String get adminVerificationEmpty;
+
+  /// No description provided for @adminVerificationPose.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pose pedida: {pose}'**
+  String adminVerificationPose(String pose);
+
+  /// No description provided for @adminVerificationRejectHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Motivo (a pessoa vê)'**
+  String get adminVerificationRejectHint;
 }
 
 class _AppLocalizationsDelegate

@@ -30,6 +30,7 @@ Use esse canal para qualquer pedido ou dúvida sobre seus dados.
 - **Dados técnicos:** endereço IP, data e hora de acesso, tipo de dispositivo e sistema, e registros de erro.
 - **Compras:** plano assinado, validade, itens avulsos comprados e saldo (superlikes e boosts). O pagamento é feito na loja (Google Play ou App Store); **não recebemos dados do seu cartão**. Se você usar o modo viagem, guardamos a cidade escolhida.
 - **Ingressos:** quando você toca em "Comprar ingresso", registramos que a pessoa da sua conta tocou naquele evento, para mostrar ao produtor quantas pessoas o Pulse levou até a venda (ele vê só o número). O ingresso é comprado no site da vendedora, com as regras dela.
+- **Verificação por selfie (opcional):** se você pedir o selo de verificado, tira uma selfie fazendo uma pose sorteada. A equipe do Pulse compara com as fotos do seu perfil e **a selfie é apagada logo depois da análise**. Guardamos só o resultado (aprovado ou não, data e motivo).
 
 ### 2.3 O que não coletamos
 
@@ -50,6 +51,7 @@ Não acessamos seus contatos, não rastreamos sua localização em segundo plano
 | Criar e manter sua conta, mostrar perfis compatíveis, eventos, matches, mensagens e crews | Execução de contrato (art. 7º, V) |
 | Verificar que você tem 18 anos ou mais e evitar contas duplicadas (celular único) | Execução de contrato (art. 7º, V) e legítimo interesse (art. 7º, IX) |
 | Tratar sua orientação sexual para mostrar e encontrar perfis compatíveis | Consentimento específico e destacado (art. 11, I) |
+| Verificar sua identidade com uma selfie (selo de verificado) | Consentimento específico e destacado (art. 11, I), pedido na hora do envio |
 | Segurança, prevenção a fraudes, spam e abuso, limites de uso, moderação e análise de denúncias | Legítimo interesse (art. 7º, IX) e proteção da vida e da incolumidade física (art. 7º, VII) |
 | Enviar e-mails de confirmação de conta e recuperação de senha | Execução de contrato (art. 7º, V) |
 | Processar compras e assinaturas e liberar os benefícios pagos | Execução de contrato (art. 7º, V) |
@@ -94,6 +96,7 @@ Os dados principais ficam no Brasil. Alguns fornecedores acima (Resend, Google, 
 | Registros de acesso (IP, data e hora) | **6 meses**, conforme o art. 15 do Marco Civil da Internet. |
 | Registros de compras (produto, data e identificador da conta) | **5 anos** após a compra, para atender o Código de Defesa do Consumidor e obrigações fiscais, mesmo após a exclusão da conta. |
 | Toques em "Comprar ingresso" | Vinculados à sua conta por **90 dias**; depois fica só a contagem, sem identificar ninguém. |
+| Selfie de verificação | **Apagada logo depois da análise.** O resultado (aprovado ou não, data e motivo) fica enquanto a conta existir. |
 | Cópias de segurança (backups) | Os dados excluídos podem permanecer em backups por até **[PRAZO DE BACKUP] dias**, até serem sobrescritos. |
 
 ## 7. Moderação e denúncias

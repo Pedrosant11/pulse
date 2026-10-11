@@ -16,6 +16,7 @@ evento no banco (match, mensagem, crew)
 | `crew_invite` | o convidado | crews | Conversas (convites) |
 | `crew_request` | o dono da crew | crews | a crew |
 | `crew_request_accepted` / `crew_invite_accepted` | quem pediu / quem convidou | crews | a crew |
+| `verification_approved` / `verification_rejected` | quem pediu a verificação | account | a tela de verificação |
 
 Os textos ficam em `supabase/functions/send-push/index.ts`, porque o celular os mostra com o app fechado.
 

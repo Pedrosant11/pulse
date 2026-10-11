@@ -2,7 +2,8 @@
 //
 // POST with the user's access token and `{ "password": "..." }`.
 // 1. Identifies the caller from the token and re-checks the password.
-// 2. Removes the caller's files from Storage (profile photos and covers of
+// 2. Removes the caller's files from Storage (profile photos, a pending
+//    verification selfie and covers of
 //    their unpublished suggestions); SQL can't delete Storage objects.
 // 3. Deletes the Auth user. The database cascade removes the rest; the
 //    `profiles_before_delete` trigger hands owned crews to a member first.
@@ -75,6 +76,15 @@ Deno.serve(async (req) => {
     const paths = await listAll(admin, "profile-photos", user.id);
     if (paths.length > 0) {
       const { error } = await admin.storage.from("profile-photos").remove(paths);
+      if (error) throw error;
+    }
+
+    // A selfie still waiting for review (reviewed ones are already gone).
+    const selfies = await listAll(admin, "verification-selfies", user.id);
+    if (selfies.length > 0) {
+      const { error } = await admin.storage
+        .from("verification-selfies")
+        .remove(selfies);
       if (error) throw error;
     }
 

@@ -24,7 +24,7 @@ interface ServiceAccount {
 }
 
 interface PushText {
-  channel: "matches" | "messages" | "crews";
+  channel: "matches" | "messages" | "crews" | "account";
   title: string;
   body: string;
 }
@@ -80,6 +80,18 @@ function textFor(kind: string, data: Record<string, unknown>): PushText | null {
         channel: "crews",
         title: "Convite aceito 🎉",
         body: "Alguém entrou na sua crew pelo seu convite.",
+      };
+    case "verification_approved":
+      return {
+        channel: "account",
+        title: "Perfil verificado ✅",
+        body: "Seu selo de verificado já aparece para todo mundo.",
+      };
+    case "verification_rejected":
+      return {
+        channel: "account",
+        title: "Verificação não aprovada",
+        body: "Veja o motivo e tente de novo com uma nova selfie.",
       };
     default:
       return null;

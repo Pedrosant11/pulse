@@ -68,6 +68,9 @@ sealed class AppFailure implements Exception {
       // Crews without Crew mode ("events only" migration).
       ('P0001', 'crew_mode_required') => CrewModeRequiredFailure(error),
       ('P0001', 'crew_needs_event') => CrewNeedsEventFailure(error),
+      // Selfie verification.
+      ('P0001', 'verification_pending') => VerificationPendingFailure(error),
+      ('P0001', 'already_verified') => AlreadyVerifiedFailure(error),
       // Plans (monetization migration).
       ('P0001', 'like_limit') => LikeLimitFailure(error),
       ('P0001', 'superlike_limit') => SuperlikeLimitFailure(error),
@@ -204,5 +207,14 @@ final class BoostActiveFailure extends AppFailure {
 
 /// A Crew like without a party in common.
 final class CrewNeedsEventFailure extends AppFailure {
+  const new([super.cause]);
+}
+
+/// A verification selfie is already waiting for review.
+final class VerificationPendingFailure extends AppFailure {
+  const new([super.cause]);
+}
+
+final class AlreadyVerifiedFailure extends AppFailure {
   const new([super.cause]);
 }

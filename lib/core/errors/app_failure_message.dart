@@ -21,6 +21,8 @@ extension AppFailureMessage on AppFailure {
       MinPhotosFailure() => l10n.errorMinPhotos,
       CrewModeRequiredFailure() => l10n.errorCrewModeRequired,
       CrewNeedsEventFailure() => l10n.errorCrewNeedsEvent,
+      VerificationPendingFailure() => l10n.verificationPendingBody,
+      AlreadyVerifiedFailure() => l10n.verificationApprovedTitle,
       LikeLimitFailure() => l10n.errorLikeLimit,
       SuperlikeLimitFailure() => l10n.errorSuperlikeLimit,
       PlanRequiredFailure() => l10n.errorPlanRequired,
