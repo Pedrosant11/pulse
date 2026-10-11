@@ -554,7 +554,7 @@ final class CrewEditorProvider
   }
 }
 
-String _$crewEditorHash() => r'5b24cc91d9f3045cba0554f54f34fca4920d0c08';
+String _$crewEditorHash() => r'778184e112379f84077597a0c7968b8be2d5452d';
 
 /// Every crew action; refreshes the affected views.
 

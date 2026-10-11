@@ -71,6 +71,8 @@ sealed class AppFailure implements Exception {
       // Selfie verification.
       ('P0001', 'verification_pending') => VerificationPendingFailure(error),
       ('P0001', 'already_verified') => AlreadyVerifiedFailure(error),
+      // Modo Hoje.
+      ('P0001', 'checkin_closed') => CheckinClosedFailure(error),
       // Plans (monetization migration).
       ('P0001', 'like_limit') => LikeLimitFailure(error),
       ('P0001', 'superlike_limit') => SuperlikeLimitFailure(error),
@@ -216,5 +218,10 @@ final class VerificationPendingFailure extends AppFailure {
 }
 
 final class AlreadyVerifiedFailure extends AppFailure {
+  const new([super.cause]);
+}
+
+/// Check-in outside the party window.
+final class CheckinClosedFailure extends AppFailure {
   const new([super.cause]);
 }

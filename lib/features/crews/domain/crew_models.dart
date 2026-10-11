@@ -58,6 +58,9 @@ abstract class CrewDetail with _$CrewDetail {
 
     /// The user's pending request/invite for this crew.
     String? myRequestId,
+
+    /// Where the crew meets at the party (members only).
+    String? meetingPoint,
   }) = _CrewDetail;
 
   const new _();

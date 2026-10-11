@@ -66,6 +66,14 @@ class CrewEditor extends _$CrewEditor {
     if (eventId != null) ref.invalidate(eventCrewsProvider(eventId));
   }
 
+  /// Where the crew meets at the party (any member).
+  Future<bool?> setMeetingPoint(String crewId, String text) =>
+      runAction(ref, (s) => state = s, () async {
+        await _repository.setMeetingPoint(crewId, text);
+        ref.invalidate(crewProvider(crewId));
+        return true;
+      });
+
   /// Creates the crew (optionally inviting a Crew match right away, e.g.
   /// from the match screen). Returns the new crew id.
   Future<String?> create({

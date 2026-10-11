@@ -132,6 +132,14 @@ class CrewsRepository {
         .eq('user_id', userId),
   );
 
+  /// Members only (database check).
+  Future<void> setMeetingPoint(String crewId, String text) => guardFailures(
+    () => _client.rpc<void>(
+      'set_crew_meeting_point',
+      params: {'p_crew_id': crewId, 'p_text': text},
+    ),
+  );
+
   Future<void> transferOwnership(String crewId, String newOwnerId) =>
       guardFailures(
         () => _client.rpc<void>(

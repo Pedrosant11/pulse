@@ -31,6 +31,7 @@ abstract final class AppRoutes {
   static const activateModes = '/activate-modes';
   static const plans = '/plans';
   static const likesYou = '/likes';
+  static const sameNight = '/same-night';
   static const safetyTips = '/safety-tips';
   static const accountRestricted = '/account-restricted';
   static const admin = '/admin';

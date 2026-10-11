@@ -48,6 +48,9 @@ abstract class DiscoverCandidate with _$DiscoverCandidate {
 
     /// They superliked the viewer (plans).
     @Default(false) bool superLikedMe,
+
+    /// At the same party as the viewer right now (Modo Hoje).
+    @Default(false) bool hereNow,
   }) = _DiscoverCandidate;
 
   const new _();

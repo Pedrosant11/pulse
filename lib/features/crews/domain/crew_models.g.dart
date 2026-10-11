@@ -67,6 +67,7 @@ _CrewDetail _$CrewDetailFromJson(Map<String, dynamic> json) => _CrewDetail(
     unknownValue: JsonKey.nullForUndefinedEnumValue,
   ),
   myRequestId: json['my_request_id'] as String?,
+  meetingPoint: json['meeting_point'] as String?,
 );
 
 Map<String, dynamic> _$CrewDetailToJson(_CrewDetail instance) =>
@@ -85,6 +86,7 @@ Map<String, dynamic> _$CrewDetailToJson(_CrewDetail instance) =>
       'conversation_id': instance.conversationId,
       'my_status': _$CrewRelationEnumMap[instance.myStatus],
       'my_request_id': instance.myRequestId,
+      'meeting_point': instance.meetingPoint,
     };
 
 _CrewMember _$CrewMemberFromJson(Map<String, dynamic> json) => _CrewMember(

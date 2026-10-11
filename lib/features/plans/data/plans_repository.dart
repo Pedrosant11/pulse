@@ -33,6 +33,18 @@ class PlansRepository {
         .toList();
   });
 
+  /// People from the same party (24 h after it): how many, for everyone.
+  Future<int> sameNightCount() =>
+      guardFailures(() => _client.rpc<int>('get_same_night_count'));
+
+  /// Who they are: Pulse Black only.
+  Future<List<SameNightPerson>> sameNight() => guardFailures(() async {
+    final rows = await _client.rpc<List<dynamic>>('get_same_night');
+    return rows
+        .map((r) => SameNightPerson.fromJson(r as Map<String, dynamic>))
+        .toList();
+  });
+
   /// Returns when the boost ends.
   Future<DateTime> activateBoost() => guardFailures(() async {
     final endsAt = await _client.rpc<String>('activate_boost');

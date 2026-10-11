@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:pulse/core/models/user_role.dart';
 import 'package:pulse/core/utils/run_action.dart';
 import 'package:pulse/features/auth/presentation/session_providers.dart';
+import 'package:pulse/features/discover/presentation/discover_providers.dart';
 import 'package:pulse/features/events/data/events_repository.dart';
 import 'package:pulse/features/events/domain/event.dart';
 import 'package:pulse/features/profile/presentation/profile_providers.dart';
@@ -216,3 +217,42 @@ Future<List<EventListEntry>> eventMap(Ref ref) {
 @riverpod
 Future<EventVenue?> eventVenue(Ref ref, String eventId) =>
     ref.watch(eventsRepositoryProvider).venue(eventId);
+
+// "Modo Hoje" ---------------------------------------------------------------
+
+@riverpod
+Future<bool> isCheckedIn(Ref ref, String eventId) {
+  final userId = ref.watch(currentUserIdProvider);
+  if (userId == null) return Future.value(false);
+  return ref.watch(eventsRepositoryProvider).isCheckedIn(userId, eventId);
+}
+
+@riverpod
+Future<int> hereCount(Ref ref, String eventId) =>
+    ref.watch(eventsRepositoryProvider).hereCount(eventId);
+
+@riverpod
+Future<List<HereFriend>> hereFriends(Ref ref, String eventId) =>
+    ref.watch(eventsRepositoryProvider).hereFriends(eventId);
+
+@riverpod
+class CheckInEditor extends _$CheckInEditor {
+  @override
+  AsyncValue<void> build() => const AsyncData(null);
+
+  Future<bool?> setCheckedIn(String eventId, {required bool checkedIn}) =>
+      runAction(ref, (s) => state = s, () async {
+        final repository = ref.read(eventsRepositoryProvider);
+        checkedIn
+            ? await repository.checkIn(eventId)
+            : await repository.checkOut(eventId);
+        ref
+          ..invalidate(isCheckedInProvider(eventId))
+          ..invalidate(hereCountProvider(eventId))
+          ..invalidate(hereFriendsProvider(eventId))
+          ..invalidate(isAttendingProvider(eventId))
+          // People at the same party now jump to the top of Discover.
+          ..invalidate(discoverDeckProvider);
+        return true;
+      });
+}

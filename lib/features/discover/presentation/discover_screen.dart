@@ -208,6 +208,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
     final cards = deck?.value?.cards ?? const <DiscoverCandidate>[];
 
     final plan = ref.watch(entitlementsProvider).value;
+    final sameNight = ref.watch(sameNightCountProvider).value ?? 0;
 
     ref.listen(discoverDeckProvider(mode), (_, next) {
       final error = next.value?.error;
@@ -325,6 +326,26 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                 SizedBox(width: spacing.xs),
               ],
             ),
+            // "Mesmo rolê": people from last night's party (Date).
+            if (mode == AppMode.date && sameNight > 0)
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                  spacing.md,
+                  spacing.xs,
+                  spacing.md,
+                  0,
+                ),
+                child: GlassCard(
+                  padding: EdgeInsets.zero,
+                  child: ListTile(
+                    dense: true,
+                    leading: Icon(Icons.nightlight_round, color: colors.lime),
+                    title: Text(l10n.sameNightBanner(sameNight)),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () => context.push(AppRoutes.sameNight),
+                  ),
+                ),
+              ),
             if (plan?.isTraveling ?? false)
               Text(
                 l10n.travelBanner('${plan!.travelCity}, ${plan.travelState}'),

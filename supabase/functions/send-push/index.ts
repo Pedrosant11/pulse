@@ -81,6 +81,12 @@ function textFor(kind: string, data: Record<string, unknown>): PushText | null {
         title: "Convite aceito 🎉",
         body: "Alguém entrou na sua crew pelo seu convite.",
       };
+    case "same_night":
+      return {
+        channel: "matches",
+        title: "Mesmo rolê 🌙",
+        body: "Tinha gente do Pulse na festa com você. Veja quem antes que o dia acabe.",
+      };
     case "verification_approved":
       return {
         channel: "account",

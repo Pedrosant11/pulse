@@ -242,6 +242,10 @@ class _CrewBody extends ConsumerWidget {
           SizedBox(height: spacing.md),
           Text(description, style: context.textTheme.bodyMedium),
         ],
+        if (status == CrewRelation.owner || status == CrewRelation.member) ...[
+          SizedBox(height: spacing.md),
+          _MeetingPoint(crew: crew),
+        ],
         SizedBox(height: spacing.lg),
         FormErrorText(error: editor.error),
         primaryAction(),
@@ -623,6 +627,69 @@ class EventCrewsSection extends ConsumerWidget {
           ),
         ],
       ],
+    );
+  }
+}
+
+/// Where the crew meets at the party; any member edits it.
+class _MeetingPoint extends ConsumerWidget {
+  const new({required this.crew});
+
+  final CrewDetail crew;
+
+  Future<void> _edit(BuildContext context, WidgetRef ref) async {
+    final l10n = context.l10n;
+    final controller = TextEditingController(text: crew.meetingPoint);
+    final text = await showDialog<String>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.crewMeetingPoint),
+        content: TextField(
+          controller: controller,
+          maxLength: 120,
+          autofocus: true,
+          textCapitalization: TextCapitalization.sentences,
+          decoration: InputDecoration(hintText: l10n.crewMeetingPointHint),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(l10n.cancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, controller.text),
+            child: Text(l10n.saveButton),
+          ),
+        ],
+      ),
+    );
+    controller.dispose();
+    if (text == null) return;
+    await ref.read(crewEditorProvider.notifier).setMeetingPoint(crew.id, text);
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final colors = context.colors;
+    final point = crew.meetingPoint;
+    return GlassCard(
+      padding: EdgeInsets.zero,
+      child: ListTile(
+        leading: Icon(Icons.place_rounded, color: colors.cyan),
+        title: Text(l10n.crewMeetingPoint),
+        subtitle: Text(
+          point ?? l10n.crewMeetingPointEmpty,
+          style: point == null
+              ? null
+              : context.textTheme.titleMedium?.copyWith(color: colors.cyan),
+        ),
+        trailing: IconButton(
+          tooltip: l10n.crewMeetingPointEdit,
+          icon: const Icon(Icons.edit_outlined),
+          onPressed: () => _edit(context, ref),
+        ),
+      ),
     );
   }
 }

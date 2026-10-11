@@ -31,6 +31,20 @@ Future<List<LikedYou>> likesReceived(Ref ref) async {
 }
 
 @riverpod
+Future<int> sameNightCount(Ref ref) {
+  ref.watch(currentUserIdProvider);
+  return ref.watch(plansRepositoryProvider).sameNightCount();
+}
+
+/// Only fetched for Black (the database refuses others).
+@riverpod
+Future<List<SameNightPerson>> sameNight(Ref ref) async {
+  final entitlements = await ref.watch(entitlementsProvider.future);
+  if (!entitlements.isBlack) return const [];
+  return await ref.watch(plansRepositoryProvider).sameNight();
+}
+
+@riverpod
 Future<List<StoreOffer>> storeOffers(Ref ref) =>
     ref.watch(storePurchasesProvider).offers();
 

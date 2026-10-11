@@ -320,7 +320,8 @@ as CrewRelation?,
 mixin _$CrewDetail {
 
  String get id; String get name; int get maxMembers; int get memberCount; String get ownerId; String get eventId; String get eventName; DateTime get eventStartsAt; String? get description; bool get isOpen; bool get sameGenderOnly; String? get conversationId;@JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue) CrewRelation? get myStatus;/// The user's pending request/invite for this crew.
- String? get myRequestId;
+ String? get myRequestId;/// Where the crew meets at the party (members only).
+ String? get meetingPoint;
 /// Create a copy of CrewDetail
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -334,20 +335,20 @@ $CrewDetailCopyWith<CrewDetail> get copyWith => _$CrewDetailCopyWithImpl<CrewDet
 @override
 bool operator ==(Object other) {
   final _this = this as CrewDetail;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CrewDetail&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.maxMembers, _this.maxMembers) || other.maxMembers == _this.maxMembers)&&(identical(other.memberCount, _this.memberCount) || other.memberCount == _this.memberCount)&&(identical(other.ownerId, _this.ownerId) || other.ownerId == _this.ownerId)&&(identical(other.eventId, _this.eventId) || other.eventId == _this.eventId)&&(identical(other.eventName, _this.eventName) || other.eventName == _this.eventName)&&(identical(other.eventStartsAt, _this.eventStartsAt) || other.eventStartsAt == _this.eventStartsAt)&&(identical(other.description, _this.description) || other.description == _this.description)&&(identical(other.isOpen, _this.isOpen) || other.isOpen == _this.isOpen)&&(identical(other.sameGenderOnly, _this.sameGenderOnly) || other.sameGenderOnly == _this.sameGenderOnly)&&(identical(other.conversationId, _this.conversationId) || other.conversationId == _this.conversationId)&&(identical(other.myStatus, _this.myStatus) || other.myStatus == _this.myStatus)&&(identical(other.myRequestId, _this.myRequestId) || other.myRequestId == _this.myRequestId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CrewDetail&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.maxMembers, _this.maxMembers) || other.maxMembers == _this.maxMembers)&&(identical(other.memberCount, _this.memberCount) || other.memberCount == _this.memberCount)&&(identical(other.ownerId, _this.ownerId) || other.ownerId == _this.ownerId)&&(identical(other.eventId, _this.eventId) || other.eventId == _this.eventId)&&(identical(other.eventName, _this.eventName) || other.eventName == _this.eventName)&&(identical(other.eventStartsAt, _this.eventStartsAt) || other.eventStartsAt == _this.eventStartsAt)&&(identical(other.description, _this.description) || other.description == _this.description)&&(identical(other.isOpen, _this.isOpen) || other.isOpen == _this.isOpen)&&(identical(other.sameGenderOnly, _this.sameGenderOnly) || other.sameGenderOnly == _this.sameGenderOnly)&&(identical(other.conversationId, _this.conversationId) || other.conversationId == _this.conversationId)&&(identical(other.myStatus, _this.myStatus) || other.myStatus == _this.myStatus)&&(identical(other.myRequestId, _this.myRequestId) || other.myRequestId == _this.myRequestId)&&(identical(other.meetingPoint, _this.meetingPoint) || other.meetingPoint == _this.meetingPoint));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as CrewDetail;
-  return Object.hash(runtimeType,_this.id,_this.name,_this.maxMembers,_this.memberCount,_this.ownerId,_this.eventId,_this.eventName,_this.eventStartsAt,_this.description,_this.isOpen,_this.sameGenderOnly,_this.conversationId,_this.myStatus,_this.myRequestId);
+  return Object.hash(runtimeType,_this.id,_this.name,_this.maxMembers,_this.memberCount,_this.ownerId,_this.eventId,_this.eventName,_this.eventStartsAt,_this.description,_this.isOpen,_this.sameGenderOnly,_this.conversationId,_this.myStatus,_this.myRequestId,_this.meetingPoint);
 }
 
 @override
 String toString() {
   final _this = this as CrewDetail;
-  return 'CrewDetail(id: ${_this.id}, name: ${_this.name}, maxMembers: ${_this.maxMembers}, memberCount: ${_this.memberCount}, ownerId: ${_this.ownerId}, eventId: ${_this.eventId}, eventName: ${_this.eventName}, eventStartsAt: ${_this.eventStartsAt}, description: ${_this.description}, isOpen: ${_this.isOpen}, sameGenderOnly: ${_this.sameGenderOnly}, conversationId: ${_this.conversationId}, myStatus: ${_this.myStatus}, myRequestId: ${_this.myRequestId})';
+  return 'CrewDetail(id: ${_this.id}, name: ${_this.name}, maxMembers: ${_this.maxMembers}, memberCount: ${_this.memberCount}, ownerId: ${_this.ownerId}, eventId: ${_this.eventId}, eventName: ${_this.eventName}, eventStartsAt: ${_this.eventStartsAt}, description: ${_this.description}, isOpen: ${_this.isOpen}, sameGenderOnly: ${_this.sameGenderOnly}, conversationId: ${_this.conversationId}, myStatus: ${_this.myStatus}, myRequestId: ${_this.myRequestId}, meetingPoint: ${_this.meetingPoint})';
 }
 
 
@@ -358,7 +359,7 @@ abstract mixin class $CrewDetailCopyWith<$Res>  {
   factory $CrewDetailCopyWith(CrewDetail value, $Res Function(CrewDetail) _then) = _$CrewDetailCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, int maxMembers, int memberCount, String ownerId, String eventId, String eventName, DateTime eventStartsAt, String? description, bool isOpen, bool sameGenderOnly, String? conversationId,@JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue) CrewRelation? myStatus, String? myRequestId
+ String id, String name, int maxMembers, int memberCount, String ownerId, String eventId, String eventName, DateTime eventStartsAt, String? description, bool isOpen, bool sameGenderOnly, String? conversationId,@JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue) CrewRelation? myStatus, String? myRequestId, String? meetingPoint
 });
 
 
@@ -375,7 +376,7 @@ class _$CrewDetailCopyWithImpl<$Res>
 
 /// Create a copy of CrewDetail
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? maxMembers = null,Object? memberCount = null,Object? ownerId = null,Object? eventId = null,Object? eventName = null,Object? eventStartsAt = null,Object? description = freezed,Object? isOpen = null,Object? sameGenderOnly = null,Object? conversationId = freezed,Object? myStatus = freezed,Object? myRequestId = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? maxMembers = null,Object? memberCount = null,Object? ownerId = null,Object? eventId = null,Object? eventName = null,Object? eventStartsAt = null,Object? description = freezed,Object? isOpen = null,Object? sameGenderOnly = null,Object? conversationId = freezed,Object? myStatus = freezed,Object? myRequestId = freezed,Object? meetingPoint = freezed,}) {
   return _then(CrewDetail(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -391,6 +392,7 @@ as bool,sameGenderOnly: null == sameGenderOnly ? _self.sameGenderOnly : sameGend
 as bool,conversationId: freezed == conversationId ? _self.conversationId : conversationId // ignore: cast_nullable_to_non_nullable
 as String?,myStatus: freezed == myStatus ? _self.myStatus : myStatus // ignore: cast_nullable_to_non_nullable
 as CrewRelation?,myRequestId: freezed == myRequestId ? _self.myRequestId : myRequestId // ignore: cast_nullable_to_non_nullable
+as String?,meetingPoint: freezed == meetingPoint ? _self.meetingPoint : meetingPoint // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -476,10 +478,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  int maxMembers,  int memberCount,  String ownerId,  String eventId,  String eventName,  DateTime eventStartsAt,  String? description,  bool isOpen,  bool sameGenderOnly,  String? conversationId, @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)  CrewRelation? myStatus,  String? myRequestId)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  int maxMembers,  int memberCount,  String ownerId,  String eventId,  String eventName,  DateTime eventStartsAt,  String? description,  bool isOpen,  bool sameGenderOnly,  String? conversationId, @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)  CrewRelation? myStatus,  String? myRequestId,  String? meetingPoint)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CrewDetail() when $default != null:
-return $default(_that.id,_that.name,_that.maxMembers,_that.memberCount,_that.ownerId,_that.eventId,_that.eventName,_that.eventStartsAt,_that.description,_that.isOpen,_that.sameGenderOnly,_that.conversationId,_that.myStatus,_that.myRequestId);case _:
+return $default(_that.id,_that.name,_that.maxMembers,_that.memberCount,_that.ownerId,_that.eventId,_that.eventName,_that.eventStartsAt,_that.description,_that.isOpen,_that.sameGenderOnly,_that.conversationId,_that.myStatus,_that.myRequestId,_that.meetingPoint);case _:
   return orElse();
 
 }
@@ -497,10 +499,10 @@ return $default(_that.id,_that.name,_that.maxMembers,_that.memberCount,_that.own
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  int maxMembers,  int memberCount,  String ownerId,  String eventId,  String eventName,  DateTime eventStartsAt,  String? description,  bool isOpen,  bool sameGenderOnly,  String? conversationId, @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)  CrewRelation? myStatus,  String? myRequestId)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  int maxMembers,  int memberCount,  String ownerId,  String eventId,  String eventName,  DateTime eventStartsAt,  String? description,  bool isOpen,  bool sameGenderOnly,  String? conversationId, @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)  CrewRelation? myStatus,  String? myRequestId,  String? meetingPoint)  $default,) {final _that = this;
 switch (_that) {
 case _CrewDetail():
-return $default(_that.id,_that.name,_that.maxMembers,_that.memberCount,_that.ownerId,_that.eventId,_that.eventName,_that.eventStartsAt,_that.description,_that.isOpen,_that.sameGenderOnly,_that.conversationId,_that.myStatus,_that.myRequestId);case _:
+return $default(_that.id,_that.name,_that.maxMembers,_that.memberCount,_that.ownerId,_that.eventId,_that.eventName,_that.eventStartsAt,_that.description,_that.isOpen,_that.sameGenderOnly,_that.conversationId,_that.myStatus,_that.myRequestId,_that.meetingPoint);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -517,10 +519,10 @@ return $default(_that.id,_that.name,_that.maxMembers,_that.memberCount,_that.own
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  int maxMembers,  int memberCount,  String ownerId,  String eventId,  String eventName,  DateTime eventStartsAt,  String? description,  bool isOpen,  bool sameGenderOnly,  String? conversationId, @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)  CrewRelation? myStatus,  String? myRequestId)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  int maxMembers,  int memberCount,  String ownerId,  String eventId,  String eventName,  DateTime eventStartsAt,  String? description,  bool isOpen,  bool sameGenderOnly,  String? conversationId, @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)  CrewRelation? myStatus,  String? myRequestId,  String? meetingPoint)?  $default,) {final _that = this;
 switch (_that) {
 case _CrewDetail() when $default != null:
-return $default(_that.id,_that.name,_that.maxMembers,_that.memberCount,_that.ownerId,_that.eventId,_that.eventName,_that.eventStartsAt,_that.description,_that.isOpen,_that.sameGenderOnly,_that.conversationId,_that.myStatus,_that.myRequestId);case _:
+return $default(_that.id,_that.name,_that.maxMembers,_that.memberCount,_that.ownerId,_that.eventId,_that.eventName,_that.eventStartsAt,_that.description,_that.isOpen,_that.sameGenderOnly,_that.conversationId,_that.myStatus,_that.myRequestId,_that.meetingPoint);case _:
   return null;
 
 }
@@ -532,7 +534,7 @@ return $default(_that.id,_that.name,_that.maxMembers,_that.memberCount,_that.own
 @JsonSerializable()
 
 class _CrewDetail extends CrewDetail {
-  const _CrewDetail({required this.id, required this.name, required this.maxMembers, required this.memberCount, required this.ownerId, required this.eventId, required this.eventName, required this.eventStartsAt, this.description, this.isOpen = true, this.sameGenderOnly = false, this.conversationId, @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue) this.myStatus, this.myRequestId}): super._();
+  const _CrewDetail({required this.id, required this.name, required this.maxMembers, required this.memberCount, required this.ownerId, required this.eventId, required this.eventName, required this.eventStartsAt, this.description, this.isOpen = true, this.sameGenderOnly = false, this.conversationId, @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue) this.myStatus, this.myRequestId, this.meetingPoint}): super._();
   factory _CrewDetail.fromJson(Map<String, dynamic> json) => _$CrewDetailFromJson(json);
 
 @override final  String id;
@@ -550,6 +552,8 @@ class _CrewDetail extends CrewDetail {
 @override@JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue) final  CrewRelation? myStatus;
 /// The user's pending request/invite for this crew.
 @override final  String? myRequestId;
+/// Where the crew meets at the party (members only).
+@override final  String? meetingPoint;
 
 /// Create a copy of CrewDetail
 /// with the given fields replaced by the non-null parameter values.
@@ -564,18 +568,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CrewDetail&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.maxMembers, maxMembers) || other.maxMembers == maxMembers)&&(identical(other.memberCount, memberCount) || other.memberCount == memberCount)&&(identical(other.ownerId, ownerId) || other.ownerId == ownerId)&&(identical(other.eventId, eventId) || other.eventId == eventId)&&(identical(other.eventName, eventName) || other.eventName == eventName)&&(identical(other.eventStartsAt, eventStartsAt) || other.eventStartsAt == eventStartsAt)&&(identical(other.description, description) || other.description == description)&&(identical(other.isOpen, isOpen) || other.isOpen == isOpen)&&(identical(other.sameGenderOnly, sameGenderOnly) || other.sameGenderOnly == sameGenderOnly)&&(identical(other.conversationId, conversationId) || other.conversationId == conversationId)&&(identical(other.myStatus, myStatus) || other.myStatus == myStatus)&&(identical(other.myRequestId, myRequestId) || other.myRequestId == myRequestId));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _CrewDetail&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.maxMembers, maxMembers) || other.maxMembers == maxMembers)&&(identical(other.memberCount, memberCount) || other.memberCount == memberCount)&&(identical(other.ownerId, ownerId) || other.ownerId == ownerId)&&(identical(other.eventId, eventId) || other.eventId == eventId)&&(identical(other.eventName, eventName) || other.eventName == eventName)&&(identical(other.eventStartsAt, eventStartsAt) || other.eventStartsAt == eventStartsAt)&&(identical(other.description, description) || other.description == description)&&(identical(other.isOpen, isOpen) || other.isOpen == isOpen)&&(identical(other.sameGenderOnly, sameGenderOnly) || other.sameGenderOnly == sameGenderOnly)&&(identical(other.conversationId, conversationId) || other.conversationId == conversationId)&&(identical(other.myStatus, myStatus) || other.myStatus == myStatus)&&(identical(other.myRequestId, myRequestId) || other.myRequestId == myRequestId)&&(identical(other.meetingPoint, meetingPoint) || other.meetingPoint == meetingPoint));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,id,name,maxMembers,memberCount,ownerId,eventId,eventName,eventStartsAt,description,isOpen,sameGenderOnly,conversationId,myStatus,myRequestId);
+    return Object.hash(runtimeType,id,name,maxMembers,memberCount,ownerId,eventId,eventName,eventStartsAt,description,isOpen,sameGenderOnly,conversationId,myStatus,myRequestId,meetingPoint);
 }
 
 @override
 String toString() {
-    return 'CrewDetail(id: $id, name: $name, maxMembers: $maxMembers, memberCount: $memberCount, ownerId: $ownerId, eventId: $eventId, eventName: $eventName, eventStartsAt: $eventStartsAt, description: $description, isOpen: $isOpen, sameGenderOnly: $sameGenderOnly, conversationId: $conversationId, myStatus: $myStatus, myRequestId: $myRequestId)';
+    return 'CrewDetail(id: $id, name: $name, maxMembers: $maxMembers, memberCount: $memberCount, ownerId: $ownerId, eventId: $eventId, eventName: $eventName, eventStartsAt: $eventStartsAt, description: $description, isOpen: $isOpen, sameGenderOnly: $sameGenderOnly, conversationId: $conversationId, myStatus: $myStatus, myRequestId: $myRequestId, meetingPoint: $meetingPoint)';
 }
 
 
@@ -586,7 +590,7 @@ abstract mixin class _$CrewDetailCopyWith<$Res> implements $CrewDetailCopyWith<$
   factory _$CrewDetailCopyWith(_CrewDetail value, $Res Function(_CrewDetail) _then) = __$CrewDetailCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, int maxMembers, int memberCount, String ownerId, String eventId, String eventName, DateTime eventStartsAt, String? description, bool isOpen, bool sameGenderOnly, String? conversationId,@JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue) CrewRelation? myStatus, String? myRequestId
+ String id, String name, int maxMembers, int memberCount, String ownerId, String eventId, String eventName, DateTime eventStartsAt, String? description, bool isOpen, bool sameGenderOnly, String? conversationId,@JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue) CrewRelation? myStatus, String? myRequestId, String? meetingPoint
 });
 
 
@@ -603,7 +607,7 @@ class __$CrewDetailCopyWithImpl<$Res>
 
 /// Create a copy of CrewDetail
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? maxMembers = null,Object? memberCount = null,Object? ownerId = null,Object? eventId = null,Object? eventName = null,Object? eventStartsAt = null,Object? description = freezed,Object? isOpen = null,Object? sameGenderOnly = null,Object? conversationId = freezed,Object? myStatus = freezed,Object? myRequestId = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? maxMembers = null,Object? memberCount = null,Object? ownerId = null,Object? eventId = null,Object? eventName = null,Object? eventStartsAt = null,Object? description = freezed,Object? isOpen = null,Object? sameGenderOnly = null,Object? conversationId = freezed,Object? myStatus = freezed,Object? myRequestId = freezed,Object? meetingPoint = freezed,}) {
   return _then(_CrewDetail(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -619,6 +623,7 @@ as bool,sameGenderOnly: null == sameGenderOnly ? _self.sameGenderOnly : sameGend
 as bool,conversationId: freezed == conversationId ? _self.conversationId : conversationId // ignore: cast_nullable_to_non_nullable
 as String?,myStatus: freezed == myStatus ? _self.myStatus : myStatus // ignore: cast_nullable_to_non_nullable
 as CrewRelation?,myRequestId: freezed == myRequestId ? _self.myRequestId : myRequestId // ignore: cast_nullable_to_non_nullable
+as String?,meetingPoint: freezed == meetingPoint ? _self.meetingPoint : meetingPoint // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
