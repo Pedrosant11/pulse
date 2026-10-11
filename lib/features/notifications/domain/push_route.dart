@@ -1,9 +1,8 @@
 import 'package:pulse/app/routes.dart';
 
 /// Screen to open when a notification is tapped, from its `route` data.
-/// Only the inbox, a conversation, a crew, the verification screen or "Mesmo
-/// rolê" are accepted, so a malformed message can't send the user
-/// anywhere else.
+/// Only the inbox, a conversation, a crew or the verification screen are
+/// accepted, so a malformed message can't send the user anywhere else.
 /// Falls back to the inbox.
 String routeFromPushData(Map<String, dynamic> data) {
   final route = data['route'];
@@ -15,7 +14,6 @@ String routeFromPushData(Map<String, dynamic> data) {
     ['chats', final id] when isId => AppRoutes.conversation(id),
     ['crews', final id] when isId => AppRoutes.crew(id),
     ['settings', 'verification'] => AppRoutes.verification,
-    ['same-night'] => AppRoutes.sameNight,
     _ => AppRoutes.chats,
   };
 }

@@ -113,7 +113,6 @@ class PlansScreen extends ConsumerWidget {
                   l10n.planBenefitLikedYou,
                   l10n.planBenefitBoost,
                   l10n.planBenefitIncognito,
-                  l10n.planBenefitSameNight,
                 ],
                 busy: actions.isLoading,
                 onBuy: buy(StoreItem.blackMonthly),

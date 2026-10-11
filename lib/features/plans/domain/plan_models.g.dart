@@ -88,21 +88,3 @@ Map<String, dynamic> _$AdminPlanToJson(_AdminPlan instance) =>
       'superlike_balance': instance.superlikeBalance,
       'boost_balance': instance.boostBalance,
     };
-
-_SameNightPerson _$SameNightPersonFromJson(Map<String, dynamic> json) =>
-    _SameNightPerson(
-      userId: json['user_id'] as String,
-      firstName: json['first_name'] as String,
-      age: (json['age'] as num).toInt(),
-      eventName: json['event_name'] as String,
-      photoPath: json['photo_path'] as String?,
-    );
-
-Map<String, dynamic> _$SameNightPersonToJson(_SameNightPerson instance) =>
-    <String, dynamic>{
-      'user_id': instance.userId,
-      'first_name': instance.firstName,
-      'age': instance.age,
-      'event_name': instance.eventName,
-      'photo_path': instance.photoPath,
-    };

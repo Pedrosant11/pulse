@@ -35,7 +35,6 @@ import 'package:pulse/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:pulse/features/plans/domain/plan_models.dart';
 import 'package:pulse/features/plans/presentation/likes_you_screen.dart';
 import 'package:pulse/features/plans/presentation/plans_screen.dart';
-import 'package:pulse/features/plans/presentation/same_night_screen.dart';
 import 'package:pulse/features/profile/presentation/edit_profile_screen.dart';
 import 'package:pulse/features/profile/presentation/profile_screen.dart';
 import 'package:pulse/features/safety/presentation/account_restricted_screen.dart';
@@ -293,10 +292,6 @@ GoRouter router(Ref ref) {
       GoRoute(
         path: AppRoutes.likesYou,
         builder: (_, _) => const LikesYouScreen(),
-      ),
-      GoRoute(
-        path: AppRoutes.sameNight,
-        builder: (_, _) => const SameNightScreen(),
       ),
       GoRoute(
         path: AppRoutes.safetyTips,

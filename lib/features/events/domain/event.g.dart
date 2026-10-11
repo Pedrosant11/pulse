@@ -272,18 +272,3 @@ const _$UserRoleEnumMap = {
   UserRole.producer: 'producer',
   UserRole.admin: 'admin',
 };
-
-_HereFriend _$HereFriendFromJson(Map<String, dynamic> json) => _HereFriend(
-  userId: json['user_id'] as String,
-  firstName: json['first_name'] as String,
-  relation: json['relation'] as String,
-  photoPath: json['photo_path'] as String?,
-);
-
-Map<String, dynamic> _$HereFriendToJson(_HereFriend instance) =>
-    <String, dynamic>{
-      'user_id': instance.userId,
-      'first_name': instance.firstName,
-      'relation': instance.relation,
-      'photo_path': instance.photoPath,
-    };

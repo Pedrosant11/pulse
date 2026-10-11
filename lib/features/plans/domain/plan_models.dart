@@ -13,7 +13,6 @@ enum PlanFeature {
   likedYou,
   boost,
   incognito,
-  sameNight,
 }
 
 /// Matches the database enum `plan_tier`.
@@ -111,19 +110,4 @@ abstract class AdminPlan with _$AdminPlan {
   }) = _AdminPlan;
 
   factory fromJson(Map<String, dynamic> json) => _$AdminPlanFromJson(json);
-}
-
-/// Someone from the same party, in the 24 h after it (Black).
-@freezed
-abstract class SameNightPerson with _$SameNightPerson {
-  const factory({
-    required String userId,
-    required String firstName,
-    required int age,
-    required String eventName,
-    String? photoPath,
-  }) = _SameNightPerson;
-
-  factory fromJson(Map<String, dynamic> json) =>
-      _$SameNightPersonFromJson(json);
 }

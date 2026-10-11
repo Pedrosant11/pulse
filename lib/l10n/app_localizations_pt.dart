@@ -2439,7 +2439,6 @@ class AppLocalizationsPt extends AppLocalizations {
       'likedYou': 'Veja quem curtiu você',
       'boost': 'Apareça primeiro',
       'incognito': 'Modo discreto',
-      'sameNight': 'Mesmo rolê',
       'other': 'Pulse+ e Pulse Black',
     });
     return '$_temp0';
@@ -2456,7 +2455,6 @@ class AppLocalizationsPt extends AppLocalizations {
           'Com o Pulse Black você vê quem já curtiu você e dá match na hora.',
       'boost': 'O boost te coloca no topo do Descobrir por 30 minutos, ideal na noite da festa.',
       'incognito': 'Com o Pulse Black só te vê quem você curtiu.',
-      'sameNight': 'Com o Pulse Black você vê quem estava na festa com você e pode dar match no dia seguinte.',
       'other': 'Conheça os planos do Pulse.',
     });
     return '$_temp0';
@@ -2795,49 +2793,6 @@ class AppLocalizationsPt extends AppLocalizations {
   String get adminVerificationRejectHint => 'Motivo (a pessoa vê)';
 
   @override
-  String get tonightTitle => 'Hoje tem festa!';
-
-  @override
-  String get tonightCheckedIn => 'Você está na festa 🔥';
-
-  @override
-  String tonightHereCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count pessoas do Pulse aqui agora',
-      one: '1 pessoa do Pulse aqui agora',
-      zero: 'Ninguém do Pulse fez check-in ainda',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String get tonightCheckIn => 'Tô na festa';
-
-  @override
-  String get tonightCheckInHint =>
-      'Seus matches e sua crew veem que você chegou. Ninguém vê sua localização.';
-
-  @override
-  String get tonightCheckOut => 'Saí da festa';
-
-  @override
-  String get tonightNoFriends => 'Nenhum match ou crew por aqui ainda.';
-
-  @override
-  String get tonightCrewMate => 'Crew';
-
-  @override
-  String get tonightMatch => 'Match';
-
-  @override
-  String get errorCheckinClosed => 'O check-in abre 2 horas antes da festa.';
-
-  @override
-  String get discoverHereNow => 'Tá na festa agora 🔥';
-
-  @override
   String get crewMeetingPoint => 'Ponto de encontro';
 
   @override
@@ -2849,48 +2804,4 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get crewMeetingPointEdit => 'Editar ponto de encontro';
-
-  @override
-  String get sameNightTitle => 'Mesmo rolê';
-
-  @override
-  String sameNightCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count pessoas estavam na festa com você',
-      one: '1 pessoa estava na festa com você',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String get sameNightEmpty => 'Ninguém da última festa por aqui';
-
-  @override
-  String get sameNightExplain =>
-      'Nas 24 horas depois de uma festa em que você fez check-in, aparecem aqui as pessoas que também estavam lá.';
-
-  @override
-  String get sameNightUnlock => 'Ver quem são com o Pulse Black';
-
-  @override
-  String sameNightWasAt(String event) {
-    return 'Estava no $event';
-  }
-
-  @override
-  String sameNightBanner(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count pessoas do seu último rolê. Ver quem',
-      one: '1 pessoa do seu último rolê. Ver quem',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String get planBenefitSameNight =>
-      'Mesmo rolê: veja quem estava na festa com você';
 }

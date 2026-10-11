@@ -295,8 +295,7 @@ mixin _$DiscoverCandidate {
  String get id; String get firstName; int get age; String? get city; String? get state; String? get occupation; String? get bio; Gender? get gender; bool get isVerified; List<MusicGenre> get musicGenres; List<String> get photoPaths; List<CommonEvent> get commonEvents; int get commonEventCount; bool get isFallback; double? get distanceKm; List<String> get favoriteDjs; DateIntent? get dateLookingFor;/// Crew mode: size of their crew for the first common event (null =
 /// going solo).
  int? get crewSize;/// They superliked the viewer (plans).
- bool get superLikedMe;/// At the same party as the viewer right now (Modo Hoje).
- bool get hereNow;
+ bool get superLikedMe;
 /// Create a copy of DiscoverCandidate
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -310,20 +309,20 @@ $DiscoverCandidateCopyWith<DiscoverCandidate> get copyWith => _$DiscoverCandidat
 @override
 bool operator ==(Object other) {
   final _this = this as DiscoverCandidate;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DiscoverCandidate&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.firstName, _this.firstName) || other.firstName == _this.firstName)&&(identical(other.age, _this.age) || other.age == _this.age)&&(identical(other.city, _this.city) || other.city == _this.city)&&(identical(other.state, _this.state) || other.state == _this.state)&&(identical(other.occupation, _this.occupation) || other.occupation == _this.occupation)&&(identical(other.bio, _this.bio) || other.bio == _this.bio)&&(identical(other.gender, _this.gender) || other.gender == _this.gender)&&(identical(other.isVerified, _this.isVerified) || other.isVerified == _this.isVerified)&&const DeepCollectionEquality().equals(other.musicGenres, _this.musicGenres)&&const DeepCollectionEquality().equals(other.photoPaths, _this.photoPaths)&&const DeepCollectionEquality().equals(other.commonEvents, _this.commonEvents)&&(identical(other.commonEventCount, _this.commonEventCount) || other.commonEventCount == _this.commonEventCount)&&(identical(other.isFallback, _this.isFallback) || other.isFallback == _this.isFallback)&&(identical(other.distanceKm, _this.distanceKm) || other.distanceKm == _this.distanceKm)&&const DeepCollectionEquality().equals(other.favoriteDjs, _this.favoriteDjs)&&(identical(other.dateLookingFor, _this.dateLookingFor) || other.dateLookingFor == _this.dateLookingFor)&&(identical(other.crewSize, _this.crewSize) || other.crewSize == _this.crewSize)&&(identical(other.superLikedMe, _this.superLikedMe) || other.superLikedMe == _this.superLikedMe)&&(identical(other.hereNow, _this.hereNow) || other.hereNow == _this.hereNow));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DiscoverCandidate&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.firstName, _this.firstName) || other.firstName == _this.firstName)&&(identical(other.age, _this.age) || other.age == _this.age)&&(identical(other.city, _this.city) || other.city == _this.city)&&(identical(other.state, _this.state) || other.state == _this.state)&&(identical(other.occupation, _this.occupation) || other.occupation == _this.occupation)&&(identical(other.bio, _this.bio) || other.bio == _this.bio)&&(identical(other.gender, _this.gender) || other.gender == _this.gender)&&(identical(other.isVerified, _this.isVerified) || other.isVerified == _this.isVerified)&&const DeepCollectionEquality().equals(other.musicGenres, _this.musicGenres)&&const DeepCollectionEquality().equals(other.photoPaths, _this.photoPaths)&&const DeepCollectionEquality().equals(other.commonEvents, _this.commonEvents)&&(identical(other.commonEventCount, _this.commonEventCount) || other.commonEventCount == _this.commonEventCount)&&(identical(other.isFallback, _this.isFallback) || other.isFallback == _this.isFallback)&&(identical(other.distanceKm, _this.distanceKm) || other.distanceKm == _this.distanceKm)&&const DeepCollectionEquality().equals(other.favoriteDjs, _this.favoriteDjs)&&(identical(other.dateLookingFor, _this.dateLookingFor) || other.dateLookingFor == _this.dateLookingFor)&&(identical(other.crewSize, _this.crewSize) || other.crewSize == _this.crewSize)&&(identical(other.superLikedMe, _this.superLikedMe) || other.superLikedMe == _this.superLikedMe));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as DiscoverCandidate;
-  return Object.hashAll([runtimeType,_this.id,_this.firstName,_this.age,_this.city,_this.state,_this.occupation,_this.bio,_this.gender,_this.isVerified,const DeepCollectionEquality().hash(_this.musicGenres),const DeepCollectionEquality().hash(_this.photoPaths),const DeepCollectionEquality().hash(_this.commonEvents),_this.commonEventCount,_this.isFallback,_this.distanceKm,const DeepCollectionEquality().hash(_this.favoriteDjs),_this.dateLookingFor,_this.crewSize,_this.superLikedMe,_this.hereNow]);
+  return Object.hashAll([runtimeType,_this.id,_this.firstName,_this.age,_this.city,_this.state,_this.occupation,_this.bio,_this.gender,_this.isVerified,const DeepCollectionEquality().hash(_this.musicGenres),const DeepCollectionEquality().hash(_this.photoPaths),const DeepCollectionEquality().hash(_this.commonEvents),_this.commonEventCount,_this.isFallback,_this.distanceKm,const DeepCollectionEquality().hash(_this.favoriteDjs),_this.dateLookingFor,_this.crewSize,_this.superLikedMe]);
 }
 
 @override
 String toString() {
   final _this = this as DiscoverCandidate;
-  return 'DiscoverCandidate(id: ${_this.id}, firstName: ${_this.firstName}, age: ${_this.age}, city: ${_this.city}, state: ${_this.state}, occupation: ${_this.occupation}, bio: ${_this.bio}, gender: ${_this.gender}, isVerified: ${_this.isVerified}, musicGenres: ${_this.musicGenres}, photoPaths: ${_this.photoPaths}, commonEvents: ${_this.commonEvents}, commonEventCount: ${_this.commonEventCount}, isFallback: ${_this.isFallback}, distanceKm: ${_this.distanceKm}, favoriteDjs: ${_this.favoriteDjs}, dateLookingFor: ${_this.dateLookingFor}, crewSize: ${_this.crewSize}, superLikedMe: ${_this.superLikedMe}, hereNow: ${_this.hereNow})';
+  return 'DiscoverCandidate(id: ${_this.id}, firstName: ${_this.firstName}, age: ${_this.age}, city: ${_this.city}, state: ${_this.state}, occupation: ${_this.occupation}, bio: ${_this.bio}, gender: ${_this.gender}, isVerified: ${_this.isVerified}, musicGenres: ${_this.musicGenres}, photoPaths: ${_this.photoPaths}, commonEvents: ${_this.commonEvents}, commonEventCount: ${_this.commonEventCount}, isFallback: ${_this.isFallback}, distanceKm: ${_this.distanceKm}, favoriteDjs: ${_this.favoriteDjs}, dateLookingFor: ${_this.dateLookingFor}, crewSize: ${_this.crewSize}, superLikedMe: ${_this.superLikedMe})';
 }
 
 
@@ -334,7 +333,7 @@ abstract mixin class $DiscoverCandidateCopyWith<$Res>  {
   factory $DiscoverCandidateCopyWith(DiscoverCandidate value, $Res Function(DiscoverCandidate) _then) = _$DiscoverCandidateCopyWithImpl;
 @useResult
 $Res call({
- String id, String firstName, int age, String? city, String? state, String? occupation, String? bio, Gender? gender, bool isVerified, List<MusicGenre> musicGenres, List<String> photoPaths, List<CommonEvent> commonEvents, int commonEventCount, bool isFallback, double? distanceKm, List<String> favoriteDjs, DateIntent? dateLookingFor, int? crewSize, bool superLikedMe, bool hereNow
+ String id, String firstName, int age, String? city, String? state, String? occupation, String? bio, Gender? gender, bool isVerified, List<MusicGenre> musicGenres, List<String> photoPaths, List<CommonEvent> commonEvents, int commonEventCount, bool isFallback, double? distanceKm, List<String> favoriteDjs, DateIntent? dateLookingFor, int? crewSize, bool superLikedMe
 });
 
 
@@ -351,7 +350,7 @@ class _$DiscoverCandidateCopyWithImpl<$Res>
 
 /// Create a copy of DiscoverCandidate
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? firstName = null,Object? age = null,Object? city = freezed,Object? state = freezed,Object? occupation = freezed,Object? bio = freezed,Object? gender = freezed,Object? isVerified = null,Object? musicGenres = null,Object? photoPaths = null,Object? commonEvents = null,Object? commonEventCount = null,Object? isFallback = null,Object? distanceKm = freezed,Object? favoriteDjs = null,Object? dateLookingFor = freezed,Object? crewSize = freezed,Object? superLikedMe = null,Object? hereNow = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? firstName = null,Object? age = null,Object? city = freezed,Object? state = freezed,Object? occupation = freezed,Object? bio = freezed,Object? gender = freezed,Object? isVerified = null,Object? musicGenres = null,Object? photoPaths = null,Object? commonEvents = null,Object? commonEventCount = null,Object? isFallback = null,Object? distanceKm = freezed,Object? favoriteDjs = null,Object? dateLookingFor = freezed,Object? crewSize = freezed,Object? superLikedMe = null,}) {
   return _then(DiscoverCandidate(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
@@ -372,7 +371,6 @@ as double?,favoriteDjs: null == favoriteDjs ? _self.favoriteDjs : favoriteDjs //
 as List<String>,dateLookingFor: freezed == dateLookingFor ? _self.dateLookingFor : dateLookingFor // ignore: cast_nullable_to_non_nullable
 as DateIntent?,crewSize: freezed == crewSize ? _self.crewSize : crewSize // ignore: cast_nullable_to_non_nullable
 as int?,superLikedMe: null == superLikedMe ? _self.superLikedMe : superLikedMe // ignore: cast_nullable_to_non_nullable
-as bool,hereNow: null == hereNow ? _self.hereNow : hereNow // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -458,10 +456,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String firstName,  int age,  String? city,  String? state,  String? occupation,  String? bio,  Gender? gender,  bool isVerified,  List<MusicGenre> musicGenres,  List<String> photoPaths,  List<CommonEvent> commonEvents,  int commonEventCount,  bool isFallback,  double? distanceKm,  List<String> favoriteDjs,  DateIntent? dateLookingFor,  int? crewSize,  bool superLikedMe,  bool hereNow)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String firstName,  int age,  String? city,  String? state,  String? occupation,  String? bio,  Gender? gender,  bool isVerified,  List<MusicGenre> musicGenres,  List<String> photoPaths,  List<CommonEvent> commonEvents,  int commonEventCount,  bool isFallback,  double? distanceKm,  List<String> favoriteDjs,  DateIntent? dateLookingFor,  int? crewSize,  bool superLikedMe)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DiscoverCandidate() when $default != null:
-return $default(_that.id,_that.firstName,_that.age,_that.city,_that.state,_that.occupation,_that.bio,_that.gender,_that.isVerified,_that.musicGenres,_that.photoPaths,_that.commonEvents,_that.commonEventCount,_that.isFallback,_that.distanceKm,_that.favoriteDjs,_that.dateLookingFor,_that.crewSize,_that.superLikedMe,_that.hereNow);case _:
+return $default(_that.id,_that.firstName,_that.age,_that.city,_that.state,_that.occupation,_that.bio,_that.gender,_that.isVerified,_that.musicGenres,_that.photoPaths,_that.commonEvents,_that.commonEventCount,_that.isFallback,_that.distanceKm,_that.favoriteDjs,_that.dateLookingFor,_that.crewSize,_that.superLikedMe);case _:
   return orElse();
 
 }
@@ -479,10 +477,10 @@ return $default(_that.id,_that.firstName,_that.age,_that.city,_that.state,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String firstName,  int age,  String? city,  String? state,  String? occupation,  String? bio,  Gender? gender,  bool isVerified,  List<MusicGenre> musicGenres,  List<String> photoPaths,  List<CommonEvent> commonEvents,  int commonEventCount,  bool isFallback,  double? distanceKm,  List<String> favoriteDjs,  DateIntent? dateLookingFor,  int? crewSize,  bool superLikedMe,  bool hereNow)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String firstName,  int age,  String? city,  String? state,  String? occupation,  String? bio,  Gender? gender,  bool isVerified,  List<MusicGenre> musicGenres,  List<String> photoPaths,  List<CommonEvent> commonEvents,  int commonEventCount,  bool isFallback,  double? distanceKm,  List<String> favoriteDjs,  DateIntent? dateLookingFor,  int? crewSize,  bool superLikedMe)  $default,) {final _that = this;
 switch (_that) {
 case _DiscoverCandidate():
-return $default(_that.id,_that.firstName,_that.age,_that.city,_that.state,_that.occupation,_that.bio,_that.gender,_that.isVerified,_that.musicGenres,_that.photoPaths,_that.commonEvents,_that.commonEventCount,_that.isFallback,_that.distanceKm,_that.favoriteDjs,_that.dateLookingFor,_that.crewSize,_that.superLikedMe,_that.hereNow);case _:
+return $default(_that.id,_that.firstName,_that.age,_that.city,_that.state,_that.occupation,_that.bio,_that.gender,_that.isVerified,_that.musicGenres,_that.photoPaths,_that.commonEvents,_that.commonEventCount,_that.isFallback,_that.distanceKm,_that.favoriteDjs,_that.dateLookingFor,_that.crewSize,_that.superLikedMe);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -499,10 +497,10 @@ return $default(_that.id,_that.firstName,_that.age,_that.city,_that.state,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String firstName,  int age,  String? city,  String? state,  String? occupation,  String? bio,  Gender? gender,  bool isVerified,  List<MusicGenre> musicGenres,  List<String> photoPaths,  List<CommonEvent> commonEvents,  int commonEventCount,  bool isFallback,  double? distanceKm,  List<String> favoriteDjs,  DateIntent? dateLookingFor,  int? crewSize,  bool superLikedMe,  bool hereNow)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String firstName,  int age,  String? city,  String? state,  String? occupation,  String? bio,  Gender? gender,  bool isVerified,  List<MusicGenre> musicGenres,  List<String> photoPaths,  List<CommonEvent> commonEvents,  int commonEventCount,  bool isFallback,  double? distanceKm,  List<String> favoriteDjs,  DateIntent? dateLookingFor,  int? crewSize,  bool superLikedMe)?  $default,) {final _that = this;
 switch (_that) {
 case _DiscoverCandidate() when $default != null:
-return $default(_that.id,_that.firstName,_that.age,_that.city,_that.state,_that.occupation,_that.bio,_that.gender,_that.isVerified,_that.musicGenres,_that.photoPaths,_that.commonEvents,_that.commonEventCount,_that.isFallback,_that.distanceKm,_that.favoriteDjs,_that.dateLookingFor,_that.crewSize,_that.superLikedMe,_that.hereNow);case _:
+return $default(_that.id,_that.firstName,_that.age,_that.city,_that.state,_that.occupation,_that.bio,_that.gender,_that.isVerified,_that.musicGenres,_that.photoPaths,_that.commonEvents,_that.commonEventCount,_that.isFallback,_that.distanceKm,_that.favoriteDjs,_that.dateLookingFor,_that.crewSize,_that.superLikedMe);case _:
   return null;
 
 }
@@ -514,7 +512,7 @@ return $default(_that.id,_that.firstName,_that.age,_that.city,_that.state,_that.
 @JsonSerializable()
 
 class _DiscoverCandidate extends DiscoverCandidate {
-  const _DiscoverCandidate({required this.id, required this.firstName, required this.age, this.city, this.state, this.occupation, this.bio, this.gender, this.isVerified = false,  List<MusicGenre> musicGenres = const [],  List<String> photoPaths = const [],  List<CommonEvent> commonEvents = const [], this.commonEventCount = 0, this.isFallback = false, this.distanceKm,  List<String> favoriteDjs = const [], this.dateLookingFor, this.crewSize, this.superLikedMe = false, this.hereNow = false}): _musicGenres = musicGenres,_photoPaths = photoPaths,_commonEvents = commonEvents,_favoriteDjs = favoriteDjs,super._();
+  const _DiscoverCandidate({required this.id, required this.firstName, required this.age, this.city, this.state, this.occupation, this.bio, this.gender, this.isVerified = false,  List<MusicGenre> musicGenres = const [],  List<String> photoPaths = const [],  List<CommonEvent> commonEvents = const [], this.commonEventCount = 0, this.isFallback = false, this.distanceKm,  List<String> favoriteDjs = const [], this.dateLookingFor, this.crewSize, this.superLikedMe = false}): _musicGenres = musicGenres,_photoPaths = photoPaths,_commonEvents = commonEvents,_favoriteDjs = favoriteDjs,super._();
   factory _DiscoverCandidate.fromJson(Map<String, dynamic> json) => _$DiscoverCandidateFromJson(json);
 
 @override final  String id;
@@ -563,8 +561,6 @@ class _DiscoverCandidate extends DiscoverCandidate {
 @override final  int? crewSize;
 /// They superliked the viewer (plans).
 @override@JsonKey() final  bool superLikedMe;
-/// At the same party as the viewer right now (Modo Hoje).
-@override@JsonKey() final  bool hereNow;
 
 /// Create a copy of DiscoverCandidate
 /// with the given fields replaced by the non-null parameter values.
@@ -579,18 +575,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _DiscoverCandidate&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.age, age) || other.age == age)&&(identical(other.city, city) || other.city == city)&&(identical(other.state, state) || other.state == state)&&(identical(other.occupation, occupation) || other.occupation == occupation)&&(identical(other.bio, bio) || other.bio == bio)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.isVerified, isVerified) || other.isVerified == isVerified)&&const DeepCollectionEquality().equals(other.musicGenres, _musicGenres)&&const DeepCollectionEquality().equals(other.photoPaths, _photoPaths)&&const DeepCollectionEquality().equals(other.commonEvents, _commonEvents)&&(identical(other.commonEventCount, commonEventCount) || other.commonEventCount == commonEventCount)&&(identical(other.isFallback, isFallback) || other.isFallback == isFallback)&&(identical(other.distanceKm, distanceKm) || other.distanceKm == distanceKm)&&const DeepCollectionEquality().equals(other.favoriteDjs, _favoriteDjs)&&(identical(other.dateLookingFor, dateLookingFor) || other.dateLookingFor == dateLookingFor)&&(identical(other.crewSize, crewSize) || other.crewSize == crewSize)&&(identical(other.superLikedMe, superLikedMe) || other.superLikedMe == superLikedMe)&&(identical(other.hereNow, hereNow) || other.hereNow == hereNow));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _DiscoverCandidate&&(identical(other.id, id) || other.id == id)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.age, age) || other.age == age)&&(identical(other.city, city) || other.city == city)&&(identical(other.state, state) || other.state == state)&&(identical(other.occupation, occupation) || other.occupation == occupation)&&(identical(other.bio, bio) || other.bio == bio)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.isVerified, isVerified) || other.isVerified == isVerified)&&const DeepCollectionEquality().equals(other.musicGenres, _musicGenres)&&const DeepCollectionEquality().equals(other.photoPaths, _photoPaths)&&const DeepCollectionEquality().equals(other.commonEvents, _commonEvents)&&(identical(other.commonEventCount, commonEventCount) || other.commonEventCount == commonEventCount)&&(identical(other.isFallback, isFallback) || other.isFallback == isFallback)&&(identical(other.distanceKm, distanceKm) || other.distanceKm == distanceKm)&&const DeepCollectionEquality().equals(other.favoriteDjs, _favoriteDjs)&&(identical(other.dateLookingFor, dateLookingFor) || other.dateLookingFor == dateLookingFor)&&(identical(other.crewSize, crewSize) || other.crewSize == crewSize)&&(identical(other.superLikedMe, superLikedMe) || other.superLikedMe == superLikedMe));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hashAll([runtimeType,id,firstName,age,city,state,occupation,bio,gender,isVerified,const DeepCollectionEquality().hash(_musicGenres),const DeepCollectionEquality().hash(_photoPaths),const DeepCollectionEquality().hash(_commonEvents),commonEventCount,isFallback,distanceKm,const DeepCollectionEquality().hash(_favoriteDjs),dateLookingFor,crewSize,superLikedMe,hereNow]);
+    return Object.hashAll([runtimeType,id,firstName,age,city,state,occupation,bio,gender,isVerified,const DeepCollectionEquality().hash(_musicGenres),const DeepCollectionEquality().hash(_photoPaths),const DeepCollectionEquality().hash(_commonEvents),commonEventCount,isFallback,distanceKm,const DeepCollectionEquality().hash(_favoriteDjs),dateLookingFor,crewSize,superLikedMe]);
 }
 
 @override
 String toString() {
-    return 'DiscoverCandidate(id: $id, firstName: $firstName, age: $age, city: $city, state: $state, occupation: $occupation, bio: $bio, gender: $gender, isVerified: $isVerified, musicGenres: $musicGenres, photoPaths: $photoPaths, commonEvents: $commonEvents, commonEventCount: $commonEventCount, isFallback: $isFallback, distanceKm: $distanceKm, favoriteDjs: $favoriteDjs, dateLookingFor: $dateLookingFor, crewSize: $crewSize, superLikedMe: $superLikedMe, hereNow: $hereNow)';
+    return 'DiscoverCandidate(id: $id, firstName: $firstName, age: $age, city: $city, state: $state, occupation: $occupation, bio: $bio, gender: $gender, isVerified: $isVerified, musicGenres: $musicGenres, photoPaths: $photoPaths, commonEvents: $commonEvents, commonEventCount: $commonEventCount, isFallback: $isFallback, distanceKm: $distanceKm, favoriteDjs: $favoriteDjs, dateLookingFor: $dateLookingFor, crewSize: $crewSize, superLikedMe: $superLikedMe)';
 }
 
 
@@ -601,7 +597,7 @@ abstract mixin class _$DiscoverCandidateCopyWith<$Res> implements $DiscoverCandi
   factory _$DiscoverCandidateCopyWith(_DiscoverCandidate value, $Res Function(_DiscoverCandidate) _then) = __$DiscoverCandidateCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String firstName, int age, String? city, String? state, String? occupation, String? bio, Gender? gender, bool isVerified, List<MusicGenre> musicGenres, List<String> photoPaths, List<CommonEvent> commonEvents, int commonEventCount, bool isFallback, double? distanceKm, List<String> favoriteDjs, DateIntent? dateLookingFor, int? crewSize, bool superLikedMe, bool hereNow
+ String id, String firstName, int age, String? city, String? state, String? occupation, String? bio, Gender? gender, bool isVerified, List<MusicGenre> musicGenres, List<String> photoPaths, List<CommonEvent> commonEvents, int commonEventCount, bool isFallback, double? distanceKm, List<String> favoriteDjs, DateIntent? dateLookingFor, int? crewSize, bool superLikedMe
 });
 
 
@@ -618,7 +614,7 @@ class __$DiscoverCandidateCopyWithImpl<$Res>
 
 /// Create a copy of DiscoverCandidate
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? firstName = null,Object? age = null,Object? city = freezed,Object? state = freezed,Object? occupation = freezed,Object? bio = freezed,Object? gender = freezed,Object? isVerified = null,Object? musicGenres = null,Object? photoPaths = null,Object? commonEvents = null,Object? commonEventCount = null,Object? isFallback = null,Object? distanceKm = freezed,Object? favoriteDjs = null,Object? dateLookingFor = freezed,Object? crewSize = freezed,Object? superLikedMe = null,Object? hereNow = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? firstName = null,Object? age = null,Object? city = freezed,Object? state = freezed,Object? occupation = freezed,Object? bio = freezed,Object? gender = freezed,Object? isVerified = null,Object? musicGenres = null,Object? photoPaths = null,Object? commonEvents = null,Object? commonEventCount = null,Object? isFallback = null,Object? distanceKm = freezed,Object? favoriteDjs = null,Object? dateLookingFor = freezed,Object? crewSize = freezed,Object? superLikedMe = null,}) {
   return _then(_DiscoverCandidate(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
@@ -639,7 +635,6 @@ as double?,favoriteDjs: null == favoriteDjs ? _self._favoriteDjs : favoriteDjs /
 as List<String>,dateLookingFor: freezed == dateLookingFor ? _self.dateLookingFor : dateLookingFor // ignore: cast_nullable_to_non_nullable
 as DateIntent?,crewSize: freezed == crewSize ? _self.crewSize : crewSize // ignore: cast_nullable_to_non_nullable
 as int?,superLikedMe: null == superLikedMe ? _self.superLikedMe : superLikedMe // ignore: cast_nullable_to_non_nullable
-as bool,hereNow: null == hereNow ? _self.hereNow : hereNow // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

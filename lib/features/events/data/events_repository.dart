@@ -245,46 +245,6 @@ class EventsRepository {
     if (status == EventStatus.rejected) 'rejection_reason': rejectionReason,
   });
 
-  /// "Tô na festa" (also marks "Vou"). Opens 2 h before the start.
-  Future<void> checkIn(String eventId) => guardFailures(
-    () => _client.rpc<void>('check_in', params: {'p_event_id': eventId}),
-  );
-
-  Future<void> checkOut(String eventId) => guardFailures(
-    () => _client.rpc<void>('check_out', params: {'p_event_id': eventId}),
-  );
-
-  /// Whether the user is checked in there now.
-  Future<bool> isCheckedIn(String userId, String eventId) =>
-      guardFailures(() async {
-        final rows = await _client
-            .from('event_checkins')
-            .select('checked_out_at')
-            .eq('event_id', eventId)
-            .eq('user_id', userId)
-            .isFilter('checked_out_at', null);
-        return rows.isNotEmpty;
-      });
-
-  Future<int> hereCount(String eventId) => guardFailures(
-    () => _client.rpc<int>(
-      'get_event_here_count',
-      params: {'p_event_id': eventId},
-    ),
-  );
-
-  /// Matches and crew mates there (only once checked in).
-  Future<List<HereFriend>> hereFriends(String eventId) =>
-      guardFailures(() async {
-        final rows = await _client.rpc<List<dynamic>>(
-          'get_event_here_friends',
-          params: {'p_event_id': eventId},
-        );
-        return rows
-            .map((r) => HereFriend.fromJson(r as Map<String, dynamic>))
-            .toList();
-      });
-
   /// Counts a "Comprar ingresso" tap (deduplicated by the database).
   Future<void> logTicketClick(String eventId) => guardFailures(
     () =>

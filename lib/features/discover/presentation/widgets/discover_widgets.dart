@@ -63,16 +63,6 @@ class CandidateCard extends StatelessWidget {
           )
         : null;
 
-    // At the same party right now (Modo Hoje).
-    final hereChip = c.hereNow
-        ? Padding(
-            padding: EdgeInsets.only(bottom: spacing.sm),
-            child: _EventChip(
-              accent: colors.magenta,
-              text: l10n.discoverHereNow,
-            ),
-          )
-        : null;
     // They superliked the viewer (shown first in the deck).
     final superChip = c.superLikedMe
         ? Padding(
@@ -122,7 +112,6 @@ class CandidateCard extends StatelessWidget {
     final crewSize = c.crewSize;
     final details = isCrew
         ? <Widget>[
-            ?hereChip,
             ?superChip,
             ?vibeChip,
             nameRow,
@@ -181,7 +170,6 @@ class CandidateCard extends StatelessWidget {
             ],
           ]
         : <Widget>[
-            ?hereChip,
             ?superChip,
             ?vibeChip,
             if (firstEvent != null)

@@ -23,7 +23,6 @@ import 'package:pulse/features/events/domain/event.dart';
 import 'package:pulse/features/events/presentation/events_providers.dart';
 import 'package:pulse/features/events/presentation/widgets/event_location.dart';
 import 'package:pulse/features/events/presentation/widgets/event_visuals.dart';
-import 'package:pulse/features/events/presentation/widgets/tonight_card.dart';
 import 'package:pulse/features/profile/presentation/profile_labels.dart';
 import 'package:pulse/features/profile/presentation/widgets/profile_photo_image.dart';
 import 'package:pulse/features/safety/domain/safety_models.dart';
@@ -289,12 +288,6 @@ class _EventDetailBody extends ConsumerWidget {
               SizedBox(height: spacing.lg),
               if (event.status == EventStatus.approved && !hasEnded)
                 _GoingButton(eventId: event.id),
-              // The party night: check in and see who's here.
-              if (event.status == EventStatus.approved &&
-                  TonightCard.isTonight(event, DateTime.now())) ...[
-                SizedBox(height: spacing.sm),
-                TonightCard(event: event),
-              ],
               if (ticketUrl != null) ...[
                 SizedBox(height: spacing.sm),
                 OutlinedButton.icon(

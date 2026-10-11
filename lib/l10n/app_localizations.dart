@@ -4291,13 +4291,13 @@ abstract class AppLocalizations {
   /// No description provided for @planFeatureHeadline.
   ///
   /// In pt, this message translates to:
-  /// **'{feature, select, likes{Curta sem limite} rewind{Voltar é do Pulse+} superlikes{Mais superlikes} travel{Vai viajar? Chegue conhecendo gente} likedYou{Veja quem curtiu você} boost{Apareça primeiro} incognito{Modo discreto} sameNight{Mesmo rolê} other{Pulse+ e Pulse Black}}'**
+  /// **'{feature, select, likes{Curta sem limite} rewind{Voltar é do Pulse+} superlikes{Mais superlikes} travel{Vai viajar? Chegue conhecendo gente} likedYou{Veja quem curtiu você} boost{Apareça primeiro} incognito{Modo discreto} other{Pulse+ e Pulse Black}}'**
   String planFeatureHeadline(String feature);
 
   /// No description provided for @planFeaturePitch.
   ///
   /// In pt, this message translates to:
-  /// **'{feature, select, likes{Seus likes de hoje acabaram. Com o Pulse+ você curte quantas pessoas quiser.} rewind{Passou sem querer? Com o Pulse+ você volta o último swipe.} superlikes{Superlikes avisam que você curtiu e te colocam no topo. Assine ou compre um pacote.} travel{Com o modo viagem você descobre gente da cidade ou do festival antes de chegar.} likedYou{Com o Pulse Black você vê quem já curtiu você e dá match na hora.} boost{O boost te coloca no topo do Descobrir por 30 minutos, ideal na noite da festa.} incognito{Com o Pulse Black só te vê quem você curtiu.} sameNight{Com o Pulse Black você vê quem estava na festa com você e pode dar match no dia seguinte.} other{Conheça os planos do Pulse.}}'**
+  /// **'{feature, select, likes{Seus likes de hoje acabaram. Com o Pulse+ você curte quantas pessoas quiser.} rewind{Passou sem querer? Com o Pulse+ você volta o último swipe.} superlikes{Superlikes avisam que você curtiu e te colocam no topo. Assine ou compre um pacote.} travel{Com o modo viagem você descobre gente da cidade ou do festival antes de chegar.} likedYou{Com o Pulse Black você vê quem já curtiu você e dá match na hora.} boost{O boost te coloca no topo do Descobrir por 30 minutos, ideal na noite da festa.} incognito{Com o Pulse Black só te vê quem você curtiu.} other{Conheça os planos do Pulse.}}'**
   String planFeaturePitch(String feature);
 
   /// No description provided for @likesYouTitle.
@@ -4834,72 +4834,6 @@ abstract class AppLocalizations {
   /// **'Motivo (a pessoa vê)'**
   String get adminVerificationRejectHint;
 
-  /// No description provided for @tonightTitle.
-  ///
-  /// In pt, this message translates to:
-  /// **'Hoje tem festa!'**
-  String get tonightTitle;
-
-  /// No description provided for @tonightCheckedIn.
-  ///
-  /// In pt, this message translates to:
-  /// **'Você está na festa 🔥'**
-  String get tonightCheckedIn;
-
-  /// No description provided for @tonightHereCount.
-  ///
-  /// In pt, this message translates to:
-  /// **'{count, plural, =0{Ninguém do Pulse fez check-in ainda} =1{1 pessoa do Pulse aqui agora} other{{count} pessoas do Pulse aqui agora}}'**
-  String tonightHereCount(int count);
-
-  /// No description provided for @tonightCheckIn.
-  ///
-  /// In pt, this message translates to:
-  /// **'Tô na festa'**
-  String get tonightCheckIn;
-
-  /// No description provided for @tonightCheckInHint.
-  ///
-  /// In pt, this message translates to:
-  /// **'Seus matches e sua crew veem que você chegou. Ninguém vê sua localização.'**
-  String get tonightCheckInHint;
-
-  /// No description provided for @tonightCheckOut.
-  ///
-  /// In pt, this message translates to:
-  /// **'Saí da festa'**
-  String get tonightCheckOut;
-
-  /// No description provided for @tonightNoFriends.
-  ///
-  /// In pt, this message translates to:
-  /// **'Nenhum match ou crew por aqui ainda.'**
-  String get tonightNoFriends;
-
-  /// No description provided for @tonightCrewMate.
-  ///
-  /// In pt, this message translates to:
-  /// **'Crew'**
-  String get tonightCrewMate;
-
-  /// No description provided for @tonightMatch.
-  ///
-  /// In pt, this message translates to:
-  /// **'Match'**
-  String get tonightMatch;
-
-  /// No description provided for @errorCheckinClosed.
-  ///
-  /// In pt, this message translates to:
-  /// **'O check-in abre 2 horas antes da festa.'**
-  String get errorCheckinClosed;
-
-  /// No description provided for @discoverHereNow.
-  ///
-  /// In pt, this message translates to:
-  /// **'Tá na festa agora 🔥'**
-  String get discoverHereNow;
-
   /// No description provided for @crewMeetingPoint.
   ///
   /// In pt, this message translates to:
@@ -4923,54 +4857,6 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Editar ponto de encontro'**
   String get crewMeetingPointEdit;
-
-  /// No description provided for @sameNightTitle.
-  ///
-  /// In pt, this message translates to:
-  /// **'Mesmo rolê'**
-  String get sameNightTitle;
-
-  /// No description provided for @sameNightCount.
-  ///
-  /// In pt, this message translates to:
-  /// **'{count, plural, =1{1 pessoa estava na festa com você} other{{count} pessoas estavam na festa com você}}'**
-  String sameNightCount(int count);
-
-  /// No description provided for @sameNightEmpty.
-  ///
-  /// In pt, this message translates to:
-  /// **'Ninguém da última festa por aqui'**
-  String get sameNightEmpty;
-
-  /// No description provided for @sameNightExplain.
-  ///
-  /// In pt, this message translates to:
-  /// **'Nas 24 horas depois de uma festa em que você fez check-in, aparecem aqui as pessoas que também estavam lá.'**
-  String get sameNightExplain;
-
-  /// No description provided for @sameNightUnlock.
-  ///
-  /// In pt, this message translates to:
-  /// **'Ver quem são com o Pulse Black'**
-  String get sameNightUnlock;
-
-  /// No description provided for @sameNightWasAt.
-  ///
-  /// In pt, this message translates to:
-  /// **'Estava no {event}'**
-  String sameNightWasAt(String event);
-
-  /// No description provided for @sameNightBanner.
-  ///
-  /// In pt, this message translates to:
-  /// **'{count, plural, =1{1 pessoa do seu último rolê. Ver quem} other{{count} pessoas do seu último rolê. Ver quem}}'**
-  String sameNightBanner(int count);
-
-  /// No description provided for @planBenefitSameNight.
-  ///
-  /// In pt, this message translates to:
-  /// **'Mesmo rolê: veja quem estava na festa com você'**
-  String get planBenefitSameNight;
 }
 
 class _AppLocalizationsDelegate

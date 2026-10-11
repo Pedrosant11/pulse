@@ -184,20 +184,3 @@ abstract class EventFilters with _$EventFilters {
 }
 
 enum EventDateRange { any, today, weekend, next30Days }
-
-/// A match or crew mate at the party right now (`get_event_here_friends`).
-@freezed
-abstract class HereFriend with _$HereFriend {
-  const factory({
-    required String userId,
-    required String firstName,
-    required String relation,
-    String? photoPath,
-  }) = _HereFriend;
-
-  const new _();
-
-  factory fromJson(Map<String, dynamic> json) => _$HereFriendFromJson(json);
-
-  bool get isCrew => relation == 'crew';
-}
