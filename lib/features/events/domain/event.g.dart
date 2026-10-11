@@ -82,6 +82,7 @@ _EventListEntry _$EventListEntryFromJson(Map<String, dynamic> json) =>
       locationRevealAt: json['location_reveal_at'] == null
           ? null
           : DateTime.parse(json['location_reveal_at'] as String),
+      isFeatured: json['is_featured'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$EventListEntryToJson(_EventListEntry instance) =>
@@ -105,6 +106,7 @@ Map<String, dynamic> _$EventListEntryToJson(_EventListEntry instance) =>
       'pin_lng': instance.pinLng,
       'pin_exact': instance.pinExact,
       'location_reveal_at': instance.locationRevealAt?.toIso8601String(),
+      'is_featured': instance.isFeatured,
     };
 
 const _$EventStatusEnumMap = {
@@ -142,6 +144,9 @@ _EventDetail _$EventDetailFromJson(Map<String, dynamic> json) => _EventDetail(
   isOfficial: json['is_official'] as bool? ?? false,
   createdBy: json['created_by'] as String?,
   rejectionReason: json['rejection_reason'] as String?,
+  featuredUntil: json['featured_until'] == null
+      ? null
+      : DateTime.parse(json['featured_until'] as String),
 );
 
 Map<String, dynamic> _$EventDetailToJson(_EventDetail instance) =>
@@ -167,6 +172,7 @@ Map<String, dynamic> _$EventDetailToJson(_EventDetail instance) =>
       'is_official': instance.isOfficial,
       'created_by': instance.createdBy,
       'rejection_reason': instance.rejectionReason,
+      'featured_until': instance.featuredUntil?.toIso8601String(),
     };
 
 _EventVenue _$EventVenueFromJson(Map<String, dynamic> json) => _EventVenue(

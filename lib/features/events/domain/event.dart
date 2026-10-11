@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pulse/core/models/app_mode.dart';
 import 'package:pulse/core/models/user_role.dart';
+import 'package:pulse/core/utils/enum_json.dart';
 import 'package:pulse/features/profile/domain/profile_enums.dart';
 
 part 'event.freezed.dart';
@@ -56,6 +57,9 @@ abstract class EventListEntry with _$EventListEntry {
 
     /// Secret location: when the venue is revealed.
     DateTime? locationRevealAt,
+
+    /// Featured by an admin (paid by the producer): first in the list.
+    @Default(false) bool isFeatured,
   }) = _EventListEntry;
 
   factory fromJson(Map<String, dynamic> json) => _$EventListEntryFromJson(json);
@@ -92,6 +96,9 @@ abstract class EventDetail with _$EventDetail {
     @Default(false) bool isOfficial,
     String? createdBy,
     String? rejectionReason,
+
+    /// Featured until this moment (admins set it).
+    DateTime? featuredUntil,
   }) = _EventDetail;
 
   factory fromJson(Map<String, dynamic> json) => _$EventDetailFromJson(json);
@@ -184,3 +191,68 @@ abstract class EventFilters with _$EventFilters {
 }
 
 enum EventDateRange { any, today, weekend, next30Days }
+
+/// Aggregated numbers for the event's creator (`get_event_insights`).
+/// Breakdowns are empty below 5 people (nobody can be singled out).
+class EventInsights {
+  const new({
+    required this.going,
+    required this.goingDate,
+    required this.goingCrew,
+    required this.ticketClicks,
+    required this.crews,
+    required this.breakdownsHidden,
+    this.genres = const [],
+    this.cities = const [],
+    this.genders = const {},
+    this.ages = const {},
+  });
+
+  factory fromJson(Map<String, dynamic> json) {
+    int n(Object? v) => (v as num?)?.toInt() ?? 0;
+    return EventInsights(
+      going: n(json['going']),
+      goingDate: n(json['going_date']),
+      goingCrew: n(json['going_crew']),
+      ticketClicks: n(json['ticket_clicks']),
+      crews: n(json['crews']),
+      breakdownsHidden: json['breakdowns_hidden'] == true,
+      genres: [
+        for (final g in (json['genres'] as List?) ?? const [])
+          (
+            genre: MusicGenre.values
+                .where((v) => enumToDb(v) == (g as Map)['genre'])
+                .firstOrNull,
+            count: n((g as Map)['count']),
+          ),
+      ],
+      cities: [
+        for (final c in (json['cities'] as List?) ?? const [])
+          (label: '${(c as Map)['city']}, ${c['state']}', count: n(c['count'])),
+      ],
+      genders: {
+        for (final e in ((json['genders'] as Map?) ?? const {}).entries)
+          e.key as String: n(e.value),
+      },
+      ages: {
+        for (final e in ((json['ages'] as Map?) ?? const {}).entries)
+          e.key as String: n(e.value),
+      },
+    );
+  }
+
+  final int going;
+  final int goingDate;
+  final int goingCrew;
+  final int ticketClicks;
+  final int crews;
+  final bool breakdownsHidden;
+  final List<({MusicGenre? genre, int count})> genres;
+  final List<({String label, int count})> cities;
+
+  /// Database gender value (or "unknown") → people.
+  final Map<String, int> genders;
+
+  /// "18_24", "25_34", "35_plus" → people.
+  final Map<String, int> ages;
+}

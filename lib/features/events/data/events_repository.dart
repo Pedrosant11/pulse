@@ -245,18 +245,27 @@ class EventsRepository {
     if (status == EventStatus.rejected) 'rejection_reason': rejectionReason,
   });
 
+  /// Admins only; [days] null removes the highlight.
+  Future<void> feature(String eventId, {int? days}) => guardFailures(
+    () => _client.rpc<void>(
+      'admin_feature_event',
+      params: {'p_event_id': eventId, 'p_days': days},
+    ),
+  );
+
+  /// Creator and moderators only.
+  Future<EventInsights> insights(String eventId) => guardFailures(() async {
+    final json = await _client.rpc<Map<String, dynamic>>(
+      'get_event_insights',
+      params: {'p_event_id': eventId},
+    );
+    return EventInsights.fromJson(json);
+  });
+
   /// Counts a "Comprar ingresso" tap (deduplicated by the database).
   Future<void> logTicketClick(String eventId) => guardFailures(
     () =>
         _client.rpc<void>('log_ticket_click', params: {'p_event_id': eventId}),
-  );
-
-  /// Creator and moderators only (0 for others).
-  Future<int> ticketClickCount(String eventId) => guardFailures(
-    () => _client.rpc<int>(
-      'get_ticket_click_count',
-      params: {'p_event_id': eventId},
-    ),
   );
 }
 

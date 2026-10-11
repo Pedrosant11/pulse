@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:pulse/app/routes.dart';
+import 'package:pulse/core/errors/app_failure_message.dart';
 import 'package:pulse/core/extensions/context_extensions.dart';
 import 'package:pulse/core/models/user_role.dart';
 import 'package:pulse/core/widgets/form_error_text.dart';
@@ -125,6 +126,34 @@ class _EventDetailBody extends ConsumerWidget {
         .setStatus(event.id, EventStatus.cancelled);
   }
 
+  /// Admin: feature for some days (paid by the producer) or remove it.
+  Future<void> _feature(BuildContext context, WidgetRef ref) async {
+    final l10n = context.l10n;
+    if (event.featuredUntil?.isAfter(DateTime.now()) ?? false) {
+      await ref.read(featureEditorProvider.notifier).feature(event.id);
+      return;
+    }
+    final days = await showDialog<int>(
+      context: context,
+      builder: (context) => SimpleDialog(
+        title: Text(l10n.eventFeatureTitle),
+        children: [
+          for (final days in const [3, 7, 14, 30])
+            SimpleDialogOption(
+              onPressed: () => Navigator.pop(context, days),
+              child: Text(l10n.eventFeatureDays(days)),
+            ),
+        ],
+      ),
+    );
+    // Read after the dialog (the controller is kept alive by build).
+    if (days != null) {
+      await ref
+          .read(featureEditorProvider.notifier)
+          .feature(event.id, days: days);
+    }
+  }
+
   Future<void> _openTicket(BuildContext context, String url) async {
     final opened = await launchUrl(
       Uri.parse(url),
@@ -144,6 +173,15 @@ class _EventDetailBody extends ConsumerWidget {
     final role = ref.watch(currentRoleProvider);
     final userId = ref.watch(currentUserIdProvider);
     final editor = ref.watch(eventEditorProvider);
+    // Keeps the admin highlight controller alive across its dialog and
+    // reports its errors.
+    ref.listen(featureEditorProvider, (_, next) {
+      if (next case AsyncError(:final error)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(friendlyErrorMessage(error, l10n))),
+        );
+      }
+    });
     final isCreator = event.createdBy != null && event.createdBy == userId;
     // UI hints only; the database decides (can_edit_event / guard trigger).
     final canEdit =
@@ -157,6 +195,7 @@ class _EventDetailBody extends ConsumerWidget {
         event.status != EventStatus.rejected;
     final canReport = !isCreator && event.status == EventStatus.approved;
     final hasEnded = event.endsAt.isBefore(DateTime.now());
+    final isFeatured = event.featuredUntil?.isAfter(DateTime.now()) ?? false;
     final ticketUrl = event.ticketUrl;
     final description = event.description;
 
@@ -181,15 +220,30 @@ class _EventDetailBody extends ConsumerWidget {
           expandedHeight: 260,
           backgroundColor: colors.background,
           actions: [
+            // Event panel: aggregated numbers (creator and moderators).
+            if (role.isModerator || isCreator)
+              IconButton(
+                tooltip: l10n.insightsTitle,
+                icon: const Icon(Icons.insights_rounded),
+                onPressed: () =>
+                    context.push(AppRoutes.eventInsights(event.id)),
+              ),
             if (canEdit)
               IconButton(
                 tooltip: l10n.eventEdit,
                 icon: const Icon(Icons.edit_outlined),
                 onPressed: () => context.push(AppRoutes.editEvent(event.id)),
               ),
-            if (canCancel || canReport)
+            if (canCancel || canReport || role.isAdmin)
               PopupMenuButton<void>(
                 itemBuilder: (_) => [
+                  if (role.isAdmin && event.status == EventStatus.approved)
+                    PopupMenuItem(
+                      onTap: () => _feature(context, ref),
+                      child: Text(
+                        isFeatured ? l10n.eventUnfeature : l10n.eventFeature,
+                      ),
+                    ),
                   if (canCancel)
                     PopupMenuItem(
                       onTap: () => _cancelEvent(context, ref),
@@ -308,8 +362,6 @@ class _EventDetailBody extends ConsumerWidget {
                   SizedBox(height: spacing.xs),
                   _CouponRow(coupon: coupon),
                 ],
-                if (role.isModerator || isCreator)
-                  _TicketClicks(eventId: event.id),
               ],
               if (event.status == EventStatus.approved && !hasEnded) ...[
                 SizedBox(height: spacing.md),
@@ -770,26 +822,6 @@ class _CouponRow extends StatelessWidget {
           icon: const Icon(Icons.copy_rounded, size: 18),
           label: Text(l10n.eventCouponCopy),
         ),
-      ),
-    );
-  }
-}
-
-/// How many people tapped "Comprar ingresso" (creator and moderators).
-class _TicketClicks extends ConsumerWidget {
-  const new({required this.eventId});
-
-  final String eventId;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final count = ref.watch(ticketClickCountProvider(eventId)).value;
-    if (count == null) return const SizedBox.shrink();
-    return Padding(
-      padding: EdgeInsets.only(top: context.spacing.xs),
-      child: Text(
-        context.l10n.eventTicketClicks(count),
-        style: context.textTheme.bodySmall,
       ),
     );
   }

@@ -913,8 +913,6 @@
   "eventCouponLabel": "Cupom de desconto",
   "eventCouponCopy": "Copiar",
   "eventCouponCopied": "Cupom copiado. Use na compra do ingresso.",
-  "eventTicketClicks": "{count, plural, =0{Ninguém tocou em Comprar ingresso ainda} =1{1 pessoa tocou em Comprar ingresso} other{{count} pessoas tocaram em Comprar ingresso}}",
-  "@eventTicketClicks": { "placeholders": { "count": { "type": "int" } } },
 
   "shareNightSubject": "Meu rolê",
   "shareNightIntro": "🛡️ Meu rolê (pelo Pulse):",
@@ -977,5 +975,28 @@
   "crewMeetingPoint": "Ponto de encontro",
   "crewMeetingPointHint": "Ex.: perto do bar do fundo, 1h",
   "crewMeetingPointEmpty": "Ninguém definiu ainda. Toque no lápis para combinar.",
-  "crewMeetingPointEdit": "Editar ponto de encontro"
+  "crewMeetingPointEdit": "Editar ponto de encontro",
+
+  "eventFeatured": "Destaque",
+  "eventFeature": "Destacar evento",
+  "eventUnfeature": "Remover destaque",
+  "eventFeatureTitle": "Destacar por quantos dias?",
+  "eventFeatureDays": "{days} dias",
+  "@eventFeatureDays": { "placeholders": { "days": { "type": "int" } } },
+  "insightsTitle": "Painel do evento",
+  "insightsGoing": "Pessoas vão",
+  "insightsTicketClicks": "Toques em Comprar ingresso",
+  "insightsGoingDate": "Vão no Date",
+  "insightsGoingCrew": "Vão no Crew",
+  "insightsCrews": "Crews formadas",
+  "insightsTooFew": "Os detalhes do público aparecem a partir de 5 pessoas confirmadas.",
+  "insightsGenres": "Estilos que o público curte",
+  "insightsCities": "De onde o público vem",
+  "insightsGender": "Gênero",
+  "insightsGenderUnknown": "Não informado",
+  "insightsAge": "Idade",
+  "insightsPrivacy": "Números agregados: ninguém é identificado.",
+  "insightsFeaturedUntil": "Em destaque até {date}",
+  "@insightsFeaturedUntil": { "placeholders": { "date": { "type": "String" } } },
+  "insightsFeatureHint": "Quer mais gente no seu evento? Fale com a equipe Pulse para destacá-lo."
 }

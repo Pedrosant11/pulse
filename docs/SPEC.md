@@ -439,6 +439,6 @@ Baseado na pesquisa de mercado (apps de relacionamento migrando para eventos pre
 2. ~~"Cheguei bem"~~ (descartado em 2026-10-10: complexo demais para o ganho).
 3. **Verificação por selfie** (feito): pose sorteada + selfie pela câmera, análise manual pelo admin (Painel → Verificações), selfie apagada após a decisão, aviso por push. Automatizar com reconhecimento facial depois, se o volume pedir.
 4. ~~Modo Hoje~~ (removido em 2026-10-10: deixava a tela do evento poluída). Ficou só o **ponto de encontro da crew** (feito). Check-in, "Tá na festa agora" e "Mesmo rolê" saíram junto.
-5. **Produtores**: evento em destaque (Pix, fora da loja), painel do produtor com números agregados (presenças, toques no ingresso, gêneros, cidades).
+5. **Produtores** (feito): evento em destaque liberado pelo admin (⋮ → Destacar evento, 3–30 dias; topo de "Próximos", selo "Destaque" e pin ciano maior no mapa). Painel do evento (ícone no topo do evento, para quem criou e moderadores): presenças (Date/Crew), toques no ingresso, crews, estilos, cidades, gênero e idade, com detalhes só a partir de 5 pessoas. Cobrança por Pix fica para quando houver CNPJ.
 6. **Planos**: semanal e anual com desconto, 3 dias de Black grátis no primeiro match. Sem curtidas falsas.
 7. **Crescimento**: QR code/link do evento (abre o evento no app), indicação com recompensa (superlikes/boosts), conexão com Spotify para gosto musical.

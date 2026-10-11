@@ -42,6 +42,7 @@ abstract final class AppRoutes {
 
   static String eventDetail(String eventId) => '$events/$eventId';
   static String editEvent(String eventId) => '$events/$eventId/edit';
+  static String eventInsights(String eventId) => '$events/$eventId/insights';
   static String conversation(String conversationId) => '$chats/$conversationId';
   static String editProfileSection(String section) => '$editProfile/$section';
   static String crew(String crewId) => '$crews/$crewId';

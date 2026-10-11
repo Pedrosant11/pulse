@@ -26,6 +26,7 @@ import 'package:pulse/features/discover/presentation/discover_screen.dart';
 import 'package:pulse/features/discover/presentation/match_screen.dart';
 import 'package:pulse/features/events/presentation/event_detail_screen.dart';
 import 'package:pulse/features/events/presentation/event_form_screen.dart';
+import 'package:pulse/features/events/presentation/event_insights_screen.dart';
 import 'package:pulse/features/events/presentation/events_screen.dart';
 import 'package:pulse/features/events/presentation/moderation_queue_screen.dart';
 import 'package:pulse/features/legal/domain/legal_document.dart';
@@ -137,6 +138,13 @@ GoRouter router(Ref ref) {
                         parentNavigatorKey: _rootNavigatorKey,
                         builder: (_, state) => EventFormScreen(
                           eventId: state.pathParameters['eventId'],
+                        ),
+                      ),
+                      GoRoute(
+                        path: 'insights',
+                        parentNavigatorKey: _rootNavigatorKey,
+                        builder: (_, state) => EventInsightsScreen(
+                          eventId: state.pathParameters['eventId']!,
                         ),
                       ),
                     ],

@@ -314,84 +314,6 @@ final class EventDetailFamily extends $Family
   String toString() => r'eventDetailProvider';
 }
 
-/// "Comprar ingresso" taps (creator and moderators).
-
-@ProviderFor(ticketClickCount)
-final ticketClickCountProvider = TicketClickCountFamily._();
-
-/// "Comprar ingresso" taps (creator and moderators).
-
-final class TicketClickCountProvider
-    extends $FunctionalProvider<AsyncValue<int>, int, FutureOr<int>>
-    with $FutureModifier<int>, $FutureProvider<int> {
-  /// "Comprar ingresso" taps (creator and moderators).
-  TicketClickCountProvider._({
-    required TicketClickCountFamily super.from,
-    required String super.argument,
-  }) : super(
-         retry: null,
-         name: r'ticketClickCountProvider',
-         isAutoDispose: true,
-         dependencies: null,
-         $allTransitiveDependencies: null,
-       );
-
-  @override
-  String debugGetCreateSourceHash() => _$ticketClickCountHash();
-
-  @override
-  String toString() {
-    return r'ticketClickCountProvider'
-        ''
-        '($argument)';
-  }
-
-  @$internal
-  @override
-  $FutureProviderElement<int> $createElement($ProviderPointer pointer) =>
-      $FutureProviderElement(pointer);
-
-  @override
-  FutureOr<int> create(Ref ref) {
-    final argument = this.argument as String;
-    return ticketClickCount(ref, argument);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is TicketClickCountProvider && other.argument == argument;
-  }
-
-  @override
-  int get hashCode {
-    return argument.hashCode;
-  }
-}
-
-String _$ticketClickCountHash() => r'fae218296d508268e496bab1c9d2225c60ac8c60';
-
-/// "Comprar ingresso" taps (creator and moderators).
-
-final class TicketClickCountFamily extends $Family
-    with $FunctionalFamilyOverride<FutureOr<int>, String> {
-  TicketClickCountFamily._()
-    : super(
-        retry: null,
-        name: r'ticketClickCountProvider',
-        dependencies: null,
-        $allTransitiveDependencies: null,
-        isAutoDispose: true,
-      );
-
-  /// "Comprar ingresso" taps (creator and moderators).
-
-  TicketClickCountProvider call(String eventId) =>
-      TicketClickCountProvider._(argument: eventId, from: this);
-
-  @override
-  String toString() => r'ticketClickCountProvider';
-}
-
 @ProviderFor(isAttending)
 final isAttendingProvider = IsAttendingFamily._();
 
@@ -1026,4 +948,131 @@ final class EventVenueFamily extends $Family
 
   @override
   String toString() => r'eventVenueProvider';
+}
+
+@ProviderFor(eventInsights)
+final eventInsightsProvider = EventInsightsFamily._();
+
+final class EventInsightsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<EventInsights>,
+          EventInsights,
+          FutureOr<EventInsights>
+        >
+    with $FutureModifier<EventInsights>, $FutureProvider<EventInsights> {
+  EventInsightsProvider._({
+    required EventInsightsFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'eventInsightsProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$eventInsightsHash();
+
+  @override
+  String toString() {
+    return r'eventInsightsProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<EventInsights> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<EventInsights> create(Ref ref) {
+    final argument = this.argument as String;
+    return eventInsights(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is EventInsightsProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$eventInsightsHash() => r'bd7aa04749251afce7cbfc1dad103636f7444db8';
+
+final class EventInsightsFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<EventInsights>, String> {
+  EventInsightsFamily._()
+    : super(
+        retry: null,
+        name: r'eventInsightsProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  EventInsightsProvider call(String eventId) =>
+      EventInsightsProvider._(argument: eventId, from: this);
+
+  @override
+  String toString() => r'eventInsightsProvider';
+}
+
+@ProviderFor(FeatureEditor)
+final featureEditorProvider = FeatureEditorProvider._();
+
+final class FeatureEditorProvider
+    extends $NotifierProvider<FeatureEditor, AsyncValue<void>> {
+  FeatureEditorProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'featureEditorProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$featureEditorHash();
+
+  @$internal
+  @override
+  FeatureEditor create() => FeatureEditor();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AsyncValue<void> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AsyncValue<void>>(value),
+    );
+  }
+}
+
+String _$featureEditorHash() => r'd959be1db5be50a5a3be49f030af43986d061df7';
+
+abstract class _$FeatureEditor extends $Notifier<AsyncValue<void>> {
+  AsyncValue<void> build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<void>, AsyncValue<void>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<void>, AsyncValue<void>>,
+              AsyncValue<void>,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
 }

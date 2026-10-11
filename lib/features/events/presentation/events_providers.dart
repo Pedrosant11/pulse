@@ -55,11 +55,6 @@ Future<List<EventListEntry>> eventList(Ref ref, EventListScope scope) {
 Future<EventDetail> eventDetail(Ref ref, String eventId) =>
     ref.watch(eventsRepositoryProvider).fetch(eventId);
 
-/// "Comprar ingresso" taps (creator and moderators).
-@riverpod
-Future<int> ticketClickCount(Ref ref, String eventId) =>
-    ref.watch(eventsRepositoryProvider).ticketClickCount(eventId);
-
 @riverpod
 Future<bool> isAttending(Ref ref, String eventId) => ref
     .watch(eventsRepositoryProvider)
@@ -216,3 +211,25 @@ Future<List<EventListEntry>> eventMap(Ref ref) {
 @riverpod
 Future<EventVenue?> eventVenue(Ref ref, String eventId) =>
     ref.watch(eventsRepositoryProvider).venue(eventId);
+
+// Producers -----------------------------------------------------------------
+
+@riverpod
+Future<EventInsights> eventInsights(Ref ref, String eventId) =>
+    ref.watch(eventsRepositoryProvider).insights(eventId);
+
+@riverpod
+class FeatureEditor extends _$FeatureEditor {
+  @override
+  AsyncValue<void> build() => const AsyncData(null);
+
+  /// [days] null removes the highlight.
+  Future<bool?> feature(String eventId, {int? days}) =>
+      runAction(ref, (s) => state = s, () async {
+        await ref.read(eventsRepositoryProvider).feature(eventId, days: days);
+        ref
+          ..invalidate(eventDetailProvider(eventId))
+          ..invalidate(eventListProvider);
+        return true;
+      });
+}

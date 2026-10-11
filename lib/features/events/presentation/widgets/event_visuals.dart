@@ -182,6 +182,16 @@ class EventCard extends StatelessWidget {
                         ),
                       ),
                     ),
+                    // Featured by the producer (paid highlight).
+                    if (event.isFeatured)
+                      Positioned(
+                        left: spacing.sm,
+                        bottom: spacing.sm,
+                        child: StatusPill(
+                          label: l10n.eventFeatured,
+                          color: colors.lime,
+                        ),
+                      ),
                     if (statusPill != null || event.isGoing)
                       Positioned(
                         right: spacing.sm,

@@ -4516,12 +4516,6 @@ abstract class AppLocalizations {
   /// **'Cupom copiado. Use na compra do ingresso.'**
   String get eventCouponCopied;
 
-  /// No description provided for @eventTicketClicks.
-  ///
-  /// In pt, this message translates to:
-  /// **'{count, plural, =0{Ninguém tocou em Comprar ingresso ainda} =1{1 pessoa tocou em Comprar ingresso} other{{count} pessoas tocaram em Comprar ingresso}}'**
-  String eventTicketClicks(int count);
-
   /// No description provided for @shareNightSubject.
   ///
   /// In pt, this message translates to:
@@ -4857,6 +4851,126 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Editar ponto de encontro'**
   String get crewMeetingPointEdit;
+
+  /// No description provided for @eventFeatured.
+  ///
+  /// In pt, this message translates to:
+  /// **'Destaque'**
+  String get eventFeatured;
+
+  /// No description provided for @eventFeature.
+  ///
+  /// In pt, this message translates to:
+  /// **'Destacar evento'**
+  String get eventFeature;
+
+  /// No description provided for @eventUnfeature.
+  ///
+  /// In pt, this message translates to:
+  /// **'Remover destaque'**
+  String get eventUnfeature;
+
+  /// No description provided for @eventFeatureTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Destacar por quantos dias?'**
+  String get eventFeatureTitle;
+
+  /// No description provided for @eventFeatureDays.
+  ///
+  /// In pt, this message translates to:
+  /// **'{days} dias'**
+  String eventFeatureDays(int days);
+
+  /// No description provided for @insightsTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Painel do evento'**
+  String get insightsTitle;
+
+  /// No description provided for @insightsGoing.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pessoas vão'**
+  String get insightsGoing;
+
+  /// No description provided for @insightsTicketClicks.
+  ///
+  /// In pt, this message translates to:
+  /// **'Toques em Comprar ingresso'**
+  String get insightsTicketClicks;
+
+  /// No description provided for @insightsGoingDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vão no Date'**
+  String get insightsGoingDate;
+
+  /// No description provided for @insightsGoingCrew.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vão no Crew'**
+  String get insightsGoingCrew;
+
+  /// No description provided for @insightsCrews.
+  ///
+  /// In pt, this message translates to:
+  /// **'Crews formadas'**
+  String get insightsCrews;
+
+  /// No description provided for @insightsTooFew.
+  ///
+  /// In pt, this message translates to:
+  /// **'Os detalhes do público aparecem a partir de 5 pessoas confirmadas.'**
+  String get insightsTooFew;
+
+  /// No description provided for @insightsGenres.
+  ///
+  /// In pt, this message translates to:
+  /// **'Estilos que o público curte'**
+  String get insightsGenres;
+
+  /// No description provided for @insightsCities.
+  ///
+  /// In pt, this message translates to:
+  /// **'De onde o público vem'**
+  String get insightsCities;
+
+  /// No description provided for @insightsGender.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gênero'**
+  String get insightsGender;
+
+  /// No description provided for @insightsGenderUnknown.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não informado'**
+  String get insightsGenderUnknown;
+
+  /// No description provided for @insightsAge.
+  ///
+  /// In pt, this message translates to:
+  /// **'Idade'**
+  String get insightsAge;
+
+  /// No description provided for @insightsPrivacy.
+  ///
+  /// In pt, this message translates to:
+  /// **'Números agregados: ninguém é identificado.'**
+  String get insightsPrivacy;
+
+  /// No description provided for @insightsFeaturedUntil.
+  ///
+  /// In pt, this message translates to:
+  /// **'Em destaque até {date}'**
+  String insightsFeaturedUntil(String date);
+
+  /// No description provided for @insightsFeatureHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quer mais gente no seu evento? Fale com a equipe Pulse para destacá-lo.'**
+  String get insightsFeatureHint;
 }
 
 class _AppLocalizationsDelegate

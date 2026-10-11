@@ -77,6 +77,8 @@ A ordem em que os perfis aparecem é definida automaticamente, considerando even
 | ViaCEP | Busca de endereço por CEP | CEP digitado e endereço IP | Brasil |
 | App Store e Google Play | Download e atualizações do app (e compras, se existirem no futuro) | Conforme as políticas de cada loja | Conforme cada loja |
 
+**Produtores de eventos** veem, no painel do evento deles, apenas **números agregados** do público que marcou presença (quantas pessoas, estilos musicais, cidades, gênero e faixa de idade), e esses detalhes só aparecem a partir de 5 pessoas. Eles nunca veem quem é você.
+
 Também podemos compartilhar dados com **autoridades públicas**, quando houver ordem judicial ou obrigação legal, e para proteger a vida ou a segurança de alguém.
 
 ### Transferência internacional

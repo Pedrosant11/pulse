@@ -44,13 +44,15 @@ Widget mapAttribution() => const RichAttributionWidget(
   ],
 );
 
-/// Neon map pin. Lime for official events, magenta otherwise; dimmed when
+/// Neon map pin. Cyan and bigger for featured events, lime for official
+/// ones, magenta otherwise; dimmed when
 /// it only marks an area.
 class EventPin extends StatelessWidget {
   const new({
     this.official = false,
     this.approximate = false,
     this.selected = false,
+    this.featured = false,
     super.key,
   });
 
@@ -61,12 +63,20 @@ class EventPin extends StatelessWidget {
   final bool approximate;
   final bool selected;
 
+  /// Paid highlight: bigger, cyan, with a stronger glow.
+  final bool featured;
+
   @override
   Widget build(BuildContext context) {
     final colors = context.colors;
-    final color = official ? colors.lime : colors.magenta;
+    final color = featured
+        ? colors.cyan
+        : official
+        ? colors.lime
+        : colors.magenta;
+    final base = featured ? 1.3 : 1.0;
     return AnimatedScale(
-      scale: selected ? 1.25 : 1,
+      scale: selected ? base * 1.25 : base,
       duration: context.reduceMotion
           ? Duration.zero
           : const Duration(milliseconds: 180),

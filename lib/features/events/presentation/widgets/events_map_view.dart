@@ -96,6 +96,7 @@ class _EventsMapViewState extends ConsumerState<EventsMapView> {
               onTap: () => setState(() => _selectedId = e.id),
               child: EventPin(
                 official: e.isOfficial,
+                featured: e.isFeatured,
                 approximate: !e.pinExact,
                 selected: e.id == _selectedId,
               ),

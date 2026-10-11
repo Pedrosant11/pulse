@@ -2603,18 +2603,6 @@ class AppLocalizationsPt extends AppLocalizations {
   String get eventCouponCopied => 'Cupom copiado. Use na compra do ingresso.';
 
   @override
-  String eventTicketClicks(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count pessoas tocaram em Comprar ingresso',
-      one: '1 pessoa tocou em Comprar ingresso',
-      zero: 'Ninguém tocou em Comprar ingresso ainda',
-    );
-    return '$_temp0';
-  }
-
-  @override
   String get shareNightSubject => 'Meu rolê';
 
   @override
@@ -2804,4 +2792,70 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get crewMeetingPointEdit => 'Editar ponto de encontro';
+
+  @override
+  String get eventFeatured => 'Destaque';
+
+  @override
+  String get eventFeature => 'Destacar evento';
+
+  @override
+  String get eventUnfeature => 'Remover destaque';
+
+  @override
+  String get eventFeatureTitle => 'Destacar por quantos dias?';
+
+  @override
+  String eventFeatureDays(int days) {
+    return '$days dias';
+  }
+
+  @override
+  String get insightsTitle => 'Painel do evento';
+
+  @override
+  String get insightsGoing => 'Pessoas vão';
+
+  @override
+  String get insightsTicketClicks => 'Toques em Comprar ingresso';
+
+  @override
+  String get insightsGoingDate => 'Vão no Date';
+
+  @override
+  String get insightsGoingCrew => 'Vão no Crew';
+
+  @override
+  String get insightsCrews => 'Crews formadas';
+
+  @override
+  String get insightsTooFew =>
+      'Os detalhes do público aparecem a partir de 5 pessoas confirmadas.';
+
+  @override
+  String get insightsGenres => 'Estilos que o público curte';
+
+  @override
+  String get insightsCities => 'De onde o público vem';
+
+  @override
+  String get insightsGender => 'Gênero';
+
+  @override
+  String get insightsGenderUnknown => 'Não informado';
+
+  @override
+  String get insightsAge => 'Idade';
+
+  @override
+  String get insightsPrivacy => 'Números agregados: ninguém é identificado.';
+
+  @override
+  String insightsFeaturedUntil(String date) {
+    return 'Em destaque até $date';
+  }
+
+  @override
+  String get insightsFeatureHint =>
+      'Quer mais gente no seu evento? Fale com a equipe Pulse para destacá-lo.';
 }
