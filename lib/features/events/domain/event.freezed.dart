@@ -657,7 +657,8 @@ mixin _$EventDetail {
 
  String get id; String get name; String get venueName; String get city; String get state; DateTime get startsAt; DateTime get endsAt; EventStatus get status; String? get description; String? get coverPath;/// City centroid (radius filter). The venue is in [EventVenue].
  double? get lat; double? get lng;/// Secret location: venue revealed this many hours before the start.
- int? get locationRevealHours; List<MusicGenre> get genres; List<String> get lineup; String? get ticketUrl; int get minAge; bool get isOfficial; String? get createdBy; String? get rejectionReason;
+ int? get locationRevealHours; List<MusicGenre> get genres; List<String> get lineup; String? get ticketUrl;/// Affiliate/promoter code shown next to the ticket link.
+ String? get ticketCoupon; int get minAge; bool get isOfficial; String? get createdBy; String? get rejectionReason;
 /// Create a copy of EventDetail
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -671,20 +672,20 @@ $EventDetailCopyWith<EventDetail> get copyWith => _$EventDetailCopyWithImpl<Even
 @override
 bool operator ==(Object other) {
   final _this = this as EventDetail;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is EventDetail&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.venueName, _this.venueName) || other.venueName == _this.venueName)&&(identical(other.city, _this.city) || other.city == _this.city)&&(identical(other.state, _this.state) || other.state == _this.state)&&(identical(other.startsAt, _this.startsAt) || other.startsAt == _this.startsAt)&&(identical(other.endsAt, _this.endsAt) || other.endsAt == _this.endsAt)&&(identical(other.status, _this.status) || other.status == _this.status)&&(identical(other.description, _this.description) || other.description == _this.description)&&(identical(other.coverPath, _this.coverPath) || other.coverPath == _this.coverPath)&&(identical(other.lat, _this.lat) || other.lat == _this.lat)&&(identical(other.lng, _this.lng) || other.lng == _this.lng)&&(identical(other.locationRevealHours, _this.locationRevealHours) || other.locationRevealHours == _this.locationRevealHours)&&const DeepCollectionEquality().equals(other.genres, _this.genres)&&const DeepCollectionEquality().equals(other.lineup, _this.lineup)&&(identical(other.ticketUrl, _this.ticketUrl) || other.ticketUrl == _this.ticketUrl)&&(identical(other.minAge, _this.minAge) || other.minAge == _this.minAge)&&(identical(other.isOfficial, _this.isOfficial) || other.isOfficial == _this.isOfficial)&&(identical(other.createdBy, _this.createdBy) || other.createdBy == _this.createdBy)&&(identical(other.rejectionReason, _this.rejectionReason) || other.rejectionReason == _this.rejectionReason));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is EventDetail&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.venueName, _this.venueName) || other.venueName == _this.venueName)&&(identical(other.city, _this.city) || other.city == _this.city)&&(identical(other.state, _this.state) || other.state == _this.state)&&(identical(other.startsAt, _this.startsAt) || other.startsAt == _this.startsAt)&&(identical(other.endsAt, _this.endsAt) || other.endsAt == _this.endsAt)&&(identical(other.status, _this.status) || other.status == _this.status)&&(identical(other.description, _this.description) || other.description == _this.description)&&(identical(other.coverPath, _this.coverPath) || other.coverPath == _this.coverPath)&&(identical(other.lat, _this.lat) || other.lat == _this.lat)&&(identical(other.lng, _this.lng) || other.lng == _this.lng)&&(identical(other.locationRevealHours, _this.locationRevealHours) || other.locationRevealHours == _this.locationRevealHours)&&const DeepCollectionEquality().equals(other.genres, _this.genres)&&const DeepCollectionEquality().equals(other.lineup, _this.lineup)&&(identical(other.ticketUrl, _this.ticketUrl) || other.ticketUrl == _this.ticketUrl)&&(identical(other.ticketCoupon, _this.ticketCoupon) || other.ticketCoupon == _this.ticketCoupon)&&(identical(other.minAge, _this.minAge) || other.minAge == _this.minAge)&&(identical(other.isOfficial, _this.isOfficial) || other.isOfficial == _this.isOfficial)&&(identical(other.createdBy, _this.createdBy) || other.createdBy == _this.createdBy)&&(identical(other.rejectionReason, _this.rejectionReason) || other.rejectionReason == _this.rejectionReason));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as EventDetail;
-  return Object.hashAll([runtimeType,_this.id,_this.name,_this.venueName,_this.city,_this.state,_this.startsAt,_this.endsAt,_this.status,_this.description,_this.coverPath,_this.lat,_this.lng,_this.locationRevealHours,const DeepCollectionEquality().hash(_this.genres),const DeepCollectionEquality().hash(_this.lineup),_this.ticketUrl,_this.minAge,_this.isOfficial,_this.createdBy,_this.rejectionReason]);
+  return Object.hashAll([runtimeType,_this.id,_this.name,_this.venueName,_this.city,_this.state,_this.startsAt,_this.endsAt,_this.status,_this.description,_this.coverPath,_this.lat,_this.lng,_this.locationRevealHours,const DeepCollectionEquality().hash(_this.genres),const DeepCollectionEquality().hash(_this.lineup),_this.ticketUrl,_this.ticketCoupon,_this.minAge,_this.isOfficial,_this.createdBy,_this.rejectionReason]);
 }
 
 @override
 String toString() {
   final _this = this as EventDetail;
-  return 'EventDetail(id: ${_this.id}, name: ${_this.name}, venueName: ${_this.venueName}, city: ${_this.city}, state: ${_this.state}, startsAt: ${_this.startsAt}, endsAt: ${_this.endsAt}, status: ${_this.status}, description: ${_this.description}, coverPath: ${_this.coverPath}, lat: ${_this.lat}, lng: ${_this.lng}, locationRevealHours: ${_this.locationRevealHours}, genres: ${_this.genres}, lineup: ${_this.lineup}, ticketUrl: ${_this.ticketUrl}, minAge: ${_this.minAge}, isOfficial: ${_this.isOfficial}, createdBy: ${_this.createdBy}, rejectionReason: ${_this.rejectionReason})';
+  return 'EventDetail(id: ${_this.id}, name: ${_this.name}, venueName: ${_this.venueName}, city: ${_this.city}, state: ${_this.state}, startsAt: ${_this.startsAt}, endsAt: ${_this.endsAt}, status: ${_this.status}, description: ${_this.description}, coverPath: ${_this.coverPath}, lat: ${_this.lat}, lng: ${_this.lng}, locationRevealHours: ${_this.locationRevealHours}, genres: ${_this.genres}, lineup: ${_this.lineup}, ticketUrl: ${_this.ticketUrl}, ticketCoupon: ${_this.ticketCoupon}, minAge: ${_this.minAge}, isOfficial: ${_this.isOfficial}, createdBy: ${_this.createdBy}, rejectionReason: ${_this.rejectionReason})';
 }
 
 
@@ -695,7 +696,7 @@ abstract mixin class $EventDetailCopyWith<$Res>  {
   factory $EventDetailCopyWith(EventDetail value, $Res Function(EventDetail) _then) = _$EventDetailCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, String venueName, String city, String state, DateTime startsAt, DateTime endsAt, EventStatus status, String? description, String? coverPath, double? lat, double? lng, int? locationRevealHours, List<MusicGenre> genres, List<String> lineup, String? ticketUrl, int minAge, bool isOfficial, String? createdBy, String? rejectionReason
+ String id, String name, String venueName, String city, String state, DateTime startsAt, DateTime endsAt, EventStatus status, String? description, String? coverPath, double? lat, double? lng, int? locationRevealHours, List<MusicGenre> genres, List<String> lineup, String? ticketUrl, String? ticketCoupon, int minAge, bool isOfficial, String? createdBy, String? rejectionReason
 });
 
 
@@ -712,7 +713,7 @@ class _$EventDetailCopyWithImpl<$Res>
 
 /// Create a copy of EventDetail
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? venueName = null,Object? city = null,Object? state = null,Object? startsAt = null,Object? endsAt = null,Object? status = null,Object? description = freezed,Object? coverPath = freezed,Object? lat = freezed,Object? lng = freezed,Object? locationRevealHours = freezed,Object? genres = null,Object? lineup = null,Object? ticketUrl = freezed,Object? minAge = null,Object? isOfficial = null,Object? createdBy = freezed,Object? rejectionReason = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? venueName = null,Object? city = null,Object? state = null,Object? startsAt = null,Object? endsAt = null,Object? status = null,Object? description = freezed,Object? coverPath = freezed,Object? lat = freezed,Object? lng = freezed,Object? locationRevealHours = freezed,Object? genres = null,Object? lineup = null,Object? ticketUrl = freezed,Object? ticketCoupon = freezed,Object? minAge = null,Object? isOfficial = null,Object? createdBy = freezed,Object? rejectionReason = freezed,}) {
   return _then(EventDetail(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -730,6 +731,7 @@ as double?,locationRevealHours: freezed == locationRevealHours ? _self.locationR
 as int?,genres: null == genres ? _self.genres : genres // ignore: cast_nullable_to_non_nullable
 as List<MusicGenre>,lineup: null == lineup ? _self.lineup : lineup // ignore: cast_nullable_to_non_nullable
 as List<String>,ticketUrl: freezed == ticketUrl ? _self.ticketUrl : ticketUrl // ignore: cast_nullable_to_non_nullable
+as String?,ticketCoupon: freezed == ticketCoupon ? _self.ticketCoupon : ticketCoupon // ignore: cast_nullable_to_non_nullable
 as String?,minAge: null == minAge ? _self.minAge : minAge // ignore: cast_nullable_to_non_nullable
 as int,isOfficial: null == isOfficial ? _self.isOfficial : isOfficial // ignore: cast_nullable_to_non_nullable
 as bool,createdBy: freezed == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable
@@ -819,10 +821,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String venueName,  String city,  String state,  DateTime startsAt,  DateTime endsAt,  EventStatus status,  String? description,  String? coverPath,  double? lat,  double? lng,  int? locationRevealHours,  List<MusicGenre> genres,  List<String> lineup,  String? ticketUrl,  int minAge,  bool isOfficial,  String? createdBy,  String? rejectionReason)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String venueName,  String city,  String state,  DateTime startsAt,  DateTime endsAt,  EventStatus status,  String? description,  String? coverPath,  double? lat,  double? lng,  int? locationRevealHours,  List<MusicGenre> genres,  List<String> lineup,  String? ticketUrl,  String? ticketCoupon,  int minAge,  bool isOfficial,  String? createdBy,  String? rejectionReason)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _EventDetail() when $default != null:
-return $default(_that.id,_that.name,_that.venueName,_that.city,_that.state,_that.startsAt,_that.endsAt,_that.status,_that.description,_that.coverPath,_that.lat,_that.lng,_that.locationRevealHours,_that.genres,_that.lineup,_that.ticketUrl,_that.minAge,_that.isOfficial,_that.createdBy,_that.rejectionReason);case _:
+return $default(_that.id,_that.name,_that.venueName,_that.city,_that.state,_that.startsAt,_that.endsAt,_that.status,_that.description,_that.coverPath,_that.lat,_that.lng,_that.locationRevealHours,_that.genres,_that.lineup,_that.ticketUrl,_that.ticketCoupon,_that.minAge,_that.isOfficial,_that.createdBy,_that.rejectionReason);case _:
   return orElse();
 
 }
@@ -840,10 +842,10 @@ return $default(_that.id,_that.name,_that.venueName,_that.city,_that.state,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String venueName,  String city,  String state,  DateTime startsAt,  DateTime endsAt,  EventStatus status,  String? description,  String? coverPath,  double? lat,  double? lng,  int? locationRevealHours,  List<MusicGenre> genres,  List<String> lineup,  String? ticketUrl,  int minAge,  bool isOfficial,  String? createdBy,  String? rejectionReason)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String venueName,  String city,  String state,  DateTime startsAt,  DateTime endsAt,  EventStatus status,  String? description,  String? coverPath,  double? lat,  double? lng,  int? locationRevealHours,  List<MusicGenre> genres,  List<String> lineup,  String? ticketUrl,  String? ticketCoupon,  int minAge,  bool isOfficial,  String? createdBy,  String? rejectionReason)  $default,) {final _that = this;
 switch (_that) {
 case _EventDetail():
-return $default(_that.id,_that.name,_that.venueName,_that.city,_that.state,_that.startsAt,_that.endsAt,_that.status,_that.description,_that.coverPath,_that.lat,_that.lng,_that.locationRevealHours,_that.genres,_that.lineup,_that.ticketUrl,_that.minAge,_that.isOfficial,_that.createdBy,_that.rejectionReason);case _:
+return $default(_that.id,_that.name,_that.venueName,_that.city,_that.state,_that.startsAt,_that.endsAt,_that.status,_that.description,_that.coverPath,_that.lat,_that.lng,_that.locationRevealHours,_that.genres,_that.lineup,_that.ticketUrl,_that.ticketCoupon,_that.minAge,_that.isOfficial,_that.createdBy,_that.rejectionReason);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -860,10 +862,10 @@ return $default(_that.id,_that.name,_that.venueName,_that.city,_that.state,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String venueName,  String city,  String state,  DateTime startsAt,  DateTime endsAt,  EventStatus status,  String? description,  String? coverPath,  double? lat,  double? lng,  int? locationRevealHours,  List<MusicGenre> genres,  List<String> lineup,  String? ticketUrl,  int minAge,  bool isOfficial,  String? createdBy,  String? rejectionReason)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String venueName,  String city,  String state,  DateTime startsAt,  DateTime endsAt,  EventStatus status,  String? description,  String? coverPath,  double? lat,  double? lng,  int? locationRevealHours,  List<MusicGenre> genres,  List<String> lineup,  String? ticketUrl,  String? ticketCoupon,  int minAge,  bool isOfficial,  String? createdBy,  String? rejectionReason)?  $default,) {final _that = this;
 switch (_that) {
 case _EventDetail() when $default != null:
-return $default(_that.id,_that.name,_that.venueName,_that.city,_that.state,_that.startsAt,_that.endsAt,_that.status,_that.description,_that.coverPath,_that.lat,_that.lng,_that.locationRevealHours,_that.genres,_that.lineup,_that.ticketUrl,_that.minAge,_that.isOfficial,_that.createdBy,_that.rejectionReason);case _:
+return $default(_that.id,_that.name,_that.venueName,_that.city,_that.state,_that.startsAt,_that.endsAt,_that.status,_that.description,_that.coverPath,_that.lat,_that.lng,_that.locationRevealHours,_that.genres,_that.lineup,_that.ticketUrl,_that.ticketCoupon,_that.minAge,_that.isOfficial,_that.createdBy,_that.rejectionReason);case _:
   return null;
 
 }
@@ -875,7 +877,7 @@ return $default(_that.id,_that.name,_that.venueName,_that.city,_that.state,_that
 @JsonSerializable()
 
 class _EventDetail implements EventDetail {
-  const _EventDetail({required this.id, required this.name, required this.venueName, required this.city, required this.state, required this.startsAt, required this.endsAt, required this.status, this.description, this.coverPath, this.lat, this.lng, this.locationRevealHours,  List<MusicGenre> genres = const [],  List<String> lineup = const [], this.ticketUrl, this.minAge = 18, this.isOfficial = false, this.createdBy, this.rejectionReason}): _genres = genres,_lineup = lineup;
+  const _EventDetail({required this.id, required this.name, required this.venueName, required this.city, required this.state, required this.startsAt, required this.endsAt, required this.status, this.description, this.coverPath, this.lat, this.lng, this.locationRevealHours,  List<MusicGenre> genres = const [],  List<String> lineup = const [], this.ticketUrl, this.ticketCoupon, this.minAge = 18, this.isOfficial = false, this.createdBy, this.rejectionReason}): _genres = genres,_lineup = lineup;
   factory _EventDetail.fromJson(Map<String, dynamic> json) => _$EventDetailFromJson(json);
 
 @override final  String id;
@@ -908,6 +910,8 @@ class _EventDetail implements EventDetail {
 }
 
 @override final  String? ticketUrl;
+/// Affiliate/promoter code shown next to the ticket link.
+@override final  String? ticketCoupon;
 @override@JsonKey() final  int minAge;
 @override@JsonKey() final  bool isOfficial;
 @override final  String? createdBy;
@@ -926,18 +930,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _EventDetail&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.venueName, venueName) || other.venueName == venueName)&&(identical(other.city, city) || other.city == city)&&(identical(other.state, state) || other.state == state)&&(identical(other.startsAt, startsAt) || other.startsAt == startsAt)&&(identical(other.endsAt, endsAt) || other.endsAt == endsAt)&&(identical(other.status, status) || other.status == status)&&(identical(other.description, description) || other.description == description)&&(identical(other.coverPath, coverPath) || other.coverPath == coverPath)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.lng, lng) || other.lng == lng)&&(identical(other.locationRevealHours, locationRevealHours) || other.locationRevealHours == locationRevealHours)&&const DeepCollectionEquality().equals(other.genres, _genres)&&const DeepCollectionEquality().equals(other.lineup, _lineup)&&(identical(other.ticketUrl, ticketUrl) || other.ticketUrl == ticketUrl)&&(identical(other.minAge, minAge) || other.minAge == minAge)&&(identical(other.isOfficial, isOfficial) || other.isOfficial == isOfficial)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.rejectionReason, rejectionReason) || other.rejectionReason == rejectionReason));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _EventDetail&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.venueName, venueName) || other.venueName == venueName)&&(identical(other.city, city) || other.city == city)&&(identical(other.state, state) || other.state == state)&&(identical(other.startsAt, startsAt) || other.startsAt == startsAt)&&(identical(other.endsAt, endsAt) || other.endsAt == endsAt)&&(identical(other.status, status) || other.status == status)&&(identical(other.description, description) || other.description == description)&&(identical(other.coverPath, coverPath) || other.coverPath == coverPath)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.lng, lng) || other.lng == lng)&&(identical(other.locationRevealHours, locationRevealHours) || other.locationRevealHours == locationRevealHours)&&const DeepCollectionEquality().equals(other.genres, _genres)&&const DeepCollectionEquality().equals(other.lineup, _lineup)&&(identical(other.ticketUrl, ticketUrl) || other.ticketUrl == ticketUrl)&&(identical(other.ticketCoupon, ticketCoupon) || other.ticketCoupon == ticketCoupon)&&(identical(other.minAge, minAge) || other.minAge == minAge)&&(identical(other.isOfficial, isOfficial) || other.isOfficial == isOfficial)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.rejectionReason, rejectionReason) || other.rejectionReason == rejectionReason));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hashAll([runtimeType,id,name,venueName,city,state,startsAt,endsAt,status,description,coverPath,lat,lng,locationRevealHours,const DeepCollectionEquality().hash(_genres),const DeepCollectionEquality().hash(_lineup),ticketUrl,minAge,isOfficial,createdBy,rejectionReason]);
+    return Object.hashAll([runtimeType,id,name,venueName,city,state,startsAt,endsAt,status,description,coverPath,lat,lng,locationRevealHours,const DeepCollectionEquality().hash(_genres),const DeepCollectionEquality().hash(_lineup),ticketUrl,ticketCoupon,minAge,isOfficial,createdBy,rejectionReason]);
 }
 
 @override
 String toString() {
-    return 'EventDetail(id: $id, name: $name, venueName: $venueName, city: $city, state: $state, startsAt: $startsAt, endsAt: $endsAt, status: $status, description: $description, coverPath: $coverPath, lat: $lat, lng: $lng, locationRevealHours: $locationRevealHours, genres: $genres, lineup: $lineup, ticketUrl: $ticketUrl, minAge: $minAge, isOfficial: $isOfficial, createdBy: $createdBy, rejectionReason: $rejectionReason)';
+    return 'EventDetail(id: $id, name: $name, venueName: $venueName, city: $city, state: $state, startsAt: $startsAt, endsAt: $endsAt, status: $status, description: $description, coverPath: $coverPath, lat: $lat, lng: $lng, locationRevealHours: $locationRevealHours, genres: $genres, lineup: $lineup, ticketUrl: $ticketUrl, ticketCoupon: $ticketCoupon, minAge: $minAge, isOfficial: $isOfficial, createdBy: $createdBy, rejectionReason: $rejectionReason)';
 }
 
 
@@ -948,7 +952,7 @@ abstract mixin class _$EventDetailCopyWith<$Res> implements $EventDetailCopyWith
   factory _$EventDetailCopyWith(_EventDetail value, $Res Function(_EventDetail) _then) = __$EventDetailCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, String venueName, String city, String state, DateTime startsAt, DateTime endsAt, EventStatus status, String? description, String? coverPath, double? lat, double? lng, int? locationRevealHours, List<MusicGenre> genres, List<String> lineup, String? ticketUrl, int minAge, bool isOfficial, String? createdBy, String? rejectionReason
+ String id, String name, String venueName, String city, String state, DateTime startsAt, DateTime endsAt, EventStatus status, String? description, String? coverPath, double? lat, double? lng, int? locationRevealHours, List<MusicGenre> genres, List<String> lineup, String? ticketUrl, String? ticketCoupon, int minAge, bool isOfficial, String? createdBy, String? rejectionReason
 });
 
 
@@ -965,7 +969,7 @@ class __$EventDetailCopyWithImpl<$Res>
 
 /// Create a copy of EventDetail
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? venueName = null,Object? city = null,Object? state = null,Object? startsAt = null,Object? endsAt = null,Object? status = null,Object? description = freezed,Object? coverPath = freezed,Object? lat = freezed,Object? lng = freezed,Object? locationRevealHours = freezed,Object? genres = null,Object? lineup = null,Object? ticketUrl = freezed,Object? minAge = null,Object? isOfficial = null,Object? createdBy = freezed,Object? rejectionReason = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? venueName = null,Object? city = null,Object? state = null,Object? startsAt = null,Object? endsAt = null,Object? status = null,Object? description = freezed,Object? coverPath = freezed,Object? lat = freezed,Object? lng = freezed,Object? locationRevealHours = freezed,Object? genres = null,Object? lineup = null,Object? ticketUrl = freezed,Object? ticketCoupon = freezed,Object? minAge = null,Object? isOfficial = null,Object? createdBy = freezed,Object? rejectionReason = freezed,}) {
   return _then(_EventDetail(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -983,6 +987,7 @@ as double?,locationRevealHours: freezed == locationRevealHours ? _self.locationR
 as int?,genres: null == genres ? _self._genres : genres // ignore: cast_nullable_to_non_nullable
 as List<MusicGenre>,lineup: null == lineup ? _self._lineup : lineup // ignore: cast_nullable_to_non_nullable
 as List<String>,ticketUrl: freezed == ticketUrl ? _self.ticketUrl : ticketUrl // ignore: cast_nullable_to_non_nullable
+as String?,ticketCoupon: freezed == ticketCoupon ? _self.ticketCoupon : ticketCoupon // ignore: cast_nullable_to_non_nullable
 as String?,minAge: null == minAge ? _self.minAge : minAge // ignore: cast_nullable_to_non_nullable
 as int,isOfficial: null == isOfficial ? _self.isOfficial : isOfficial // ignore: cast_nullable_to_non_nullable
 as bool,createdBy: freezed == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable

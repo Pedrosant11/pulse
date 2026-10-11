@@ -29,6 +29,7 @@ Use esse canal para qualquer pedido ou dúvida sobre seus dados.
 - **Atividade:** última vez em que você usou o app, confirmação de leitura das mensagens e registros de moderação sobre a sua conta (advertências, suspensões e banimentos).
 - **Dados técnicos:** endereço IP, data e hora de acesso, tipo de dispositivo e sistema, e registros de erro.
 - **Compras:** plano assinado, validade, itens avulsos comprados e saldo (superlikes e boosts). O pagamento é feito na loja (Google Play ou App Store); **não recebemos dados do seu cartão**. Se você usar o modo viagem, guardamos a cidade escolhida.
+- **Ingressos:** quando você toca em "Comprar ingresso", registramos que a pessoa da sua conta tocou naquele evento, para mostrar ao produtor quantas pessoas o Pulse levou até a venda (ele vê só o número). O ingresso é comprado no site da vendedora, com as regras dela.
 
 ### 2.3 O que não coletamos
 
@@ -92,6 +93,7 @@ Os dados principais ficam no Brasil. Alguns fornecedores acima (Resend, Google, 
 | Denúncias sobre o seu conteúdo | Uma cópia do conteúdo denunciado pode ser mantida, desvinculada da sua conta, por até **5 anos**, para segurança da comunidade e defesa em eventuais processos. |
 | Registros de acesso (IP, data e hora) | **6 meses**, conforme o art. 15 do Marco Civil da Internet. |
 | Registros de compras (produto, data e identificador da conta) | **5 anos** após a compra, para atender o Código de Defesa do Consumidor e obrigações fiscais, mesmo após a exclusão da conta. |
+| Toques em "Comprar ingresso" | Vinculados à sua conta por **90 dias**; depois fica só a contagem, sem identificar ninguém. |
 | Cópias de segurança (backups) | Os dados excluídos podem permanecer em backups por até **[PRAZO DE BACKUP] dias**, até serem sobrescritos. |
 
 ## 7. Moderação e denúncias

@@ -18,6 +18,7 @@ import 'package:pulse/features/crews/presentation/widgets/start_crew_sheet.dart'
 import 'package:pulse/features/profile/presentation/widgets/user_profile_sheet.dart';
 import 'package:pulse/features/safety/domain/safety_models.dart';
 import 'package:pulse/features/safety/presentation/safety_actions.dart';
+import 'package:pulse/features/safety/presentation/widgets/night_safety.dart';
 
 /// 1:1 conversation (SPEC 9.1): realtime messages, sent/read status,
 /// typing indicator, icebreakers and the safety menu. Long-pressing someone
@@ -135,6 +136,15 @@ class _ConversationState extends ConsumerState<_Conversation> {
     switch (action) {
       case _MenuAction.profile:
         await _openProfile();
+      case _MenuAction.shareDate:
+        // Safety: tell a trusted contact who you are meeting.
+        final event = _header.commonEvents.firstOrNull;
+        await shareMyNight(
+          context,
+          withName: name,
+          eventName: event?.name,
+          startsAt: event?.startsAt,
+        );
       case _MenuAction.unmatch:
         if (matchId == null) return;
         final ok = await _confirm(
@@ -348,6 +358,10 @@ class _ConversationState extends ConsumerState<_Conversation> {
                         child: Text(l10n.chatMenuProfile),
                       ),
                       PopupMenuItem(
+                        value: _MenuAction.shareDate,
+                        child: Text(l10n.chatMenuShareDate),
+                      ),
+                      PopupMenuItem(
                         value: _MenuAction.unmatch,
                         child: Text(l10n.chatMenuUnmatch),
                       ),
@@ -450,7 +464,7 @@ class _ConversationState extends ConsumerState<_Conversation> {
   }
 }
 
-enum _MenuAction { profile, viewCrew, unmatch, block, report }
+enum _MenuAction { profile, shareDate, viewCrew, unmatch, block, report }
 
 /// Shown while the chat is empty: suggestions based on the common event.
 class _Icebreakers extends StatelessWidget {

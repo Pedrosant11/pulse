@@ -85,6 +85,9 @@ abstract class EventDetail with _$EventDetail {
     @Default([]) List<MusicGenre> genres,
     @Default([]) List<String> lineup,
     String? ticketUrl,
+
+    /// Affiliate/promoter code shown next to the ticket link.
+    String? ticketCoupon,
     @Default(18) int minAge,
     @Default(false) bool isOfficial,
     String? createdBy,

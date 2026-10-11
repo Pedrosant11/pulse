@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui' show ImageFilter;
 
 import 'package:flutter/services.dart';
@@ -17,6 +18,7 @@ import 'package:pulse/core/widgets/state_views.dart';
 import 'package:pulse/features/auth/presentation/session_providers.dart';
 import 'package:pulse/features/badges/presentation/widgets/profile_badges.dart';
 import 'package:pulse/features/crews/presentation/crew_screen.dart';
+import 'package:pulse/features/events/data/events_repository.dart';
 import 'package:pulse/features/events/domain/event.dart';
 import 'package:pulse/features/events/presentation/events_providers.dart';
 import 'package:pulse/features/events/presentation/widgets/event_location.dart';
@@ -25,6 +27,7 @@ import 'package:pulse/features/profile/presentation/profile_labels.dart';
 import 'package:pulse/features/profile/presentation/widgets/profile_photo_image.dart';
 import 'package:pulse/features/safety/domain/safety_models.dart';
 import 'package:pulse/features/safety/presentation/safety_actions.dart';
+import 'package:pulse/features/safety/presentation/widgets/night_safety.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EventDetailScreen extends ConsumerWidget {
@@ -288,9 +291,32 @@ class _EventDetailBody extends ConsumerWidget {
               if (ticketUrl != null) ...[
                 SizedBox(height: spacing.sm),
                 OutlinedButton.icon(
-                  onPressed: () => _openTicket(context, ticketUrl),
+                  onPressed: () {
+                    // Counted for the producer; never blocks the link.
+                    unawaited(
+                      ref
+                          .read(eventsRepositoryProvider)
+                          .logTicketClick(event.id)
+                          .catchError((_) {}),
+                    );
+                    unawaited(_openTicket(context, ticketUrl));
+                  },
                   icon: const Icon(Icons.confirmation_number_outlined),
                   label: Text(l10n.eventBuyTicket),
+                ),
+                if (event.ticketCoupon case final coupon?) ...[
+                  SizedBox(height: spacing.xs),
+                  _CouponRow(coupon: coupon),
+                ],
+                if (role.isModerator || isCreator)
+                  _TicketClicks(eventId: event.id),
+              ],
+              if (event.status == EventStatus.approved && !hasEnded) ...[
+                SizedBox(height: spacing.md),
+                NightSafetyCard(
+                  eventName: event.name,
+                  venue: '${event.venueName}, ${event.city}',
+                  startsAt: event.startsAt,
                 ),
               ],
               if (role.isModerator && event.status == EventStatus.pending) ...[
@@ -708,6 +734,63 @@ class _CreatorCard extends ConsumerWidget {
           ),
         );
       },
+    );
+  }
+}
+
+/// Coupon next to the ticket link, with a copy button (affiliate/promoter).
+class _CouponRow extends StatelessWidget {
+  const new({required this.coupon});
+
+  final String coupon;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final colors = context.colors;
+    return GlassCard(
+      padding: EdgeInsets.zero,
+      child: ListTile(
+        dense: true,
+        leading: Icon(Icons.sell_outlined, color: colors.lime),
+        title: Text(l10n.eventCouponLabel),
+        subtitle: Text(
+          coupon,
+          style: context.textTheme.titleMedium?.copyWith(color: colors.lime),
+        ),
+        trailing: TextButton.icon(
+          onPressed: () async {
+            await Clipboard.setData(ClipboardData(text: coupon));
+            if (context.mounted) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(l10n.eventCouponCopied)));
+            }
+          },
+          icon: const Icon(Icons.copy_rounded, size: 18),
+          label: Text(l10n.eventCouponCopy),
+        ),
+      ),
+    );
+  }
+}
+
+/// How many people tapped "Comprar ingresso" (creator and moderators).
+class _TicketClicks extends ConsumerWidget {
+  const new({required this.eventId});
+
+  final String eventId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final count = ref.watch(ticketClickCountProvider(eventId)).value;
+    if (count == null) return const SizedBox.shrink();
+    return Padding(
+      padding: EdgeInsets.only(top: context.spacing.xs),
+      child: Text(
+        context.l10n.eventTicketClicks(count),
+        style: context.textTheme.bodySmall,
+      ),
     );
   }
 }

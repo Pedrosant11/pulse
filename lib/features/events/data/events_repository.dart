@@ -244,6 +244,20 @@ class EventsRepository {
     'status': status.name,
     if (status == EventStatus.rejected) 'rejection_reason': rejectionReason,
   });
+
+  /// Counts a "Comprar ingresso" tap (deduplicated by the database).
+  Future<void> logTicketClick(String eventId) => guardFailures(
+    () =>
+        _client.rpc<void>('log_ticket_click', params: {'p_event_id': eventId}),
+  );
+
+  /// Creator and moderators only (0 for others).
+  Future<int> ticketClickCount(String eventId) => guardFailures(
+    () => _client.rpc<int>(
+      'get_ticket_click_count',
+      params: {'p_event_id': eventId},
+    ),
+  );
 }
 
 /// [range] as a [from, to) window in local time.

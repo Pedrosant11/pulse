@@ -1720,6 +1720,18 @@ abstract class AppLocalizations {
   /// **'Link do ingresso (opcional)'**
   String get fieldTicketUrl;
 
+  /// No description provided for @fieldTicketCoupon.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cupom de desconto (opcional)'**
+  String get fieldTicketCoupon;
+
+  /// No description provided for @fieldTicketCouponHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aparece no evento com botão de copiar, ex.: seu código de promoter.'**
+  String get fieldTicketCouponHint;
+
   /// No description provided for @fieldMinAge.
   ///
   /// In pt, this message translates to:
@@ -4485,6 +4497,162 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'+{count} boost'**
   String adminGiveBoosts(int count);
+
+  /// No description provided for @eventCouponLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cupom de desconto'**
+  String get eventCouponLabel;
+
+  /// No description provided for @eventCouponCopy.
+  ///
+  /// In pt, this message translates to:
+  /// **'Copiar'**
+  String get eventCouponCopy;
+
+  /// No description provided for @eventCouponCopied.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cupom copiado. Use na compra do ingresso.'**
+  String get eventCouponCopied;
+
+  /// No description provided for @eventTicketClicks.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =0{Ninguém tocou em Comprar ingresso ainda} =1{1 pessoa tocou em Comprar ingresso} other{{count} pessoas tocaram em Comprar ingresso}}'**
+  String eventTicketClicks(int count);
+
+  /// No description provided for @shareNightSubject.
+  ///
+  /// In pt, this message translates to:
+  /// **'Meu rolê'**
+  String get shareNightSubject;
+
+  /// No description provided for @shareNightIntro.
+  ///
+  /// In pt, this message translates to:
+  /// **'🛡️ Meu rolê (pelo Pulse):'**
+  String get shareNightIntro;
+
+  /// No description provided for @shareNightEvent.
+  ///
+  /// In pt, this message translates to:
+  /// **'📍 {place} {when}'**
+  String shareNightEvent(String place, String when);
+
+  /// No description provided for @shareNightWith.
+  ///
+  /// In pt, this message translates to:
+  /// **'👤 Vou encontrar {name}, que conheci no Pulse.'**
+  String shareNightWith(String name);
+
+  /// No description provided for @shareNightOutro.
+  ///
+  /// In pt, this message translates to:
+  /// **'Se eu não der notícia, me liga!'**
+  String get shareNightOutro;
+
+  /// No description provided for @shareNightAction.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compartilhar meu rolê'**
+  String get shareNightAction;
+
+  /// No description provided for @chatMenuShareDate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compartilhar encontro'**
+  String get chatMenuShareDate;
+
+  /// No description provided for @nightSafetyTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Rolê seguro'**
+  String get nightSafetyTitle;
+
+  /// No description provided for @nightSafetyCardTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Rolê seguro'**
+  String get nightSafetyCardTitle;
+
+  /// No description provided for @nightSafetyCardBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Avise alguém de confiança aonde você vai e tenha os números de emergência à mão.'**
+  String get nightSafetyCardBody;
+
+  /// No description provided for @nightSafetyTipsAction.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dicas e emergência'**
+  String get nightSafetyTipsAction;
+
+  /// No description provided for @nightTipWater.
+  ///
+  /// In pt, this message translates to:
+  /// **'Beba água entre um drink e outro e faça pausas para descansar.'**
+  String get nightTipWater;
+
+  /// No description provided for @nightTipDrink.
+  ///
+  /// In pt, this message translates to:
+  /// **'Não aceite bebida aberta de desconhecidos e não deixe seu copo sozinho.'**
+  String get nightTipDrink;
+
+  /// No description provided for @nightTipMeetingPoint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Combine um ponto de encontro com sua crew para quando o sinal cair.'**
+  String get nightTipMeetingPoint;
+
+  /// No description provided for @nightTipBattery.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saia com bateria cheia (ou um carregador) para chamar ajuda ou um carro.'**
+  String get nightTipBattery;
+
+  /// No description provided for @nightTipRide.
+  ///
+  /// In pt, this message translates to:
+  /// **'Na volta, confira a placa e o motorista do app antes de entrar.'**
+  String get nightTipRide;
+
+  /// No description provided for @nightTipHelp.
+  ///
+  /// In pt, this message translates to:
+  /// **'Se algo der errado, procure a equipe de saúde, a segurança ou a brigada do evento.'**
+  String get nightTipHelp;
+
+  /// No description provided for @emergencyTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Emergência'**
+  String get emergencyTitle;
+
+  /// No description provided for @emergencyPolice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Polícia'**
+  String get emergencyPolice;
+
+  /// No description provided for @emergencySamu.
+  ///
+  /// In pt, this message translates to:
+  /// **'SAMU'**
+  String get emergencySamu;
+
+  /// No description provided for @emergencyWomen.
+  ///
+  /// In pt, this message translates to:
+  /// **'Central de Atendimento à Mulher'**
+  String get emergencyWomen;
+
+  /// No description provided for @emergencyCvv.
+  ///
+  /// In pt, this message translates to:
+  /// **'CVV (apoio emocional)'**
+  String get emergencyCvv;
 }
 
 class _AppLocalizationsDelegate

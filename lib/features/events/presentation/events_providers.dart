@@ -55,6 +55,11 @@ Future<List<EventListEntry>> eventList(Ref ref, EventListScope scope) {
 Future<EventDetail> eventDetail(Ref ref, String eventId) =>
     ref.watch(eventsRepositoryProvider).fetch(eventId);
 
+/// "Comprar ingresso" taps (creator and moderators).
+@riverpod
+Future<int> ticketClickCount(Ref ref, String eventId) =>
+    ref.watch(eventsRepositoryProvider).ticketClickCount(eventId);
+
 @riverpod
 Future<bool> isAttending(Ref ref, String eventId) => ref
     .watch(eventsRepositoryProvider)

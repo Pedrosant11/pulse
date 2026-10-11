@@ -278,3 +278,10 @@ insert into public.swipes (swiper_id, swiped_id, mode, direction, is_super) valu
   ('00000000-0000-4000-a000-000000000027', '00000000-0000-4000-a000-000000000005', 'date', 'like', true),
   ('00000000-0000-4000-a000-000000000002', '00000000-0000-4000-a000-000000000001', 'date', 'like', false),
   ('00000000-0000-4000-a000-000000000004', '00000000-0000-4000-a000-000000000001', 'date', 'like', false);
+
+-- Ticket link with a promoter coupon (tickets migration), for testing the
+-- coupon row and the tap count.
+update public.events
+set ticket_url = 'https://shotgun.live/pt-br/events/noite-acida?ref=pulse',
+    ticket_coupon = 'PULSE10'
+where id = '00000000-0000-4000-b000-000000000001';

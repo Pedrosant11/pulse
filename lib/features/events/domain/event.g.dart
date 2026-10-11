@@ -137,6 +137,7 @@ _EventDetail _$EventDetailFromJson(Map<String, dynamic> json) => _EventDetail(
       (json['lineup'] as List<dynamic>?)?.map((e) => e as String).toList() ??
       const [],
   ticketUrl: json['ticket_url'] as String?,
+  ticketCoupon: json['ticket_coupon'] as String?,
   minAge: (json['min_age'] as num?)?.toInt() ?? 18,
   isOfficial: json['is_official'] as bool? ?? false,
   createdBy: json['created_by'] as String?,
@@ -161,6 +162,7 @@ Map<String, dynamic> _$EventDetailToJson(_EventDetail instance) =>
       'genres': instance.genres.map((e) => _$MusicGenreEnumMap[e]!).toList(),
       'lineup': instance.lineup,
       'ticket_url': instance.ticketUrl,
+      'ticket_coupon': instance.ticketCoupon,
       'min_age': instance.minAge,
       'is_official': instance.isOfficial,
       'created_by': instance.createdBy,

@@ -314,6 +314,84 @@ final class EventDetailFamily extends $Family
   String toString() => r'eventDetailProvider';
 }
 
+/// "Comprar ingresso" taps (creator and moderators).
+
+@ProviderFor(ticketClickCount)
+final ticketClickCountProvider = TicketClickCountFamily._();
+
+/// "Comprar ingresso" taps (creator and moderators).
+
+final class TicketClickCountProvider
+    extends $FunctionalProvider<AsyncValue<int>, int, FutureOr<int>>
+    with $FutureModifier<int>, $FutureProvider<int> {
+  /// "Comprar ingresso" taps (creator and moderators).
+  TicketClickCountProvider._({
+    required TicketClickCountFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'ticketClickCountProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$ticketClickCountHash();
+
+  @override
+  String toString() {
+    return r'ticketClickCountProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<int> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<int> create(Ref ref) {
+    final argument = this.argument as String;
+    return ticketClickCount(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is TicketClickCountProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$ticketClickCountHash() => r'fae218296d508268e496bab1c9d2225c60ac8c60';
+
+/// "Comprar ingresso" taps (creator and moderators).
+
+final class TicketClickCountFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<int>, String> {
+  TicketClickCountFamily._()
+    : super(
+        retry: null,
+        name: r'ticketClickCountProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// "Comprar ingresso" taps (creator and moderators).
+
+  TicketClickCountProvider call(String eventId) =>
+      TicketClickCountProvider._(argument: eventId, from: this);
+
+  @override
+  String toString() => r'ticketClickCountProvider';
+}
+
 @ProviderFor(isAttending)
 final isAttendingProvider = IsAttendingFamily._();
 

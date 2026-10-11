@@ -13,6 +13,7 @@ import 'package:pulse/features/legal/presentation/privacy_providers.dart';
 import 'package:pulse/features/plans/domain/plan_models.dart';
 import 'package:pulse/features/plans/presentation/plans_providers.dart';
 import 'package:pulse/features/plans/presentation/widgets/plans_prompt.dart';
+import 'package:pulse/features/safety/presentation/widgets/night_safety.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const new({super.key});
@@ -112,6 +113,12 @@ class SettingsScreen extends ConsumerWidget {
                 title: Text(l10n.safetyTipsTitle),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () => context.push(AppRoutes.safetyTips),
+              ),
+              ListTile(
+                leading: const Icon(Icons.shield_moon_outlined),
+                title: Text(l10n.nightSafetyTitle),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => showNightSafetySheet(context),
               ),
             ]),
             // LGPD: documents and the right to access/port the data.

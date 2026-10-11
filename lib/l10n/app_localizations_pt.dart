@@ -925,6 +925,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String get fieldTicketUrl => 'Link do ingresso (opcional)';
 
   @override
+  String get fieldTicketCoupon => 'Cupom de desconto (opcional)';
+
+  @override
+  String get fieldTicketCouponHint =>
+      'Aparece no evento com botão de copiar, ex.: seu código de promoter.';
+
+  @override
   String get fieldMinAge => 'Classificação etária';
 
   @override
@@ -2585,4 +2592,102 @@ class AppLocalizationsPt extends AppLocalizations {
   String adminGiveBoosts(int count) {
     return '+$count boost';
   }
+
+  @override
+  String get eventCouponLabel => 'Cupom de desconto';
+
+  @override
+  String get eventCouponCopy => 'Copiar';
+
+  @override
+  String get eventCouponCopied => 'Cupom copiado. Use na compra do ingresso.';
+
+  @override
+  String eventTicketClicks(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pessoas tocaram em Comprar ingresso',
+      one: '1 pessoa tocou em Comprar ingresso',
+      zero: 'Ninguém tocou em Comprar ingresso ainda',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get shareNightSubject => 'Meu rolê';
+
+  @override
+  String get shareNightIntro => '🛡️ Meu rolê (pelo Pulse):';
+
+  @override
+  String shareNightEvent(String place, String when) {
+    return '📍 $place $when';
+  }
+
+  @override
+  String shareNightWith(String name) {
+    return '👤 Vou encontrar $name, que conheci no Pulse.';
+  }
+
+  @override
+  String get shareNightOutro => 'Se eu não der notícia, me liga!';
+
+  @override
+  String get shareNightAction => 'Compartilhar meu rolê';
+
+  @override
+  String get chatMenuShareDate => 'Compartilhar encontro';
+
+  @override
+  String get nightSafetyTitle => 'Rolê seguro';
+
+  @override
+  String get nightSafetyCardTitle => 'Rolê seguro';
+
+  @override
+  String get nightSafetyCardBody =>
+      'Avise alguém de confiança aonde você vai e tenha os números de emergência à mão.';
+
+  @override
+  String get nightSafetyTipsAction => 'Dicas e emergência';
+
+  @override
+  String get nightTipWater =>
+      'Beba água entre um drink e outro e faça pausas para descansar.';
+
+  @override
+  String get nightTipDrink =>
+      'Não aceite bebida aberta de desconhecidos e não deixe seu copo sozinho.';
+
+  @override
+  String get nightTipMeetingPoint =>
+      'Combine um ponto de encontro com sua crew para quando o sinal cair.';
+
+  @override
+  String get nightTipBattery =>
+      'Saia com bateria cheia (ou um carregador) para chamar ajuda ou um carro.';
+
+  @override
+  String get nightTipRide =>
+      'Na volta, confira a placa e o motorista do app antes de entrar.';
+
+  @override
+  String get nightTipHelp =>
+      'Se algo der errado, procure a equipe de saúde, a segurança ou a brigada do evento.';
+
+  @override
+  String get emergencyTitle => 'Emergência';
+
+  @override
+  String get emergencyPolice => 'Polícia';
+
+  @override
+  String get emergencySamu => 'SAMU';
+
+  @override
+  String get emergencyWomen => 'Central de Atendimento à Mulher';
+
+  @override
+  String get emergencyCvv => 'CVV (apoio emocional)';
 }

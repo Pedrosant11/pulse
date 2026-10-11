@@ -80,6 +80,9 @@ class _EventFormState extends ConsumerState<_EventForm> {
   late final _venue = TextEditingController(text: _initial?.venueName);
   late final _description = TextEditingController(text: _initial?.description);
   late final _ticketUrl = TextEditingController(text: _initial?.ticketUrl);
+  late final _ticketCoupon = TextEditingController(
+    text: _initial?.ticketCoupon,
+  );
   final _artist = TextEditingController();
   late final _cityText = TextEditingController(
     text: _initial == null ? '' : '${_initial.city}, ${_initial.state}',
@@ -125,6 +128,7 @@ class _EventFormState extends ConsumerState<_EventForm> {
       _venue,
       _description,
       _ticketUrl,
+      _ticketCoupon,
       _artist,
       _cityText,
     ]) {
@@ -210,6 +214,7 @@ class _EventFormState extends ConsumerState<_EventForm> {
       'genres': enumsToDb(_genres),
       'lineup': _lineup,
       'ticket_url': _blankToNull(_ticketUrl.text),
+      'ticket_coupon': _blankToNull(_ticketCoupon.text),
       'min_age': _minAge,
       'location_reveal_hours': _secretLocation ? _revealHours : null,
     };
@@ -556,6 +561,23 @@ class _EventFormState extends ConsumerState<_EventForm> {
                   ).hasMatch(url)
                   ? null
                   : l10n.validationUrl;
+            },
+          ),
+          SizedBox(height: spacing.sm),
+          // Affiliate or promoter code, shown with a copy button.
+          TextFormField(
+            controller: _ticketCoupon,
+            maxLength: 30,
+            textCapitalization: TextCapitalization.characters,
+            decoration: InputDecoration(
+              labelText: l10n.fieldTicketCoupon,
+              helperText: l10n.fieldTicketCouponHint,
+            ),
+            validator: (v) {
+              final code = (v ?? '').trim();
+              return code.isNotEmpty && code.length < 2
+                  ? l10n.validationRequired
+                  : null;
             },
           ),
           SizedBox(height: spacing.xl),
