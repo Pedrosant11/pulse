@@ -204,17 +204,11 @@ void main() {
       expect(find.textContaining('Você já viu todo mundo'), findsOneWidget);
     });
 
-    testWidgets('Crew without events points to the Events tab', (
-      tester,
-    ) async {
+    testWidgets('Crew without events points to the Events tab', (tester) async {
       await tester.pumpWidget(
         _app(
           const DiscoverScreen(),
-          overrides: overrides(
-            const [],
-            hasEvents: false,
-            mode: AppMode.crew,
-          ),
+          overrides: overrides(const [], hasEvents: false, mode: AppMode.crew),
         ),
       );
       await settle(tester);

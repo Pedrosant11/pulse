@@ -27,8 +27,9 @@ class LikesYouActions extends _$LikesYouActions {
   @override
   AsyncValue<void> build() => const AsyncData(null);
 
-  /// Returns whether it became a match.
-  Future<bool?> answer(LikedYou like, {required bool liked}) =>
+  /// Returns the swipe result (match and its conversation), or null when it
+  /// failed.
+  Future<SwipeResult?> answer(LikedYou like, {required bool liked}) =>
       runAction(ref, (s) => state = s, () async {
         final result = await ref
             .read(discoverRepositoryProvider)
@@ -40,7 +41,7 @@ class LikesYouActions extends _$LikesYouActions {
         ref
           ..invalidate(likesReceivedProvider)
           ..invalidate(likesReceivedCountProvider);
-        return result.matched;
+        return result;
       });
 }
 
@@ -226,20 +227,29 @@ class _LikesGridState extends ConsumerState<_LikesGrid> {
 
   Future<void> _answer(LikedYou like, {required bool liked}) async {
     final l10n = context.l10n;
-    final matched = await ref
+    final result = await ref
         .read(likesYouActionsProvider.notifier)
         .answer(like, liked: liked);
-    if (matched == true && mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
+    if (result == null || !result.matched || !mounted) return;
+    final router = GoRouter.maybeOf(context);
+    final conversationId = result.conversationId;
+    // A newer match replaces the previous notice instead of queueing, and
+    // it leaves by itself (snackbars with an action persist by default).
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
         SnackBar(
+          persist: false,
+          duration: const Duration(seconds: 5),
           content: Text(l10n.likesYouMatched(like.firstName)),
           action: SnackBarAction(
-            label: l10n.likesYouOpenChats,
-            onPressed: () => context.go(AppRoutes.chats),
+            label: l10n.likesYouOpenChat,
+            onPressed: () => conversationId == null
+                ? router?.go(AppRoutes.chats)
+                : router?.push(AppRoutes.conversation(conversationId)),
           ),
         ),
       );
-    }
   }
 
   @override

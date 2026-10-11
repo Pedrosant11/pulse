@@ -872,7 +872,7 @@
   "likesYouUnlock": "Ver quem são com o Pulse Black",
   "likesYouMatched": "Deu match com {name}!",
   "@likesYouMatched": { "placeholders": { "name": { "type": "String" } } },
-  "likesYouOpenChats": "Abrir conversas",
+  "likesYouOpenChat": "Abrir conversa",
   "superlikeLabel": "Superlike",
   "discoverSuperLikedYou": "Te deu superlike",
 

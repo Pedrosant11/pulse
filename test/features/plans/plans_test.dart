@@ -4,6 +4,8 @@ import 'package:material_ui/material_ui.dart';
 import 'package:pulse/app/theme/app_theme.dart';
 import 'package:pulse/core/errors/app_failure.dart';
 import 'package:pulse/core/models/app_mode.dart';
+import 'package:pulse/features/discover/data/discover_repository.dart';
+import 'package:pulse/features/discover/domain/discover_models.dart';
 import 'package:pulse/features/plans/data/store_purchases.dart';
 import 'package:pulse/features/plans/domain/plan_models.dart';
 import 'package:pulse/features/plans/presentation/likes_you_screen.dart';
@@ -41,6 +43,19 @@ class _FakeStore implements StorePurchases {
     StoreOffer(item: StoreItem.plusMonthly, price: r'R$ 24,90', raw: 'plus'),
     StoreOffer(item: StoreItem.blackMonthly, price: r'R$ 44,90', raw: 'black'),
   ];
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
+class _MatchingDiscover implements DiscoverRepository {
+  @override
+  Future<SwipeResult> swipe({
+    required String targetId,
+    required AppMode mode,
+    required SwipeDirection direction,
+    bool superLike = false,
+  }) async => const SwipeResult(matched: true, conversationId: 'c1');
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
@@ -155,5 +170,42 @@ void main() {
     await settle(tester);
     expect(find.text('Xavier, 38'), findsOneWidget);
     expect(find.byIcon(Icons.star_rounded), findsOneWidget);
+  });
+
+  testWidgets('a match notice leaves by itself (no stuck snackbar)', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(400, 900));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(
+      _app(const LikesYouScreen(), [
+        discoverRepositoryProvider.overrideWithValue(_MatchingDiscover()),
+        entitlementsProvider.overrideWith(
+          (ref) async => const Entitlements(tier: PlanTier.black),
+        ),
+        likesReceivedCountProvider.overrideWith((ref) async => 1),
+        likesReceivedProvider.overrideWith(
+          (ref) async => [
+            LikedYou(
+              userId: 'u2',
+              firstName: 'Bruno',
+              age: 34,
+              mode: AppMode.date,
+              likedAt: DateTime(2026, 10, 10),
+            ),
+          ],
+        ),
+      ]),
+    );
+    await settle(tester);
+
+    await tester.tap(find.byTooltip('Curtir'));
+    await settle(tester);
+    expect(find.text('Deu match com Bruno!'), findsOneWidget);
+    expect(find.text('Abrir conversa'), findsOneWidget);
+
+    await tester.pump(const Duration(seconds: 6));
+    await settle(tester);
+    expect(find.text('Deu match com Bruno!'), findsNothing);
   });
 }

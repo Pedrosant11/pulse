@@ -2494,7 +2494,7 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
-  String get likesYouOpenChats => 'Abrir conversas';
+  String get likesYouOpenChat => 'Abrir conversa';
 
   @override
   String get superlikeLabel => 'Superlike';

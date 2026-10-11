@@ -4342,11 +4342,11 @@ abstract class AppLocalizations {
   /// **'Deu match com {name}!'**
   String likesYouMatched(String name);
 
-  /// No description provided for @likesYouOpenChats.
+  /// No description provided for @likesYouOpenChat.
   ///
   /// In pt, this message translates to:
-  /// **'Abrir conversas'**
-  String get likesYouOpenChats;
+  /// **'Abrir conversa'**
+  String get likesYouOpenChat;
 
   /// No description provided for @superlikeLabel.
   ///
