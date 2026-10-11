@@ -26,6 +26,7 @@ abstract final class AppRoutes {
   static const roleRequest = '/settings/role-request';
   static const badgeRequest = '/settings/badge-request';
   static const verification = '/settings/verification';
+  static const referral = '/settings/referral';
   static const blockedUsers = '/settings/blocked';
   static const deleteAccount = '/settings/delete-account';
   static const activateModes = '/activate-modes';

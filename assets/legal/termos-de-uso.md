@@ -92,6 +92,7 @@ Sobre as assinaturas:
 
 - A cobrança é feita pela loja, na conta que você usa nela. **A assinatura renova automaticamente** a cada período (semanal, mensal ou anual, conforme o plano escolhido), até você cancelar.
 - **Teste grátis**: no seu primeiro match, você ganha 3 dias de Pulse Black por nossa conta, uma única vez. O teste não gera cobrança e não renova: ao fim dos 3 dias, a conta volta ao plano grátis.
+- **Indique e ganhe**: quem entra com o código de um amigo antes do primeiro match ganha superlikes; quem indicou ganha superlikes e boost quando o amigo dá o primeiro match, até 10 amigos por mês. As recompensas não têm valor em dinheiro e não podem ser trocadas. Contas falsas, duplicadas ou combinadas para ganhar recompensas podem perdê-las e ser suspensas.
 - Você pode **cancelar a qualquer momento** nas configurações de assinaturas da loja. O cancelamento vale para as próximas renovações; os benefícios continuam até o fim do período já pago.
 - Excluir o app ou a conta **não cancela** a assinatura na loja: cancele por lá.
 - **Reembolsos** seguem as regras de cada loja e o Código de Defesa do Consumidor. O direito de arrependimento (art. 49 do CDC) pode ser pedido à loja em até 7 dias da compra.

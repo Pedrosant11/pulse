@@ -68,6 +68,13 @@ class SettingsScreen extends ConsumerWidget {
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () => context.push(AppRoutes.plans),
               ),
+              ListTile(
+                leading: Icon(Icons.card_giftcard_rounded, color: colors.lime),
+                title: Text(l10n.referralTitle),
+                subtitle: Text(l10n.referralSettingsSubtitle),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.push(AppRoutes.referral),
+              ),
               // Incognito works with Black; others see the plans.
               SwitchListTile(
                 secondary: const Icon(Icons.visibility_off_outlined),

@@ -2885,4 +2885,101 @@ class AppLocalizationsPt extends AppLocalizations {
   String planTrialUntil(String date) {
     return 'Teste grátis até $date, sem cobrança';
   }
+
+  @override
+  String get referralTitle => 'Indique e ganhe';
+
+  @override
+  String get referralSettingsSubtitle =>
+      'Ganhe superlikes e boosts chamando amigos';
+
+  @override
+  String get referralHeadline => 'Chame a galera pro rolê';
+
+  @override
+  String referralExplainer(int superlikes, int boosts, int friendSuperlikes) {
+    String _temp0 = intl.Intl.pluralLogic(
+      boosts,
+      locale: localeName,
+      other: '$boosts boosts',
+      one: '1 boost',
+    );
+    return 'Quando um amigo entra com seu código e dá o primeiro match, você ganha $superlikes superlikes e $_temp0. Ele ganha $friendSuperlikes superlikes na hora.';
+  }
+
+  @override
+  String get referralYourCode => 'Seu código';
+
+  @override
+  String get referralCopy => 'Copiar';
+
+  @override
+  String get referralCopied => 'Código copiado';
+
+  @override
+  String get referralShare => 'Compartilhar convite';
+
+  @override
+  String referralShareText(String code, int superlikes) {
+    return 'Bora pro Pulse? É o app pra dar match com quem vai nas mesmas festas. Use meu código $code em Configurações → Indique e ganhe e ganhe $superlikes superlikes.';
+  }
+
+  @override
+  String referralInvited(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'amigos usaram seu código',
+      one: 'amigo usou seu código',
+      zero: 'amigos usaram seu código',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String referralRewarded(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'deram match (recompensas suas)',
+      one: 'deu match (recompensa sua)',
+      zero: 'deram match (recompensas suas)',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get referralGotCode => 'Recebeu um convite?';
+
+  @override
+  String referralGotCodeHint(int superlikes) {
+    return 'Digite o código do seu amigo e ganhe $superlikes superlikes. Vale até o seu primeiro match.';
+  }
+
+  @override
+  String get referralCodeLabel => 'Código do amigo';
+
+  @override
+  String get referralRedeem => 'Usar código';
+
+  @override
+  String referralRedeemed(int superlikes) {
+    return 'Código aplicado! $superlikes superlikes na sua carteira.';
+  }
+
+  @override
+  String get referralFinePrint =>
+      'As recompensas de quem indica valem para até 10 amigos por mês. Contas falsas ou combinadas podem perder as recompensas.';
+
+  @override
+  String referralError(String problem) {
+    String _temp0 = intl.Intl.selectLogic(problem, {
+      'invalid': 'Código não encontrado. Confira as letras e os números.',
+      'own': 'Esse código é seu (ou de alguém que você indicou).',
+      'used': 'Você já usou um código de convite.',
+      'tooLate': 'Os códigos de convite valem só até o primeiro match.',
+      'other': 'Não foi possível usar o código.',
+    });
+    return '$_temp0';
+  }
 }

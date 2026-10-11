@@ -60,6 +60,10 @@ void main() {
       expect(routeFromPushData({'route': '/chats'}), '/chats');
       expect(routeFromPushData({'route': '/plans'}), '/plans');
       expect(
+        routeFromPushData({'route': '/settings/referral'}),
+        '/settings/referral',
+      );
+      expect(
         routeFromPushData({'route': '/settings/verification'}),
         '/settings/verification',
       );

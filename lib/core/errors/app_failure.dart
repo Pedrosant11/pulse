@@ -71,6 +71,11 @@ sealed class AppFailure implements Exception {
       // Selfie verification.
       ('P0001', 'verification_pending') => VerificationPendingFailure(error),
       ('P0001', 'already_verified') => AlreadyVerifiedFailure(error),
+      // Referral codes.
+      ('P0001', 'referral_invalid') => ReferralFailure(.invalid, error),
+      ('P0001', 'referral_own') => ReferralFailure(.own, error),
+      ('P0001', 'referral_used') => ReferralFailure(.used, error),
+      ('P0001', 'referral_too_late') => ReferralFailure(.tooLate, error),
       // Plans (monetization migration).
       ('P0001', 'like_limit') => LikeLimitFailure(error),
       ('P0001', 'superlike_limit') => SuperlikeLimitFailure(error),
@@ -217,4 +222,13 @@ final class VerificationPendingFailure extends AppFailure {
 
 final class AlreadyVerifiedFailure extends AppFailure {
   const new([super.cause]);
+}
+
+/// Why a friend's referral code was refused.
+enum ReferralProblem { invalid, own, used, tooLate }
+
+final class ReferralFailure extends AppFailure {
+  const new(this.problem, [super.cause]);
+
+  final ReferralProblem problem;
 }

@@ -38,6 +38,7 @@ import 'package:pulse/features/plans/presentation/likes_you_screen.dart';
 import 'package:pulse/features/plans/presentation/plans_screen.dart';
 import 'package:pulse/features/profile/presentation/edit_profile_screen.dart';
 import 'package:pulse/features/profile/presentation/profile_screen.dart';
+import 'package:pulse/features/referral/presentation/referral_screen.dart';
 import 'package:pulse/features/safety/presentation/account_restricted_screen.dart';
 import 'package:pulse/features/safety/presentation/blocked_users_screen.dart';
 import 'package:pulse/features/safety/presentation/safety_tips_screen.dart';
@@ -266,6 +267,7 @@ GoRouter router(Ref ref) {
             path: 'verification',
             builder: (_, _) => const VerificationScreen(),
           ),
+          GoRoute(path: 'referral', builder: (_, _) => const ReferralScreen()),
           GoRoute(
             path: 'blocked',
             builder: (_, _) => const BlockedUsersScreen(),

@@ -23,6 +23,7 @@ extension AppFailureMessage on AppFailure {
       CrewNeedsEventFailure() => l10n.errorCrewNeedsEvent,
       VerificationPendingFailure() => l10n.verificationPendingBody,
       AlreadyVerifiedFailure() => l10n.verificationApprovedTitle,
+      ReferralFailure(:final problem) => l10n.referralError(problem.name),
       LikeLimitFailure() => l10n.errorLikeLimit,
       SuperlikeLimitFailure() => l10n.errorSuperlikeLimit,
       PlanRequiredFailure() => l10n.errorPlanRequired,

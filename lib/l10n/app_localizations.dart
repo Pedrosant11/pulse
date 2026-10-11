@@ -4989,6 +4989,114 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Teste grátis até {date}, sem cobrança'**
   String planTrialUntil(String date);
+
+  /// No description provided for @referralTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Indique e ganhe'**
+  String get referralTitle;
+
+  /// No description provided for @referralSettingsSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ganhe superlikes e boosts chamando amigos'**
+  String get referralSettingsSubtitle;
+
+  /// No description provided for @referralHeadline.
+  ///
+  /// In pt, this message translates to:
+  /// **'Chame a galera pro rolê'**
+  String get referralHeadline;
+
+  /// No description provided for @referralExplainer.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quando um amigo entra com seu código e dá o primeiro match, você ganha {superlikes} superlikes e {boosts, plural, =1{1 boost} other{{boosts} boosts}}. Ele ganha {friendSuperlikes} superlikes na hora.'**
+  String referralExplainer(int superlikes, int boosts, int friendSuperlikes);
+
+  /// No description provided for @referralYourCode.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seu código'**
+  String get referralYourCode;
+
+  /// No description provided for @referralCopy.
+  ///
+  /// In pt, this message translates to:
+  /// **'Copiar'**
+  String get referralCopy;
+
+  /// No description provided for @referralCopied.
+  ///
+  /// In pt, this message translates to:
+  /// **'Código copiado'**
+  String get referralCopied;
+
+  /// No description provided for @referralShare.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compartilhar convite'**
+  String get referralShare;
+
+  /// No description provided for @referralShareText.
+  ///
+  /// In pt, this message translates to:
+  /// **'Bora pro Pulse? É o app pra dar match com quem vai nas mesmas festas. Use meu código {code} em Configurações → Indique e ganhe e ganhe {superlikes} superlikes.'**
+  String referralShareText(String code, int superlikes);
+
+  /// No description provided for @referralInvited.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =0{amigos usaram seu código} =1{amigo usou seu código} other{amigos usaram seu código}}'**
+  String referralInvited(int count);
+
+  /// No description provided for @referralRewarded.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =0{deram match (recompensas suas)} =1{deu match (recompensa sua)} other{deram match (recompensas suas)}}'**
+  String referralRewarded(int count);
+
+  /// No description provided for @referralGotCode.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recebeu um convite?'**
+  String get referralGotCode;
+
+  /// No description provided for @referralGotCodeHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Digite o código do seu amigo e ganhe {superlikes} superlikes. Vale até o seu primeiro match.'**
+  String referralGotCodeHint(int superlikes);
+
+  /// No description provided for @referralCodeLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Código do amigo'**
+  String get referralCodeLabel;
+
+  /// No description provided for @referralRedeem.
+  ///
+  /// In pt, this message translates to:
+  /// **'Usar código'**
+  String get referralRedeem;
+
+  /// No description provided for @referralRedeemed.
+  ///
+  /// In pt, this message translates to:
+  /// **'Código aplicado! {superlikes} superlikes na sua carteira.'**
+  String referralRedeemed(int superlikes);
+
+  /// No description provided for @referralFinePrint.
+  ///
+  /// In pt, this message translates to:
+  /// **'As recompensas de quem indica valem para até 10 amigos por mês. Contas falsas ou combinadas podem perder as recompensas.'**
+  String get referralFinePrint;
+
+  /// No description provided for @referralError.
+  ///
+  /// In pt, this message translates to:
+  /// **'{problem, select, invalid{Código não encontrado. Confira as letras e os números.} own{Esse código é seu (ou de alguém que você indicou).} used{Você já usou um código de convite.} tooLate{Os códigos de convite valem só até o primeiro match.} other{Não foi possível usar o código.}}'**
+  String referralError(String problem);
 }
 
 class _AppLocalizationsDelegate

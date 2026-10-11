@@ -87,6 +87,12 @@ function textFor(kind: string, data: Record<string, unknown>): PushText | null {
         title: "3 dias de Pulse Black por nossa conta 🎉",
         body: "Veja quem curtiu você, use o boost e o modo viagem. Sem cobrança.",
       };
+    case "referral_reward":
+      return {
+        channel: "account",
+        title: "Sua indicação deu match 🎉",
+        body: "Seus superlikes e o boost de presente já estão na carteira.",
+      };
     case "verification_approved":
       return {
         channel: "account",
