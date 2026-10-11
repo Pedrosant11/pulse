@@ -4222,11 +4222,11 @@ abstract class AppLocalizations {
   /// **'Válido até {date}'**
   String planEndsOn(String date);
 
-  /// No description provided for @planPricePerMonth.
+  /// No description provided for @planPricePer.
   ///
   /// In pt, this message translates to:
-  /// **'{price}/mês'**
-  String planPricePerMonth(String price);
+  /// **'{price}/{period, select, weekly{semana} monthly{mês} annual{ano} other{mês}}'**
+  String planPricePer(String price, String period);
 
   /// No description provided for @planCurrent.
   ///
@@ -4971,6 +4971,24 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Quer mais gente no seu evento? Fale com a equipe Pulse para destacá-lo.'**
   String get insightsFeatureHint;
+
+  /// No description provided for @planPeriodName.
+  ///
+  /// In pt, this message translates to:
+  /// **'{period, select, weekly{Semanal} monthly{Mensal} annual{Anual} other{Mensal}}'**
+  String planPeriodName(String period);
+
+  /// No description provided for @planAnnualSavings.
+  ///
+  /// In pt, this message translates to:
+  /// **'Economize {percent}%'**
+  String planAnnualSavings(int percent);
+
+  /// No description provided for @planTrialUntil.
+  ///
+  /// In pt, this message translates to:
+  /// **'Teste grátis até {date}, sem cobrança'**
+  String planTrialUntil(String date);
 }
 
 class _AppLocalizationsDelegate

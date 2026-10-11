@@ -40,8 +40,24 @@ class _FakeStore implements StorePurchases {
 
   @override
   Future<List<StoreOffer>> offers() async => const [
-    StoreOffer(item: StoreItem.plusMonthly, price: r'R$ 24,90', raw: 'plus'),
-    StoreOffer(item: StoreItem.blackMonthly, price: r'R$ 44,90', raw: 'black'),
+    StoreOffer(
+      item: StoreItem.plusMonthly,
+      price: r'R$ 24,90',
+      amount: 24.9,
+      raw: 'plus',
+    ),
+    StoreOffer(
+      item: StoreItem.plusAnnual,
+      price: r'R$ 179,90',
+      amount: 179.9,
+      raw: 'plus-annual',
+    ),
+    StoreOffer(
+      item: StoreItem.blackMonthly,
+      price: r'R$ 44,90',
+      amount: 44.9,
+      raw: 'black',
+    ),
   ];
 
   @override
@@ -119,6 +135,42 @@ void main() {
     expect(find.text(r'R$ 24,90/mês'), findsOneWidget);
     expect(find.text('Seu plano atual'), findsOneWidget);
     expect(find.text('Assinar'), findsOneWidget);
+  });
+
+  testWidgets('annual shows the yearly price and the savings', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(400, 1400));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(
+      _app(const PlansScreen(), [
+        storePurchasesProvider.overrideWithValue(_FakeStore()),
+        entitlementsProvider.overrideWith((ref) async => const Entitlements()),
+      ]),
+    );
+    await settle(tester);
+    await tester.tap(find.text('Anual'));
+    await settle(tester);
+    expect(find.text(r'R$ 179,90/ano'), findsOneWidget);
+    // 179,90 against 12 × 24,90 = 298,80.
+    expect(find.text('Economize 40%'), findsOneWidget);
+  });
+
+  testWidgets('the free trial says until when, with no charge', (tester) async {
+    await tester.pumpWidget(
+      _app(const PlansScreen(), [
+        entitlementsProvider.overrideWith(
+          (ref) async => Entitlements(
+            tier: PlanTier.black,
+            source: 'trial',
+            expiresAt: DateTime(2026, 10, 13),
+          ),
+        ),
+      ]),
+    );
+    await settle(tester);
+    expect(
+      find.text('Teste grátis até 13/10/2026, sem cobrança'),
+      findsOneWidget,
+    );
   });
 
   testWidgets('without the store the plans say "em breve"', (tester) async {

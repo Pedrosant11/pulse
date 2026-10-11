@@ -2391,8 +2391,14 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
-  String planPricePerMonth(String price) {
-    return '$price/mês';
+  String planPricePer(String price, String period) {
+    String _temp0 = intl.Intl.selectLogic(period, {
+      'weekly': 'semana',
+      'monthly': 'mês',
+      'annual': 'ano',
+      'other': 'mês',
+    });
+    return '$price/$_temp0';
   }
 
   @override
@@ -2858,4 +2864,25 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get insightsFeatureHint =>
       'Quer mais gente no seu evento? Fale com a equipe Pulse para destacá-lo.';
+
+  @override
+  String planPeriodName(String period) {
+    String _temp0 = intl.Intl.selectLogic(period, {
+      'weekly': 'Semanal',
+      'monthly': 'Mensal',
+      'annual': 'Anual',
+      'other': 'Mensal',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String planAnnualSavings(int percent) {
+    return 'Economize $percent%';
+  }
+
+  @override
+  String planTrialUntil(String date) {
+    return 'Teste grátis até $date, sem cobrança';
+  }
 }

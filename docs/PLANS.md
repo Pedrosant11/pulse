@@ -10,6 +10,10 @@
 | Boost (30 min no topo) | — | — | 1 por mês |
 | Modo discreto | — | — | ✅ |
 
+Assinaturas semanal, mensal e anual para cada plano: `pulse_plus_weekly`, `pulse_plus_monthly`, `pulse_plus_annual`, `pulse_black_weekly`, `pulse_black_monthly` e `pulse_black_annual`. A tela mostra quanto o anual economiza contra 12 mensais.
+
+**Teste grátis**: no primeiro match, a pessoa ganha 3 dias de Pulse Black (`trial_days` em `private.app_settings`). É uma vez por conta, sem cobrança e sem renovação. Quem já tem plano não ganha, e uma compra na loja substitui o teste. O push `trial_started` abre a tela de planos.
+
 Avulsos (saldo na carteira): `pulse_superlikes_5`, `pulse_superlikes_15`, `pulse_boost_1` e `pulse_boosts_5`.
 
 Os números (50 likes, superlikes, boosts, 30 min) ficam em `private.app_settings`. Dá para ajustar sem migration:
@@ -36,9 +40,9 @@ app ← get_my_entitlements() (o banco decide tudo)
 ## Configurar (quando a conta do Play Console existir)
 
 1. **Play Console → Monetizar**:
-   - Assinaturas `pulse_plus_monthly` e `pulse_black_monthly` (plano base mensal).
+   - Assinaturas com os 6 ids acima (um plano base em cada).
    - Produtos únicos com os 4 ids de avulsos.
-   - Preço sugerido: Pulse+ R$ 24,90, Black R$ 44,90, 5 superlikes R$ 14,90, 15 superlikes R$ 34,90, 1 boost R$ 12,90, 5 boosts R$ 44,90.
+   - Preço sugerido: Pulse+ R$ 9,90/semana, R$ 24,90/mês, R$ 179,90/ano; Black R$ 16,90/semana, R$ 44,90/mês, R$ 319,90/ano; 5 superlikes R$ 14,90, 15 superlikes R$ 34,90, 1 boost R$ 12,90, 5 boosts R$ 44,90.
 2. **RevenueCat** (app.revenuecat.com):
    - Criar o projeto e o app Android `com.pulseapp.pulse`.
    - Ligar ao Play com a conta de serviço do Google Cloud.

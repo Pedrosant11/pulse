@@ -18,20 +18,35 @@ enum PlanFeature {
 /// Matches the database enum `plan_tier`.
 enum PlanTier { plus, black }
 
+/// How often a subscription bills.
+enum PlanPeriod { weekly, monthly, annual }
+
 /// What the store sells. Ids must match Play Console / App Store Connect,
 /// RevenueCat and `private.store_products` (packs).
 enum StoreItem {
-  plusMonthly('pulse_plus_monthly', subscription: true),
-  blackMonthly('pulse_black_monthly', subscription: true),
+  plusWeekly('pulse_plus_weekly', tier: PlanTier.plus, period: .weekly),
+  plusMonthly('pulse_plus_monthly', tier: PlanTier.plus, period: .monthly),
+  plusAnnual('pulse_plus_annual', tier: PlanTier.plus, period: .annual),
+  blackWeekly('pulse_black_weekly', tier: PlanTier.black, period: .weekly),
+  blackMonthly('pulse_black_monthly', tier: PlanTier.black, period: .monthly),
+  blackAnnual('pulse_black_annual', tier: PlanTier.black, period: .annual),
   superlikes5('pulse_superlikes_5'),
   superlikes15('pulse_superlikes_15'),
   boost1('pulse_boost_1'),
   boosts5('pulse_boosts_5');
 
-  new(this.productId, {this.subscription = false});
+  new(this.productId, {this.tier, this.period});
 
   final String productId;
-  final bool subscription;
+
+  /// Set for subscriptions.
+  final PlanTier? tier;
+  final PlanPeriod? period;
+
+  bool get subscription => tier != null;
+
+  static StoreItem plan(PlanTier tier, PlanPeriod period) =>
+      values.firstWhere((i) => i.tier == tier && i.period == period);
 
   /// Google subscriptions come back as "productId:basePlan".
   static StoreItem? fromStoreId(String id) {

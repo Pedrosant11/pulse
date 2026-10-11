@@ -7,12 +7,20 @@ part 'store_purchases.g.dart';
 
 /// A product as the store sells it (localized price).
 class StoreOffer {
-  const new({required this.item, required this.price, required this.raw});
+  const new({
+    required this.item,
+    required this.price,
+    required this.raw,
+    this.amount = 0,
+  });
 
   final StoreItem item;
 
   /// e.g. "R$ 24,90".
   final String price;
+
+  /// Numeric price in the store currency (to compare periods).
+  final double amount;
 
   /// The SDK product, used to buy it.
   final Object raw;
@@ -97,7 +105,12 @@ class RevenueCatPurchases implements StorePurchases {
     return [
       for (final product in [...subscriptions, ...packs])
         if (StoreItem.fromStoreId(product.identifier) case final item?)
-          StoreOffer(item: item, price: product.priceString, raw: product),
+          StoreOffer(
+            item: item,
+            price: product.priceString,
+            amount: product.price,
+            raw: product,
+          ),
     ];
   }
 

@@ -845,8 +845,8 @@
   "@planRenewsOn": { "placeholders": { "date": { "type": "String" } } },
   "planEndsOn": "Válido até {date}",
   "@planEndsOn": { "placeholders": { "date": { "type": "String" } } },
-  "planPricePerMonth": "{price}/mês",
-  "@planPricePerMonth": { "placeholders": { "price": { "type": "String" } } },
+  "planPricePer": "{price}/{period, select, weekly{semana} monthly{mês} annual{ano} other{mês}}",
+  "@planPricePer": { "placeholders": { "price": { "type": "String" }, "period": { "type": "String" } } },
   "planCurrent": "Seu plano atual",
   "planSubscribe": "Assinar",
   "planBenefitUnlimitedLikes": "Likes ilimitados",
@@ -998,5 +998,12 @@
   "insightsPrivacy": "Números agregados: ninguém é identificado.",
   "insightsFeaturedUntil": "Em destaque até {date}",
   "@insightsFeaturedUntil": { "placeholders": { "date": { "type": "String" } } },
-  "insightsFeatureHint": "Quer mais gente no seu evento? Fale com a equipe Pulse para destacá-lo."
+  "insightsFeatureHint": "Quer mais gente no seu evento? Fale com a equipe Pulse para destacá-lo.",
+
+  "planPeriodName": "{period, select, weekly{Semanal} monthly{Mensal} annual{Anual} other{Mensal}}",
+  "@planPeriodName": { "placeholders": { "period": { "type": "String" } } },
+  "planAnnualSavings": "Economize {percent}%",
+  "@planAnnualSavings": { "placeholders": { "percent": { "type": "int" } } },
+  "planTrialUntil": "Teste grátis até {date}, sem cobrança",
+  "@planTrialUntil": { "placeholders": { "date": { "type": "String" } } }
 }

@@ -90,7 +90,8 @@ O Pulse pode ser usado de graça, com limites (por exemplo, um número de likes 
 
 Sobre as assinaturas:
 
-- A cobrança é feita pela loja, na conta que você usa nela. **A assinatura renova automaticamente** a cada período (mensal), até você cancelar.
+- A cobrança é feita pela loja, na conta que você usa nela. **A assinatura renova automaticamente** a cada período (semanal, mensal ou anual, conforme o plano escolhido), até você cancelar.
+- **Teste grátis**: no seu primeiro match, você ganha 3 dias de Pulse Black por nossa conta, uma única vez. O teste não gera cobrança e não renova: ao fim dos 3 dias, a conta volta ao plano grátis.
 - Você pode **cancelar a qualquer momento** nas configurações de assinaturas da loja. O cancelamento vale para as próximas renovações; os benefícios continuam até o fim do período já pago.
 - Excluir o app ou a conta **não cancela** a assinatura na loja: cancele por lá.
 - **Reembolsos** seguem as regras de cada loja e o Código de Defesa do Consumidor. O direito de arrependimento (art. 49 do CDC) pode ser pedido à loja em até 7 dias da compra.

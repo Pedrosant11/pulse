@@ -15,10 +15,17 @@ import 'package:pulse/features/plans/presentation/plans_providers.dart';
 
 /// Plans and packs (SPEC monetization). Prices come from the store; what
 /// the person can use comes from the database.
-class PlansScreen extends ConsumerWidget {
+class PlansScreen extends ConsumerStatefulWidget {
   const new({this.feature, super.key});
 
   final PlanFeature? feature;
+
+  @override
+  ConsumerState<PlansScreen> createState() => _PlansScreenState();
+}
+
+class _PlansScreenState extends ConsumerState<PlansScreen> {
+  PlanPeriod _period = PlanPeriod.monthly;
 
   Future<void> _buy(
     BuildContext context,
@@ -33,8 +40,20 @@ class PlansScreen extends ConsumerWidget {
     }
   }
 
+  /// Annual price against 12 monthly payments, in % (null when unknown).
+  int? _annualSavings(Map<StoreItem, StoreOffer> offers, PlanTier tier) {
+    final monthly = offers[StoreItem.plan(tier, PlanPeriod.monthly)]?.amount;
+    final annual = offers[StoreItem.plan(tier, PlanPeriod.annual)]?.amount;
+    if (monthly == null || annual == null || monthly <= 0 || annual <= 0) {
+      return null;
+    }
+    final savings = ((1 - annual / (monthly * 12)) * 100).round();
+    return savings > 0 ? savings : null;
+  }
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
+    final feature = widget.feature;
     final l10n = context.l10n;
     final colors = context.colors;
     final spacing = context.spacing;
@@ -90,10 +109,28 @@ class PlansScreen extends ConsumerWidget {
                 ),
                 SizedBox(height: spacing.md),
               ],
+              // Billing period for both plans.
+              SegmentedButton<PlanPeriod>(
+                showSelectedIcon: false,
+                segments: [
+                  for (final period in PlanPeriod.values)
+                    ButtonSegment(
+                      value: period,
+                      label: Text(l10n.planPeriodName(period.name)),
+                    ),
+                ],
+                selected: {_period},
+                onSelectionChanged: (s) => setState(() => _period = s.first),
+              ),
+              SizedBox(height: spacing.md),
               _PlanCard(
                 tier: PlanTier.plus,
                 current: me.tier == PlanTier.plus,
-                price: offers[StoreItem.plusMonthly]?.price,
+                period: _period,
+                price: offers[StoreItem.plan(PlanTier.plus, _period)]?.price,
+                savings: _period == PlanPeriod.annual
+                    ? _annualSavings(offers, PlanTier.plus)
+                    : null,
                 benefits: [
                   l10n.planBenefitUnlimitedLikes,
                   l10n.planBenefitRewind,
@@ -101,13 +138,17 @@ class PlansScreen extends ConsumerWidget {
                   l10n.planBenefitSuperlikes(5),
                 ],
                 busy: actions.isLoading,
-                onBuy: buy(StoreItem.plusMonthly),
+                onBuy: buy(StoreItem.plan(PlanTier.plus, _period)),
               ),
               SizedBox(height: spacing.md),
               _PlanCard(
                 tier: PlanTier.black,
                 current: me.tier == PlanTier.black,
-                price: offers[StoreItem.blackMonthly]?.price,
+                period: _period,
+                price: offers[StoreItem.plan(PlanTier.black, _period)]?.price,
+                savings: _period == PlanPeriod.annual
+                    ? _annualSavings(offers, PlanTier.black)
+                    : null,
                 benefits: [
                   l10n.planBenefitEverythingPlus,
                   l10n.planBenefitLikedYou,
@@ -115,7 +156,7 @@ class PlansScreen extends ConsumerWidget {
                   l10n.planBenefitIncognito,
                 ],
                 busy: actions.isLoading,
-                onBuy: buy(StoreItem.blackMonthly),
+                onBuy: buy(StoreItem.plan(PlanTier.black, _period)),
               ),
               SizedBox(height: spacing.lg),
               Text(
@@ -203,6 +244,7 @@ class _CurrentPlan extends StatelessWidget {
         : DateFormat.yMd('pt_BR').format(expires.toLocal());
     final detail = switch ((entitlements.source, date)) {
       ('admin', _) => l10n.planGrantedByTeam,
+      ('trial', final date?) => l10n.planTrialUntil(date),
       (_, final date?) when entitlements.willRenew => l10n.planRenewsOn(date),
       (_, final date?) => l10n.planEndsOn(date),
       _ => null,
@@ -235,15 +277,21 @@ class _PlanCard extends StatelessWidget {
   const new({
     required this.tier,
     required this.current,
+    required this.period,
     required this.price,
     required this.benefits,
     required this.busy,
     required this.onBuy,
+    this.savings,
   });
 
   final PlanTier tier;
   final bool current;
+  final PlanPeriod period;
   final String? price;
+
+  /// Annual discount against 12 months, in %.
+  final int? savings;
   final List<String> benefits;
   final bool busy;
   final VoidCallback? onBuy;
@@ -275,11 +323,21 @@ class _PlanCard extends StatelessWidget {
               ),
               if (price != null)
                 Text(
-                  l10n.planPricePerMonth(price!),
+                  l10n.planPricePer(price!, period.name),
                   style: context.textTheme.titleMedium,
                 ),
             ],
           ),
+          if (savings case final savings?)
+            Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: Text(
+                l10n.planAnnualSavings(savings),
+                style: context.textTheme.labelMedium?.copyWith(
+                  color: colors.lime,
+                ),
+              ),
+            ),
           SizedBox(height: spacing.sm),
           for (final benefit in benefits)
             Padding(

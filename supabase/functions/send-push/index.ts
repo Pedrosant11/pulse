@@ -81,6 +81,12 @@ function textFor(kind: string, data: Record<string, unknown>): PushText | null {
         title: "Convite aceito 🎉",
         body: "Alguém entrou na sua crew pelo seu convite.",
       };
+    case "trial_started":
+      return {
+        channel: "account",
+        title: "3 dias de Pulse Black por nossa conta 🎉",
+        body: "Veja quem curtiu você, use o boost e o modo viagem. Sem cobrança.",
+      };
     case "verification_approved":
       return {
         channel: "account",

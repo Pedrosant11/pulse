@@ -58,6 +58,7 @@ void main() {
       expect(routeFromPushData({'route': '/chats/$id'}), '/chats/$id');
       expect(routeFromPushData({'route': '/crews/$id'}), '/crews/$id');
       expect(routeFromPushData({'route': '/chats'}), '/chats');
+      expect(routeFromPushData({'route': '/plans'}), '/plans');
       expect(
         routeFromPushData({'route': '/settings/verification'}),
         '/settings/verification',
