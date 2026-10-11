@@ -430,3 +430,15 @@ Regras:
 - Compras dentro do app **obrigatoriamente pelo sistema das lojas** (In-App Purchase da Apple e Google Play Billing), recomendado via RevenueCat. Não usar checkout próprio, Stripe ou Pix para recursos digitais.
 - O direito de uso (plano ativo, créditos) fica no **banco**, atualizado pelo webhook da loja/RevenueCat numa Edge Function; as regras (limite de likes, passaporte, voltar, ver quem curtiu) são checadas em RLS/RPCs, nunca só no app.
 - Até essa fase existir: likes sem limite, "voltar" disponível para todos (como na seção 8.2), e Passaporte, super like e "ver quem te curtiu" não aparecem.
+
+## 16. Roteiro pós-pesquisa (decidido em 2026-10-10)
+
+Baseado na pesquisa de mercado (apps de relacionamento migrando para eventos presenciais, Radiate/FestivalMates/Shotgun). Uma fase por vez:
+
+1. **Ingressos e Rolê seguro** (feito): cupom de afiliado/promoter no evento (botão copiar), contagem de toques em "Comprar ingresso" para o produtor; "Compartilhar meu rolê"/"Compartilhar encontro" (texto pelo WhatsApp etc., nada vai ao servidor), dicas da noite e números de emergência.
+2. **"Cheguei bem"** (check-in com prazo; se não confirmar, avisa um contato de confiança). Depende do canal do aviso (e-mail, WhatsApp/SMS pago ou push para outro usuário do Pulse).
+3. **Verificação por selfie** (antes do lançamento): selo de verificado grátis.
+4. **Modo Hoje**: check-in na festa, quem do Pulse está lá agora (opt-in), ponto de encontro da crew; "Você esteve no mesmo rolê que…" nas 24 h seguintes (Black).
+5. **Produtores**: evento em destaque (Pix, fora da loja), painel do produtor com números agregados (presenças, toques no ingresso, gêneros, cidades).
+6. **Planos**: semanal e anual com desconto, 3 dias de Black grátis no primeiro match. Sem curtidas falsas.
+7. **Crescimento**: QR code/link do evento (abre o evento no app), indicação com recompensa (superlikes/boosts), conexão com Spotify para gosto musical.
