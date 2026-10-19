@@ -14,6 +14,7 @@ import 'package:pulse/features/chat/presentation/widgets/chat_avatar.dart';
 import 'package:pulse/features/crews/presentation/crews_providers.dart';
 import 'package:pulse/features/events/presentation/widgets/event_visuals.dart';
 import 'package:pulse/features/plans/presentation/plans_providers.dart';
+import 'package:pulse/l10n/app_localizations.dart';
 
 /// Inbox (SPEC 9.1): Date / Crew / Grupos tabs; new matches in a horizontal
 /// strip on top.
@@ -198,7 +199,7 @@ class _ConversationTile extends ConsumerWidget {
     final userId = ref.watch(currentUserIdProvider);
     final c = conversation;
     final unread = c.unreadCount > 0;
-    final last = c.lastMessage ?? l10n.chatsSayHi;
+    final last = lastMessageText(c, l10n) ?? l10n.chatsSayHi;
     final preview = c.lastMessageSenderId == userId
         ? l10n.chatsYouPrefix(last)
         : last;
@@ -400,8 +401,8 @@ class _GroupsTab extends ConsumerWidget {
                     ? '${group.eventName ?? ''} · '
                           '${l10n.crewMembersShort(group.memberCount ?? 0)}'
                     : group.lastMessageSenderId == userId
-                    ? l10n.chatsYouPrefix(group.lastMessage!)
-                    : group.lastMessage!,
+                    ? l10n.chatsYouPrefix(lastMessageText(group, l10n)!)
+                    : lastMessageText(group, l10n)!,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: context.textTheme.bodySmall,
@@ -417,4 +418,15 @@ class _GroupsTab extends ConsumerWidget {
       ),
     );
   }
+}
+
+/// The inbox preview: the text, or "Foto" / "Áudio" for media.
+String? lastMessageText(ConversationSummary c, AppLocalizations l10n) {
+  final text = c.lastMessage;
+  if (text == null) return null;
+  return switch (c.lastMessageKind) {
+    MessageKind.text => text,
+    MessageKind.image => text.isEmpty ? l10n.chatPhoto : '📷 $text',
+    MessageKind.audio => l10n.chatVoice,
+  };
 }

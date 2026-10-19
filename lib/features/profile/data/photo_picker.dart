@@ -89,6 +89,23 @@ class PhotoPicker {
     );
   }
 
+  /// A photo for a chat: no crop, JPEG ≤1600px, EXIF (GPS) stripped.
+  Future<Uint8List?> chatPhoto(PhotoSource source) async {
+    final picked = await _picker.pickImage(
+      source: source == PhotoSource.camera
+          ? ImageSource.camera
+          : ImageSource.gallery,
+      requestFullMetadata: false,
+    );
+    if (picked == null) return null;
+    return await FlutterImageCompress.compressWithFile(
+      picked.path,
+      minWidth: 1600,
+      minHeight: 1600,
+      quality: 80,
+    );
+  }
+
   /// Live selfie from the front camera (verification): no gallery, no crop.
   /// Compressed to ≤1080px and stripped of EXIF.
   Future<Uint8List?> selfie() async {

@@ -145,6 +145,84 @@ final class ConversationHeaderFamily extends $Family
   String toString() => r'conversationHeaderProvider';
 }
 
+/// Signed link to a photo or voice message, cached while the chat is open.
+
+@ProviderFor(chatMediaUrl)
+final chatMediaUrlProvider = ChatMediaUrlFamily._();
+
+/// Signed link to a photo or voice message, cached while the chat is open.
+
+final class ChatMediaUrlProvider
+    extends $FunctionalProvider<AsyncValue<String>, String, FutureOr<String>>
+    with $FutureModifier<String>, $FutureProvider<String> {
+  /// Signed link to a photo or voice message, cached while the chat is open.
+  ChatMediaUrlProvider._({
+    required ChatMediaUrlFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'chatMediaUrlProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$chatMediaUrlHash();
+
+  @override
+  String toString() {
+    return r'chatMediaUrlProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<String> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<String> create(Ref ref) {
+    final argument = this.argument as String;
+    return chatMediaUrl(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ChatMediaUrlProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$chatMediaUrlHash() => r'79228fcfc05e380d5ad4de7a77997524fbedf04c';
+
+/// Signed link to a photo or voice message, cached while the chat is open.
+
+final class ChatMediaUrlFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<String>, String> {
+  ChatMediaUrlFamily._()
+    : super(
+        retry: null,
+        name: r'chatMediaUrlProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// Signed link to a photo or voice message, cached while the chat is open.
+
+  ChatMediaUrlProvider call(String path) =>
+      ChatMediaUrlProvider._(argument: path, from: this);
+
+  @override
+  String toString() => r'chatMediaUrlProvider';
+}
+
 /// Members by id (names in group chat bubbles).
 
 @ProviderFor(conversationMembers)
@@ -286,7 +364,7 @@ final class ConversationControllerProvider
 }
 
 String _$conversationControllerHash() =>
-    r'bd3d45dd1e0535aff07c915742465172ab0a543f';
+    r'ff1dbf6aa5f90687943d6454d6395cdcab88789f';
 
 /// One open conversation: messages (paginated), optimistic sending, read
 /// receipts and typing (SPEC 9.1).

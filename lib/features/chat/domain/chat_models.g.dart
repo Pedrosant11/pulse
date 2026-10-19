@@ -21,6 +21,12 @@ _ConversationSummary _$ConversationSummaryFromJson(Map<String, dynamic> json) =>
       lastMessageAt: json['last_message_at'] == null
           ? null
           : DateTime.parse(json['last_message_at'] as String),
+      lastMessageKind:
+          $enumDecodeNullable(
+            _$MessageKindEnumMap,
+            json['last_message_kind'],
+          ) ??
+          MessageKind.text,
       unreadCount: (json['unread_count'] as num?)?.toInt() ?? 0,
       crewId: json['crew_id'] as String?,
       crewName: json['crew_name'] as String?,
@@ -42,6 +48,7 @@ Map<String, dynamic> _$ConversationSummaryToJson(
   'last_message': instance.lastMessage,
   'last_message_sender_id': instance.lastMessageSenderId,
   'last_message_at': instance.lastMessageAt?.toIso8601String(),
+  'last_message_kind': _$MessageKindEnumMap[instance.lastMessageKind]!,
   'unread_count': instance.unreadCount,
   'crew_id': instance.crewId,
   'crew_name': instance.crewName,
@@ -55,6 +62,12 @@ const _$ConversationTypeEnumMap = {
 };
 
 const _$AppModeEnumMap = {AppMode.date: 'date', AppMode.crew: 'crew'};
+
+const _$MessageKindEnumMap = {
+  MessageKind.text: 'text',
+  MessageKind.image: 'image',
+  MessageKind.audio: 'audio',
+};
 
 _ConversationHeader _$ConversationHeaderFromJson(Map<String, dynamic> json) =>
     _ConversationHeader(
@@ -105,6 +118,11 @@ _ChatMessage _$ChatMessageFromJson(Map<String, dynamic> json) => _ChatMessage(
   deletedAt: json['deleted_at'] == null
       ? null
       : DateTime.parse(json['deleted_at'] as String),
+  kind:
+      $enumDecodeNullable(_$MessageKindEnumMap, json['kind']) ??
+      MessageKind.text,
+  mediaPath: json['media_path'] as String?,
+  mediaDurationMs: (json['media_duration_ms'] as num?)?.toInt(),
 );
 
 Map<String, dynamic> _$ChatMessageToJson(_ChatMessage instance) =>
@@ -115,6 +133,9 @@ Map<String, dynamic> _$ChatMessageToJson(_ChatMessage instance) =>
       'content': instance.content,
       'created_at': instance.createdAt.toIso8601String(),
       'deleted_at': instance.deletedAt?.toIso8601String(),
+      'kind': _$MessageKindEnumMap[instance.kind]!,
+      'media_path': instance.mediaPath,
+      'media_duration_ms': instance.mediaDurationMs,
     };
 
 _ConversationMember _$ConversationMemberFromJson(Map<String, dynamic> json) =>

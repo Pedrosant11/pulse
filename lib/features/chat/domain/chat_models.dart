@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pulse/core/models/app_mode.dart';
 import 'package:pulse/features/discover/domain/discover_models.dart';
@@ -7,6 +9,9 @@ part 'chat_models.g.dart';
 
 /// Mirrors the database enum `conversation_type`.
 enum ConversationType { direct, crew }
+
+/// What a message carries (`messages.kind`).
+enum MessageKind { text, image, audio }
 
 /// Row of `list_conversations()` (SPEC 9.1).
 @freezed
@@ -23,6 +28,7 @@ abstract class ConversationSummary with _$ConversationSummary {
     String? lastMessage,
     String? lastMessageSenderId,
     DateTime? lastMessageAt,
+    @Default(MessageKind.text) MessageKind lastMessageKind,
     @Default(0) int unreadCount,
     String? crewId,
     String? crewName,
@@ -75,6 +81,11 @@ abstract class ChatMessage with _$ChatMessage {
     required String content,
     required DateTime createdAt,
     DateTime? deletedAt,
+    @Default(MessageKind.text) MessageKind kind,
+
+    /// `chat-media` path of a photo or voice message.
+    String? mediaPath,
+    int? mediaDurationMs,
   }) = _ChatMessage;
 
   factory fromJson(Map<String, dynamic> json) => _$ChatMessageFromJson(json);
@@ -101,6 +112,14 @@ abstract class PendingMessage with _$PendingMessage {
     required String content,
     required DateTime createdAt,
     @Default(false) bool failed,
+    @Default(MessageKind.text) MessageKind kind,
+
+    /// The photo or recording being sent (shown while uploading).
+    Uint8List? bytes,
+    int? durationMs,
+
+    /// Set once uploaded, so a retry only sends the message.
+    String? mediaPath,
   }) = _PendingMessage;
 }
 

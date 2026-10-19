@@ -88,6 +88,19 @@ Deno.serve(async (req) => {
       if (error) throw error;
     }
 
+    // Photos and voice messages they sent: {user}/{conversation}/{file}.
+    const conversations = await admin.storage
+      .from("chat-media")
+      .list(user.id, { limit: 1000 });
+    if (conversations.error) throw conversations.error;
+    for (const folder of conversations.data ?? []) {
+      const files = await listAll(admin, "chat-media", `${user.id}/${folder.name}`);
+      if (files.length > 0) {
+        const { error } = await admin.storage.from("chat-media").remove(files);
+        if (error) throw error;
+      }
+    }
+
     // Covers of suggestions that only this person could see; the database
     // deletes those events with the profile.
     const { data: events, error: eventsError } = await admin

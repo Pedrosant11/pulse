@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -65,16 +66,43 @@ class FakeChatRepository implements ChatRepository {
     required String conversationId,
     required String senderId,
     required String content,
+    MessageKind kind = MessageKind.text,
+    String? mediaPath,
+    int? mediaDurationMs,
   }) async {
     if (sendError case final error?) throw error;
     return ChatMessage(
-      id: 'server-$content',
+      id: kind == MessageKind.text ? 'server-$content' : 'server-${kind.name}',
       conversationId: conversationId,
       senderId: senderId,
       content: content,
       createdAt: DateTime.utc(2026, 10, 4, 21),
+      kind: kind,
+      mediaPath: mediaPath,
+      mediaDurationMs: mediaDurationMs,
     );
   }
+
+  final uploads = <String>[];
+  final removed = <String>[];
+  Exception? uploadError;
+
+  @override
+  Future<String> uploadMedia({
+    required String conversationId,
+    required String senderId,
+    required MessageKind kind,
+    required Uint8List bytes,
+  }) async {
+    if (uploadError case final error?) throw error;
+    final path =
+        '$senderId/$conversationId/${uploads.length}.${kind == MessageKind.image ? 'jpg' : 'm4a'}';
+    uploads.add(path);
+    return path;
+  }
+
+  @override
+  Future<void> removeMedia(String path) async => removed.add(path);
 
   @override
   Future<void> markRead(String id) async => markedRead++;
@@ -140,6 +168,66 @@ void main() {
     await sending;
     expect(state().pending, isEmpty);
     expect(state().messages.first.id, 'server-oi');
+  });
+
+  test('a photo goes up first, then the message points to it', () async {
+    await open();
+    final bytes = Uint8List.fromList([1, 2, 3]);
+    final sending = controller().sendMedia(
+      MessageKind.image,
+      bytes,
+      caption: ' olha ',
+    );
+    // Shown right away from the local bytes.
+    expect(state().pending.single.bytes, bytes);
+    await sending;
+    expect(repository.uploads, ['me/c1/0.jpg']);
+    final sent = state().messages.first;
+    expect(sent.kind, MessageKind.image);
+    expect(sent.mediaPath, 'me/c1/0.jpg');
+    expect(sent.content, 'olha');
+  });
+
+  test('a voice message keeps its length', () async {
+    await open();
+    await controller().sendMedia(
+      MessageKind.audio,
+      Uint8List(4),
+      durationMs: 4200,
+    );
+    expect(state().messages.first.mediaDurationMs, 4200);
+    expect(repository.uploads.single, endsWith('.m4a'));
+  });
+
+  test('a retry after the upload does not upload again', () async {
+    repository.sendError = const NetworkFailure();
+    await open();
+    await controller().sendMedia(MessageKind.image, Uint8List(3));
+    expect(state().pending.single.failed, isTrue);
+    expect(state().pending.single.mediaPath, isNotNull);
+
+    repository.sendError = null;
+    await controller().retry(state().pending.single);
+    expect(repository.uploads, hasLength(1));
+    expect(state().pending, isEmpty);
+  });
+
+  test('deleting a photo removes the file too', () async {
+    repository.history = [
+      ChatMessage(
+        id: 'p',
+        conversationId: conversationId,
+        senderId: 'me',
+        content: '',
+        createdAt: DateTime.utc(2026, 10, 4),
+        kind: MessageKind.image,
+        mediaPath: 'me/c1/x.jpg',
+      ),
+    ];
+    await open();
+    await controller().delete(state().messages.single);
+    await Future<void>.delayed(Duration.zero);
+    expect(repository.removed, ['me/c1/x.jpg']);
   });
 
   test('a failed message can be retried', () async {

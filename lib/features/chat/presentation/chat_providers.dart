@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:pulse/app/constants.dart';
 import 'package:pulse/core/utils/random_id.dart';
@@ -57,6 +58,11 @@ Future<ConversationHeader?> conversationHeader(
   Ref ref,
   String conversationId,
 ) => ref.watch(chatRepositoryProvider).header(conversationId);
+
+/// Signed link to a photo or voice message, cached while the chat is open.
+@riverpod
+Future<String> chatMediaUrl(Ref ref, String path) =>
+    ref.watch(chatRepositoryProvider).mediaUrl(path);
 
 /// Members by id (names in group chat bubbles).
 @riverpod
@@ -197,26 +203,61 @@ class ConversationController extends _$ConversationController {
     await _deliver(pending);
   }
 
-  Future<void> retry(PendingMessage pending) async {
+  /// A photo (with an optional caption) or a voice message.
+  Future<void> sendMedia(
+    MessageKind kind,
+    Uint8List bytes, {
+    String caption = '',
+    int? durationMs,
+  }) async {
     final current = _current;
     if (current == null) return;
-    _emit(
-      current.copyWith(
-        pending: [
-          for (final p in current.pending)
-            if (p.localId == pending.localId) p.copyWith(failed: false) else p,
-        ],
-      ),
+    final pending = PendingMessage(
+      localId: randomId(),
+      content: caption.trim(),
+      createdAt: DateTime.now(),
+      kind: kind,
+      bytes: bytes,
+      durationMs: durationMs,
     );
+    _emit(current.copyWith(pending: [pending, ...current.pending]));
     await _deliver(pending);
   }
 
-  Future<void> _deliver(PendingMessage pending) async {
+  Future<void> retry(PendingMessage pending) async {
+    final current = _current;
+    if (current == null) return;
+    // The stored copy knows whether the file already went up.
+    final stored = current.pending.firstWhere(
+      (p) => p.localId == pending.localId,
+      orElse: () => pending,
+    );
+    final again = stored.copyWith(failed: false);
+    _replacePending(again);
+    await _deliver(again);
+  }
+
+  Future<void> _deliver(PendingMessage original) async {
+    var pending = original;
     try {
+      // Media goes up first (once; a retry reuses the uploaded file).
+      if (pending.kind != MessageKind.text && pending.mediaPath == null) {
+        final path = await _repository.uploadMedia(
+          conversationId: conversationId,
+          senderId: _userId,
+          kind: pending.kind,
+          bytes: pending.bytes!,
+        );
+        pending = pending.copyWith(mediaPath: path);
+        _replacePending(pending);
+      }
       final sent = await _repository.send(
         conversationId: conversationId,
         senderId: _userId,
         content: pending.content,
+        kind: pending.kind,
+        mediaPath: pending.mediaPath,
+        mediaDurationMs: pending.durationMs,
       );
       final current = _current;
       if (current == null) return;
@@ -232,17 +273,21 @@ class ConversationController extends _$ConversationController {
         ),
       );
     } on Object {
-      final current = _current;
-      if (current == null) return;
-      _emit(
-        current.copyWith(
-          pending: [
-            for (final p in current.pending)
-              if (p.localId == pending.localId) p.copyWith(failed: true) else p,
-          ],
-        ),
-      );
+      _replacePending(pending.copyWith(failed: true));
     }
+  }
+
+  void _replacePending(PendingMessage pending) {
+    final current = _current;
+    if (current == null) return;
+    _emit(
+      current.copyWith(
+        pending: [
+          for (final p in current.pending)
+            if (p.localId == pending.localId) pending else p,
+        ],
+      ),
+    );
   }
 
   Future<void> loadMore() async {
@@ -270,6 +315,10 @@ class ConversationController extends _$ConversationController {
 
   Future<void> delete(ChatMessage message) async {
     await _repository.deleteMessage(message.id);
+    // The database drops the reference; the file goes too.
+    if (message.mediaPath case final path?) {
+      unawaited(_repository.removeMedia(path));
+    }
     final current = _current;
     if (current == null) return;
     _emit(

@@ -1,6 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:pulse/app/constants.dart';
 import 'package:pulse/core/errors/app_failure.dart';
 import 'package:pulse/core/supabase/supabase_providers.dart';
+import 'package:pulse/core/utils/random_id.dart';
 import 'package:pulse/features/chat/domain/chat_models.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -8,7 +11,10 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 part 'chat_repository.g.dart';
 
 const _messageColumns =
-    'id, conversation_id, sender_id, content, created_at, deleted_at';
+    'id, conversation_id, sender_id, content, created_at, deleted_at, '
+    'kind, media_path, media_duration_ms';
+
+const _mediaBucket = 'chat-media';
 
 /// Callbacks of a conversation's realtime channel.
 class ConversationEvents {
@@ -105,6 +111,9 @@ class ChatRepository {
     required String conversationId,
     required String senderId,
     required String content,
+    MessageKind kind = MessageKind.text,
+    String? mediaPath,
+    int? mediaDurationMs,
   }) => guardFailures(() async {
     final row = await _client
         .from('messages')
@@ -112,11 +121,51 @@ class ChatRepository {
           'conversation_id': conversationId,
           'sender_id': senderId,
           'content': content,
+          'kind': kind.name,
+          'media_path': ?mediaPath,
+          'media_duration_ms': ?mediaDurationMs,
         })
         .select(_messageColumns)
         .single();
     return ChatMessage.fromJson(row);
   });
+
+  /// Uploads a photo (jpg) or voice message (m4a) to
+  /// `{sender}/{conversation}/{random}`; returns its path.
+  Future<String> uploadMedia({
+    required String conversationId,
+    required String senderId,
+    required MessageKind kind,
+    required Uint8List bytes,
+  }) => guardFailures(() async {
+    final image = kind == MessageKind.image;
+    final path =
+        '$senderId/$conversationId/${randomId()}.${image ? 'jpg' : 'm4a'}';
+    await _client.storage
+        .from(_mediaBucket)
+        .uploadBinary(
+          path,
+          bytes,
+          fileOptions: FileOptions(
+            contentType: image ? 'image/jpeg' : 'audio/mp4',
+          ),
+        );
+    return path;
+  });
+
+  /// Short-lived link to a photo or voice message (members only).
+  Future<String> mediaUrl(String path) => guardFailures(
+    () => _client.storage.from(_mediaBucket).createSignedUrl(path, 60 * 60),
+  );
+
+  /// Best effort: the message is already gone for everyone.
+  Future<void> removeMedia(String path) async {
+    try {
+      await _client.storage.from(_mediaBucket).remove([path]);
+    } on Object {
+      // Left behind; removed with the account.
+    }
+  }
 
   /// Soft delete (only the sender; enforced by RLS and a trigger).
   Future<void> deleteMessage(String messageId) => guardFailures(

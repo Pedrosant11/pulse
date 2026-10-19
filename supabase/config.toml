@@ -141,6 +141,11 @@ public = true
 file_size_limit = "5MiB"
 allowed_mime_types = ["image/jpeg"]
 
+[storage.buckets.chat-media]
+public = false
+file_size_limit = "5MiB"
+allowed_mime_types = ["image/jpeg", "audio/mp4", "audio/m4a", "audio/x-m4a", "audio/aac"]
+
 # Allow connections via S3 compatible clients
 [storage.s3_protocol]
 enabled = true

@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:typed_data';
+
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -14,7 +17,9 @@ import 'package:pulse/features/badges/presentation/widgets/profile_badges.dart';
 import 'package:pulse/features/chat/domain/chat_models.dart';
 import 'package:pulse/features/chat/presentation/chat_providers.dart';
 import 'package:pulse/features/chat/presentation/widgets/chat_avatar.dart';
+import 'package:pulse/features/chat/presentation/widgets/chat_media.dart';
 import 'package:pulse/features/crews/presentation/widgets/start_crew_sheet.dart';
+import 'package:pulse/features/profile/data/photo_picker.dart';
 import 'package:pulse/features/profile/presentation/widgets/user_profile_sheet.dart';
 import 'package:pulse/features/safety/domain/safety_models.dart';
 import 'package:pulse/features/safety/presentation/safety_actions.dart';
@@ -86,6 +91,27 @@ class _Conversation extends ConsumerStatefulWidget {
 
 class _ConversationState extends ConsumerState<_Conversation> {
   final _input = TextEditingController();
+
+  /// The recording bar replaces the text field.
+  bool _recording = false;
+
+  Future<void> _sendPhoto() async {
+    final picked = await pickChatPhoto(context, ref.read(photoPickerProvider));
+    if (picked == null) return;
+    final (bytes, caption) = picked;
+    await _controller.sendMedia(MessageKind.image, bytes, caption: caption);
+  }
+
+  void _sendVoice(Uint8List bytes, Duration duration) {
+    setState(() => _recording = false);
+    unawaited(
+      _controller.sendMedia(
+        MessageKind.audio,
+        bytes,
+        durationMs: duration.inMilliseconds,
+      ),
+    );
+  }
 
   ConversationHeader get _header => widget.header;
   ConversationController get _controller =>
@@ -424,39 +450,71 @@ class _ConversationState extends ConsumerState<_Conversation> {
               spacing.sm,
               spacing.sm,
             ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _input,
-                    minLines: 1,
-                    maxLines: 5,
-                    maxLength: AppConstants.maxMessageLength,
-                    textCapitalization: TextCapitalization.sentences,
-                    onChanged: (_) {
-                      _controller.userTyping();
-                      setState(() {});
+            child: _recording
+                ? VoiceRecorderBar(
+                    onDone: _sendVoice,
+                    onCancel: () {
+                      if (mounted) setState(() => _recording = false);
                     },
-                    decoration: InputDecoration(
-                      hintText: l10n.chatInputHint,
-                      counterText: '',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(context.radii.lg),
-                        borderSide: BorderSide(color: colors.glassBorder),
+                  )
+                : Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      IconButton(
+                        tooltip: l10n.chatSendPhoto,
+                        onPressed: _sendPhoto,
+                        icon: Icon(
+                          Icons.add_photo_alternate_outlined,
+                          color: colors.textSecondary,
+                        ),
                       ),
-                    ),
+                      Expanded(
+                        child: TextField(
+                          controller: _input,
+                          minLines: 1,
+                          maxLines: 5,
+                          maxLength: AppConstants.maxMessageLength,
+                          textCapitalization: TextCapitalization.sentences,
+                          onChanged: (_) {
+                            _controller.userTyping();
+                            setState(() {});
+                          },
+                          decoration: InputDecoration(
+                            hintText: l10n.chatInputHint,
+                            counterText: '',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(
+                                context.radii.lg,
+                              ),
+                              borderSide: BorderSide(color: colors.glassBorder),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: spacing.xs),
+                      // Empty field: record a voice message instead.
+                      if (_input.text.trim().isEmpty)
+                        IconButton.filled(
+                          tooltip: l10n.chatRecordVoice,
+                          style: IconButton.styleFrom(backgroundColor: accent),
+                          onPressed: () => setState(() => _recording = true),
+                          icon: Icon(
+                            Icons.mic_rounded,
+                            color: colors.background,
+                          ),
+                        )
+                      else
+                        IconButton.filled(
+                          tooltip: l10n.chatSend,
+                          style: IconButton.styleFrom(backgroundColor: accent),
+                          onPressed: _send,
+                          icon: Icon(
+                            Icons.send_rounded,
+                            color: colors.background,
+                          ),
+                        ),
+                    ],
                   ),
-                ),
-                SizedBox(width: spacing.xs),
-                IconButton.filled(
-                  tooltip: l10n.chatSend,
-                  style: IconButton.styleFrom(backgroundColor: accent),
-                  onPressed: _input.text.trim().isEmpty ? null : _send,
-                  icon: Icon(Icons.send_rounded, color: colors.background),
-                ),
-              ],
-            ),
           ),
         ],
       ),
@@ -691,6 +749,7 @@ class _Bubble extends StatelessWidget {
     final text = deleted
         ? l10n.chatDeleted
         : message?.content ?? pending?.content ?? '';
+    final kind = message?.kind ?? pending?.kind ?? MessageKind.text;
     final time = (message?.createdAt ?? pending?.createdAt)!;
     final radius = Radius.circular(context.radii.lg);
 
@@ -740,13 +799,30 @@ class _Bubble extends StatelessWidget {
                 ),
               ),
             ),
-          Text(
-            text,
-            style: context.textTheme.bodyMedium?.copyWith(
-              fontStyle: deleted ? FontStyle.italic : null,
-              color: deleted ? colors.textSecondary : colors.textPrimary,
+          if (!deleted && kind == MessageKind.image) ...[
+            ChatImage(path: message?.mediaPath, bytes: pending?.bytes),
+            if (text.isNotEmpty) SizedBox(height: spacing.xs),
+          ],
+          if (!deleted && kind == MessageKind.audio)
+            VoicePlayer(
+              path: message?.mediaPath,
+              duration: Duration(
+                milliseconds:
+                    message?.mediaDurationMs ?? pending?.durationMs ?? 0,
+              ),
+              color: colors.textPrimary,
             ),
-          ),
+          if (deleted || text.isNotEmpty)
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                text,
+                style: context.textTheme.bodyMedium?.copyWith(
+                  fontStyle: deleted ? FontStyle.italic : null,
+                  color: deleted ? colors.textSecondary : colors.textPrimary,
+                ),
+              ),
+            ),
           const SizedBox(height: 2),
           Row(
             mainAxisSize: MainAxisSize.min,
