@@ -114,6 +114,7 @@ void main() {
       expect(fail('superlike_limit'), isA<SuperlikeLimitFailure>());
       expect(fail('plan_required'), isA<PlanRequiredFailure>());
       expect(fail('boost_unavailable'), isA<BoostUnavailableFailure>());
+      expect(fail('featured_limit'), isA<FeaturedLimitFailure>());
     });
   });
 

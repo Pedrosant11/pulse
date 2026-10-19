@@ -40,3 +40,16 @@ No `env.local.json` (não vai para o git):
 4. **Google Play → Conteúdo do app:** marcar "O app contém anúncios" e, em Segurança dos dados, declarar o identificador de publicidade (coletado, compartilhado com o Google para publicidade).
 5. **iOS (quando lançar):** a Apple exige o aviso de rastreamento (App Tracking Transparency) para anúncios personalizados. Sem ele, o Google mostra só anúncios não personalizados.
 6. **Consentimento:** o app já usa o formulário de consentimento do Google (UMP). Ele só aparece onde a lei exige (ex.: Europa); configure a mensagem em AdMob → Privacidade e mensagens.
+
+## Eventos em destaque (produtores)
+
+Separado dos anúncios: o produtor paga e o admin destaca o evento (⋮ → Destacar evento, 3 a 30 dias).
+
+- O evento vai para o **topo de "Próximos"**, com o selo "Destaque" e um pin maior no mapa. Os anúncios continuam no meio da lista.
+- Com vários destaques ao mesmo tempo, todos ficam no topo em **rodízio diário**: cada pessoa vê uma ordem diferente, que muda todo dia. Assim cada produtor fica em primeiro para uma parte do público.
+- **Limite:** no máximo 5 destaques valendo ao mesmo tempo por região (50 km do evento, ou o mesmo estado). Ao tentar o sexto, o app avisa. Para mudar:
+
+```sql
+update private.app_settings set value = '8' where key = 'featured_max_per_region';
+update private.app_settings set value = '80' where key = 'featured_region_km';
+```

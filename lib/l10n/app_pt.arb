@@ -1065,5 +1065,6 @@
   "adSave": "Salvar anúncio",
   "adDelete": "Excluir",
   "adDeleteTitle": "Excluir este anúncio?",
-  "eventAdvertise": "Anunciar evento"
+  "eventAdvertise": "Anunciar evento",
+  "errorFeaturedLimit": "Esta região já tem 5 eventos em destaque. Espere um terminar ou tire o destaque de outro."
 }

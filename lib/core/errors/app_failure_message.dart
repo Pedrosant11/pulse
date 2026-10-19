@@ -24,6 +24,7 @@ extension AppFailureMessage on AppFailure {
       VerificationPendingFailure() => l10n.verificationPendingBody,
       AlreadyVerifiedFailure() => l10n.verificationApprovedTitle,
       ReferralFailure(:final problem) => l10n.referralError(problem.name),
+      FeaturedLimitFailure() => l10n.errorFeaturedLimit,
       LikeLimitFailure() => l10n.errorLikeLimit,
       SuperlikeLimitFailure() => l10n.errorSuperlikeLimit,
       PlanRequiredFailure() => l10n.errorPlanRequired,

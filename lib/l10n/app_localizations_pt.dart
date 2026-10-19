@@ -3083,4 +3083,8 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get eventAdvertise => 'Anunciar evento';
+
+  @override
+  String get errorFeaturedLimit =>
+      'Esta região já tem 5 eventos em destaque. Espere um terminar ou tire o destaque de outro.';
 }

@@ -5277,6 +5277,12 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Anunciar evento'**
   String get eventAdvertise;
+
+  /// No description provided for @errorFeaturedLimit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esta região já tem 5 eventos em destaque. Espere um terminar ou tire o destaque de outro.'**
+  String get errorFeaturedLimit;
 }
 
 class _AppLocalizationsDelegate

@@ -71,6 +71,8 @@ sealed class AppFailure implements Exception {
       // Selfie verification.
       ('P0001', 'verification_pending') => VerificationPendingFailure(error),
       ('P0001', 'already_verified') => AlreadyVerifiedFailure(error),
+      // Featured events: 5 at once per region.
+      ('P0001', 'featured_limit') => FeaturedLimitFailure(error),
       // Referral codes.
       ('P0001', 'referral_invalid') => ReferralFailure(.invalid, error),
       ('P0001', 'referral_own') => ReferralFailure(.own, error),
@@ -221,6 +223,11 @@ final class VerificationPendingFailure extends AppFailure {
 }
 
 final class AlreadyVerifiedFailure extends AppFailure {
+  const new([super.cause]);
+}
+
+/// The region already has the most highlights allowed at once.
+final class FeaturedLimitFailure extends AppFailure {
   const new([super.cause]);
 }
 
