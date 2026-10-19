@@ -409,7 +409,6 @@
   "@discoverLookingFor": { "placeholders": { "intent": { "type": "String" } } },
   "discoverDjs": "Curte: {djs}",
   "@discoverDjs": { "placeholders": { "djs": { "type": "String" } } },
-  "discoverFallbackBanner": "Você já viu todo mundo dos seus eventos por enquanto. Que tal essas pessoas perto de você com o mesmo gosto musical?",
   "discoverSharedGenres": "Vocês curtem: {genres}",
   "@discoverSharedGenres": { "placeholders": { "genres": { "type": "String" } } },
   "discoverDistance": "a {km} km",

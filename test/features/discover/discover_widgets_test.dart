@@ -201,7 +201,8 @@ void main() {
       );
       await settle(tester);
       expect(find.text('Vocês curtem: Techno'), findsOneWidget);
-      expect(find.textContaining('Você já viu todo mundo'), findsOneWidget);
+      // No banner: in Date, nearby people simply follow the event ones.
+      expect(find.textContaining('Você já viu todo mundo'), findsNothing);
     });
 
     testWidgets('Crew without events points to the Events tab', (tester) async {

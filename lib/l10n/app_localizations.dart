@@ -2044,12 +2044,6 @@ abstract class AppLocalizations {
   /// **'Curte: {djs}'**
   String discoverDjs(String djs);
 
-  /// No description provided for @discoverFallbackBanner.
-  ///
-  /// In pt, this message translates to:
-  /// **'Você já viu todo mundo dos seus eventos por enquanto. Que tal essas pessoas perto de você com o mesmo gosto musical?'**
-  String get discoverFallbackBanner;
-
   /// No description provided for @discoverSharedGenres.
   ///
   /// In pt, this message translates to:

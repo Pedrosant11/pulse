@@ -13,7 +13,6 @@ import 'package:pulse/core/errors/app_failure.dart';
 import 'package:pulse/core/errors/app_failure_message.dart';
 import 'package:pulse/core/extensions/context_extensions.dart';
 import 'package:pulse/core/models/app_mode.dart';
-import 'package:pulse/core/widgets/glass_card.dart';
 import 'package:pulse/core/widgets/shader_effects.dart';
 import 'package:pulse/core/widgets/state_views.dart';
 import 'package:pulse/features/discover/domain/discover_models.dart';
@@ -441,25 +440,6 @@ class _CardStack extends StatelessWidget {
 
     return Column(
       children: [
-        if (state.isFallback)
-          Padding(
-            padding: EdgeInsets.fromLTRB(spacing.md, 0, spacing.md, spacing.sm),
-            child: GlassCard(
-              padding: EdgeInsets.all(spacing.sm),
-              child: Row(
-                children: [
-                  Icon(Icons.graphic_eq, color: accent),
-                  SizedBox(width: spacing.sm),
-                  Expanded(
-                    child: Text(
-                      l10n.discoverFallbackBanner,
-                      style: context.textTheme.bodySmall,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
         Expanded(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: spacing.md),

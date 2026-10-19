@@ -1114,10 +1114,6 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
-  String get discoverFallbackBanner =>
-      'Você já viu todo mundo dos seus eventos por enquanto. Que tal essas pessoas perto de você com o mesmo gosto musical?';
-
-  @override
   String discoverSharedGenres(String genres) {
     return 'Vocês curtem: $genres';
   }
