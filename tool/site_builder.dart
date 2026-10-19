@@ -38,6 +38,8 @@ Map<String, String> buildSite(Map<String, String> sources) {
           '</article>',
         ].join('\n'),
       ),
+    // The admin console (site/admin) stays out of search engines.
+    'robots.txt': 'User-agent: *\nDisallow: /admin/\n',
     // GitHub Pages: serve files as they are (no Jekyll).
     '.nojekyll': '',
   };

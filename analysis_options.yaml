@@ -8,6 +8,7 @@ analyzer:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
     - lib/l10n/app_localizations*.dart
+    - web/**
   errors:
     # Generated code (freezed/json_serializable) uses these annotations.
     invalid_annotation_target: ignore

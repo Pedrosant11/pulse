@@ -5595,6 +5595,204 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Festas novas perto de você, DJs que você curte e lembrete na véspera.'**
   String get notifyEventsSubtitle;
+
+  /// No description provided for @consoleTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Admin'**
+  String get consoleTitle;
+
+  /// No description provided for @consoleDenied.
+  ///
+  /// In pt, this message translates to:
+  /// **'Este painel é só para admins do Pulse.'**
+  String get consoleDenied;
+
+  /// No description provided for @consoleDashboard.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dashboard'**
+  String get consoleDashboard;
+
+  /// No description provided for @consolePeople.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pessoas e selos'**
+  String get consolePeople;
+
+  /// No description provided for @consoleUsersSection.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pessoas'**
+  String get consoleUsersSection;
+
+  /// No description provided for @consoleSettings.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ajustes'**
+  String get consoleSettings;
+
+  /// No description provided for @consolePending.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esperando você'**
+  String get consolePending;
+
+  /// No description provided for @consoleNothingPending.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nada pendente. Tudo em dia!'**
+  String get consoleNothingPending;
+
+  /// No description provided for @consoleBadgeRequests.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pedidos de selo'**
+  String get consoleBadgeRequests;
+
+  /// No description provided for @consoleUsersTotal.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pessoas no app'**
+  String get consoleUsersTotal;
+
+  /// No description provided for @consoleUsersNew.
+  ///
+  /// In pt, this message translates to:
+  /// **'Novas em 7 dias'**
+  String get consoleUsersNew;
+
+  /// No description provided for @consoleToday.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count} hoje'**
+  String consoleToday(int count);
+
+  /// No description provided for @consoleUsersActive.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ativas em 24 h'**
+  String get consoleUsersActive;
+
+  /// No description provided for @consoleLast7d.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count} em 7 dias'**
+  String consoleLast7d(int count);
+
+  /// No description provided for @consoleUsersPaused.
+  ///
+  /// In pt, this message translates to:
+  /// **'Contas pausadas'**
+  String get consoleUsersPaused;
+
+  /// No description provided for @consoleRestricted.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count} suspensas ou banidas'**
+  String consoleRestricted(int count);
+
+  /// No description provided for @consoleSignupsChart.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cadastros por dia (30 dias)'**
+  String get consoleSignupsChart;
+
+  /// No description provided for @consoleMatchesChart.
+  ///
+  /// In pt, this message translates to:
+  /// **'Matches por dia (30 dias)'**
+  String get consoleMatchesChart;
+
+  /// No description provided for @consoleChartTotal.
+  ///
+  /// In pt, this message translates to:
+  /// **'{total} no período'**
+  String consoleChartTotal(String total);
+
+  /// No description provided for @consoleActivity.
+  ///
+  /// In pt, this message translates to:
+  /// **'Atividade'**
+  String get consoleActivity;
+
+  /// No description provided for @consoleMatches.
+  ///
+  /// In pt, this message translates to:
+  /// **'Matches em 24 h'**
+  String get consoleMatches;
+
+  /// No description provided for @consoleMessages.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mensagens em 24 h'**
+  String get consoleMessages;
+
+  /// No description provided for @consoleUpcomingEvents.
+  ///
+  /// In pt, this message translates to:
+  /// **'Festas por vir'**
+  String get consoleUpcomingEvents;
+
+  /// No description provided for @consoleFeaturedNow.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count} em destaque'**
+  String consoleFeaturedNow(int count);
+
+  /// No description provided for @consoleMoney.
+  ///
+  /// In pt, this message translates to:
+  /// **'Planos e receita'**
+  String get consoleMoney;
+
+  /// No description provided for @consoleTrials.
+  ///
+  /// In pt, this message translates to:
+  /// **'Em teste grátis'**
+  String get consoleTrials;
+
+  /// No description provided for @consoleStoreRevenue.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lojas (30 dias)'**
+  String get consoleStoreRevenue;
+
+  /// No description provided for @consoleFeaturedRevenue.
+  ///
+  /// In pt, this message translates to:
+  /// **'Destaques pela equipe (30 dias)'**
+  String get consoleFeaturedRevenue;
+
+  /// No description provided for @consoleRevenueHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Lojas: valor bruto em dólar informado pelo RevenueCat, antes da taxa da loja. Destaques: pedidos marcados como pagos no painel.'**
+  String get consoleRevenueHint;
+
+  /// No description provided for @consoleSettingsHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mudanças valem na hora para todo mundo, sem lançar versão nova do app.'**
+  String get consoleSettingsHint;
+
+  /// No description provided for @consoleFeaturedPrices.
+  ///
+  /// In pt, this message translates to:
+  /// **'Preços de destaque'**
+  String get consoleFeaturedPrices;
+
+  /// No description provided for @consoleFeaturedPricesHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Valem para os pedidos pela equipe. Na compra pelo app vale o preço da loja: mude também no Play Console e na App Store.'**
+  String get consoleFeaturedPricesHint;
+
+  /// No description provided for @consoleSettingName.
+  ///
+  /// In pt, this message translates to:
+  /// **'{key, select, ads_discover_every{Anúncio a cada N perfis no Descobrir} ads_enabled{Anúncios ligados (1) ou desligados (0)} ads_events_every{Anúncio a cada N eventos em Próximos} ads_for_paid{Quem paga vê anúncios (1 sim, 0 não)} black_monthly_boosts{Boosts por mês no Pulse Black} boost_minutes{Duração do boost (minutos)} event_push_daily_cap{Avisos de festa nova por dia, por pessoa} event_push_horizon_days{Avisar festas até N dias à frente} featured_max_per_region{Destaques ao mesmo tempo por região} featured_region_km{Raio da região de destaque (km)} free_daily_likes{Curtidas por dia no plano grátis} free_weekly_superlikes{Superlikes por semana no plano grátis} plan_weekly_superlikes{Superlikes por semana nos planos} referral_monthly_cap{Indicações recompensadas por mês} referral_referred_superlikes{Superlikes para quem usa um convite} referral_referrer_boosts{Boosts para quem indicou} referral_referrer_superlikes{Superlikes para quem indicou} trial_days{Dias de teste grátis do Black} other{Outro ajuste}}'**
+  String consoleSettingName(String key);
 }
 
 class _AppLocalizationsDelegate

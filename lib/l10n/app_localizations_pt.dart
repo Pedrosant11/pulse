@@ -3285,4 +3285,139 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get notifyEventsSubtitle =>
       'Festas novas perto de você, DJs que você curte e lembrete na véspera.';
+
+  @override
+  String get consoleTitle => 'Admin';
+
+  @override
+  String get consoleDenied => 'Este painel é só para admins do Pulse.';
+
+  @override
+  String get consoleDashboard => 'Dashboard';
+
+  @override
+  String get consolePeople => 'Pessoas e selos';
+
+  @override
+  String get consoleUsersSection => 'Pessoas';
+
+  @override
+  String get consoleSettings => 'Ajustes';
+
+  @override
+  String get consolePending => 'Esperando você';
+
+  @override
+  String get consoleNothingPending => 'Nada pendente. Tudo em dia!';
+
+  @override
+  String get consoleBadgeRequests => 'Pedidos de selo';
+
+  @override
+  String get consoleUsersTotal => 'Pessoas no app';
+
+  @override
+  String get consoleUsersNew => 'Novas em 7 dias';
+
+  @override
+  String consoleToday(int count) {
+    return '$count hoje';
+  }
+
+  @override
+  String get consoleUsersActive => 'Ativas em 24 h';
+
+  @override
+  String consoleLast7d(int count) {
+    return '$count em 7 dias';
+  }
+
+  @override
+  String get consoleUsersPaused => 'Contas pausadas';
+
+  @override
+  String consoleRestricted(int count) {
+    return '$count suspensas ou banidas';
+  }
+
+  @override
+  String get consoleSignupsChart => 'Cadastros por dia (30 dias)';
+
+  @override
+  String get consoleMatchesChart => 'Matches por dia (30 dias)';
+
+  @override
+  String consoleChartTotal(String total) {
+    return '$total no período';
+  }
+
+  @override
+  String get consoleActivity => 'Atividade';
+
+  @override
+  String get consoleMatches => 'Matches em 24 h';
+
+  @override
+  String get consoleMessages => 'Mensagens em 24 h';
+
+  @override
+  String get consoleUpcomingEvents => 'Festas por vir';
+
+  @override
+  String consoleFeaturedNow(int count) {
+    return '$count em destaque';
+  }
+
+  @override
+  String get consoleMoney => 'Planos e receita';
+
+  @override
+  String get consoleTrials => 'Em teste grátis';
+
+  @override
+  String get consoleStoreRevenue => 'Lojas (30 dias)';
+
+  @override
+  String get consoleFeaturedRevenue => 'Destaques pela equipe (30 dias)';
+
+  @override
+  String get consoleRevenueHint =>
+      'Lojas: valor bruto em dólar informado pelo RevenueCat, antes da taxa da loja. Destaques: pedidos marcados como pagos no painel.';
+
+  @override
+  String get consoleSettingsHint =>
+      'Mudanças valem na hora para todo mundo, sem lançar versão nova do app.';
+
+  @override
+  String get consoleFeaturedPrices => 'Preços de destaque';
+
+  @override
+  String get consoleFeaturedPricesHint =>
+      'Valem para os pedidos pela equipe. Na compra pelo app vale o preço da loja: mude também no Play Console e na App Store.';
+
+  @override
+  String consoleSettingName(String key) {
+    String _temp0 = intl.Intl.selectLogic(key, {
+      'ads_discover_every': 'Anúncio a cada N perfis no Descobrir',
+      'ads_enabled': 'Anúncios ligados (1) ou desligados (0)',
+      'ads_events_every': 'Anúncio a cada N eventos em Próximos',
+      'ads_for_paid': 'Quem paga vê anúncios (1 sim, 0 não)',
+      'black_monthly_boosts': 'Boosts por mês no Pulse Black',
+      'boost_minutes': 'Duração do boost (minutos)',
+      'event_push_daily_cap': 'Avisos de festa nova por dia, por pessoa',
+      'event_push_horizon_days': 'Avisar festas até N dias à frente',
+      'featured_max_per_region': 'Destaques ao mesmo tempo por região',
+      'featured_region_km': 'Raio da região de destaque (km)',
+      'free_daily_likes': 'Curtidas por dia no plano grátis',
+      'free_weekly_superlikes': 'Superlikes por semana no plano grátis',
+      'plan_weekly_superlikes': 'Superlikes por semana nos planos',
+      'referral_monthly_cap': 'Indicações recompensadas por mês',
+      'referral_referred_superlikes': 'Superlikes para quem usa um convite',
+      'referral_referrer_boosts': 'Boosts para quem indicou',
+      'referral_referrer_superlikes': 'Superlikes para quem indicou',
+      'trial_days': 'Dias de teste grátis do Black',
+      'other': 'Outro ajuste',
+    });
+    return '$_temp0';
+  }
 }
