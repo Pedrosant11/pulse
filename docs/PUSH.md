@@ -19,6 +19,7 @@ evento no banco (match, mensagem, crew)
 | `verification_approved` / `verification_rejected` | quem pediu a verificação | account | a tela de verificação |
 | `trial_started` | quem deu o primeiro match e ganhou 3 dias de Black | account | Planos |
 | `referral_reward` | quem indicou, quando o indicado dá o primeiro match | account | Indique e ganhe |
+| `featured_on` | o produtor, quando o destaque pago começa | account | O evento |
 
 Os textos ficam em `supabase/functions/send-push/index.ts`, porque o celular os mostra com o app fechado.
 

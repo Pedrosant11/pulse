@@ -25,6 +25,7 @@ import 'package:pulse/features/events/domain/event.dart';
 import 'package:pulse/features/events/presentation/events_providers.dart';
 import 'package:pulse/features/events/presentation/widgets/event_location.dart';
 import 'package:pulse/features/events/presentation/widgets/event_visuals.dart';
+import 'package:pulse/features/events/presentation/widgets/featured_promo.dart';
 import 'package:pulse/features/profile/presentation/profile_labels.dart';
 import 'package:pulse/features/profile/presentation/widgets/profile_photo_image.dart';
 import 'package:pulse/features/safety/domain/safety_models.dart';
@@ -374,6 +375,13 @@ class _EventDetailBody extends ConsumerWidget {
                   SizedBox(height: spacing.xs),
                   _CouponRow(coupon: coupon),
                 ],
+              ],
+              // The producer can put the party on top of "Próximos".
+              if (isCreator &&
+                  event.status == EventStatus.approved &&
+                  !hasEnded) ...[
+                SizedBox(height: spacing.md),
+                FeaturedPromoCard(event: event),
               ],
               if (event.status == EventStatus.approved && !hasEnded) ...[
                 SizedBox(height: spacing.md),

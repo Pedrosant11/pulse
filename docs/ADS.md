@@ -43,7 +43,21 @@ No `env.local.json` (não vai para o git):
 
 ## Eventos em destaque (produtores)
 
-Separado dos anúncios: o produtor paga e o admin destaca o evento (⋮ → Destacar evento, 3 a 30 dias).
+Separado dos anúncios. O **produtor** destaca a própria festa na tela do evento ("Coloque sua festa no topo" → escolhe os dias):
+
+| Dias | Preço | Por dia | Produto na loja |
+|---|---|---|---|
+| 3 | R$ 79 | R$ 26,33 | `pulse_featured_3` |
+| 7 | R$ 149 | R$ 21,29 | `pulse_featured_7` |
+| 14 | R$ 249 | R$ 17,79 | `pulse_featured_14` |
+| 30 | R$ 449 | R$ 14,97 | `pulse_featured_30` |
+
+- **Destacar agora:** compra pela loja (Google Play / App Store). O webhook do RevenueCat liga o destaque sozinho. Aparece quando as lojas estiverem configuradas.
+- **Pedir pela equipe Pulse:** o pedido cai em Painel → Pedidos de destaque. Você combina o pagamento (Pix, pacotes) e toca em "Pago, ativar". O produtor recebe um push.
+- O destaque começa quando o pagamento é confirmado e soma com o tempo que ainda falta.
+- O admin também pode destacar direto pelo menu ⋮ do evento (cortesia, parceiros).
+- Preços: `update public.featured_prices set price_cents = 9900 where days = 3;` (o preço na loja muda no Play Console / App Store Connect).
+- O app não mostra link nem chave Pix: pelas regras das lojas, o pagamento por fora é combinado fora do app.
 
 - O evento vai para o **topo de "Próximos"**, com o selo "Destaque" e um pin maior no mapa. Os anúncios continuam no meio da lista.
 - Com vários destaques ao mesmo tempo, todos ficam no topo em **rodízio diário**: cada pessoa vê uma ordem diferente, que muda todo dia. Assim cada produtor fica em primeiro para uma parte do público.

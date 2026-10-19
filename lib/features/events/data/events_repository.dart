@@ -5,6 +5,7 @@ import 'package:pulse/core/supabase/supabase_providers.dart';
 import 'package:pulse/core/utils/enum_json.dart';
 import 'package:pulse/core/utils/random_id.dart';
 import 'package:pulse/features/events/domain/event.dart';
+import 'package:pulse/features/events/domain/featured.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -267,6 +268,59 @@ class EventsRepository {
     () =>
         _client.rpc<void>('log_ticket_click', params: {'p_event_id': eventId}),
   );
+
+  // Paid highlights (featured_sales migration) ----------------------------
+
+  Future<List<FeaturedPrice>> featuredPrices() => guardFailures(() async {
+    final rows = await _client
+        .from('featured_prices')
+        .select()
+        .order('days', ascending: true);
+    return rows.map(FeaturedPrice.fromJson).toList();
+  });
+
+  /// The creator's open request for [eventId], if any.
+  Future<FeaturedRequest?> openFeaturedRequest(String eventId) =>
+      guardFailures(() async {
+        final row = await _client
+            .from('featured_requests')
+            .select('id, event_id, days, price_cents, method, created_at')
+            .eq('event_id', eventId)
+            .eq('status', 'pending')
+            .maybeSingle();
+        return row == null ? null : FeaturedRequest.fromJson(row);
+      });
+
+  /// Creator only; the database checks the party and the region limit.
+  Future<void> requestFeatured(
+    String eventId, {
+    required int days,
+    required FeaturedMethod method,
+  }) => guardFailures(
+    () => _client.rpc<void>(
+      'request_featured',
+      params: {'p_event_id': eventId, 'p_days': days, 'p_method': method.name},
+    ),
+  );
+
+  Future<List<AdminFeaturedRequest>> adminFeaturedRequests() => guardFailures(
+    () async {
+      final rows = await _client.rpc<List<dynamic>>('admin_featured_requests');
+      return [
+        for (final row in rows.cast<Map<String, dynamic>>())
+          AdminFeaturedRequest.fromJson(row),
+      ];
+    },
+  );
+
+  /// Admin: paid (turns the highlight on) or not happening.
+  Future<void> reviewFeatured(String requestId, {required bool approve}) =>
+      guardFailures(
+        () => _client.rpc<void>(
+          'admin_review_featured',
+          params: {'p_request': requestId, 'p_approve': approve},
+        ),
+      );
 }
 
 /// [range] as a [from, to) window in local time.

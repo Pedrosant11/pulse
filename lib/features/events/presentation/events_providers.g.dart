@@ -1076,3 +1076,220 @@ abstract class _$FeatureEditor extends $Notifier<AsyncValue<void>> {
     return element.handleCreate(ref, build);
   }
 }
+
+@ProviderFor(featuredPrices)
+final featuredPricesProvider = FeaturedPricesProvider._();
+
+final class FeaturedPricesProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<FeaturedPrice>>,
+          List<FeaturedPrice>,
+          FutureOr<List<FeaturedPrice>>
+        >
+    with
+        $FutureModifier<List<FeaturedPrice>>,
+        $FutureProvider<List<FeaturedPrice>> {
+  FeaturedPricesProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'featuredPricesProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$featuredPricesHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<List<FeaturedPrice>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<FeaturedPrice>> create(Ref ref) {
+    return featuredPrices(ref);
+  }
+}
+
+String _$featuredPricesHash() => r'1d36dbcdb448622ebf35813c925b570ee6fe5e52';
+
+@ProviderFor(openFeaturedRequest)
+final openFeaturedRequestProvider = OpenFeaturedRequestFamily._();
+
+final class OpenFeaturedRequestProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<FeaturedRequest?>,
+          FeaturedRequest?,
+          FutureOr<FeaturedRequest?>
+        >
+    with $FutureModifier<FeaturedRequest?>, $FutureProvider<FeaturedRequest?> {
+  OpenFeaturedRequestProvider._({
+    required OpenFeaturedRequestFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'openFeaturedRequestProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$openFeaturedRequestHash();
+
+  @override
+  String toString() {
+    return r'openFeaturedRequestProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<FeaturedRequest?> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<FeaturedRequest?> create(Ref ref) {
+    final argument = this.argument as String;
+    return openFeaturedRequest(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is OpenFeaturedRequestProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$openFeaturedRequestHash() =>
+    r'c4b218c515d6da4a35a9ad27aca6baf4e54e973d';
+
+final class OpenFeaturedRequestFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<FeaturedRequest?>, String> {
+  OpenFeaturedRequestFamily._()
+    : super(
+        retry: null,
+        name: r'openFeaturedRequestProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  OpenFeaturedRequestProvider call(String eventId) =>
+      OpenFeaturedRequestProvider._(argument: eventId, from: this);
+
+  @override
+  String toString() => r'openFeaturedRequestProvider';
+}
+
+@ProviderFor(adminFeaturedRequests)
+final adminFeaturedRequestsProvider = AdminFeaturedRequestsProvider._();
+
+final class AdminFeaturedRequestsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<AdminFeaturedRequest>>,
+          List<AdminFeaturedRequest>,
+          FutureOr<List<AdminFeaturedRequest>>
+        >
+    with
+        $FutureModifier<List<AdminFeaturedRequest>>,
+        $FutureProvider<List<AdminFeaturedRequest>> {
+  AdminFeaturedRequestsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'adminFeaturedRequestsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$adminFeaturedRequestsHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<List<AdminFeaturedRequest>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<AdminFeaturedRequest>> create(Ref ref) {
+    return adminFeaturedRequests(ref);
+  }
+}
+
+String _$adminFeaturedRequestsHash() =>
+    r'31b2a1ef2204844c9c554ed1a3456c53a9884532';
+
+/// A producer asking for a highlight, and the admin settling team requests.
+
+@ProviderFor(FeaturedSales)
+final featuredSalesProvider = FeaturedSalesProvider._();
+
+/// A producer asking for a highlight, and the admin settling team requests.
+final class FeaturedSalesProvider
+    extends $NotifierProvider<FeaturedSales, AsyncValue<void>> {
+  /// A producer asking for a highlight, and the admin settling team requests.
+  FeaturedSalesProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'featuredSalesProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$featuredSalesHash();
+
+  @$internal
+  @override
+  FeaturedSales create() => FeaturedSales();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AsyncValue<void> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AsyncValue<void>>(value),
+    );
+  }
+}
+
+String _$featuredSalesHash() => r'89dea4e29ce313e0a6ace8a62982a256e34a4859';
+
+/// A producer asking for a highlight, and the admin settling team requests.
+
+abstract class _$FeaturedSales extends $Notifier<AsyncValue<void>> {
+  AsyncValue<void> build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<void>, AsyncValue<void>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<void>, AsyncValue<void>>,
+              AsyncValue<void>,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}

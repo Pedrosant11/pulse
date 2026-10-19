@@ -5,6 +5,7 @@ import 'package:pulse/core/utils/run_action.dart';
 import 'package:pulse/features/auth/presentation/session_providers.dart';
 import 'package:pulse/features/events/data/events_repository.dart';
 import 'package:pulse/features/events/domain/event.dart';
+import 'package:pulse/features/events/domain/featured.dart';
 import 'package:pulse/features/profile/presentation/profile_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -232,4 +233,53 @@ class FeatureEditor extends _$FeatureEditor {
           ..invalidate(eventListProvider);
         return true;
       });
+}
+
+@riverpod
+Future<List<FeaturedPrice>> featuredPrices(Ref ref) =>
+    ref.watch(eventsRepositoryProvider).featuredPrices();
+
+@riverpod
+Future<FeaturedRequest?> openFeaturedRequest(Ref ref, String eventId) =>
+    ref.watch(eventsRepositoryProvider).openFeaturedRequest(eventId);
+
+@riverpod
+Future<List<AdminFeaturedRequest>> adminFeaturedRequests(Ref ref) =>
+    ref.watch(eventsRepositoryProvider).adminFeaturedRequests();
+
+/// A producer asking for a highlight, and the admin settling team requests.
+@riverpod
+class FeaturedSales extends _$FeaturedSales {
+  @override
+  AsyncValue<void> build() => const AsyncData(null);
+
+  Future<bool?> request(
+    String eventId, {
+    required int days,
+    required FeaturedMethod method,
+  }) => runAction(ref, (s) => state = s, () async {
+    await ref
+        .read(eventsRepositoryProvider)
+        .requestFeatured(eventId, days: days, method: method);
+    ref.invalidate(openFeaturedRequestProvider(eventId));
+    return true;
+  });
+
+  Future<bool?> review(AdminFeaturedRequest request, {required bool approve}) =>
+      runAction(ref, (s) => state = s, () async {
+        await ref
+            .read(eventsRepositoryProvider)
+            .reviewFeatured(request.id, approve: approve);
+        ref
+          ..invalidate(adminFeaturedRequestsProvider)
+          ..invalidate(eventDetailProvider(request.eventId))
+          ..invalidate(eventListProvider);
+        return true;
+      });
+
+  /// After a store purchase the webhook turns the highlight on.
+  void refreshAfterPurchase(String eventId) => ref
+    ..invalidate(openFeaturedRequestProvider(eventId))
+    ..invalidate(eventDetailProvider(eventId))
+    ..invalidate(eventListProvider);
 }

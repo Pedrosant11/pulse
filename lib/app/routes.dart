@@ -39,6 +39,7 @@ abstract final class AppRoutes {
   static const adminRestricted = '/admin/restricted';
   static const adminBadges = '/admin/badges';
   static const adminVerifications = '/admin/verifications';
+  static const adminFeatured = '/admin/featured';
   static const adminAds = '/admin/ads';
   static const adminAdForm = '/admin/ads/edit';
   static const legalPrefix = '/legal';

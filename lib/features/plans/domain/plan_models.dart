@@ -33,15 +33,24 @@ enum StoreItem {
   superlikes5('pulse_superlikes_5'),
   superlikes15('pulse_superlikes_15'),
   boost1('pulse_boost_1'),
-  boosts5('pulse_boosts_5');
+  boosts5('pulse_boosts_5'),
 
-  new(this.productId, {this.tier, this.period});
+  /// A party highlight bought by its producer (`featured_prices`).
+  featured3('pulse_featured_3', featuredDays: 3),
+  featured7('pulse_featured_7', featuredDays: 7),
+  featured14('pulse_featured_14', featuredDays: 14),
+  featured30('pulse_featured_30', featuredDays: 30);
+
+  new(this.productId, {this.tier, this.period, this.featuredDays});
 
   final String productId;
 
   /// Set for subscriptions.
   final PlanTier? tier;
   final PlanPeriod? period;
+
+  /// Set for highlights.
+  final int? featuredDays;
 
   bool get subscription => tier != null;
 

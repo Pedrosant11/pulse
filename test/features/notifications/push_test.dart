@@ -57,6 +57,7 @@ void main() {
     test('opens the conversation, crew or inbox', () {
       expect(routeFromPushData({'route': '/chats/$id'}), '/chats/$id');
       expect(routeFromPushData({'route': '/crews/$id'}), '/crews/$id');
+      expect(routeFromPushData({'route': '/events/$id'}), '/events/$id');
       expect(routeFromPushData({'route': '/chats'}), '/chats');
       expect(routeFromPushData({'route': '/plans'}), '/plans');
       expect(

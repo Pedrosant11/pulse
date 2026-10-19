@@ -41,7 +41,7 @@ app ← get_my_entitlements() (o banco decide tudo)
 
 1. **Play Console → Monetizar**:
    - Assinaturas com os 6 ids acima (um plano base em cada).
-   - Produtos únicos com os 4 ids de avulsos.
+   - Produtos únicos com os 4 ids de avulsos e os 4 de destaque (`pulse_featured_3`, `_7`, `_14`, `_30`, consumíveis; preços em `docs/ADS.md`).
    - Preço sugerido: Pulse+ R$ 9,90/semana, R$ 24,90/mês, R$ 179,90/ano; Black R$ 16,90/semana, R$ 44,90/mês, R$ 319,90/ano; 5 superlikes R$ 14,90, 15 superlikes R$ 34,90, 1 boost R$ 12,90, 5 boosts R$ 44,90.
 2. **RevenueCat** (app.revenuecat.com):
    - Criar o projeto e o app Android `com.pulseapp.pulse`.

@@ -36,6 +36,9 @@ class AdminScreen extends ConsumerWidget {
     final pendingVerifications = role.isAdmin
         ? ref.watch(pendingVerificationsProvider).value?.length
         : null;
+    final pendingFeatured = role.isAdmin
+        ? ref.watch(adminFeaturedRequestsProvider).value?.length
+        : null;
 
     return Scaffold(
       backgroundColor: context.colors.background,
@@ -109,6 +112,20 @@ class AdminScreen extends ConsumerWidget {
                     child: const Icon(Icons.chevron_right),
                   ),
                   onTap: () => context.push(AppRoutes.adminVerifications),
+                ),
+              ),
+              SizedBox(height: spacing.sm),
+              GlassCard(
+                padding: EdgeInsets.zero,
+                child: ListTile(
+                  leading: const Icon(Icons.rocket_launch_outlined),
+                  title: Text(l10n.adminFeatured),
+                  trailing: Badge(
+                    isLabelVisible: (pendingFeatured ?? 0) > 0,
+                    label: Text('${pendingFeatured ?? 0}'),
+                    child: const Icon(Icons.chevron_right),
+                  ),
+                  onTap: () => context.push(AppRoutes.adminFeatured),
                 ),
               ),
               SizedBox(height: spacing.sm),

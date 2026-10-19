@@ -3087,4 +3087,98 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get errorFeaturedLimit =>
       'Esta região já tem 5 eventos em destaque. Espere um terminar ou tire o destaque de outro.';
+
+  @override
+  String get errorFeaturedUnavailable =>
+      'Só dá para destacar festas aprovadas que ainda não aconteceram.';
+
+  @override
+  String get featuredPromoTitle => 'Coloque sua festa no topo';
+
+  @override
+  String get featuredPromoBody =>
+      'Destaque a festa e ela aparece primeiro em Próximos, com o selo Destaque, para quem está na região.';
+
+  @override
+  String get featuredCta => 'Destacar festa';
+
+  @override
+  String get featuredOnTitle => 'Sua festa está em destaque';
+
+  @override
+  String featuredOnBody(String date) {
+    return 'No topo de Próximos até $date.';
+  }
+
+  @override
+  String get featuredExtend => 'Estender destaque';
+
+  @override
+  String get featuredRequestedTitle => 'Pedido de destaque enviado';
+
+  @override
+  String featuredRequestedBody(int days, String price) {
+    return '$days dias · $price. A equipe Pulse vai te chamar para combinar.';
+  }
+
+  @override
+  String get featuredChange => 'Mudar pedido';
+
+  @override
+  String get featuredSheetTitle => 'Por quantos dias?';
+
+  @override
+  String get featuredSheetBody =>
+      'Quanto mais dias, menor o preço por dia. O destaque começa assim que o pagamento é confirmado e soma com o tempo que ainda falta.';
+
+  @override
+  String featuredDays(int days) {
+    return '$days dias';
+  }
+
+  @override
+  String featuredPerDay(String price) {
+    return '$price por dia';
+  }
+
+  @override
+  String get featuredBestValue => 'Melhor preço por dia';
+
+  @override
+  String featuredBuyNow(String price) {
+    return 'Destacar agora · $price';
+  }
+
+  @override
+  String get featuredAskTeam => 'Pedir pela equipe Pulse';
+
+  @override
+  String get featuredTeamHint =>
+      'A equipe também monta pacotes para várias festas.';
+
+  @override
+  String get featuredBought =>
+      'Pagamento confirmado! Sua festa entra no topo em instantes.';
+
+  @override
+  String get featuredRequestSent =>
+      'Pedido enviado! A equipe Pulse vai te chamar para combinar.';
+
+  @override
+  String get adminFeatured => 'Pedidos de destaque';
+
+  @override
+  String get adminFeaturedEmpty => 'Nenhum pedido de destaque';
+
+  @override
+  String get adminFeaturedEmptyHint =>
+      'Os pedidos feitos pela equipe aparecem aqui. Compras pela loja entram sozinhas.';
+
+  @override
+  String adminFeaturedLine(String name, int days, String price) {
+    return '$name · $days dias · $price';
+  }
+
+  @override
+  String get adminFeaturedPaid => 'Pago, ativar';
 }

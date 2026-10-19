@@ -26,6 +26,7 @@ import 'package:pulse/features/crews/presentation/crew_screen.dart';
 import 'package:pulse/features/discover/domain/discover_models.dart';
 import 'package:pulse/features/discover/presentation/discover_screen.dart';
 import 'package:pulse/features/discover/presentation/match_screen.dart';
+import 'package:pulse/features/events/presentation/admin_featured_screen.dart';
 import 'package:pulse/features/events/presentation/event_detail_screen.dart';
 import 'package:pulse/features/events/presentation/event_form_screen.dart';
 import 'package:pulse/features/events/presentation/event_insights_screen.dart';
@@ -327,6 +328,10 @@ GoRouter router(Ref ref) {
           GoRoute(
             path: 'restricted',
             builder: (_, _) => const RestrictedUsersScreen(),
+          ),
+          GoRoute(
+            path: 'featured',
+            builder: (_, _) => const AdminFeaturedScreen(),
           ),
           GoRoute(
             path: 'ads',

@@ -5283,6 +5283,156 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Esta região já tem 5 eventos em destaque. Espere um terminar ou tire o destaque de outro.'**
   String get errorFeaturedLimit;
+
+  /// No description provided for @errorFeaturedUnavailable.
+  ///
+  /// In pt, this message translates to:
+  /// **'Só dá para destacar festas aprovadas que ainda não aconteceram.'**
+  String get errorFeaturedUnavailable;
+
+  /// No description provided for @featuredPromoTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Coloque sua festa no topo'**
+  String get featuredPromoTitle;
+
+  /// No description provided for @featuredPromoBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Destaque a festa e ela aparece primeiro em Próximos, com o selo Destaque, para quem está na região.'**
+  String get featuredPromoBody;
+
+  /// No description provided for @featuredCta.
+  ///
+  /// In pt, this message translates to:
+  /// **'Destacar festa'**
+  String get featuredCta;
+
+  /// No description provided for @featuredOnTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sua festa está em destaque'**
+  String get featuredOnTitle;
+
+  /// No description provided for @featuredOnBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'No topo de Próximos até {date}.'**
+  String featuredOnBody(String date);
+
+  /// No description provided for @featuredExtend.
+  ///
+  /// In pt, this message translates to:
+  /// **'Estender destaque'**
+  String get featuredExtend;
+
+  /// No description provided for @featuredRequestedTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pedido de destaque enviado'**
+  String get featuredRequestedTitle;
+
+  /// No description provided for @featuredRequestedBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'{days} dias · {price}. A equipe Pulse vai te chamar para combinar.'**
+  String featuredRequestedBody(int days, String price);
+
+  /// No description provided for @featuredChange.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mudar pedido'**
+  String get featuredChange;
+
+  /// No description provided for @featuredSheetTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Por quantos dias?'**
+  String get featuredSheetTitle;
+
+  /// No description provided for @featuredSheetBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quanto mais dias, menor o preço por dia. O destaque começa assim que o pagamento é confirmado e soma com o tempo que ainda falta.'**
+  String get featuredSheetBody;
+
+  /// No description provided for @featuredDays.
+  ///
+  /// In pt, this message translates to:
+  /// **'{days} dias'**
+  String featuredDays(int days);
+
+  /// No description provided for @featuredPerDay.
+  ///
+  /// In pt, this message translates to:
+  /// **'{price} por dia'**
+  String featuredPerDay(String price);
+
+  /// No description provided for @featuredBestValue.
+  ///
+  /// In pt, this message translates to:
+  /// **'Melhor preço por dia'**
+  String get featuredBestValue;
+
+  /// No description provided for @featuredBuyNow.
+  ///
+  /// In pt, this message translates to:
+  /// **'Destacar agora · {price}'**
+  String featuredBuyNow(String price);
+
+  /// No description provided for @featuredAskTeam.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pedir pela equipe Pulse'**
+  String get featuredAskTeam;
+
+  /// No description provided for @featuredTeamHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'A equipe também monta pacotes para várias festas.'**
+  String get featuredTeamHint;
+
+  /// No description provided for @featuredBought.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pagamento confirmado! Sua festa entra no topo em instantes.'**
+  String get featuredBought;
+
+  /// No description provided for @featuredRequestSent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pedido enviado! A equipe Pulse vai te chamar para combinar.'**
+  String get featuredRequestSent;
+
+  /// No description provided for @adminFeatured.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pedidos de destaque'**
+  String get adminFeatured;
+
+  /// No description provided for @adminFeaturedEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum pedido de destaque'**
+  String get adminFeaturedEmpty;
+
+  /// No description provided for @adminFeaturedEmptyHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Os pedidos feitos pela equipe aparecem aqui. Compras pela loja entram sozinhas.'**
+  String get adminFeaturedEmptyHint;
+
+  /// No description provided for @adminFeaturedLine.
+  ///
+  /// In pt, this message translates to:
+  /// **'{name} · {days} dias · {price}'**
+  String adminFeaturedLine(String name, int days, String price);
+
+  /// No description provided for @adminFeaturedPaid.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pago, ativar'**
+  String get adminFeaturedPaid;
 }
 
 class _AppLocalizationsDelegate

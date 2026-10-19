@@ -49,7 +49,7 @@ final class AdsConfigProvider
   }
 }
 
-String _$adsConfigHash() => r'882bdfa86e908f52b1222995b5328cbddeca957c';
+String _$adsConfigHash() => r'c60657a8f812cef41b75d757a4bed33a692e85f3';
 
 /// Whether slots of [placement] can be filled right now.
 
