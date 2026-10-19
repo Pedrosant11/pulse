@@ -3,6 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:pulse/app/theme/app_theme.dart';
 import 'package:pulse/core/models/app_mode.dart';
+import 'package:pulse/features/ads/data/ads_repository.dart';
+import 'package:pulse/features/ads/domain/ad_models.dart';
+import 'package:pulse/features/ads/presentation/ads_providers.dart';
 import 'package:pulse/features/discover/domain/discover_models.dart';
 import 'package:pulse/features/discover/presentation/discover_providers.dart';
 import 'package:pulse/features/discover/presentation/discover_screen.dart';
@@ -125,6 +128,7 @@ void main() {
       bool hasEvents = true,
       AppMode mode = AppMode.date,
       List<AppMode>? modes,
+      DiscoverDeck Function()? deck,
     }) => [
       myProfileProvider.overrideWith(
         (ref) async => MyProfile(
@@ -134,7 +138,7 @@ void main() {
         ),
       ),
       discoverDeckProvider(mode)
-          .overrideWith(() => _FixedDeck(DeckState(cards: cards))),
+          .overrideWith(deck ?? () => _FixedDeck(DeckState(cards: cards))),
       myPhotosProvider.overrideWith((ref) async => const []),
       myAttendingEventsProvider.overrideWith(
         (ref) async => hasEvents
@@ -268,7 +272,83 @@ void main() {
       expect(find.text('Ativar Date ou Crew'), findsOneWidget);
       expect(find.text('CREW'), findsNothing);
     });
+
+    testWidgets('an ad card comes every N swipes and any swipe skips it', (
+      tester,
+    ) async {
+      final bruno = ana.copyWith(id: 'bruno', firstName: 'Bruno');
+      final carla = ana.copyWith(id: 'carla', firstName: 'Carla');
+      await tester.pumpWidget(
+        _app(
+          const DiscoverScreen(),
+          overrides: [
+            ...overrides(
+              const [],
+              deck: () => _LocalDeck(DeckState(cards: [ana, bruno, carla])),
+            ),
+            adsRepositoryProvider.overrideWithValue(_NoopAds()),
+            adsConfigProvider.overrideWith(
+              (ref) async => const AdsConfig(
+                enabled: true,
+                discoverEvery: 1,
+                ads: [
+                  HouseAd(
+                    id: 'ad1',
+                    title: 'Sunset Club',
+                    placements: [AdPlacement.discover],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+      await settle(tester);
+      expect(find.text('Ana, 32'), findsOneWidget);
+
+      await tester.tap(find.byTooltip('Passar'));
+      await settle(tester);
+      expect(find.text('Sunset Club'), findsOneWidget);
+      expect(find.text('Patrocinado'), findsOneWidget);
+
+      // Skipping the ad doesn't swipe anyone: Bruno is still next.
+      await tester.tap(find.byTooltip('Passar'));
+      await settle(tester);
+      expect(find.text('Sunset Club'), findsNothing);
+      expect(find.text('Bruno, 32'), findsOneWidget);
+    });
   });
+}
+
+/// Swipes without a server.
+class _LocalDeck extends DiscoverDeck {
+  new(this._state);
+
+  final DeckState _state;
+
+  @override
+  Future<DeckState> build(AppMode mode) async => _state;
+
+  @override
+  Future<SwipeResult?> swipe(
+    DiscoverCandidate candidate,
+    SwipeDirection direction, {
+    bool superLike = false,
+  }) async {
+    final now = state.requireValue;
+    state = AsyncData(
+      now.copyWith(cards: [...now.cards.where((c) => c.id != candidate.id)]),
+    );
+    return const SwipeResult(matched: false);
+  }
+}
+
+class _NoopAds implements AdsRepository {
+  @override
+  Future<void> log(String adId, {required bool click}) async {}
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
 class _FixedDeck extends DiscoverDeck {

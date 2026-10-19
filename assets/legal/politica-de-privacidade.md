@@ -30,11 +30,12 @@ Use esse canal para qualquer pedido ou dúvida sobre seus dados.
 - **Dados técnicos:** endereço IP, data e hora de acesso, tipo de dispositivo e sistema, e registros de erro.
 - **Compras:** plano assinado, validade, itens avulsos comprados e saldo (superlikes e boosts). O pagamento é feito na loja (Google Play ou App Store); **não recebemos dados do seu cartão**. Se você usar o modo viagem, guardamos a cidade escolhida. Na indicação, guardamos seu código e quem entrou com ele (para pagar as recompensas); quem indicou vê só a quantidade, nunca quem foi.
 - **Ingressos:** quando você toca em "Comprar ingresso", registramos que a pessoa da sua conta tocou naquele evento, para mostrar ao produtor quantas pessoas o Pulse levou até a venda (ele vê só o número). O ingresso é comprado no site da vendedora, com as regras dela.
+- **Anúncios:** o Pulse mostra anúncios na lista de eventos e no Descobrir, sempre com o selo "Patrocinado". Nos anúncios próprios (festas e parceiros), registramos que sua conta viu ou tocou o anúncio, uma vez por dia, só para contar visualizações e toques; o anunciante vê apenas os totais. Quando não há anúncio próprio, aparecem anúncios do **Google (AdMob)**, que usa o identificador de publicidade do aparelho, endereço IP e dados técnicos para escolher, entregar e medir os anúncios. Você pode redefinir ou desativar o identificador de publicidade nas configurações do celular, e o app pede seu consentimento quando a lei exigir.
 - **Verificação por selfie (opcional):** se você pedir o selo de verificado, tira uma selfie fazendo uma pose sorteada. A equipe do Pulse compara com as fotos do seu perfil e **a selfie é apagada logo depois da análise**. Guardamos só o resultado (aprovado ou não, data e motivo).
 
 ### 2.3 O que não coletamos
 
-Não acessamos seus contatos, não rastreamos sua localização em segundo plano e não usamos ferramentas de publicidade ou rastreamento de terceiros.
+Não acessamos seus contatos e não rastreamos sua localização em segundo plano. **Não passamos aos anunciantes** seu nome, fotos, mensagens, orientação sexual, matches ou as festas que você vai.
 
 ## 3. O que os outros usuários veem
 
@@ -55,6 +56,7 @@ Não acessamos seus contatos, não rastreamos sua localização em segundo plano
 | Segurança, prevenção a fraudes, spam e abuso, limites de uso, moderação e análise de denúncias | Legítimo interesse (art. 7º, IX) e proteção da vida e da incolumidade física (art. 7º, VII) |
 | Enviar e-mails de confirmação de conta e recuperação de senha | Execução de contrato (art. 7º, V) |
 | Processar compras e assinaturas e liberar os benefícios pagos | Execução de contrato (art. 7º, V) |
+| Mostrar anúncios (próprios e do Google) e medir visualizações e toques | Legítimo interesse (art. 7º, IX); anúncios personalizados do Google dependem do seu consentimento quando a lei exigir (art. 7º, I) |
 | Guardar registros de acesso pelo prazo exigido em lei | Cumprimento de obrigação legal (art. 7º, II, e art. 15 do Marco Civil) |
 | Defender direitos em processos judiciais ou administrativos | Exercício regular de direitos (art. 7º, VI) |
 
@@ -72,6 +74,7 @@ A ordem em que os perfis aparecem é definida automaticamente, considerando even
 | Resend | Envio de e-mails de confirmação e recuperação de senha | E-mail e conteúdo da mensagem | Estados Unidos |
 | Google (Firebase Cloud Messaging) | Entrega das notificações no celular | Identificador de notificação do aparelho e um texto genérico (sem nomes nem conteúdo das conversas) | Estados Unidos |
 | RevenueCat | Confirmação das compras e assinaturas feitas nas lojas | Identificador da conta no Pulse, produtos comprados, datas e status da assinatura (sem dados de cartão) | Estados Unidos |
+| Google (AdMob) | Anúncios quando não há anúncio próprio | Identificador de publicidade do aparelho, endereço IP, dados técnicos e interações com o anúncio (sem nome, fotos, mensagens ou dados do perfil) | Estados Unidos |
 | OpenFreeMap | Imagens do mapa de eventos | Endereço IP e área do mapa visualizada | Europa |
 | Photon (komoot) | Busca de endereço ao cadastrar um evento | Texto buscado e endereço IP | Alemanha |
 | ViaCEP | Busca de endereço por CEP | CEP digitado e endereço IP | Brasil |
@@ -83,7 +86,7 @@ Também podemos compartilhar dados com **autoridades públicas**, quando houver 
 
 ### Transferência internacional
 
-Os dados principais ficam no Brasil. Alguns fornecedores acima (Resend, Google, RevenueCat, OpenFreeMap e Photon) estão fora do país. Essas transferências são necessárias para executar o serviço que você contratou (art. 33, IX, combinado com o art. 7º, V, da LGPD) e envolvem apenas os dados indicados na tabela.
+Os dados principais ficam no Brasil. Alguns fornecedores acima (Resend, Google, incluindo o AdMob, RevenueCat, OpenFreeMap e Photon) estão fora do país. Essas transferências são necessárias para executar o serviço que você contratou (art. 33, IX, combinado com o art. 7º, V, da LGPD) e envolvem apenas os dados indicados na tabela.
 
 ## 6. Por quanto tempo guardamos
 
@@ -152,7 +155,7 @@ O Pulse é **proibido para menores de 18 anos**. Não coletamos dados de menores
 
 ## 11. Cookies
 
-O app não usa cookies. As páginas públicas do Pulse (como esta) também não usam cookies de rastreamento.
+O app não usa cookies (o SDK de anúncios do Google usa o identificador de publicidade do aparelho, descrito no item 2.2). As páginas públicas do Pulse (como esta) também não usam cookies de rastreamento.
 
 ## 12. Mudanças nesta Política
 

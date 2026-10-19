@@ -445,3 +445,4 @@ Baseado na pesquisa de mercado (apps de relacionamento migrando para eventos pre
     - **Indique e ganhe** (feito): código de 6 caracteres em Configurações. Quem usa um código antes do primeiro match ganha 3 superlikes na hora; quem indicou ganha 3 superlikes + 1 boost no primeiro match do indicado (até 10 por mês, push avisando). Sem troca de códigos entre duas pessoas. Valores em `private.app_settings`.
     - QR code/link do evento: espera o domínio (link clicável no WhatsApp + App Links).
     - Spotify: depois, junto com as contas de lojas (app em developer.spotify.com).
+8. **Anúncios** (feito): card patrocinado a cada 6 eventos em "Próximos" e a cada 20 perfis no Descobrir, para todos (inclusive quem paga, ajustável em `private.app_settings`). Anúncios próprios (festas e parceiros, criados pelo admin, com visualizações e toques) têm prioridade; o Google AdMob completa. Ver `docs/ADS.md`.

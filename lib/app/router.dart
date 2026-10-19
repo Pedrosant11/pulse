@@ -7,6 +7,8 @@ import 'package:pulse/features/admin/presentation/admin_screen.dart';
 import 'package:pulse/features/admin/presentation/reports_screen.dart';
 import 'package:pulse/features/admin/presentation/restricted_users_screen.dart';
 import 'package:pulse/features/admin/presentation/role_request_screen.dart';
+import 'package:pulse/features/ads/presentation/ad_form_screen.dart';
+import 'package:pulse/features/ads/presentation/admin_ads_screen.dart';
 import 'package:pulse/features/auth/presentation/account_setup_screen.dart';
 import 'package:pulse/features/auth/presentation/check_email_screen.dart';
 import 'package:pulse/features/auth/presentation/forgot_password_screen.dart';
@@ -325,6 +327,21 @@ GoRouter router(Ref ref) {
           GoRoute(
             path: 'restricted',
             builder: (_, _) => const RestrictedUsersScreen(),
+          ),
+          GoRoute(
+            path: 'ads',
+            builder: (_, _) => const AdminAdsScreen(),
+            routes: [
+              GoRoute(
+                path: 'edit',
+                // Opened from the list or an event; without its data it
+                // goes back to the list.
+                redirect: (_, state) =>
+                    state.extra is AdFormArgs ? null : AppRoutes.adminAds,
+                builder: (_, state) =>
+                    AdFormScreen(args: state.extra! as AdFormArgs),
+              ),
+            ],
           ),
         ],
       ),

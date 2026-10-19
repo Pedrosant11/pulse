@@ -2978,4 +2978,109 @@ class AppLocalizationsPt extends AppLocalizations {
     });
     return '$_temp0';
   }
+
+  @override
+  String get adSponsored => 'Patrocinado';
+
+  @override
+  String get adLearnMore => 'Saiba mais';
+
+  @override
+  String get adStampNext => 'PRÓXIMO';
+
+  @override
+  String get adSwipeHint => 'Deslize para continuar';
+
+  @override
+  String get adminAds => 'Anúncios';
+
+  @override
+  String get adNew => 'Novo anúncio';
+
+  @override
+  String get adEdit => 'Editar anúncio';
+
+  @override
+  String get adsEmptyTitle => 'Nenhum anúncio ainda';
+
+  @override
+  String get adsEmptyBody =>
+      'Crie anúncios de festas e parceiros. Eles aparecem na lista de eventos e no Descobrir; sem anúncio próprio, entram os anúncios do Google.';
+
+  @override
+  String get adRunning => 'No ar';
+
+  @override
+  String get adNotRunning => 'Fora do ar';
+
+  @override
+  String adUntil(String date) {
+    return 'até $date';
+  }
+
+  @override
+  String get adNoEnd => 'Sem data de fim';
+
+  @override
+  String adStats(int views, int taps, String ctr) {
+    return '$views views · $taps toques ($ctr%)';
+  }
+
+  @override
+  String get adImage => 'Imagem do anúncio (16:9)';
+
+  @override
+  String get adTitle => 'Título';
+
+  @override
+  String get adTitleRequired => 'Dê um título ao anúncio';
+
+  @override
+  String get adBody => 'Texto (opcional)';
+
+  @override
+  String get adCta => 'Texto do botão (opcional)';
+
+  @override
+  String get adLink => 'Link (site, ingresso, Instagram)';
+
+  @override
+  String get adLinkInvalid => 'Use um link completo, começando com https://';
+
+  @override
+  String get adLinkedEvent => 'Evento vinculado';
+
+  @override
+  String get adPlacements => 'Onde aparece';
+
+  @override
+  String adPlacement(String placement) {
+    String _temp0 = intl.Intl.selectLogic(placement, {
+      'events': 'Lista de eventos',
+      'discover': 'Descobrir',
+      'other': 'Outro',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get adStartsAt => 'Começa em';
+
+  @override
+  String get adEndsAt => 'Termina em';
+
+  @override
+  String get adActive => 'Anúncio ativo';
+
+  @override
+  String get adSave => 'Salvar anúncio';
+
+  @override
+  String get adDelete => 'Excluir';
+
+  @override
+  String get adDeleteTitle => 'Excluir este anúncio?';
+
+  @override
+  String get eventAdvertise => 'Anunciar evento';
 }

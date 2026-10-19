@@ -8,6 +8,8 @@ class Env {
     required this.supabasePublishableKey,
     this.revenueCatGoogleKey,
     this.revenueCatAppleKey,
+    this.admobNativeAndroid,
+    this.admobNativeIos,
   });
 
   /// Reads and validates the values compiled into the app.
@@ -18,6 +20,8 @@ class Env {
     ),
     revenueCatGoogleKey: const String.fromEnvironment('REVENUECAT_GOOGLE_KEY'),
     revenueCatAppleKey: const String.fromEnvironment('REVENUECAT_APPLE_KEY'),
+    admobNativeAndroid: const String.fromEnvironment('ADMOB_NATIVE_ANDROID'),
+    admobNativeIos: const String.fromEnvironment('ADMOB_NATIVE_IOS'),
   );
 
   /// Validates raw values, failing fast with a message aimed at developers.
@@ -26,6 +30,8 @@ class Env {
     required String supabasePublishableKey,
     String? revenueCatGoogleKey,
     String? revenueCatAppleKey,
+    String? admobNativeAndroid,
+    String? admobNativeIos,
   }) {
     final missing = [
       if (supabaseUrl.trim().isEmpty) 'SUPABASE_URL',
@@ -49,6 +55,8 @@ class Env {
       supabasePublishableKey: supabasePublishableKey.trim(),
       revenueCatGoogleKey: optional(revenueCatGoogleKey),
       revenueCatAppleKey: optional(revenueCatAppleKey),
+      admobNativeAndroid: optional(admobNativeAndroid),
+      admobNativeIos: optional(admobNativeIos),
     );
   }
 
@@ -59,4 +67,9 @@ class Env {
   /// screen shows the plans but purchases are unavailable.
   final String? revenueCatGoogleKey;
   final String? revenueCatAppleKey;
+
+  /// AdMob native ad unit ids (public). "test" uses Google's test ads;
+  /// without them only the own ads (from the database) are shown.
+  final String? admobNativeAndroid;
+  final String? admobNativeIos;
 }

@@ -111,6 +111,16 @@ class AdminScreen extends ConsumerWidget {
                   onTap: () => context.push(AppRoutes.adminVerifications),
                 ),
               ),
+              SizedBox(height: spacing.sm),
+              GlassCard(
+                padding: EdgeInsets.zero,
+                child: ListTile(
+                  leading: const Icon(Icons.campaign_outlined),
+                  title: Text(l10n.adminAds),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => context.push(AppRoutes.adminAds),
+                ),
+              ),
               SizedBox(height: spacing.lg),
               Text(
                 l10n.adminRoleRequests.toUpperCase(),

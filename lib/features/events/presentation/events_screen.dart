@@ -8,6 +8,9 @@ import 'package:pulse/app/routes.dart';
 import 'package:pulse/core/extensions/context_extensions.dart';
 import 'package:pulse/core/widgets/neon_button.dart';
 import 'package:pulse/core/widgets/state_views.dart';
+import 'package:pulse/features/ads/domain/ad_models.dart';
+import 'package:pulse/features/ads/presentation/ads_providers.dart';
+import 'package:pulse/features/ads/presentation/widgets/sponsored_slot.dart';
 import 'package:pulse/features/events/data/events_repository.dart';
 import 'package:pulse/features/events/domain/event.dart';
 import 'package:pulse/features/events/presentation/events_providers.dart';
@@ -133,6 +136,15 @@ class _EventList extends ConsumerWidget {
     // Room for the floating bottom navigation.
     final bottomPadding = MediaQuery.paddingOf(context).bottom + spacing.xl;
 
+    // Ads only in "Próximos", between events (never after the last one).
+    final adsEvery =
+        ref.watch(adsConfigProvider).value?.every(AdPlacement.events) ?? 0;
+    final withAds =
+        nearby &&
+        adsEvery > 0 &&
+        ref.watch(adsReadyProvider(AdPlacement.events));
+    int adSlots(int count) => withAds ? (count - 1) ~/ adsEvery : 0;
+
     Future<void> refresh() async {
       ref.invalidate(eventListProvider(scope));
       await ref.read(eventListProvider(scope).future);
@@ -183,15 +195,23 @@ class _EventList extends ConsumerWidget {
                         bottomPadding,
                       ),
                       sliver: SliverList.separated(
-                        itemCount: events.length,
+                        itemCount: events.length + adSlots(events.length),
                         separatorBuilder: (_, _) =>
                             SizedBox(height: spacing.md),
                         itemBuilder: (context, i) {
+                          // An ad after every `adsEvery` events.
+                          final step = adsEvery + 1;
+                          if (withAds && (i + 1) % step == 0) {
+                            return SponsoredSlot(
+                              placement: AdPlacement.events,
+                              index: i ~/ step,
+                            );
+                          }
+                          final event = events[withAds ? i - i ~/ step : i];
                           final card = EventCard(
-                            event: events[i],
-                            onTap: () => context.push(
-                              AppRoutes.eventDetail(events[i].id),
-                            ),
+                            event: event,
+                            onTap: () =>
+                                context.push(AppRoutes.eventDetail(event.id)),
                           );
                           return context.reduceMotion || i > 6
                               ? card

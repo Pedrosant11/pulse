@@ -16,6 +16,7 @@ import 'package:pulse/core/widgets/glass_card.dart';
 import 'package:pulse/core/widgets/neon_button.dart';
 import 'package:pulse/core/widgets/rive_slot.dart';
 import 'package:pulse/core/widgets/state_views.dart';
+import 'package:pulse/features/ads/presentation/ad_form_screen.dart';
 import 'package:pulse/features/auth/presentation/session_providers.dart';
 import 'package:pulse/features/badges/presentation/widgets/profile_badges.dart';
 import 'package:pulse/features/crews/presentation/crew_screen.dart';
@@ -243,6 +244,17 @@ class _EventDetailBody extends ConsumerWidget {
                       child: Text(
                         isFeatured ? l10n.eventUnfeature : l10n.eventFeature,
                       ),
+                    ),
+                  if (role.isAdmin && event.status == EventStatus.approved)
+                    PopupMenuItem(
+                      onTap: () => context.push(
+                        AppRoutes.adminAdForm,
+                        extra: AdFormArgs(
+                          eventId: event.id,
+                          eventName: event.name,
+                        ),
+                      ),
+                      child: Text(l10n.eventAdvertise),
                     ),
                   if (canCancel)
                     PopupMenuItem(

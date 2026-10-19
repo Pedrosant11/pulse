@@ -36,6 +36,11 @@ android {
         // flag during build.
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        // AdMob app id (public). Google's test id until the AdMob account
+        // exists; set the real one with -PadmobAppId=... or here (docs/ADS.md).
+        manifestPlaceholders["admobAppId"] =
+            (project.findProperty("admobAppId") as String?)
+                ?: "ca-app-pub-3940256099942544~3347511713"
     }
 
     signingConfigs {
@@ -53,6 +58,10 @@ android {
         release {
             signingConfig = signingConfigs.findByName("release")
                 ?: signingConfigs.getByName("debug")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
         }
     }
 }

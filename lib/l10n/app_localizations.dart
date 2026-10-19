@@ -5091,6 +5091,192 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'{problem, select, invalid{Código não encontrado. Confira as letras e os números.} own{Esse código é seu (ou de alguém que você indicou).} used{Você já usou um código de convite.} tooLate{Os códigos de convite valem só até o primeiro match.} other{Não foi possível usar o código.}}'**
   String referralError(String problem);
+
+  /// No description provided for @adSponsored.
+  ///
+  /// In pt, this message translates to:
+  /// **'Patrocinado'**
+  String get adSponsored;
+
+  /// No description provided for @adLearnMore.
+  ///
+  /// In pt, this message translates to:
+  /// **'Saiba mais'**
+  String get adLearnMore;
+
+  /// No description provided for @adStampNext.
+  ///
+  /// In pt, this message translates to:
+  /// **'PRÓXIMO'**
+  String get adStampNext;
+
+  /// No description provided for @adSwipeHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Deslize para continuar'**
+  String get adSwipeHint;
+
+  /// No description provided for @adminAds.
+  ///
+  /// In pt, this message translates to:
+  /// **'Anúncios'**
+  String get adminAds;
+
+  /// No description provided for @adNew.
+  ///
+  /// In pt, this message translates to:
+  /// **'Novo anúncio'**
+  String get adNew;
+
+  /// No description provided for @adEdit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar anúncio'**
+  String get adEdit;
+
+  /// No description provided for @adsEmptyTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhum anúncio ainda'**
+  String get adsEmptyTitle;
+
+  /// No description provided for @adsEmptyBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Crie anúncios de festas e parceiros. Eles aparecem na lista de eventos e no Descobrir; sem anúncio próprio, entram os anúncios do Google.'**
+  String get adsEmptyBody;
+
+  /// No description provided for @adRunning.
+  ///
+  /// In pt, this message translates to:
+  /// **'No ar'**
+  String get adRunning;
+
+  /// No description provided for @adNotRunning.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fora do ar'**
+  String get adNotRunning;
+
+  /// No description provided for @adUntil.
+  ///
+  /// In pt, this message translates to:
+  /// **'até {date}'**
+  String adUntil(String date);
+
+  /// No description provided for @adNoEnd.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem data de fim'**
+  String get adNoEnd;
+
+  /// No description provided for @adStats.
+  ///
+  /// In pt, this message translates to:
+  /// **'{views} views · {taps} toques ({ctr}%)'**
+  String adStats(int views, int taps, String ctr);
+
+  /// No description provided for @adImage.
+  ///
+  /// In pt, this message translates to:
+  /// **'Imagem do anúncio (16:9)'**
+  String get adImage;
+
+  /// No description provided for @adTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Título'**
+  String get adTitle;
+
+  /// No description provided for @adTitleRequired.
+  ///
+  /// In pt, this message translates to:
+  /// **'Dê um título ao anúncio'**
+  String get adTitleRequired;
+
+  /// No description provided for @adBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Texto (opcional)'**
+  String get adBody;
+
+  /// No description provided for @adCta.
+  ///
+  /// In pt, this message translates to:
+  /// **'Texto do botão (opcional)'**
+  String get adCta;
+
+  /// No description provided for @adLink.
+  ///
+  /// In pt, this message translates to:
+  /// **'Link (site, ingresso, Instagram)'**
+  String get adLink;
+
+  /// No description provided for @adLinkInvalid.
+  ///
+  /// In pt, this message translates to:
+  /// **'Use um link completo, começando com https://'**
+  String get adLinkInvalid;
+
+  /// No description provided for @adLinkedEvent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Evento vinculado'**
+  String get adLinkedEvent;
+
+  /// No description provided for @adPlacements.
+  ///
+  /// In pt, this message translates to:
+  /// **'Onde aparece'**
+  String get adPlacements;
+
+  /// No description provided for @adPlacement.
+  ///
+  /// In pt, this message translates to:
+  /// **'{placement, select, events{Lista de eventos} discover{Descobrir} other{Outro}}'**
+  String adPlacement(String placement);
+
+  /// No description provided for @adStartsAt.
+  ///
+  /// In pt, this message translates to:
+  /// **'Começa em'**
+  String get adStartsAt;
+
+  /// No description provided for @adEndsAt.
+  ///
+  /// In pt, this message translates to:
+  /// **'Termina em'**
+  String get adEndsAt;
+
+  /// No description provided for @adActive.
+  ///
+  /// In pt, this message translates to:
+  /// **'Anúncio ativo'**
+  String get adActive;
+
+  /// No description provided for @adSave.
+  ///
+  /// In pt, this message translates to:
+  /// **'Salvar anúncio'**
+  String get adSave;
+
+  /// No description provided for @adDelete.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir'**
+  String get adDelete;
+
+  /// No description provided for @adDeleteTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Excluir este anúncio?'**
+  String get adDeleteTitle;
+
+  /// No description provided for @eventAdvertise.
+  ///
+  /// In pt, this message translates to:
+  /// **'Anunciar evento'**
+  String get eventAdvertise;
 }
 
 class _AppLocalizationsDelegate

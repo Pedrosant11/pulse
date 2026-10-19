@@ -15,6 +15,9 @@ import 'package:pulse/core/extensions/context_extensions.dart';
 import 'package:pulse/core/models/app_mode.dart';
 import 'package:pulse/core/widgets/shader_effects.dart';
 import 'package:pulse/core/widgets/state_views.dart';
+import 'package:pulse/features/ads/domain/ad_models.dart';
+import 'package:pulse/features/ads/presentation/ads_providers.dart';
+import 'package:pulse/features/ads/presentation/widgets/discover_ad_card.dart';
 import 'package:pulse/features/discover/domain/discover_models.dart';
 import 'package:pulse/features/discover/presentation/discover_providers.dart';
 import 'package:pulse/features/discover/presentation/widgets/candidate_profile_page.dart';
@@ -44,7 +47,34 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
   /// The next like comes from the superlike button.
   bool _pendingSuper = false;
 
+  /// An ad card every `discover_every` swipes (ads migration).
+  int _sinceAd = 0;
+  int _adsShown = 0;
+  bool _showAd = false;
+  int _adsEvery = 0;
+  bool _adsReady = false;
+
   static const _preloadCount = 3;
+
+  void _countForAd() {
+    if (_adsEvery <= 0 || !_adsReady) return;
+    if (++_sinceAd >= _adsEvery) {
+      setState(() {
+        _sinceAd = 0;
+        _showAd = true;
+      });
+    }
+  }
+
+  /// The ad card was swiped away (or had nothing to show).
+  void _dismissAd() {
+    _pendingSuper = false;
+    if (!mounted || !_showAd) return;
+    setState(() {
+      _showAd = false;
+      _adsShown++;
+    });
+  }
 
   /// Warms the image cache for the next cards (SPEC 8.2).
   void _precacheNext(List<DiscoverCandidate> cards) {
@@ -76,6 +106,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
     if (direction == SwipeDirection.like) {
       unawaited(HapticFeedback.lightImpact());
     }
+    _countForAd();
     final result = await ref
         .read(discoverDeckProvider(mode).notifier)
         .swipe(candidate, direction, superLike: superLike);
@@ -207,6 +238,10 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
     final cards = deck?.value?.cards ?? const <DiscoverCandidate>[];
 
     final plan = ref.watch(entitlementsProvider).value;
+    _adsReady = ref.watch(adsReadyProvider(AdPlacement.discover));
+    _adsEvery =
+        ref.watch(adsConfigProvider).value?.every(AdPlacement.discover) ?? 0;
+    final showAd = _showAd && _adsReady;
 
     ref.listen(discoverDeckProvider(mode), (_, next) {
       final error = next.value?.error;
@@ -270,6 +305,14 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
                 mode: mode,
                 accent: accent,
                 controller: _card,
+                ad: showAd
+                    ? DiscoverAdCard(
+                        key: ValueKey('ad-$_adsShown'),
+                        index: _adsShown,
+                        onUnavailable: _dismissAd,
+                      )
+                    : null,
+                onAdDone: _dismissAd,
                 onSwiped: (candidate, direction) =>
                     _onSwiped(mode, candidate, direction),
                 onOpenProfile: (candidate) =>
@@ -420,6 +463,8 @@ class _CardStack extends StatelessWidget {
     required this.myGenres,
     required this.onSwiped,
     required this.onOpenProfile,
+    required this.onAdDone,
+    this.ad,
   });
 
   final DeckState state;
@@ -430,6 +475,10 @@ class _CardStack extends StatelessWidget {
   final void Function(DiscoverCandidate, SwipeDirection) onSwiped;
   final ValueChanged<DiscoverCandidate> onOpenProfile;
 
+  /// An ad card on top of the deck; any swipe just moves on.
+  final Widget? ad;
+  final VoidCallback onAdDone;
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -437,6 +486,39 @@ class _CardStack extends StatelessWidget {
     final cards = state.cards;
     final top = cards.first;
     final next = cards.length > 1 ? cards[1] : null;
+    final ad = this.ad;
+    if (ad != null) {
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: spacing.md),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Transform.scale(
+              scale: 0.95,
+              child: IgnorePointer(
+                child: CandidateCard(
+                  candidate: top,
+                  mode: mode,
+                  myGenres: myGenres,
+                  accent: accent,
+                  onOpenProfile: () {},
+                ),
+              ),
+            ),
+            SwipeCard(
+              key: ad.key,
+              controller: controller,
+              likeStamp: l10n.adStampNext,
+              passStamp: l10n.adStampNext,
+              likeColor: accent,
+              onSwiped: (_) => onAdDone(),
+              onOpenProfile: () {},
+              child: ad,
+            ),
+          ],
+        ),
+      );
+    }
 
     return Column(
       children: [
