@@ -46,6 +46,25 @@ const _sunset = HouseAd(
 );
 
 void main() {
+  test('an ad after every N events; short lists get one at the end', () {
+    List<String> layout(int count, int every) => [
+      for (final item in eventsWithAds([
+        for (var i = 0; i < count; i++) _event(i),
+      ], every))
+        item.event?.name ?? 'ad',
+    ];
+    expect(layout(4, 2), [
+      'Festa 0',
+      'Festa 1',
+      'ad',
+      'Festa 2',
+      'Festa 3',
+      'ad',
+    ]);
+    expect(layout(3, 6), ['Festa 0', 'Festa 1', 'Festa 2', 'ad']);
+    expect(layout(7, 6).where((s) => s == 'ad'), hasLength(1));
+  });
+
   test('get_ads json: on/off, frequency and ads per place', () {
     final config = AdsConfig.fromJson({
       'enabled': true,
@@ -105,9 +124,7 @@ void main() {
     return ads;
   }
 
-  testWidgets('own ads go between events, never after the last one', (
-    tester,
-  ) async {
+  testWidgets('own ads go after every N events', (tester) async {
     final ads = await pump(
       tester,
       const AdsConfig(enabled: true, eventsEvery: 2, ads: [_sunset]),

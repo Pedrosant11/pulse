@@ -7,7 +7,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:pulse/app/routes.dart';
 import 'package:pulse/core/extensions/context_extensions.dart';
-import 'package:pulse/core/widgets/glass_card.dart';
 import 'package:pulse/features/ads/data/ad_network.dart';
 import 'package:pulse/features/ads/data/ads_repository.dart';
 import 'package:pulse/features/ads/domain/ad_models.dart';
@@ -186,29 +185,29 @@ class _HouseAdViewState extends ConsumerState<HouseAdView> {
       );
     }
 
-    return GlassCard(
-      padding: EdgeInsets.zero,
+    // Same surface as the event cards around it (a blurred glass card
+    // misrenders inside the scrolling list).
+    return Material(
+      color: colors.surface,
+      borderRadius: BorderRadius.circular(radius),
+      clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: _open,
-        borderRadius: BorderRadius.circular(radius),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(radius)),
-              child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    image,
-                    Positioned(
-                      top: spacing.sm,
-                      left: spacing.sm,
-                      child: const SponsoredTag(),
-                    ),
-                  ],
-                ),
+            AspectRatio(
+              aspectRatio: 16 / 9,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  image,
+                  Positioned(
+                    top: spacing.sm,
+                    left: spacing.sm,
+                    child: const SponsoredTag(),
+                  ),
+                ],
               ),
             ),
             Padding(padding: EdgeInsets.all(spacing.md), child: texts),

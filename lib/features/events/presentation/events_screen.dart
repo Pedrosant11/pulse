@@ -113,6 +113,23 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
   }
 }
 
+/// Events with an ad (its turn number) after every [every] events. A list
+/// shorter than that still gets one ad, at the end.
+@visibleForTesting
+List<({EventListEntry? event, int? ad})> eventsWithAds(
+  List<EventListEntry> events,
+  int every,
+) {
+  final items = <({EventListEntry? event, int? ad})>[];
+  var ads = 0;
+  for (final (i, event) in events.indexed) {
+    items.add((event: event, ad: null));
+    if ((i + 1) % every == 0) items.add((event: null, ad: ads++));
+  }
+  if (ads == 0) items.add((event: null, ad: 0));
+  return items;
+}
+
 class _EventList extends ConsumerWidget {
   const new({required this.scope});
 
@@ -136,14 +153,13 @@ class _EventList extends ConsumerWidget {
     // Room for the floating bottom navigation.
     final bottomPadding = MediaQuery.paddingOf(context).bottom + spacing.xl;
 
-    // Ads only in "Próximos", between events (never after the last one).
+    // Ads only in "Próximos".
     final adsEvery =
         ref.watch(adsConfigProvider).value?.every(AdPlacement.events) ?? 0;
     final withAds =
         nearby &&
         adsEvery > 0 &&
         ref.watch(adsReadyProvider(AdPlacement.events));
-    int adSlots(int count) => withAds ? (count - 1) ~/ adsEvery : 0;
 
     Future<void> refresh() async {
       ref.invalidate(eventListProvider(scope));
@@ -184,45 +200,50 @@ class _EventList extends ConsumerWidget {
                 child: ErrorView(error: error, onRetry: refresh),
               ),
             ],
-            data: (events) => events.isEmpty
-                ? [SliverFillRemaining(hasScrollBody: false, child: empty())]
-                : [
-                    SliverPadding(
-                      padding: EdgeInsets.fromLTRB(
-                        spacing.md,
-                        spacing.sm,
-                        spacing.md,
-                        bottomPadding,
-                      ),
-                      sliver: SliverList.separated(
-                        itemCount: events.length + adSlots(events.length),
-                        separatorBuilder: (_, _) =>
-                            SizedBox(height: spacing.md),
-                        itemBuilder: (context, i) {
-                          // An ad after every `adsEvery` events.
-                          final step = adsEvery + 1;
-                          if (withAds && (i + 1) % step == 0) {
-                            return SponsoredSlot(
-                              placement: AdPlacement.events,
-                              index: i ~/ step,
-                            );
-                          }
-                          final event = events[withAds ? i - i ~/ step : i];
-                          final card = EventCard(
-                            event: event,
-                            onTap: () =>
-                                context.push(AppRoutes.eventDetail(event.id)),
-                          );
-                          return context.reduceMotion || i > 6
-                              ? card
-                              : card
-                                    .animate(delay: (50 * i).ms)
-                                    .fadeIn(duration: 250.ms)
-                                    .slideY(begin: 0.06);
-                        },
-                      ),
-                    ),
-                  ],
+            data: (events) {
+              if (events.isEmpty) {
+                return [
+                  SliverFillRemaining(hasScrollBody: false, child: empty()),
+                ];
+              }
+              final items = withAds
+                  ? eventsWithAds(events, adsEvery)
+                  : [for (final e in events) (event: e, ad: null)];
+              return [
+                SliverPadding(
+                  padding: EdgeInsets.fromLTRB(
+                    spacing.md,
+                    spacing.sm,
+                    spacing.md,
+                    bottomPadding,
+                  ),
+                  sliver: SliverList.separated(
+                    itemCount: items.length,
+                    separatorBuilder: (_, _) => SizedBox(height: spacing.md),
+                    itemBuilder: (context, i) {
+                      final (:event, :ad) = items[i];
+                      if (event == null) {
+                        return SponsoredSlot(
+                          placement: AdPlacement.events,
+                          index: ad!,
+                        );
+                      }
+                      final card = EventCard(
+                        event: event,
+                        onTap: () =>
+                            context.push(AppRoutes.eventDetail(event.id)),
+                      );
+                      return context.reduceMotion || i > 6
+                          ? card
+                          : card
+                                .animate(delay: (50 * i).ms)
+                                .fadeIn(duration: 250.ms)
+                                .slideY(begin: 0.06);
+                    },
+                  ),
+                ),
+              ];
+            },
           ),
         ],
       ),
