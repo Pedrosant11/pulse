@@ -3202,4 +3202,41 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get errorAccountPaused =>
       'Sua conta está pausada. Volte a aparecer para curtir pessoas.';
+
+  @override
+  String get editSectionPrompts => 'Perguntas';
+
+  @override
+  String get promptsIntro =>
+      'Responda até 3 perguntas. Elas aparecem no seu perfil e dão assunto para puxar conversa.';
+
+  @override
+  String get promptsPick => 'Escolha uma pergunta';
+
+  @override
+  String get promptsAdd => 'Adicionar pergunta';
+
+  @override
+  String get promptsRemove => 'Remover';
+
+  @override
+  String get promptsAnswerHint => 'Sua resposta';
+
+  @override
+  String prompt(String prompt) {
+    String _temp0 = intl.Intl.selectLogic(prompt, {
+      'dreamSet': 'Meu set dos sonhos é…',
+      'onTheFloor': 'Na pista eu sou…',
+      'afterParty': 'Depois da festa, eu…',
+      'bestParty': 'A melhor festa da minha vida foi…',
+      'trackOnRepeat': 'A música que não sai da minha cabeça…',
+      'festivalMust': 'Num festival eu não vivo sem…',
+      'greenFlag': 'Green flag na pista é…',
+      'crewRole': 'Na minha crew eu sou quem…',
+      'matchIf': 'Bora dar match se você…',
+      'winsMeOver': 'O que me ganha numa festa…',
+      'other': 'Pergunta',
+    });
+    return '$_temp0';
+  }
 }

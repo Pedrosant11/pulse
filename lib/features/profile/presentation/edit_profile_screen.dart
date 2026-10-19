@@ -10,9 +10,10 @@ import 'package:pulse/features/onboarding/presentation/activate_modes_screen.dar
 import 'package:pulse/features/profile/presentation/profile_providers.dart';
 import 'package:pulse/features/profile/presentation/widgets/photo_grid_editor.dart';
 import 'package:pulse/features/profile/presentation/widgets/profile_forms.dart';
+import 'package:pulse/features/profile/presentation/widgets/profile_prompts.dart';
 
 /// Editable sections — the same widgets as the onboarding steps.
-enum ProfileSection { photos, basics, about, music, modes }
+enum ProfileSection { photos, basics, about, prompts, music, modes }
 
 class EditProfileScreen extends ConsumerWidget {
   const new({super.key});
@@ -30,6 +31,11 @@ class EditProfileScreen extends ConsumerWidget {
       ),
       (ProfileSection.basics, Icons.badge_outlined, l10n.editSectionBasics),
       (ProfileSection.about, Icons.person_outline, l10n.editSectionAbout),
+      (
+        ProfileSection.prompts,
+        Icons.chat_bubble_outline_rounded,
+        l10n.editSectionPrompts,
+      ),
       (ProfileSection.music, Icons.headphones_outlined, l10n.editSectionMusic),
       (ProfileSection.modes, Icons.tune, l10n.editSectionModes),
     ];
@@ -79,6 +85,7 @@ class EditProfileSectionScreen extends ConsumerWidget {
       ProfileSection.photos => l10n.editSectionPhotos,
       ProfileSection.basics => l10n.editSectionBasics,
       ProfileSection.about => l10n.editSectionAbout,
+      ProfileSection.prompts => l10n.editSectionPrompts,
       ProfileSection.music => l10n.editSectionMusic,
       ProfileSection.modes => l10n.editSectionModes,
     };
@@ -125,6 +132,25 @@ class EditProfileSectionScreen extends ConsumerWidget {
                 submitLabel: l10n.saveButton,
                 onSubmit: save,
               ),
+              ProfileSection.prompts =>
+                ref
+                    .watch(myPromptsProvider)
+                    .when(
+                      loading: LoadingView.new,
+                      error: (error, _) => ErrorView(
+                        error: error,
+                        onRetry: () => ref.invalidate(myPromptsProvider),
+                      ),
+                      data: (answers) => PromptsForm(
+                        initial: answers,
+                        onSaved: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(l10n.savedMessage)),
+                          );
+                          context.pop();
+                        },
+                      ),
+                    ),
               ProfileSection.music => MusicForm(
                 initial: profile,
                 submitLabel: l10n.saveButton,

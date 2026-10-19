@@ -5469,6 +5469,48 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Sua conta está pausada. Volte a aparecer para curtir pessoas.'**
   String get errorAccountPaused;
+
+  /// No description provided for @editSectionPrompts.
+  ///
+  /// In pt, this message translates to:
+  /// **'Perguntas'**
+  String get editSectionPrompts;
+
+  /// No description provided for @promptsIntro.
+  ///
+  /// In pt, this message translates to:
+  /// **'Responda até 3 perguntas. Elas aparecem no seu perfil e dão assunto para puxar conversa.'**
+  String get promptsIntro;
+
+  /// No description provided for @promptsPick.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolha uma pergunta'**
+  String get promptsPick;
+
+  /// No description provided for @promptsAdd.
+  ///
+  /// In pt, this message translates to:
+  /// **'Adicionar pergunta'**
+  String get promptsAdd;
+
+  /// No description provided for @promptsRemove.
+  ///
+  /// In pt, this message translates to:
+  /// **'Remover'**
+  String get promptsRemove;
+
+  /// No description provided for @promptsAnswerHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sua resposta'**
+  String get promptsAnswerHint;
+
+  /// No description provided for @prompt.
+  ///
+  /// In pt, this message translates to:
+  /// **'{prompt, select, dreamSet{Meu set dos sonhos é…} onTheFloor{Na pista eu sou…} afterParty{Depois da festa, eu…} bestParty{A melhor festa da minha vida foi…} trackOnRepeat{A música que não sai da minha cabeça…} festivalMust{Num festival eu não vivo sem…} greenFlag{Green flag na pista é…} crewRole{Na minha crew eu sou quem…} matchIf{Bora dar match se você…} winsMeOver{O que me ganha numa festa…} other{Pergunta}}'**
+  String prompt(String prompt);
 }
 
 class _AppLocalizationsDelegate

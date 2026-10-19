@@ -4,6 +4,7 @@ import 'package:pulse/core/errors/app_failure.dart';
 import 'package:pulse/core/supabase/supabase_providers.dart';
 import 'package:pulse/core/utils/random_id.dart';
 import 'package:pulse/features/profile/domain/profile.dart';
+import 'package:pulse/features/profile/domain/profile_prompt.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -32,6 +33,26 @@ class ProfileRepository {
       guardFailures(
         () => _client.from('profiles').update(fields).eq('id', userId),
       );
+
+  /// Answers to the profile questions, in order.
+  Future<List<PromptAnswer>> prompts(String userId) => guardFailures(() async {
+    final rows = await _client
+        .from('profile_prompts')
+        .select('prompt, answer')
+        .eq('user_id', userId)
+        .order('position', ascending: true);
+    return rows.map(PromptAnswer.fromJson).toList();
+  });
+
+  /// Replaces the user's answers (the database checks the rules).
+  Future<void> setPrompts(List<PromptAnswer> answers) => guardFailures(
+    () => _client.rpc<void>(
+      'set_profile_prompts',
+      params: {
+        'p_prompts': [for (final a in answers) a.toJson()],
+      },
+    ),
+  );
 
   /// "Pausar conta" (only through the RPC).
   Future<void> setPaused({required bool paused}) => guardFailures(

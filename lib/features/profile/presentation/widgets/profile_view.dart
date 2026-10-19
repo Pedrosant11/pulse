@@ -6,6 +6,7 @@ import 'package:pulse/features/badges/presentation/widgets/profile_badges.dart';
 import 'package:pulse/features/profile/domain/profile.dart';
 import 'package:pulse/features/profile/presentation/profile_labels.dart';
 import 'package:pulse/features/profile/presentation/widgets/profile_photo_image.dart';
+import 'package:pulse/features/profile/presentation/widgets/profile_prompts.dart';
 
 /// A profile exactly as other users see it (SPEC 6.3): photos, first name,
 /// age, city and the public details. Reused by Discover (Phase 5).
@@ -149,6 +150,8 @@ class ProfileView extends StatelessWidget {
             ),
           ),
         ],
+        // Answers to the profile questions (empty when there are none).
+        ProfilePromptsView(userId: p.id),
         if (p.musicGenres.isNotEmpty || p.favoriteDjs.isNotEmpty) ...[
           SizedBox(height: spacing.lg),
           Text(

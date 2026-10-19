@@ -285,3 +285,15 @@ update public.events
 set ticket_url = 'https://shotgun.live/pt-br/events/noite-acida?ref=pulse',
     ticket_coupon = 'PULSE10'
 where id = '00000000-0000-4000-b000-000000000001';
+
+-- Profile prompts (a few profiles answer, so the cards show them).
+insert into public.profile_prompts (user_id, position, prompt, answer) values
+  ('00000000-0000-4000-a000-000000000001', 0, 'dream_set', 'Charlotte de Witte no nascer do sol, sem hora pra acabar.'),
+  ('00000000-0000-4000-a000-000000000001', 1, 'on_the_floor', 'A que não sai da frente da caixa.'),
+  ('00000000-0000-4000-a000-000000000002', 0, 'after_party', 'Pão de queijo na padaria às 7h.'),
+  ('00000000-0000-4000-a000-000000000004', 0, 'best_party', 'Warung em Itajaí, chovendo, todo mundo dançando.'),
+  ('00000000-0000-4000-a000-000000000004', 1, 'green_flag', 'Dividir água sem eu pedir.'),
+  ('00000000-0000-4000-a000-000000000006', 0, 'crew_role', 'Leva o carregador portátil e lembra onde estacionou.'),
+  ('00000000-0000-4000-a000-000000000010', 0, 'match_if', 'Topa sair de uma festa pra outra.'),
+  ('00000000-0000-4000-a000-000000000012', 0, 'track_on_repeat', 'Innerbloom, versão de 9 minutos.'),
+  ('00000000-0000-4000-a000-000000000014', 0, 'festival_must', 'Protetor solar, leque e a minha crew.');

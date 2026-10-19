@@ -7,6 +7,7 @@ import 'package:pulse/features/events/domain/event.dart';
 import 'package:pulse/features/profile/data/photo_picker.dart';
 import 'package:pulse/features/profile/data/profile_repository.dart';
 import 'package:pulse/features/profile/domain/profile.dart';
+import 'package:pulse/features/profile/domain/profile_prompt.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'profile_providers.g.dart';
@@ -150,6 +151,28 @@ class PhotosEditor extends _$PhotosEditor {
           for (final p in ordered) p.id,
         ]);
         _refresh();
+        return true;
+      });
+}
+
+/// Answers to the profile questions of [userId].
+@riverpod
+Future<List<PromptAnswer>> profilePrompts(Ref ref, String userId) =>
+    ref.watch(profileRepositoryProvider).prompts(userId);
+
+@riverpod
+Future<List<PromptAnswer>> myPrompts(Ref ref) =>
+    ref.watch(profilePromptsProvider(_requireUserId(ref)).future);
+
+@riverpod
+class PromptsEditor extends _$PromptsEditor {
+  @override
+  AsyncValue<void> build() => const AsyncData(null);
+
+  Future<bool?> save(List<PromptAnswer> answers) =>
+      runAction(ref, (s) => state = s, () async {
+        await ref.read(profileRepositoryProvider).setPrompts(answers);
+        ref.invalidate(profilePromptsProvider(_requireUserId(ref)));
         return true;
       });
 }

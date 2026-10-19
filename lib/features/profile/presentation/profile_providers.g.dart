@@ -603,3 +603,182 @@ abstract class _$PhotosEditor extends $Notifier<AsyncValue<void>> {
     return element.handleCreate(ref, build);
   }
 }
+
+/// Answers to the profile questions of [userId].
+
+@ProviderFor(profilePrompts)
+final profilePromptsProvider = ProfilePromptsFamily._();
+
+/// Answers to the profile questions of [userId].
+
+final class ProfilePromptsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<PromptAnswer>>,
+          List<PromptAnswer>,
+          FutureOr<List<PromptAnswer>>
+        >
+    with
+        $FutureModifier<List<PromptAnswer>>,
+        $FutureProvider<List<PromptAnswer>> {
+  /// Answers to the profile questions of [userId].
+  ProfilePromptsProvider._({
+    required ProfilePromptsFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'profilePromptsProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$profilePromptsHash();
+
+  @override
+  String toString() {
+    return r'profilePromptsProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<List<PromptAnswer>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<PromptAnswer>> create(Ref ref) {
+    final argument = this.argument as String;
+    return profilePrompts(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ProfilePromptsProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$profilePromptsHash() => r'64269b7772982f27f7f2b28af2154d4fa9555003';
+
+/// Answers to the profile questions of [userId].
+
+final class ProfilePromptsFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<List<PromptAnswer>>, String> {
+  ProfilePromptsFamily._()
+    : super(
+        retry: null,
+        name: r'profilePromptsProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// Answers to the profile questions of [userId].
+
+  ProfilePromptsProvider call(String userId) =>
+      ProfilePromptsProvider._(argument: userId, from: this);
+
+  @override
+  String toString() => r'profilePromptsProvider';
+}
+
+@ProviderFor(myPrompts)
+final myPromptsProvider = MyPromptsProvider._();
+
+final class MyPromptsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<PromptAnswer>>,
+          List<PromptAnswer>,
+          FutureOr<List<PromptAnswer>>
+        >
+    with
+        $FutureModifier<List<PromptAnswer>>,
+        $FutureProvider<List<PromptAnswer>> {
+  MyPromptsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'myPromptsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$myPromptsHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<List<PromptAnswer>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<PromptAnswer>> create(Ref ref) {
+    return myPrompts(ref);
+  }
+}
+
+String _$myPromptsHash() => r'4d53f4ef5101a1439f5f07aaf56eb17e3fcdfb33';
+
+@ProviderFor(PromptsEditor)
+final promptsEditorProvider = PromptsEditorProvider._();
+
+final class PromptsEditorProvider
+    extends $NotifierProvider<PromptsEditor, AsyncValue<void>> {
+  PromptsEditorProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'promptsEditorProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$promptsEditorHash();
+
+  @$internal
+  @override
+  PromptsEditor create() => PromptsEditor();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AsyncValue<void> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AsyncValue<void>>(value),
+    );
+  }
+}
+
+String _$promptsEditorHash() => r'69b56aa789a6a84cba9cb53e80abe6cc398deaed';
+
+abstract class _$PromptsEditor extends $Notifier<AsyncValue<void>> {
+  AsyncValue<void> build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<void>, AsyncValue<void>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<void>, AsyncValue<void>>,
+              AsyncValue<void>,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
