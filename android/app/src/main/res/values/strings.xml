@@ -10,4 +10,6 @@
     <string name="channel_crews_description">Convites e pedidos para entrar nas crews.</string>
     <string name="channel_account">Conta</string>
     <string name="channel_account_description">Verificação do perfil e avisos da conta.</string>
+    <string name="channel_events">Festas</string>
+    <string name="channel_events_description">Festas novas perto de você, DJs que você curte e lembretes.</string>
 </resources>

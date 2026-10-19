@@ -5511,6 +5511,90 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'{prompt, select, dreamSet{Meu set dos sonhos é…} onTheFloor{Na pista eu sou…} afterParty{Depois da festa, eu…} bestParty{A melhor festa da minha vida foi…} trackOnRepeat{A música que não sai da minha cabeça…} festivalMust{Num festival eu não vivo sem…} greenFlag{Green flag na pista é…} crewRole{Na minha crew eu sou quem…} matchIf{Bora dar match se você…} winsMeOver{O que me ganha numa festa…} other{Pergunta}}'**
   String prompt(String prompt);
+
+  /// No description provided for @chatPhoto.
+  ///
+  /// In pt, this message translates to:
+  /// **'📷 Foto'**
+  String get chatPhoto;
+
+  /// No description provided for @chatVoice.
+  ///
+  /// In pt, this message translates to:
+  /// **'🎤 Áudio'**
+  String get chatVoice;
+
+  /// No description provided for @chatSendPhoto.
+  ///
+  /// In pt, this message translates to:
+  /// **'Enviar foto'**
+  String get chatSendPhoto;
+
+  /// No description provided for @chatPhotoCamera.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tirar foto'**
+  String get chatPhotoCamera;
+
+  /// No description provided for @chatPhotoGallery.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolher da galeria'**
+  String get chatPhotoGallery;
+
+  /// No description provided for @chatPhotoCaption.
+  ///
+  /// In pt, this message translates to:
+  /// **'Legenda (opcional)'**
+  String get chatPhotoCaption;
+
+  /// No description provided for @chatRecordVoice.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gravar áudio'**
+  String get chatRecordVoice;
+
+  /// No description provided for @chatVoiceRecording.
+  ///
+  /// In pt, this message translates to:
+  /// **'Gravando… {time}'**
+  String chatVoiceRecording(String time);
+
+  /// No description provided for @chatVoiceCancel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Descartar áudio'**
+  String get chatVoiceCancel;
+
+  /// No description provided for @chatVoicePlay.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ouvir áudio'**
+  String get chatVoicePlay;
+
+  /// No description provided for @chatVoicePause.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pausar áudio'**
+  String get chatVoicePause;
+
+  /// No description provided for @chatVoiceNoPermission.
+  ///
+  /// In pt, this message translates to:
+  /// **'Permita o microfone nas configurações do celular para mandar áudios.'**
+  String get chatVoiceNoPermission;
+
+  /// No description provided for @notifyEventsTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Avisos de festas'**
+  String get notifyEventsTitle;
+
+  /// No description provided for @notifyEventsSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Festas novas perto de você, DJs que você curte e lembrete na véspera.'**
+  String get notifyEventsSubtitle;
 }
 
 class _AppLocalizationsDelegate

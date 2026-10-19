@@ -23,6 +23,7 @@ class MainActivity : FlutterActivity() {
             Triple("messages", R.string.channel_messages, R.string.channel_messages_description),
             Triple("crews", R.string.channel_crews, R.string.channel_crews_description),
             Triple("account", R.string.channel_account, R.string.channel_account_description),
+            Triple("events", R.string.channel_events, R.string.channel_events_description),
         ).forEach { (id, name, description) ->
             val channel = NotificationChannel(
                 id,

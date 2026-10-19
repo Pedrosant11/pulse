@@ -18,10 +18,10 @@ Use esse canal para qualquer pedido ou dúvida sobre seus dados.
 
 - **Cadastro:** nome, sobrenome, e-mail, senha (guardada de forma criptografada, nunca em texto puro), data de nascimento e número de celular.
 - **Aceite dos termos:** versão aceita, data e hora.
-- **Perfil:** primeiro nome, cidade e estado, fotos, gênero, ocupação, bio, altura, idiomas, signo, hábitos (bebida e cigarro), pets, gêneros musicais, DJs favoritos, modos de uso (Date e Crew), preferências de busca (faixa de idade, quem você quer ver) e raio de distância.
+- **Perfil:** primeiro nome, cidade e estado, fotos, gênero, ocupação, bio, altura, idiomas, signo, hábitos (bebida e cigarro), pets, gêneros musicais, DJs favoritos, modos de uso (Date e Crew), preferências de busca (faixa de idade, quem você quer ver), raio de distância e as respostas às perguntas do perfil. Se você pausar a conta ou desligar os avisos de festas, guardamos essa escolha.
 - **Orientação sexual (opcional):** é um **dado pessoal sensível**. Só tratamos se você informar e der seu **consentimento específico**, que fica registrado com data e hora. Você decide se ela aparece no seu perfil e pode removê-la a qualquer momento, o que apaga o dado e o consentimento.
 - **Eventos:** eventos que você marca que vai, eventos e endereços que você cadastra.
-- **Interações:** curtidas e passes, matches, mensagens, crews, convites e pedidos de entrada, denúncias, bloqueios, pedidos de papel (curador/produtor) e de selos.
+- **Interações:** curtidas e passes, matches, mensagens (texto, fotos e áudios que você envia no chat), crews, convites e pedidos de entrada, denúncias, bloqueios, pedidos de papel (curador/produtor) e de selos. Fotos enviadas no chat são reduzidas e têm os dados de localização (EXIF) removidos antes do envio.
 
 ### 2.2 Dados gerados pelo uso
 
@@ -42,7 +42,7 @@ Não acessamos seus contatos e não rastreamos sua localização em segundo plan
 - **No seu perfil:** primeiro nome, idade (calculada, sem a data de nascimento), cidade, fotos e as informações de perfil que você preencher. A orientação sexual só aparece se você ativar essa opção.
 - **Nunca mostramos** sobrenome, e-mail, celular, data de nascimento ou localização exata.
 - **Em "Quem vai" nos eventos:** quem ainda não deu match com você aparece como avatar desfocado e anônimo.
-- **Mensagens:** só os participantes da conversa leem. A equipe de moderação **não lê suas conversas**; ela só vê uma mensagem quando alguém a denuncia (veja o item 7).
+- **Mensagens:** só os participantes da conversa leem, ouvem e veem as fotos. A equipe de moderação **não lê suas conversas**; ela só vê uma mensagem (ou a foto e o áudio dela) quando alguém a denuncia (veja o item 7). Ao apagar uma mensagem, a foto ou o áudio também é apagado.
 - **Bloqueio:** quando você bloqueia alguém, vocês deixam de se ver em todo o app.
 
 ## 4. Para que usamos seus dados e com qual base legal

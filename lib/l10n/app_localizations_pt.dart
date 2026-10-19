@@ -3239,4 +3239,50 @@ class AppLocalizationsPt extends AppLocalizations {
     });
     return '$_temp0';
   }
+
+  @override
+  String get chatPhoto => '📷 Foto';
+
+  @override
+  String get chatVoice => '🎤 Áudio';
+
+  @override
+  String get chatSendPhoto => 'Enviar foto';
+
+  @override
+  String get chatPhotoCamera => 'Tirar foto';
+
+  @override
+  String get chatPhotoGallery => 'Escolher da galeria';
+
+  @override
+  String get chatPhotoCaption => 'Legenda (opcional)';
+
+  @override
+  String get chatRecordVoice => 'Gravar áudio';
+
+  @override
+  String chatVoiceRecording(String time) {
+    return 'Gravando… $time';
+  }
+
+  @override
+  String get chatVoiceCancel => 'Descartar áudio';
+
+  @override
+  String get chatVoicePlay => 'Ouvir áudio';
+
+  @override
+  String get chatVoicePause => 'Pausar áudio';
+
+  @override
+  String get chatVoiceNoPermission =>
+      'Permita o microfone nas configurações do celular para mandar áudios.';
+
+  @override
+  String get notifyEventsTitle => 'Avisos de festas';
+
+  @override
+  String get notifyEventsSubtitle =>
+      'Festas novas perto de você, DJs que você curte e lembrete na véspera.';
 }

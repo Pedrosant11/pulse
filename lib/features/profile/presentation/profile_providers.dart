@@ -83,6 +83,15 @@ class ProfileEditor extends _$ProfileEditor {
         return true;
       });
 
+  Future<bool?> setNotifyEvents({required bool enabled}) =>
+      runAction(ref, (s) => state = s, () async {
+        await ref
+            .read(profileRepositoryProvider)
+            .setNotifyEvents(enabled: enabled);
+        ref.invalidate(myProfileProvider);
+        return true;
+      });
+
   /// Hides (or shows again) the person in Discover.
   Future<bool?> setPaused({required bool paused}) =>
       runAction(ref, (s) => state = s, () async {

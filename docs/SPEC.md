@@ -446,3 +446,8 @@ Baseado na pesquisa de mercado (apps de relacionamento migrando para eventos pre
     - QR code/link do evento: espera o domínio (link clicável no WhatsApp + App Links).
     - Spotify: depois, junto com as contas de lojas (app em developer.spotify.com).
 8. **Anúncios** (feito): card patrocinado a cada 6 eventos em "Próximos" e a cada 20 perfis no Descobrir, para todos (inclusive quem paga, ajustável em `private.app_settings`). Anúncios próprios (festas e parceiros, criados pelo admin, com visualizações e toques) têm prioridade; o Google AdMob completa. Ver `docs/ADS.md`.
+9. **Engajamento** (feito):
+    - **Pausar conta** (Configurações): some do Descobrir e de "quem curtiu", sem poder curtir; matches, chats, crews e eventos continuam.
+    - **Perguntas no perfil**: até 3 respostas curtas de uma lista de 10 ("Meu set dos sonhos é…"), visíveis como as fotos.
+    - **Fotos e áudios no chat** (1:1 e crews): foto com legenda (JPEG ≤1600 px, sem EXIF) e áudio de até 2 min, no bucket privado `chat-media` em `{remetente}/{conversa}/`; só membros veem; apagar a mensagem apaga o arquivo; excluir a conta apaga tudo que a pessoa enviou.
+    - **Avisos de festas** (canal "Festas", desligável): festa aprovada perto com DJ que a pessoa segue (`event_dj`) ou estilo que curte (`event_new`), no máximo 1 por dia; lembrete ~24 h antes para quem vai, com quantas pessoas curtidas vão (`event_reminder`, pg_cron de hora em hora).

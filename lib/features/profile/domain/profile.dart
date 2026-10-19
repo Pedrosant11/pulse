@@ -45,6 +45,9 @@ abstract class MyProfile with _$MyProfile {
 
     /// "Pausar conta": hidden from Discover while set.
     DateTime? pausedAt,
+
+    /// Pushes about new parties nearby and reminders.
+    @Default(true) bool notifyEvents,
   }) = _MyProfile;
 
   const new _();

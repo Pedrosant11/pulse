@@ -24,7 +24,7 @@ interface ServiceAccount {
 }
 
 interface PushText {
-  channel: "matches" | "messages" | "crews" | "account";
+  channel: "matches" | "messages" | "crews" | "account" | "events";
   title: string;
   body: string;
 }
@@ -87,6 +87,29 @@ function textFor(kind: string, data: Record<string, unknown>): PushText | null {
         title: "3 dias de Pulse Black por nossa conta 🎉",
         body: "Veja quem curtiu você, use o boost e o modo viagem. Sem cobrança.",
       };
+    // Event names and DJs are public (listed in the app for everyone).
+    case "event_dj":
+      return {
+        channel: "events",
+        title: `${data.dj ?? "Um DJ que você curte"} vai tocar perto de você 🎧`,
+        body: `${data.event ?? "Festa nova"}. Marque presença e veja quem vai.`,
+      };
+    case "event_new":
+      return {
+        channel: "events",
+        title: "Festa nova do seu estilo 🔊",
+        body: `${data.event ?? "Tem festa nova"}${data.city ? ` em ${data.city}` : ""}. Veja quem vai.`,
+      };
+    case "event_reminder": {
+      const liked = Number(data.liked ?? 0);
+      return {
+        channel: "events",
+        title: `Tá chegando: ${data.event ?? "sua festa"} 🎉`,
+        body: liked > 0
+          ? `${liked} ${liked === 1 ? "pessoa que você curtiu vai" : "pessoas que você curtiu vão"}. Bora combinar?`
+          : "Veja quem vai e combine o rolê com sua crew.",
+      };
+    }
     case "featured_on":
       return {
         channel: "account",

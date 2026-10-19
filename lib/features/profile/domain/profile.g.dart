@@ -72,6 +72,7 @@ _MyProfile _$MyProfileFromJson(Map<String, dynamic> json) => _MyProfile(
   pausedAt: json['paused_at'] == null
       ? null
       : DateTime.parse(json['paused_at'] as String),
+  notifyEvents: json['notify_events'] as bool? ?? true,
 );
 
 Map<String, dynamic> _$MyProfileToJson(
@@ -112,6 +113,7 @@ Map<String, dynamic> _$MyProfileToJson(
   'onboarding_completed': instance.onboardingCompleted,
   'onboarding_step': instance.onboardingStep,
   'paused_at': instance.pausedAt?.toIso8601String(),
+  'notify_events': instance.notifyEvents,
 };
 
 const _$GenderEnumMap = {

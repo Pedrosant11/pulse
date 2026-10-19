@@ -100,6 +100,15 @@ class SettingsScreen extends ConsumerWidget {
                     .read(profileEditorProvider.notifier)
                     .setPaused(paused: paused),
               ),
+              SwitchListTile(
+                secondary: const Icon(Icons.campaign_outlined),
+                title: Text(l10n.notifyEventsTitle),
+                subtitle: Text(l10n.notifyEventsSubtitle),
+                value: ref.watch(myProfileProvider).value?.notifyEvents ?? true,
+                onChanged: (enabled) => ref
+                    .read(profileEditorProvider.notifier)
+                    .setNotifyEvents(enabled: enabled),
+              ),
               ListTile(
                 leading: Icon(Icons.verified_rounded, color: colors.lime),
                 title: Text(l10n.verificationTitle),

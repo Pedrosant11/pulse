@@ -20,6 +20,9 @@ evento no banco (match, mensagem, crew)
 | `trial_started` | quem deu o primeiro match e ganhou 3 dias de Black | account | Planos |
 | `referral_reward` | quem indicou, quando o indicado dá o primeiro match | account | Indique e ganhe |
 | `featured_on` | o produtor, quando o destaque pago começa | account | O evento |
+| `event_dj` | quem segue um DJ do lineup de uma festa aprovada perto (máx. 1 aviso de festa nova por dia) | events | O evento |
+| `event_new` | quem curte um estilo da festa aprovada perto (mesmo limite) | events | O evento |
+| `event_reminder` | quem marcou "Eu vou", ~24 h antes, com quantas pessoas curtidas vão | events | O evento |
 
 Os textos ficam em `supabase/functions/send-push/index.ts`, porque o celular os mostra com o app fechado.
 

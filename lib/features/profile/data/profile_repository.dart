@@ -54,6 +54,12 @@ class ProfileRepository {
     ),
   );
 
+  /// "Avisos de festas" (only through the RPC).
+  Future<void> setNotifyEvents({required bool enabled}) => guardFailures(
+    () =>
+        _client.rpc<void>('set_notify_events', params: {'p_enabled': enabled}),
+  );
+
   /// "Pausar conta" (only through the RPC).
   Future<void> setPaused({required bool paused}) => guardFailures(
     () => _client.rpc<void>('set_paused', params: {'p_paused': paused}),

@@ -1113,5 +1113,22 @@
   "promptsRemove": "Remover",
   "promptsAnswerHint": "Sua resposta",
   "prompt": "{prompt, select, dreamSet{Meu set dos sonhos é…} onTheFloor{Na pista eu sou…} afterParty{Depois da festa, eu…} bestParty{A melhor festa da minha vida foi…} trackOnRepeat{A música que não sai da minha cabeça…} festivalMust{Num festival eu não vivo sem…} greenFlag{Green flag na pista é…} crewRole{Na minha crew eu sou quem…} matchIf{Bora dar match se você…} winsMeOver{O que me ganha numa festa…} other{Pergunta}}",
-  "@prompt": { "placeholders": { "prompt": { "type": "String" } } }
+  "@prompt": { "placeholders": { "prompt": { "type": "String" } } },
+
+  "chatPhoto": "📷 Foto",
+  "chatVoice": "🎤 Áudio",
+  "chatSendPhoto": "Enviar foto",
+  "chatPhotoCamera": "Tirar foto",
+  "chatPhotoGallery": "Escolher da galeria",
+  "chatPhotoCaption": "Legenda (opcional)",
+  "chatRecordVoice": "Gravar áudio",
+  "chatVoiceRecording": "Gravando… {time}",
+  "@chatVoiceRecording": { "placeholders": { "time": { "type": "String" } } },
+  "chatVoiceCancel": "Descartar áudio",
+  "chatVoicePlay": "Ouvir áudio",
+  "chatVoicePause": "Pausar áudio",
+  "chatVoiceNoPermission": "Permita o microfone nas configurações do celular para mandar áudios.",
+
+  "notifyEventsTitle": "Avisos de festas",
+  "notifyEventsSubtitle": "Festas novas perto de você, DJs que você curte e lembrete na véspera."
 }
