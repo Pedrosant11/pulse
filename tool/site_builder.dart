@@ -1,8 +1,9 @@
 import 'package:markdown/markdown.dart' as md;
 
-/// Builds the public legal site (GitHub Pages) from the same Markdown the
-/// app bundles (`assets/legal/`). Pure function so a test can check that
-/// `site/` is up to date.
+/// Builds the public site (GitHub Pages) from the same Markdown the app
+/// bundles (`assets/legal/`). Pure function so a test can check that `site/`
+/// is up to date. Styles, scripts, fonts and three.js are copied as they are
+/// by `tool/build_site.dart` (from `tool/site_template/` and `assets/`).
 ///
 /// [sources] maps a slug ("termos-de-uso") to its Markdown. Returns the
 /// files to write under `site/`, keyed by relative path.
@@ -13,27 +14,102 @@ Map<String, String> buildSite(Map<String, String> sources) {
   };
   return {
     'index.html': _page(
-      title: 'Pulse',
+      title: 'Pulse — match nas mesmas festas',
       depth: 0,
-      body: [
-        '<h1>Pulse</h1>',
-        '<p>Documentos legais e de privacidade do app Pulse.</p>',
-        '<ul class="docs">',
-        for (final slug in sources.keys)
-          '<li><a href="$slug/">${_escape(titles[slug]!)}</a></li>',
-        '</ul>',
-      ].join('\n'),
+      hero: true,
+      slugs: sources.keys,
+      titles: titles,
+      body: _home(sources.keys, titles),
     ),
     for (final MapEntry(key: slug, value: text) in sources.entries)
       '$slug/index.html': _page(
-        title: titles[slug]!,
+        title: '${titles[slug]!} · Pulse',
         depth: 1,
-        body: _render(text, sources.keys.toSet()),
+        hero: false,
+        slugs: sources.keys,
+        titles: titles,
+        body: [
+          '<header class="doc-hero">',
+          '<span class="eyebrow">Pulse · Documento</span>',
+          '<h1>${_escape(titles[slug]!)}</h1>',
+          '</header>',
+          '<article class="doc">',
+          _render(text, sources.keys.toSet()),
+          '</article>',
+        ].join('\n'),
       ),
     // GitHub Pages: serve files as they are (no Jekyll).
     '.nojekyll': '',
   };
 }
+
+/// One line about each document, for the home cards.
+const _blurbs = {
+  'termos-de-uso': 'As regras para usar o Pulse, os planos e as compras.',
+  'politica-de-privacidade':
+      'Quais dados tratamos, por quê e como você controla tudo.',
+  'diretrizes-da-comunidade': 'O combinado para a pista ficar segura e boa.',
+  'excluir-conta': 'Como apagar sua conta e seus dados, no app ou por aqui.',
+};
+
+/// Simple line icons (24px), one per document.
+const _icons = <String, List<String>>{
+  'termos-de-uso': [
+    '<path d="M7 3h7l5 5v13H7z"/>',
+    '<path d="M14 3v5h5M10 13h6M10 17h6"/>',
+  ],
+  'politica-de-privacidade': [
+    '<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/>',
+    '<path d="M9.5 12l2 2 3.5-4"/>',
+  ],
+  'diretrizes-da-comunidade': [
+    '<circle cx="9" cy="9" r="3"/>',
+    '<circle cx="17" cy="10" r="2.5"/>',
+    '<path d="M3.5 19c.8-3 3-4.5 5.5-4.5s4.7 1.5 5.5 4.5"/>',
+    '<path d="M15 15.2c2.6-.4 4.6.9 5.5 3.8"/>',
+  ],
+  'excluir-conta': [
+    '<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
+  ],
+};
+
+String _home(Iterable<String> slugs, Map<String, String> titles) => [
+  '<section class="hero">',
+  '<div>',
+  '<h1 class="glitch" data-text="PULSE">PULSE</h1>',
+  '<p class="tagline">Date e Crew para quem vive a pista.',
+  '<em>Ache sua galera nas mesmas festas.</em></p>',
+  '<div class="pills">',
+  '<a class="pill primary" href="#documentos">Documentos</a>',
+  '<span class="pill">Em breve no Google Play e na App Store</span>',
+  '</div>',
+  '</div>',
+  '<span class="scroll-hint" aria-hidden="true">',
+  '<svg width="28" height="28" viewBox="0 0 24 24" fill="none"',
+  'stroke="currentColor" stroke-width="2" stroke-linecap="round"',
+  'stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>',
+  '</section>',
+  '<section class="section" id="documentos">',
+  '<span class="eyebrow">Transparência</span>',
+  '<h2>Documentos legais e de privacidade</h2>',
+  '<div class="cards">',
+  for (final slug in slugs)
+    [
+      '<a class="card reveal" href="$slug/">',
+      '<span class="icon">',
+      '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"',
+      'stroke="currentColor" stroke-width="1.8" stroke-linecap="round"',
+      'stroke-linejoin="round" aria-hidden="true">',
+      ...?_icons[slug],
+      '</svg></span>',
+      '<h3>${_escape(titles[slug]!)}</h3>',
+      if (_blurbs[slug] case final blurb?) '<p>$blurb</p>',
+      '<span class="go">Ler →</span>',
+      '</a>',
+    ].join('\n'),
+  '</div>',
+  '</section>',
+].join('\n');
 
 String _title(String markdown) {
   final line = markdown
@@ -49,10 +125,13 @@ String _render(String markdown, Set<String> slugs) {
     markdown,
     extensionSet: md.ExtensionSet.gitHubFlavored,
   );
-  return html.replaceAllMapped(
-    RegExp('href="([a-z0-9-]+)"'),
-    (m) => slugs.contains(m[1]) ? 'href="../${m[1]}/"' : m[0]!,
-  );
+  return html
+      .replaceAllMapped(
+        RegExp('href="([a-z0-9-]+)"'),
+        (m) => slugs.contains(m[1]) ? 'href="../${m[1]}/"' : m[0]!,
+      )
+      .replaceAll('<table>', '<div class="table-wrap"><table>')
+      .replaceAll('</table>', '</table></div>');
 }
 
 String _escape(String text) => text
@@ -63,9 +142,13 @@ String _escape(String text) => text
 String _page({
   required String title,
   required int depth,
+  required bool hero,
+  required Iterable<String> slugs,
+  required Map<String, String> titles,
   required String body,
 }) {
-  final home = depth == 0 ? './' : '../';
+  final root = depth == 0 ? './' : '../';
+  final assets = '${root}assets';
   return '''
 <!doctype html>
 <html lang="pt-BR">
@@ -73,45 +156,30 @@ String _page({
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${_escape(title)}</title>
-<style>
-:root {
-  --bg: #0A0A0F; --surface: #14141C; --text: #F5F5F7; --muted: #9A9AB0;
-  --magenta: #FF2BD6; --cyan: #00E5FF; --violet: #7B2CFF; --border: #2A2A38;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0; background: var(--bg); color: var(--text);
-  font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-}
-header {
-  padding: 16px; border-bottom: 1px solid var(--border);
-  background: linear-gradient(90deg, rgba(123,44,255,.25), rgba(255,43,214,.15));
-}
-header a { color: var(--text); font-weight: 800; letter-spacing: .08em; text-decoration: none; }
-main { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
-h1 { font-size: 1.8rem; line-height: 1.25; }
-h2 { margin-top: 2rem; font-size: 1.3rem; color: var(--text); }
-h3 { margin-top: 1.5rem; font-size: 1.1rem; }
-p, li { color: var(--text); }
-strong { color: #fff; }
-a { color: var(--cyan); }
-ul.docs { list-style: none; padding: 0; }
-ul.docs li { margin: 8px 0; padding: 14px 16px; background: var(--surface);
-  border: 1px solid var(--border); border-radius: 12px; }
-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: .95rem; }
-th, td { text-align: left; vertical-align: top; padding: 10px;
-  border-bottom: 1px solid var(--border); }
-th { color: var(--muted); font-weight: 600; }
-.table-wrap { overflow-x: auto; }
-footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 24px 16px; }
-</style>
+<meta name="description" content="Pulse: date e crew para quem vive a música eletrônica. Ache sua galera nas mesmas festas.">
+<meta name="theme-color" content="#0A0A0F">
+<link rel="icon" href="$assets/icon.png">
+<link rel="preload" href="$assets/fonts/Unbounded-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="$assets/site.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-<header><a href="$home">PULSE</a></header>
+<canvas class="scene" data-mode="${hero ? 'hero' : 'banner'}" aria-hidden="true"></canvas>
+<header class="bar">
+<a class="brand" href="$root"><img src="$assets/icon.png" alt=""><span>PULSE</span></a>
+<nav><a href="$root#documentos">Documentos</a></nav>
+</header>
 <main>
-${body.replaceAll('<table>', '<div class="table-wrap"><table>').replaceAll('</table>', '</table></div>')}
+$body
 </main>
-<footer>Pulse · Esta página não usa cookies.</footer>
+<footer>
+<nav>
+${[for (final slug in slugs) '<a href="$root$slug/">${_escape(titles[slug]!)}</a>'].join('\n')}
+</nav>
+Pulse · Esta página não usa cookies.
+</footer>
+<script type="module" src="$assets/scene.js"></script>
+<script src="$assets/site.js" defer></script>
 </body>
 </html>
 ''';
