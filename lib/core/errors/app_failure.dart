@@ -73,6 +73,7 @@ sealed class AppFailure implements Exception {
       ('P0001', 'already_verified') => AlreadyVerifiedFailure(error),
       // Featured events: 5 at once per region.
       ('P0001', 'featured_limit') => FeaturedLimitFailure(error),
+      ('P0001', 'account_paused') => AccountPausedFailure(error),
       ('P0001', 'featured_unavailable') => FeaturedUnavailableFailure(error),
       // Referral codes.
       ('P0001', 'referral_invalid') => ReferralFailure(.invalid, error),
@@ -229,6 +230,11 @@ final class AlreadyVerifiedFailure extends AppFailure {
 
 /// The region already has the most highlights allowed at once.
 final class FeaturedLimitFailure extends AppFailure {
+  const new([super.cause]);
+}
+
+/// Swiping while the account is paused.
+final class AccountPausedFailure extends AppFailure {
   const new([super.cause]);
 }
 

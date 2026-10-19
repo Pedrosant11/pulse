@@ -3181,4 +3181,25 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get adminFeaturedPaid => 'Pago, ativar';
+
+  @override
+  String get pauseTitle => 'Pausar conta';
+
+  @override
+  String get pauseSubtitle =>
+      'Some do Descobrir sem perder nada. Matches, chats e crews continuam.';
+
+  @override
+  String get pausedTitle => 'Sua conta está pausada';
+
+  @override
+  String get pausedBody =>
+      'Ninguém te vê no Descobrir enquanto isso. Seus matches, chats, crews e eventos continuam aqui.';
+
+  @override
+  String get pausedResume => 'Voltar a aparecer';
+
+  @override
+  String get errorAccountPaused =>
+      'Sua conta está pausada. Volte a aparecer para curtir pessoas.';
 }

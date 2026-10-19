@@ -33,6 +33,11 @@ class ProfileRepository {
         () => _client.from('profiles').update(fields).eq('id', userId),
       );
 
+  /// "Pausar conta" (only through the RPC).
+  Future<void> setPaused({required bool paused}) => guardFailures(
+    () => _client.rpc<void>('set_paused', params: {'p_paused': paused}),
+  );
+
   /// Another user (or the user themself) as others see them.
   Future<PublicProfile> fetchPublic(String userId) => guardFailures(() async {
     final row = await _client

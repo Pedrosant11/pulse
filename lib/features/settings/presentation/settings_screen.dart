@@ -91,6 +91,15 @@ class SettingsScreen extends ConsumerWidget {
               ),
             ]),
             section(l10n.settingsAccountSection, [
+              SwitchListTile(
+                secondary: const Icon(Icons.pause_circle_outline_rounded),
+                title: Text(l10n.pauseTitle),
+                subtitle: Text(l10n.pauseSubtitle),
+                value: ref.watch(myProfileProvider).value?.isPaused ?? false,
+                onChanged: (paused) => ref
+                    .read(profileEditorProvider.notifier)
+                    .setPaused(paused: paused),
+              ),
               ListTile(
                 leading: Icon(Icons.verified_rounded, color: colors.lime),
                 title: Text(l10n.verificationTitle),

@@ -5433,6 +5433,42 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Pago, ativar'**
   String get adminFeaturedPaid;
+
+  /// No description provided for @pauseTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pausar conta'**
+  String get pauseTitle;
+
+  /// No description provided for @pauseSubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Some do Descobrir sem perder nada. Matches, chats e crews continuam.'**
+  String get pauseSubtitle;
+
+  /// No description provided for @pausedTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sua conta está pausada'**
+  String get pausedTitle;
+
+  /// No description provided for @pausedBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ninguém te vê no Descobrir enquanto isso. Seus matches, chats, crews e eventos continuam aqui.'**
+  String get pausedBody;
+
+  /// No description provided for @pausedResume.
+  ///
+  /// In pt, this message translates to:
+  /// **'Voltar a aparecer'**
+  String get pausedResume;
+
+  /// No description provided for @errorAccountPaused.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sua conta está pausada. Volte a aparecer para curtir pessoas.'**
+  String get errorAccountPaused;
 }
 
 class _AppLocalizationsDelegate

@@ -230,6 +230,24 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
       );
     }
 
+    // "Pausar conta": nobody sees them, so no swiping either.
+    if (me != null && me.isPaused) {
+      return Scaffold(
+        backgroundColor: colors.background,
+        body: SafeArea(
+          child: EmptyView(
+            icon: Icons.pause_circle_outline_rounded,
+            title: l10n.pausedTitle,
+            message: l10n.pausedBody,
+            actionLabel: l10n.pausedResume,
+            onAction: () => ref
+                .read(profileEditorProvider.notifier)
+                .setPaused(paused: false),
+          ),
+        ),
+      );
+    }
+
     final mode = ref.watch(discoverModeProvider);
     final enabled = ref.watch(enabledModesProvider);
     final accent = colors.accentOf(mode);

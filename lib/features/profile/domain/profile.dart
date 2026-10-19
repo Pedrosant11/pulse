@@ -42,9 +42,16 @@ abstract class MyProfile with _$MyProfile {
     @Default(false) bool isVerified,
     @Default(false) bool onboardingCompleted,
     @Default(0) int onboardingStep,
+
+    /// "Pausar conta": hidden from Discover while set.
+    DateTime? pausedAt,
   }) = _MyProfile;
 
+  const new _();
+
   factory fromJson(Map<String, dynamic> json) => _$MyProfileFromJson(json);
+
+  bool get isPaused => pausedAt != null;
 }
 
 /// What other users see (`public_profiles` view, SPEC 5.4): first name,

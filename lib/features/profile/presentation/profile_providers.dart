@@ -82,6 +82,14 @@ class ProfileEditor extends _$ProfileEditor {
         return true;
       });
 
+  /// Hides (or shows again) the person in Discover.
+  Future<bool?> setPaused({required bool paused}) =>
+      runAction(ref, (s) => state = s, () async {
+        await ref.read(profileRepositoryProvider).setPaused(paused: paused);
+        ref.invalidate(myProfileProvider);
+        return true;
+      });
+
   /// Finishes the onboarding; the account refresh moves the router on.
   Future<bool?> completeOnboarding() =>
       runAction(ref, (s) => state = s, () async {

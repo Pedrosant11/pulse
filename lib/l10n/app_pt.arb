@@ -1097,5 +1097,12 @@
   "adminFeaturedEmptyHint": "Os pedidos feitos pela equipe aparecem aqui. Compras pela loja entram sozinhas.",
   "adminFeaturedLine": "{name} · {days} dias · {price}",
   "@adminFeaturedLine": { "placeholders": { "name": { "type": "String" }, "days": { "type": "int" }, "price": { "type": "String" } } },
-  "adminFeaturedPaid": "Pago, ativar"
+  "adminFeaturedPaid": "Pago, ativar",
+
+  "pauseTitle": "Pausar conta",
+  "pauseSubtitle": "Some do Descobrir sem perder nada. Matches, chats e crews continuam.",
+  "pausedTitle": "Sua conta está pausada",
+  "pausedBody": "Ninguém te vê no Descobrir enquanto isso. Seus matches, chats, crews e eventos continuam aqui.",
+  "pausedResume": "Voltar a aparecer",
+  "errorAccountPaused": "Sua conta está pausada. Volte a aparecer para curtir pessoas."
 }

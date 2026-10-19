@@ -129,10 +129,12 @@ void main() {
       AppMode mode = AppMode.date,
       List<AppMode>? modes,
       DiscoverDeck Function()? deck,
+      DateTime? pausedAt,
     }) => [
       myProfileProvider.overrideWith(
         (ref) async => MyProfile(
           id: 'me',
+          pausedAt: pausedAt,
           modes: modes ?? [mode],
           musicGenres: const [MusicGenre.techno, MusicGenre.house],
         ),
@@ -259,6 +261,19 @@ void main() {
         find.text('O modo Crew está desligado no seu perfil.'),
         findsOneWidget,
       );
+    });
+
+    testWidgets('a paused account sees how to come back', (tester) async {
+      await tester.pumpWidget(
+        _app(
+          const DiscoverScreen(),
+          overrides: overrides([ana], pausedAt: DateTime(2026, 10, 19)),
+        ),
+      );
+      await settle(tester);
+      expect(find.text('Sua conta está pausada'), findsOneWidget);
+      expect(find.text('Voltar a aparecer'), findsOneWidget);
+      expect(find.text('Ana, 32'), findsNothing);
     });
 
     testWidgets('"events only" sees an invite instead of the deck', (

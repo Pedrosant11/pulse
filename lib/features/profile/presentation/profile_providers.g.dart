@@ -530,7 +530,7 @@ final class ProfileEditorProvider
   }
 }
 
-String _$profileEditorHash() => r'b05b990e9e6b8cb8bec9f4fd66aa9ef5bac0d8b1';
+String _$profileEditorHash() => r'81a3aef7840f013684dd4cee384d8c8a8bba7d3d';
 
 /// Saves profile sections (onboarding steps and edit screens).
 

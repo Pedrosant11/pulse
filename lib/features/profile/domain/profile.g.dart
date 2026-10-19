@@ -69,6 +69,9 @@ _MyProfile _$MyProfileFromJson(Map<String, dynamic> json) => _MyProfile(
   isVerified: json['is_verified'] as bool? ?? false,
   onboardingCompleted: json['onboarding_completed'] as bool? ?? false,
   onboardingStep: (json['onboarding_step'] as num?)?.toInt() ?? 0,
+  pausedAt: json['paused_at'] == null
+      ? null
+      : DateTime.parse(json['paused_at'] as String),
 );
 
 Map<String, dynamic> _$MyProfileToJson(
@@ -108,6 +111,7 @@ Map<String, dynamic> _$MyProfileToJson(
   'is_verified': instance.isVerified,
   'onboarding_completed': instance.onboardingCompleted,
   'onboarding_step': instance.onboardingStep,
+  'paused_at': instance.pausedAt?.toIso8601String(),
 };
 
 const _$GenderEnumMap = {
