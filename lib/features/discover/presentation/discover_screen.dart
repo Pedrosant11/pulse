@@ -230,6 +230,14 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
       );
     }
 
+    // Keeps the editor alive while "Voltar a aparecer" saves.
+    ref.listen(profileEditorProvider, (_, next) {
+      if (next case AsyncError(:final error)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(friendlyErrorMessage(error, l10n))),
+        );
+      }
+    });
     // "Pausar conta": nobody sees them, so no swiping either.
     if (me != null && me.isPaused) {
       return Scaffold(

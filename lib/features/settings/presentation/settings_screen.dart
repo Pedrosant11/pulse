@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:pulse/app/routes.dart';
+import 'package:pulse/core/errors/app_failure_message.dart';
 import 'package:pulse/core/extensions/context_extensions.dart';
 import 'package:pulse/core/widgets/form_error_text.dart';
 import 'package:pulse/core/widgets/glass_card.dart';
@@ -29,6 +30,15 @@ class SettingsScreen extends ConsumerWidget {
     final signOut = ref.watch(signOutControllerProvider);
     final controller = ref.read(signOutControllerProvider.notifier);
     final role = ref.watch(currentRoleProvider);
+    // Keeps the editor alive while the switches save (pause, event pushes)
+    // and shows what went wrong.
+    ref.listen(profileEditorProvider, (_, next) {
+      if (next case AsyncError(:final error)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(friendlyErrorMessage(error, l10n))),
+        );
+      }
+    });
     final dataExport = ref.watch(dataExportProvider);
     final plan = ref.watch(entitlementsProvider).value;
 
