@@ -1145,7 +1145,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get discoverDateEmptyBody =>
-      'Volte mais tarde ou marque presença em eventos: quem vai às mesmas festas que você aparece primeiro.';
+      'Volte mais tarde ou aumente a distância máxima (em Eventos, toque em \"Até … km\").';
 
   @override
   String discoverModeOff(String mode) {

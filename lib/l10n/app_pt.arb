@@ -419,7 +419,7 @@
   "discoverEmptyTitle": "Você viu todo mundo dos seus eventos",
   "discoverEmptyBody": "Volte mais tarde ou marque presença em mais festas para achar sua crew.",
   "discoverDateEmptyTitle": "Ninguém novo por perto agora",
-  "discoverDateEmptyBody": "Volte mais tarde ou marque presença em eventos: quem vai às mesmas festas que você aparece primeiro.",
+  "discoverDateEmptyBody": "Volte mais tarde ou aumente a distância máxima (em Eventos, toque em \"Até … km\").",
   "discoverModeOff": "O modo {mode} está desligado no seu perfil.",
   "@discoverModeOff": { "placeholders": { "mode": { "type": "String" } } },
   "discoverEnableMode": "Ativar nos modos",

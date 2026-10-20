@@ -2095,7 +2095,7 @@ abstract class AppLocalizations {
   /// No description provided for @discoverDateEmptyBody.
   ///
   /// In pt, this message translates to:
-  /// **'Volte mais tarde ou marque presença em eventos: quem vai às mesmas festas que você aparece primeiro.'**
+  /// **'Volte mais tarde ou aumente a distância máxima (em Eventos, toque em \"Até … km\").'**
   String get discoverDateEmptyBody;
 
   /// No description provided for @discoverModeOff.

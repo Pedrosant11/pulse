@@ -220,7 +220,7 @@ RPC `get_discover_feed(p_mode text, p_limit int)` que retorna perfis que:
 
 Ordenação: quantidade de eventos em comum (desc), depois o evento em comum mais próximo, depois atividade recente. Retornar junto a lista de eventos em comum de cada perfil.
 
-**Date** (migration `discover_rules`): primeiro quem vai aos mesmos eventos; depois **pessoas dentro do raio** (sem exigir evento marcado), com gêneros em comum primeiro e as mais próximas em seguida, marcadas com `is_fallback = true` (o chip do evento dá lugar a "Vocês curtem: [gêneros em comum]"). Sem ninguém, o estado vazio do Date convida a marcar presença em eventos.
+**Date** (migrations `discover_rules` e `date_radius_only`): **só pessoas dentro do raio**, tenham ou não festa em comum. Uma festa em comum não traz quem está fora do raio (isso é papel do Crew). Quem vai às mesmas festas vem primeiro, com o chip "Vocês vão: [festa]"; os demais (`is_fallback = true`) vêm por gêneros em comum e proximidade, com o chip "Vocês curtem: [gêneros em comum]". Sem ninguém, o estado vazio sugere voltar mais tarde ou aumentar a distância máxima.
 
 **Crew**: **só** quem vai às mesmas festas (sem fallback), porque o objetivo é ir junto à festa. Sem evento marcado, o estado vazio leva para a aba Eventos; com eventos e ninguém novo, "Você viu todo mundo dos seus eventos". Superlike não existe no Crew (é amizade).
 
