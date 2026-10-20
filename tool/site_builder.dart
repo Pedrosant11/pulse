@@ -86,7 +86,7 @@ const List<({String name, String title, String text})> siteScreens = [
   (
     name: 'evento',
     title: 'Marque "Eu vou"',
-    text: 'Data, local no mapa, line-up e ingresso com cupom, tudo num lugar.',
+    text: 'Confirme presença, compre o ingresso e use o cupom do promoter.',
   ),
   (
     name: 'evento-crews',
@@ -141,8 +141,8 @@ String _screens() => [
       '</li>',
     ].join('\n'),
   '</ol>',
-  '<p class="note">Imagens ilustrativas: pessoas geradas por IA e',
-  'eventos fictícios.</p>',
+  '<p class="note">Imagens ilustrativas: pessoas geradas por IA; perfis, crews e',
+  'conversas fictícios.</p>',
   '</section>',
 ].join('\n');
 

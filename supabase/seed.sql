@@ -176,20 +176,21 @@ create temp table seed_events (
 );
 
 insert into seed_events values
-  ( 1, 'Ritual',                  'Galpão 23',            'Rua Brigadeiro Galvão, 230 - Barra Funda', 'São Paulo', 'SP',  5, 8, '{techno,hard_techno}',          '{"Carla Mendes","Kaio Volt"}',             'approved', 3, true),
-  ( 2, 'Sunday Groove',           'Clube Aurora',         'Rua Guaicurus, 1200 - Lapa',  'São Paulo',      'SP', 12, 10, '{house,tech_house}',           '{"Lia Moreno","Teo Brandão"}',             'approved', 2, false),
-  ( 3, 'Subsolo',                 'Galpão na Mooca',      'Rua da Mooca, 1000',          'São Paulo',      'SP',  8, 12, '{techno,minimal}',             '{"Nyx","Rafa Kroll"}',                     'approved', 2, false),
-  ( 4, 'Horizonte',               'Rooftop Centro',       'Av. Ipiranga, 344',           'São Paulo',      'SP', 19, 6, '{melodic_techno,trance}',       '{"Ellora","Vant"}',                        'approved', 2, false),
-  ( 5, 'Raízes',                  'Casa Vermelha',        'Rua Augusta, 2203',           'São Paulo',      'SP', 26, 7, '{afro_house,house}',            '{"Kaya","Duo Baobá"}',                     'approved', 2, false),
-  ( 6, 'Globo de Ouro',           'Salão Glitter',        'Rua Augusta, 657',            'São Paulo',      'SP', 33, 6, '{disco_nu_disco,house}',        '{"Lu Disco"}',                             'approved', 2, false),
-  ( 7, 'Maré Alta Open Air',      'Marina Norte',         'Av. Infante Dom Henrique, s/n','Rio de Janeiro', 'RJ',  6, 10, '{techno,melodic_techno}',     '{"Ondina","Lux Kairo"}',                   'approved', 2, false),
-  ( 8, 'Pôr do Som',              'Praia do Arpoador',    'Arpoador, Ipanema',           'Rio de Janeiro', 'RJ', 13, 6, '{house,afro_house}',            '{"Mar Aberto"}',                           'approved', 2, false),
-  ( 9, 'Portal Psy Festival',     'Fazenda Rio Bonito',   'Estrada do Mato Alto, km 5',  'Rio de Janeiro', 'RJ', 20, 36, '{psytrance,trance}',           '{"Astral Kid","Nebulosa","Fractal Mind"}', 'approved', 2, false),
-  (10, 'Bass Cave',               'Porão Botafogo',       'Rua Voluntários da Pátria, 400','Rio de Janeiro', 'RJ', 27, 7, '{drum_and_bass,dubstep}',     '{"Breakz"}',                               'approved', 2, false),
+  ( 1, 'Ritual',                  'Galpão 23',            'Rua Brigadeiro Galvão, 230 - Barra Funda', 'São Paulo', 'SP',  5, 8, '{techno,hard_techno}',          '{"Charlotte de Witte","Sara Landry"}',     'approved', 3, true),
+  ( 2, 'Sunday Groove',           'Clube Aurora',         'Rua Guaicurus, 1200 - Lapa',  'São Paulo',      'SP', 12, 10, '{house,tech_house}',           '{"Fisher","Chris Lake"}',                  'approved', 2, false),
+  ( 3, 'Subsolo',                 'Galpão na Mooca',      'Rua da Mooca, 1000',          'São Paulo',      'SP',  8, 12, '{techno,minimal}',             '{"Richie Hawtin","Ellen Allien"}',         'approved', 2, false),
+  ( 4, 'Horizonte',               'Rooftop Centro',       'Av. Ipiranga, 344',           'São Paulo',      'SP', 19, 6, '{melodic_techno,trance}',       '{"Anyma","Argy"}',                         'approved', 2, false),
+  ( 5, 'Raízes',                  'Casa Vermelha',        'Rua Augusta, 2203',           'São Paulo',      'SP', 26, 7, '{afro_house,house}',            '{"Black Coffee","&ME"}',                   'approved', 2, false),
+  ( 6, 'Globo de Ouro',           'Salão Glitter',        'Rua Augusta, 657',            'São Paulo',      'SP', 33, 6, '{disco_nu_disco,house}',        '{"Purple Disco Machine"}',                 'approved', 2, false),
+  -- Real party (D-EDGE Rio, 06/11), with the promoter's coupon.
+  ( 7, 'Beltran na D-EDGE Rio',   'D-EDGE Rio',           'Av. Rodrigues Alves, 293 - Saúde', 'Rio de Janeiro', 'RJ', greatest(1, date '2026-11-06' - current_date), 7, '{tech_house}', '{"Beltran"}',               'approved', 2, true),
+  ( 8, 'BOMA',                    'Edifício Touring',     'Praça Mauá - Centro',         'Rio de Janeiro', 'RJ', 13, 8, '{melodic_techno,tech_house}',   '{"ARTBAT","CamelPhat"}',                   'approved', 2, false),
+  ( 9, 'Privilege Búzios',        'Privilege',            'Orla Bardot - Centro',        'Armação dos Búzios', 'RJ', 20, 7, '{edm,house}',                '{"Alok","Vintage Culture"}',               'approved', 2, false),
+  (10, 'Bass Cave',               'Porão Botafogo',       'Rua Voluntários da Pátria, 400','Rio de Janeiro', 'RJ', 27, 7, '{drum_and_bass,dubstep}',     '{"Andy C","Sub Focus"}',                   'approved', 2, false),
   -- Moderation queue example (suggested by a regular user).
   (11, 'Festa Secreta do Centro', 'Local a confirmar',    null,                          'São Paulo',      'SP', 15, 8, '{techno}',                      '{}',                                       'pending',  5, false),
   -- Already over: must not appear in the discovery feed.
-  (12, 'Ritual · Edição 11',      'Galpão 23',            'Rua Brigadeiro Galvão, 230 - Barra Funda', 'São Paulo', 'SP', -10, 8, '{techno}',             '{"Ana Ribeiro"}',                          'approved', 2, false);
+  (12, 'Ritual · Edição 11',      'Galpão 23',            'Rua Brigadeiro Galvão, 230 - Barra Funda', 'São Paulo', 'SP', -10, 8, '{techno}',             '{"Amelie Lens"}',                          'approved', 2, false);
 
 insert into public.events (
   id, name, description, venue_name, city, state, lat, lng,
@@ -201,8 +202,8 @@ select
   e.name,
   format('%s · %s. Line-up completo, pista até o sol nascer. Proibido para menores de 18.', e.name, e.venue_name),
   e.venue_name, e.city, e.state,
-  case e.state when 'SP' then -23.53 else -22.91 end,
-  case e.state when 'SP' then -46.64 else -43.20 end,
+  case when e.state = 'SP' then -23.53 when e.city = 'Armação dos Búzios' then -22.75 else -22.91 end,
+  case when e.state = 'SP' then -46.64 when e.city = 'Armação dos Búzios' then -41.89 else -43.20 end,
   ((current_date + e.days_from_now)::timestamp + interval '23 hours') at time zone 'America/Sao_Paulo',
   ((current_date + e.days_from_now)::timestamp + interval '23 hours' + make_interval(hours => e.hours)) at time zone 'America/Sao_Paulo',
   e.genres, e.lineup, e.status, e.is_official,
@@ -233,9 +234,9 @@ join (values
   ( 4, -23.5452, -46.6430),
   ( 5, -23.5617, -46.6650),
   ( 6, -23.5527, -46.6512),
-  ( 7, -22.9205, -43.1695),
-  ( 8, -22.9886, -43.1922),
-  ( 9, -22.9800, -43.5800),
+  ( 7, -22.8963, -43.1858),
+  ( 8, -22.8958, -43.1797),
+  ( 9, -22.7568, -41.8863),
   (10, -22.9658, -43.1868),
   (12, -23.5262, -46.6658)
 ) as v (n, lat, lng) on v.n = e.n;
@@ -285,12 +286,19 @@ insert into public.swipes (swiper_id, swiped_id, mode, direction, is_super) valu
   ('00000000-0000-4000-a000-000000000002', '00000000-0000-4000-a000-000000000001', 'date', 'like', false),
   ('00000000-0000-4000-a000-000000000004', '00000000-0000-4000-a000-000000000001', 'date', 'like', false);
 
--- Ticket link with a promoter coupon (tickets migration), for testing the
--- coupon row and the tap count.
+-- Ticket links with a promoter coupon (tickets migration), for testing the
+-- coupon row and the tap count. Event 7 is the real D-EDGE Rio party.
 update public.events
 set ticket_url = 'https://ingressos.exemplo.com.br/ritual?ref=pulse',
     ticket_coupon = 'PULSE10'
 where id = '00000000-0000-4000-b000-000000000001';
+update public.events
+set ticket_url = 'https://ingresse.com/d-edge-rio-3-anos',
+    ticket_coupon = 'SANT'
+where id = '00000000-0000-4000-b000-000000000007';
+update public.events
+set description = 'A D-EDGE Rio comemora 3 anos com Beltran na cabine. Proibido para menores de 18.'
+where id = '00000000-0000-4000-b000-000000000007';
 
 -- Profile prompts (a few profiles answer, so the cards show them).
 insert into public.profile_prompts (user_id, position, prompt, answer) values
