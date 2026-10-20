@@ -90,8 +90,10 @@ const List<({String name, String title, String text})> siteScreens = [
   ),
   (
     name: 'descobrir',
-    title: 'Conheça quem vai',
-    text: 'No Date, só aparece quem vai às mesmas festas que você.',
+    title: 'Conheça gente perto',
+    text:
+        'No Date, aparece quem está perto de você, e quem vai às mesmas '
+        'festas vem primeiro.',
   ),
   (
     name: 'match',
@@ -101,7 +103,9 @@ const List<({String name, String title, String text})> siteScreens = [
   (
     name: 'crew',
     title: 'Monte sua crew',
-    text: 'No Crew, ache galera para ir junto e combine tudo no grupo.',
+    text:
+        'No Crew, aparece só quem vai ao mesmo evento: ache galera para ir '
+        'junto.',
   ),
   (
     name: 'chat',
