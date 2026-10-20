@@ -34,9 +34,9 @@ create temp table seed_people (
 );
 
 insert into seed_people values
-  ( 1, 'Ana',      'Ribeiro',    'woman',          '1994-03-12', '{date,crew}', '{man}',          'dating',       false, '{techno,melodic_techno}',       '{"Charlotte de Witte","Amelie Lens"}', 'Designer',          'Sempre na grade do D-Edge.'),
+  ( 1, 'Ana',      'Ribeiro',    'woman',          '1994-03-12', '{date,crew}', '{man}',          'dating',       false, '{techno,melodic_techno}',       '{"Charlotte de Witte","Amelie Lens"}', 'Designer',          'Sempre na grade do Galpão 23.'),
   ( 2, 'Bruno',    'Carvalho',   'man',            '1992-07-04', '{date,crew}', '{woman}',        'relationship', false, '{house,tech_house}',            '{"Fisher","Chris Lake"}',               'Engenheiro',        'Curador de festa boa.'),
-  ( 3, 'Carla',    'Mendes',     'woman',          '1990-11-23', '{crew}',      '{}',             null,           true,  '{techno,hard_techno}',          '{"I Hate Models"}',                     'Produtora',         'Produzo a Noite Ácida.'),
+  ( 3, 'Carla',    'Mendes',     'woman',          '1990-11-23', '{crew}',      '{}',             null,           true,  '{techno,hard_techno}',          '{"I Hate Models"}',                     'Produtora',         'Produzo a Ritual.'),
   ( 4, 'Diego',    'Souza',      'man',            '1997-01-30', '{date}',      '{woman}',        'casual',       false, '{psytrance,trance}',            '{"Vini Vici","Astrix"}',                'Fotógrafo',         'Psy até o sol nascer.'),
   ( 5, 'Elisa',    'Moraes',     'woman',          '1999-05-17', '{date,crew}', '{man,non_binary}','figuring_out', false, '{house,afro_house}',            '{"Black Coffee","Keinemusik"}',         'Estudante',         'Afro house é vida.'),
   ( 6, 'Felipe',   'Araújo',     'man',            '1995-09-09', '{date,crew}', '{woman}',        'dating',       false, '{techno,minimal}',              '{"Richie Hawtin"}',                     'Dev',               'Minimal e café.'),
@@ -141,7 +141,7 @@ where p.id = u.id;
 -- role; user 7 has a pending DJ request for the admin panel.
 insert into public.profile_badges (user_id, badge, title) values
   ('00000000-0000-4000-a000-000000000001', 'team', 'CEO'),
-  ('00000000-0000-4000-a000-000000000006', 'dj', 'Residente D-Edge'),
+  ('00000000-0000-4000-a000-000000000006', 'dj', 'Residente Galpão 23'),
   ('00000000-0000-4000-a000-000000000010', 'public_figure', null);
 
 insert into public.badge_requests (user_id, badge, justification, links) values
@@ -176,20 +176,20 @@ create temp table seed_events (
 );
 
 insert into seed_events values
-  ( 1, 'Noite Ácida',             'D-Edge',               'Al. Olga, 170 - Barra Funda', 'São Paulo',      'SP',  5, 8, '{techno,hard_techno}',          '{"Carla Mendes","DJ Convidado"}',          'approved', 3, true),
-  ( 2, 'Warung Day Tour SP',      'Audio',                'Av. Francisco Matarazzo, 694', 'São Paulo',     'SP', 12, 10, '{house,tech_house}',           '{"Gui Boratto","Renato Ratier"}',          'approved', 2, false),
-  ( 3, 'Mamba Negra',             'Galpão na Mooca',      'Rua da Mooca, 1000',          'São Paulo',      'SP',  8, 12, '{techno,minimal}',             '{"Cashu","Carneosso"}',                    'approved', 2, false),
-  ( 4, 'Melodic Sunset',          'Terraço Itália',       'Av. Ipiranga, 344',           'São Paulo',      'SP', 19, 6, '{melodic_techno,trance}',       '{"Massano","Argy"}',                       'approved', 2, false),
-  ( 5, 'Afro House Session',      'Club Jerome',          'Rua Augusta, 2203',           'São Paulo',      'SP', 26, 7, '{afro_house,house}',            '{"Rampa","&ME"}',                          'approved', 2, false),
-  ( 6, 'Disco Inferno',           'Blitz Haus',           'Rua Augusta, 657',            'São Paulo',      'SP', 33, 6, '{disco_nu_disco,house}',        '{"Purple Disco Machine"}',                 'approved', 2, false),
-  ( 7, 'Rio Techno Open Air',     'Marina da Glória',     'Av. Infante Dom Henrique, s/n','Rio de Janeiro', 'RJ',  6, 10, '{techno,melodic_techno}',     '{"Anyma","ARTBAT"}',                       'approved', 2, false),
-  ( 8, 'Sunset na Praia',         'Praia do Arpoador',    'Arpoador, Ipanema',           'Rio de Janeiro', 'RJ', 13, 6, '{house,afro_house}',            '{"Vintage Culture"}',                      'approved', 2, false),
-  ( 9, 'Psy Rio Festival',        'Fazenda Rio Bonito',   'Estrada do Mato Alto, km 5',  'Rio de Janeiro', 'RJ', 20, 36, '{psytrance,trance}',           '{"Vini Vici","Astrix","Infected Mushroom"}','approved', 2, false),
-  (10, 'Drum & Bass Underground', 'Fosfobox',             'Rua Siqueira Campos, 143',    'Rio de Janeiro', 'RJ', 27, 7, '{drum_and_bass,dubstep}',       '{"Andy C"}',                               'approved', 2, false),
+  ( 1, 'Ritual',                  'Galpão 23',            'Rua Brigadeiro Galvão, 230 - Barra Funda', 'São Paulo', 'SP',  5, 8, '{techno,hard_techno}',          '{"Carla Mendes","Kaio Volt"}',             'approved', 3, true),
+  ( 2, 'Sunday Groove',           'Clube Aurora',         'Rua Guaicurus, 1200 - Lapa',  'São Paulo',      'SP', 12, 10, '{house,tech_house}',           '{"Lia Moreno","Teo Brandão"}',             'approved', 2, false),
+  ( 3, 'Subsolo',                 'Galpão na Mooca',      'Rua da Mooca, 1000',          'São Paulo',      'SP',  8, 12, '{techno,minimal}',             '{"Nyx","Rafa Kroll"}',                     'approved', 2, false),
+  ( 4, 'Horizonte',               'Rooftop Centro',       'Av. Ipiranga, 344',           'São Paulo',      'SP', 19, 6, '{melodic_techno,trance}',       '{"Ellora","Vant"}',                        'approved', 2, false),
+  ( 5, 'Raízes',                  'Casa Vermelha',        'Rua Augusta, 2203',           'São Paulo',      'SP', 26, 7, '{afro_house,house}',            '{"Kaya","Duo Baobá"}',                     'approved', 2, false),
+  ( 6, 'Globo de Ouro',           'Salão Glitter',        'Rua Augusta, 657',            'São Paulo',      'SP', 33, 6, '{disco_nu_disco,house}',        '{"Lu Disco"}',                             'approved', 2, false),
+  ( 7, 'Maré Alta Open Air',      'Marina Norte',         'Av. Infante Dom Henrique, s/n','Rio de Janeiro', 'RJ',  6, 10, '{techno,melodic_techno}',     '{"Ondina","Lux Kairo"}',                   'approved', 2, false),
+  ( 8, 'Pôr do Som',              'Praia do Arpoador',    'Arpoador, Ipanema',           'Rio de Janeiro', 'RJ', 13, 6, '{house,afro_house}',            '{"Mar Aberto"}',                           'approved', 2, false),
+  ( 9, 'Portal Psy Festival',     'Fazenda Rio Bonito',   'Estrada do Mato Alto, km 5',  'Rio de Janeiro', 'RJ', 20, 36, '{psytrance,trance}',           '{"Astral Kid","Nebulosa","Fractal Mind"}', 'approved', 2, false),
+  (10, 'Bass Cave',               'Porão Botafogo',       'Rua Voluntários da Pátria, 400','Rio de Janeiro', 'RJ', 27, 7, '{drum_and_bass,dubstep}',     '{"Breakz"}',                               'approved', 2, false),
   -- Moderation queue example (suggested by a regular user).
   (11, 'Festa Secreta do Centro', 'Local a confirmar',    null,                          'São Paulo',      'SP', 15, 8, '{techno}',                      '{}',                                       'pending',  5, false),
   -- Already over: must not appear in the discovery feed.
-  (12, 'Edição Passada',          'D-Edge',               'Al. Olga, 170 - Barra Funda', 'São Paulo',      'SP', -10, 8, '{techno}',                     '{"Ana Ribeiro"}',                          'approved', 2, false);
+  (12, 'Ritual · Edição 11',      'Galpão 23',            'Rua Brigadeiro Galvão, 230 - Barra Funda', 'São Paulo', 'SP', -10, 8, '{techno}',             '{"Ana Ribeiro"}',                          'approved', 2, false);
 
 insert into public.events (
   id, name, description, venue_name, city, state, lat, lng,
@@ -211,7 +211,7 @@ select
     then format('00000000-0000-4000-a000-%s', lpad(e.creator::text, 12, '0'))::uuid
   end
 ,
-  -- Mamba Negra keeps its galpão secret until 24 h before (SPEC 7.4).
+  -- Subsolo keeps its galpão secret until 24 h before (SPEC 7.4).
   case when e.n = 3 then 24 end
 from seed_events e;
 
@@ -288,7 +288,7 @@ insert into public.swipes (swiper_id, swiped_id, mode, direction, is_super) valu
 -- Ticket link with a promoter coupon (tickets migration), for testing the
 -- coupon row and the tap count.
 update public.events
-set ticket_url = 'https://shotgun.live/pt-br/events/noite-acida?ref=pulse',
+set ticket_url = 'https://ingressos.exemplo.com.br/ritual?ref=pulse',
     ticket_coupon = 'PULSE10'
 where id = '00000000-0000-4000-b000-000000000001';
 

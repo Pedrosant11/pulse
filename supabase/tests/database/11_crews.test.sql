@@ -70,7 +70,7 @@ select results_eq(
 select results_eq(
   $$ select crew_name, member_count, event_name from public.list_conversations()
      where type = 'crew' $$,
-  $$ values ('Crew da Ana'::text, 2, 'Noite Ácida'::text) $$,
+  $$ values ('Crew da Ana'::text, 2, 'Ritual'::text) $$,
   'the group chat shows up in the inbox'
 );
 

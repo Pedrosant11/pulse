@@ -83,7 +83,7 @@ select tests.login(4);
 
 select is(
   (select id from public.find_similar_events(
-     'noite acida',
+     'RITUAL',
      (select starts_at from public.events where id = tests.event(1)),
      'sao paulo'
   ) limit 1),

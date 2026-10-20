@@ -3,7 +3,7 @@ begin;
 select plan(4);
 
 -- Rafael (16) lives in Rio (~360 km from Ana, 1, in São Paulo) and marks
--- Noite Ácida, Ana's party.
+-- Ritual, Ana's party.
 insert into public.event_attendance (event_id, user_id)
 values ('00000000-0000-4000-b000-000000000001', tests.uid(16))
 on conflict do nothing;
@@ -24,7 +24,7 @@ select ok(
 select is(
   (select common_events -> 0 ->> 'name' from public.get_discover_feed('date')
    where id = tests.uid(4)),
-  'Noite Ácida',
+  'Ritual',
   'Date: nearby people going to the same party carry it on the card'
 );
 select tests.logout();

@@ -24,7 +24,7 @@ select is(
 select is(
   (select common_events -> 0 ->> 'name'
    from public.get_discover_feed('date') where first_name = 'Diego'),
-  'Noite Ácida',
+  'Ritual',
   'feed returns the common event'
 );
 

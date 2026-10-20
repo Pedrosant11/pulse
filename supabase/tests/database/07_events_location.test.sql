@@ -17,7 +17,7 @@ select ok(
 );
 
 select results_eq(
-  $$ select id from public.list_events('nearby', 'psy rio') $$,
+  $$ select id from public.list_events('nearby', 'portal psy') $$,
   $$ values (tests.event(9)) $$,
   'searching by name is nationwide (free, SPEC 15)'
 );

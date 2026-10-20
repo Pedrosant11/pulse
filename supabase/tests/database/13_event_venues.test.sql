@@ -2,14 +2,14 @@ begin;
 \ir helpers.psql
 select plan(11);
 
--- Seed: event 1 (D-Edge) is public; event 3 (Mamba Negra) reveals its
+-- Seed: event 1 (Ritual) is public; event 3 (Subsolo) reveals its
 -- venue 24 h before and starts in 8 days. Ana (1) is in São Paulo.
 
 select tests.login(4); -- Diego, a regular user
 
 select results_eq(
   $$ select address, lat from public.event_venues where event_id = tests.event(1) $$,
-  $$ values ('Al. Olga, 170 - Barra Funda'::text, -23.5262::double precision) $$,
+  $$ values ('Rua Brigadeiro Galvão, 230 - Barra Funda'::text, -23.5262::double precision) $$,
   'public venues are readable'
 );
 

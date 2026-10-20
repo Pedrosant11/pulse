@@ -48,7 +48,7 @@ select tests.logout();
 select tests.login(1);
 select is(
   (select event_name || ' ' || requester_name from public.admin_featured_requests()),
-  'Disco Inferno Carla',
+  'Globo de Ouro Carla',
   'the admin sees the party and who asked'
 );
 select public.admin_review_featured(
