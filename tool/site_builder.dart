@@ -141,8 +141,8 @@ String _screens() => [
       '</li>',
     ].join('\n'),
   '</ol>',
-  '<p class="note">Imagens ilustrativas: pessoas geradas por IA; perfis, crews e',
-  'conversas fictícios.</p>',
+  '<p class="note">Imagens ilustrativas: pessoas geradas por IA;',
+  'perfis, crews e conversas fictícios.</p>',
   '</section>',
 ].join('\n');
 
