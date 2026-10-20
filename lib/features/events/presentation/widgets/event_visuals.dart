@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:pulse/core/extensions/context_extensions.dart';
 import 'package:pulse/core/models/user_role.dart';
+import 'package:pulse/core/widgets/text_with_badge.dart';
 import 'package:pulse/features/events/data/events_repository.dart';
 import 'package:pulse/features/events/domain/event.dart';
 import 'package:pulse/l10n/app_localizations.dart';
@@ -211,26 +212,18 @@ class EventCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Text(
-                            event.name,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: context.textTheme.titleLarge,
-                          ),
-                        ),
-                        if (event.isOfficial) ...[
-                          SizedBox(width: spacing.xs),
-                          Icon(
-                            Icons.verified,
-                            size: 18,
-                            color: colors.lime,
-                            semanticLabel: l10n.eventOfficial,
-                          ),
-                        ],
-                      ],
+                    TextWithBadge(
+                      event.name,
+                      maxLines: 2,
+                      style: context.textTheme.titleLarge,
+                      badge: event.isOfficial
+                          ? Icon(
+                              Icons.verified,
+                              size: 18,
+                              color: colors.lime,
+                              semanticLabel: l10n.eventOfficial,
+                            )
+                          : null,
                     ),
                     SizedBox(height: spacing.xxs),
                     Text(

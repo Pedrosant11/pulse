@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:pulse/core/extensions/context_extensions.dart';
 import 'package:pulse/core/widgets/genre_chip.dart';
 import 'package:pulse/core/widgets/glass_card.dart';
+import 'package:pulse/core/widgets/text_with_badge.dart';
 import 'package:pulse/features/badges/presentation/widgets/profile_badges.dart';
 import 'package:pulse/features/profile/domain/profile.dart';
 import 'package:pulse/features/profile/presentation/profile_labels.dart';
@@ -82,23 +83,16 @@ class ProfileView extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                Flexible(
-                                  child: Text(
-                                    l10n.profileNameAge(p.firstName, p.age),
-                                    style: context.textTheme.headlineMedium,
-                                  ),
-                                ),
-                                if (p.isVerified) ...[
-                                  SizedBox(width: spacing.xs),
-                                  Icon(
-                                    Icons.verified,
-                                    color: colors.lime,
-                                    semanticLabel: l10n.profileVerified,
-                                  ),
-                                ],
-                              ],
+                            TextWithBadge(
+                              l10n.profileNameAge(p.firstName, p.age),
+                              style: context.textTheme.headlineMedium,
+                              badge: p.isVerified
+                                  ? Icon(
+                                      Icons.verified,
+                                      color: colors.lime,
+                                      semanticLabel: l10n.profileVerified,
+                                    )
+                                  : null,
                             ),
                             if (p.city != null)
                               Text(

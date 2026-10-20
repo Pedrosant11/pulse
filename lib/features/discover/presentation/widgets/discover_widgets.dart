@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:pulse/core/extensions/context_extensions.dart';
 import 'package:pulse/core/models/app_mode.dart';
 import 'package:pulse/core/widgets/genre_chip.dart';
+import 'package:pulse/core/widgets/text_with_badge.dart';
 import 'package:pulse/features/badges/presentation/widgets/profile_badges.dart';
 import 'package:pulse/features/discover/domain/discover_models.dart';
 import 'package:pulse/features/events/presentation/widgets/event_visuals.dart';
@@ -84,21 +85,19 @@ class CandidateCard extends StatelessWidget {
 
     final nameRow = Row(
       children: [
-        Flexible(
-          child: Text(
+        Expanded(
+          child: TextWithBadge(
             l10n.profileNameAge(c.firstName, c.age),
             style: context.textTheme.headlineMedium,
+            badge: c.isVerified
+                ? Icon(
+                    Icons.verified,
+                    color: colors.lime,
+                    semanticLabel: l10n.profileVerified,
+                  )
+                : null,
           ),
         ),
-        if (c.isVerified) ...[
-          SizedBox(width: spacing.xs),
-          Icon(
-            Icons.verified,
-            color: colors.lime,
-            semanticLabel: l10n.profileVerified,
-          ),
-        ],
-        const Spacer(),
         Icon(Icons.keyboard_arrow_up, color: accent),
       ],
     );

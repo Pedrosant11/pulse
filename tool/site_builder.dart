@@ -86,45 +86,55 @@ const List<({String name, String title, String text})> siteScreens = [
   (
     name: 'evento',
     title: 'Marque "Eu vou"',
-    text: 'Veja o line-up, quem vai e garanta o ingresso.',
+    text: 'Data, local no mapa, line-up e ingresso com cupom, tudo num lugar.',
   ),
   (
-    name: 'descobrir',
-    title: 'Conheça gente perto',
-    text:
-        'No Date, aparece quem está perto de você, e quem vai às mesmas '
-        'festas vem primeiro.',
-  ),
-  (
-    name: 'match',
-    title: 'Deu match',
-    text: 'Curtiu e foi curtido? A conversa começa antes da pista.',
+    name: 'evento-crews',
+    title: 'Veja quem vai',
+    text: 'Quantas pessoas vão e as crews já montadas para a festa.',
   ),
   (
     name: 'crew',
-    title: 'Monte sua crew',
+    title: 'Ache sua galera',
     text:
-        'No Crew, aparece só quem vai ao mesmo evento: ache galera para ir '
-        'junto.',
+        'No Crew, aparece só quem vai ao mesmo evento. Ninguém precisa ir '
+        'sozinho.',
   ),
   (
-    name: 'chat',
-    title: 'Combine o rolê',
-    text: 'Chat com fotos e áudios para marcar o ponto de encontro.',
+    name: 'criar-crew',
+    title: 'Monte a crew',
+    text: 'Crie o grupo da festa, aberto ou só por convite.',
+  ),
+  (
+    name: 'crew-grupo',
+    title: 'Combine o encontro',
+    text: 'Ponto de encontro, membros e convites no mesmo lugar.',
+  ),
+  (
+    name: 'crew-chat',
+    title: 'Chat do grupo',
+    text: 'Fotos e áudios para combinar o esquenta e não se perder na pista.',
+  ),
+  (
+    name: 'date',
+    title: 'E ainda tem o Date',
+    text:
+        'Quem está perto de você, e quem vai às mesmas festas aparece '
+        'primeiro.',
   ),
 ];
 
 String _screens() => [
   '<section class="section" id="como-funciona">',
   '<span class="eyebrow">Como funciona</span>',
-  '<h2>Da festa ao match em poucos toques</h2>',
+  '<h2>Ache a festa, monte a crew</h2>',
   '<ol class="screens">',
   for (final (i, s) in siteScreens.indexed)
     [
       '<li class="screen reveal">',
       '<div class="phone"><img src="assets/screens/${s.name}.jpg"',
       'alt="Tela do app: ${_escape(s.title)}" loading="lazy"',
-      'width="540" height="1156"></div>',
+      'width="532" height="1156"></div>',
       '<span class="step">${i + 1}</span>',
       '<h3>${_escape(s.title)}</h3>',
       '<p>${_escape(s.text)}</p>',
