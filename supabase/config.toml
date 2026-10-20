@@ -130,6 +130,7 @@ objects_path = "./seed/profile-photos"
 public = true
 file_size_limit = "5MiB"
 allowed_mime_types = ["image/jpeg", "image/png", "image/webp"]
+objects_path = "./seed/event-covers"
 
 [storage.buckets.verification-selfies]
 public = false

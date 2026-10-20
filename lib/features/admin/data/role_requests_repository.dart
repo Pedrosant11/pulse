@@ -73,7 +73,7 @@ class RoleRequestsRepository {
           '(first_name, last_name, city, state)',
         )
         .eq('status', 'pending')
-        .order('created_at');
+        .order('created_at', ascending: true);
     return [
       for (final row in rows)
         RoleRequest.fromJson({

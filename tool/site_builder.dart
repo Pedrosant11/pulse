@@ -75,6 +75,63 @@ const _icons = <String, List<String>>{
   ],
 };
 
+/// App screenshots for "Como funciona", in order:
+/// `tool/site_template/screens/<name>.jpg` → `site/assets/screens/`.
+const List<({String name, String title, String text})> siteScreens = [
+  (
+    name: 'eventos',
+    title: 'Ache as festas',
+    text: 'Techno, house, psy, DnB: filtre por estilo, data e distância.',
+  ),
+  (
+    name: 'evento',
+    title: 'Marque "Eu vou"',
+    text: 'Veja o line-up, quem vai e garanta o ingresso.',
+  ),
+  (
+    name: 'descobrir',
+    title: 'Conheça quem vai',
+    text: 'No Date, só aparece quem vai às mesmas festas que você.',
+  ),
+  (
+    name: 'match',
+    title: 'Deu match',
+    text: 'Curtiu e foi curtido? A conversa começa antes da pista.',
+  ),
+  (
+    name: 'crew',
+    title: 'Monte sua crew',
+    text: 'No Crew, ache galera para ir junto e combine tudo no grupo.',
+  ),
+  (
+    name: 'chat',
+    title: 'Combine o rolê',
+    text: 'Chat com fotos e áudios para marcar o ponto de encontro.',
+  ),
+];
+
+String _screens() => [
+  '<section class="section" id="como-funciona">',
+  '<span class="eyebrow">Como funciona</span>',
+  '<h2>Da festa ao match em poucos toques</h2>',
+  '<ol class="screens">',
+  for (final (i, s) in siteScreens.indexed)
+    [
+      '<li class="screen reveal">',
+      '<div class="phone"><img src="assets/screens/${s.name}.jpg"',
+      'alt="Tela do app: ${_escape(s.title)}" loading="lazy"',
+      'width="540" height="1156"></div>',
+      '<span class="step">${i + 1}</span>',
+      '<h3>${_escape(s.title)}</h3>',
+      '<p>${_escape(s.text)}</p>',
+      '</li>',
+    ].join('\n'),
+  '</ol>',
+  '<p class="note">Imagens ilustrativas: pessoas geradas por IA e',
+  'eventos fictícios.</p>',
+  '</section>',
+].join('\n');
+
 String _home(Iterable<String> slugs, Map<String, String> titles) => [
   '<section class="hero">',
   '<div>',
@@ -82,7 +139,7 @@ String _home(Iterable<String> slugs, Map<String, String> titles) => [
   '<p class="tagline">Date e Crew para quem vive a pista.',
   '<em>Ache sua galera nas mesmas festas.</em></p>',
   '<div class="pills">',
-  '<a class="pill primary" href="#documentos">Documentos</a>',
+  '<a class="pill primary" href="#como-funciona">Como funciona</a>',
   '<span class="pill">Em breve no Google Play e na App Store</span>',
   '</div>',
   '</div>',
@@ -91,6 +148,7 @@ String _home(Iterable<String> slugs, Map<String, String> titles) => [
   'stroke="currentColor" stroke-width="2" stroke-linecap="round"',
   'stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>',
   '</section>',
+  _screens(),
   '<section class="section" id="documentos">',
   '<span class="eyebrow">Transparência</span>',
   '<h2>Documentos legais e de privacidade</h2>',
@@ -169,7 +227,7 @@ String _page({
 <canvas class="scene" data-mode="${hero ? 'hero' : 'banner'}" aria-hidden="true"></canvas>
 <header class="bar">
 <a class="brand" href="$root"><img src="$assets/icon.png" alt=""><span>PULSE</span></a>
-<nav><a href="$root#documentos">Documentos</a></nav>
+<nav><a class="wide-only" href="$root#como-funciona">Como funciona</a><a href="$root#documentos">Documentos</a></nav>
 </header>
 <main>
 $body

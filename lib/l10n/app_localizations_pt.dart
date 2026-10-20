@@ -824,7 +824,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String creatorEventsStats(int created, int rejected) {
-    return '$created eventos criados · $rejected recusados';
+    return 'Eventos criados: $created · Recusados: $rejected';
   }
 
   @override

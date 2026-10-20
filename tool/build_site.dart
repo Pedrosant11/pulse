@@ -20,7 +20,7 @@ const slugs = [
 ];
 
 /// Copied as they are, `source` → `site/assets/target`.
-const staticFiles = {
+final staticFiles = <String, String>{
   'tool/site_template/site.css': 'site.css',
   'tool/site_template/site.js': 'site.js',
   'tool/site_template/scene.js': 'scene.js',
@@ -34,6 +34,10 @@ const staticFiles = {
   'assets/fonts/Inter-SemiBold.ttf': 'fonts/Inter-SemiBold.ttf',
   'assets/fonts/OFL-Unbounded.txt': 'fonts/OFL-Unbounded.txt',
   'assets/fonts/OFL-Inter.txt': 'fonts/OFL-Inter.txt',
+  // App screenshots for "Como funciona" (seed data, see
+  // supabase/seed/CREDITS.md).
+  for (final s in siteScreens)
+    'tool/site_template/screens/${s.name}.jpg': 'screens/${s.name}.jpg',
 };
 
 void main() {

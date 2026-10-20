@@ -60,7 +60,7 @@ class BadgesRepository {
           '(first_name, last_name)',
         )
         .eq('status', 'pending')
-        .order('created_at');
+        .order('created_at', ascending: true);
     return [
       for (final row in rows)
         BadgeRequest.fromJson({

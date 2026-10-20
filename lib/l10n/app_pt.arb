@@ -308,7 +308,7 @@
   "eventCreatorDeleted": "Conta excluída",
   "creatorMemberSince": "Membro desde {date}",
   "@creatorMemberSince": { "placeholders": { "date": { "type": "String" } } },
-  "creatorEventsStats": "{created} eventos criados · {rejected} recusados",
+  "creatorEventsStats": "Eventos criados: {created} · Recusados: {rejected}",
   "@creatorEventsStats": { "placeholders": { "created": { "type": "int" }, "rejected": { "type": "int" } } },
   "creatorOnlyModerators": "Visível só para curadores e admins.",
   "copyEmail": "Copiar e-mail",

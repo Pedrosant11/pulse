@@ -1549,7 +1549,7 @@ abstract class AppLocalizations {
   /// No description provided for @creatorEventsStats.
   ///
   /// In pt, this message translates to:
-  /// **'{created} eventos criados · {rejected} recusados'**
+  /// **'Eventos criados: {created} · Recusados: {rejected}'**
   String creatorEventsStats(int created, int rejected);
 
   /// No description provided for @creatorOnlyModerators.

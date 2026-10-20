@@ -6,7 +6,8 @@
 --   seed02@pulse.test  curator
 --   seed03@pulse.test  producer
 --   seed04..seed30     regular users (01–15 São Paulo, 16–30 Rio)
--- Photos come from supabase/seed/profile-photos (uploaded by the CLI).
+-- Photos come from supabase/seed/profile-photos and event covers from
+-- supabase/seed/event-covers (uploaded by the CLI, see seed/CREDITS.md).
 --
 -- IDs are deterministic:
 --   users  00000000-0000-4000-a000-0000000000NN
@@ -198,7 +199,7 @@ insert into public.events (
 select
   format('00000000-0000-4000-b000-%s', lpad(e.n::text, 12, '0'))::uuid,
   e.name,
-  'Evento fictício para desenvolvimento.',
+  format('%s · %s. Line-up completo, pista até o sol nascer. Proibido para menores de 18.', e.name, e.venue_name),
   e.venue_name, e.city, e.state,
   case e.state when 'SP' then -23.53 else -22.91 end,
   case e.state when 'SP' then -46.64 else -43.20 end,
@@ -213,6 +214,11 @@ select
   -- Mamba Negra keeps its galpão secret until 24 h before (SPEC 7.4).
   case when e.n = 3 then 24 end
 from seed_events e;
+
+-- Covers (supabase/seed/event-covers); the pending suggestion has none.
+update public.events
+set cover_path = id || '.jpg'
+where id::text like '00000000-0000-4000-b000-%' and status = 'approved';
 
 -- Venues (approximate real coordinates of each place).
 insert into public.event_venues (event_id, address, lat, lng)

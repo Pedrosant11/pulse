@@ -58,7 +58,7 @@ class EventsRepository {
             .select(_summaryColumns)
             .eq('status', 'approved')
             .gt('ends_at', DateTime.now().toUtc().toIso8601String())
-            .order('starts_at')
+            .order('starts_at', ascending: true)
             .limit(limit);
         final events = rows.map(EventSummary.fromJson).toList();
         if (state == null) return events;
@@ -233,7 +233,7 @@ class EventsRepository {
         .from('events')
         .select()
         .eq('status', 'pending')
-        .order('starts_at');
+        .order('starts_at', ascending: true);
     return rows.map(EventDetail.fromJson).toList();
   });
 

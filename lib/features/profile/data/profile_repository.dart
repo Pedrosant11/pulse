@@ -81,7 +81,7 @@ class ProfileRepository {
             .from('profile_photos')
             .select('id, user_id, storage_path, position')
             .eq('user_id', userId)
-            .order('position');
+            .order('position', ascending: true);
         return rows.map(ProfilePhoto.fromJson).toList();
       });
 
