@@ -105,6 +105,66 @@ class EventsRepository {
         return rows.isNotEmpty;
       });
 
+  /// "Salvar": kept for later without "Eu vou".
+  Future<bool> isSaved(String userId, String eventId) =>
+      guardFailures(() async {
+        final rows = await _client
+            .from('event_saves')
+            .select('event_id')
+            .eq('user_id', userId)
+            .eq('event_id', eventId);
+        return rows.isNotEmpty;
+      });
+
+  Future<void> setSaved({
+    required String userId,
+    required String eventId,
+    required bool saved,
+  }) => guardFailures(() async {
+    if (saved) {
+      await _client.from('event_saves').upsert({
+        'user_id': userId,
+        'event_id': eventId,
+      }, ignoreDuplicates: true);
+    } else {
+      await _client
+          .from('event_saves')
+          .delete()
+          .eq('user_id', userId)
+          .eq('event_id', eventId);
+    }
+  });
+
+  /// "Tô ON" tonight (only matches and crew-mates see it).
+  Future<bool> isOn(String userId, String eventId) => guardFailures(() async {
+    final rows = await _client
+        .from('event_on')
+        .select('event_id')
+        .eq('user_id', userId)
+        .eq('event_id', eventId);
+    return rows.isNotEmpty;
+  });
+
+  Future<void> setOn(String eventId, {required bool on}) => guardFailures(
+    () => _client.rpc<void>('set_on', params: {'p_event': eventId, 'p_on': on}),
+  );
+
+  Future<List<OnPerson>> onPeople(String eventId) => guardFailures(() async {
+    final rows = await _client.rpc<List<dynamic>>(
+      'event_on_people',
+      params: {'p_event': eventId},
+    );
+    return [
+      for (final row in rows) OnPerson.fromJson(row as Map<String, dynamic>),
+    ];
+  });
+
+  /// Cards on top of "Próximos" (`event_sections()`).
+  Future<EventSections> sections() => guardFailures(() async {
+    final json = await _client.rpc<Map<String, dynamic>>('event_sections');
+    return EventSections.fromJson(json);
+  });
+
   Future<void> setAttending({
     required String userId,
     required String eventId,

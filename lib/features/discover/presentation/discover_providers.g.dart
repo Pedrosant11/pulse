@@ -126,7 +126,7 @@ final class DiscoverDeckProvider
   /// once and comes back if the server refuses (e.g. rate limit).
   DiscoverDeckProvider._({
     required DiscoverDeckFamily super.from,
-    required AppMode super.argument,
+    required (AppMode, {String? eventId}) super.argument,
   }) : super(
          retry: null,
          name: r'discoverDeckProvider',
@@ -142,7 +142,7 @@ final class DiscoverDeckProvider
   String toString() {
     return r'discoverDeckProvider'
         ''
-        '($argument)';
+        '$argument';
   }
 
   @$internal
@@ -160,7 +160,7 @@ final class DiscoverDeckProvider
   }
 }
 
-String _$discoverDeckHash() => r'cf1282ea35b838acab41513f9a48173d03bca3a0';
+String _$discoverDeckHash() => r'b9bcb28e0a1fa9c2fc42bdd3a98206ed9ee2ff6e';
 
 /// The card deck of one mode. Swipes are optimistic: the card leaves at
 /// once and comes back if the server refuses (e.g. rate limit).
@@ -172,7 +172,7 @@ final class DiscoverDeckFamily extends $Family
           AsyncValue<DeckState>,
           DeckState,
           FutureOr<DeckState>,
-          AppMode
+          (AppMode, {String? eventId})
         > {
   DiscoverDeckFamily._()
     : super(
@@ -186,8 +186,8 @@ final class DiscoverDeckFamily extends $Family
   /// The card deck of one mode. Swipes are optimistic: the card leaves at
   /// once and comes back if the server refuses (e.g. rate limit).
 
-  DiscoverDeckProvider call(AppMode mode) =>
-      DiscoverDeckProvider._(argument: mode, from: this);
+  DiscoverDeckProvider call(AppMode mode, {String? eventId}) =>
+      DiscoverDeckProvider._(argument: (mode, eventId: eventId), from: this);
 
   @override
   String toString() => r'discoverDeckProvider';
@@ -197,10 +197,11 @@ final class DiscoverDeckFamily extends $Family
 /// once and comes back if the server refuses (e.g. rate limit).
 
 abstract class _$DiscoverDeck extends $AsyncNotifier<DeckState> {
-  late final _$args = ref.$arg as AppMode;
-  AppMode get mode => _$args;
+  late final _$args = ref.$arg as (AppMode, {String? eventId});
+  AppMode get mode => _$args.$1;
+  String? get eventId => _$args.eventId;
 
-  FutureOr<DeckState> build(AppMode mode);
+  FutureOr<DeckState> build(AppMode mode, {String? eventId});
   @$mustCallSuper
   @override
   WhenComplete runBuild() {
@@ -213,6 +214,53 @@ abstract class _$DiscoverDeck extends $AsyncNotifier<DeckState> {
               Object?,
               Object?
             >;
-    return element.handleCreate(ref, () => build(_$args));
+    return element.handleCreate(
+      ref,
+      () => build(_$args.$1, eventId: _$args.eventId),
+    );
   }
 }
+
+/// Parties I went to whose "Depois da festa" is open.
+
+@ProviderFor(myAfterParties)
+final myAfterPartiesProvider = MyAfterPartiesProvider._();
+
+/// Parties I went to whose "Depois da festa" is open.
+
+final class MyAfterPartiesProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<AfterParty>>,
+          List<AfterParty>,
+          FutureOr<List<AfterParty>>
+        >
+    with $FutureModifier<List<AfterParty>>, $FutureProvider<List<AfterParty>> {
+  /// Parties I went to whose "Depois da festa" is open.
+  MyAfterPartiesProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'myAfterPartiesProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$myAfterPartiesHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<List<AfterParty>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<AfterParty>> create(Ref ref) {
+    return myAfterParties(ref);
+  }
+}
+
+String _$myAfterPartiesHash() => r'2b0bb3cf7b883ba23e37aed48aff680e5124376c';

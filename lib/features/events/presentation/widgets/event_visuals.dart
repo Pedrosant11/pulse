@@ -193,16 +193,21 @@ class EventCard extends StatelessWidget {
                           color: colors.lime,
                         ),
                       ),
-                    if (statusPill != null || event.isGoing)
+                    if (statusPill != null || event.isGoing || event.isSaved)
                       Positioned(
                         right: spacing.sm,
                         top: spacing.sm,
                         child:
                             statusPill ??
-                            StatusPill(
-                              label: l10n.attendingButton,
-                              color: colors.magenta,
-                            ),
+                            (event.isGoing
+                                ? StatusPill(
+                                    label: l10n.attendingButton,
+                                    color: colors.magenta,
+                                  )
+                                : StatusPill(
+                                    label: l10n.eventSavedPill,
+                                    color: colors.lime,
+                                  )),
                       ),
                   ],
                 ),

@@ -52,6 +52,7 @@ abstract final class AppRoutes {
   ).toString();
   static String venue(String venueId) => '$venues/$venueId';
   static String editVenue(String venueId) => '$venues/$venueId/edit';
+  static String afterParty(String eventId) => '$discover/after-party/$eventId';
   static String eventDetail(String eventId) => '$events/$eventId';
   static String editEvent(String eventId) => '$events/$eventId/edit';
   static String eventInsights(String eventId) => '$events/$eventId/insights';

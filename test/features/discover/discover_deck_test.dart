@@ -18,8 +18,14 @@ class FakeDiscoverRepository implements DiscoverRepository {
   String? undoResult;
 
   @override
-  Future<List<DiscoverCandidate>> feed(AppMode mode, {int limit = 20}) async =>
-      feeds.isEmpty ? [] : feeds.removeAt(0);
+  Future<List<DiscoverCandidate>> feed(
+    AppMode mode, {
+    int limit = 20,
+    String? eventId,
+  }) async => feeds.isEmpty ? [] : feeds.removeAt(0);
+
+  @override
+  Future<List<AfterParty>> afterParties() async => const [];
 
   @override
   Future<SwipeResult> swipe({

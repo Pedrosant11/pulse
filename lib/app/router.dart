@@ -113,6 +113,16 @@ GoRouter router(Ref ref) {
               GoRoute(
                 path: AppRoutes.discover,
                 builder: (_, _) => const DiscoverScreen(),
+                routes: [
+                  // "Depois da festa" (push route after_party).
+                  GoRoute(
+                    path: 'after-party/:eventId',
+                    parentNavigatorKey: _rootNavigatorKey,
+                    builder: (_, state) => DiscoverScreen(
+                      afterPartyEventId: state.pathParameters['eventId'],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

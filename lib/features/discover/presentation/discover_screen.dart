@@ -34,7 +34,10 @@ import 'package:pulse/features/profile/presentation/profile_providers.dart';
 
 /// Discover tab (SPEC 8): mode selector, swipeable cards, actions.
 class DiscoverScreen extends ConsumerStatefulWidget {
-  const new({super.key});
+  const new({this.afterPartyEventId, super.key});
+
+  /// "Depois da festa": a Date deck of the people who went to this party.
+  final String? afterPartyEventId;
 
   @override
   ConsumerState<DiscoverScreen> createState() => _DiscoverScreenState();
@@ -55,6 +58,11 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
   bool _adsReady = false;
 
   static const _preloadCount = 3;
+
+  String? get _afterParty => widget.afterPartyEventId;
+
+  DiscoverDeckProvider _deckOf(AppMode mode) =>
+      discoverDeckProvider(mode, eventId: _afterParty);
 
   void _countForAd() {
     if (_adsEvery <= 0 || !_adsReady) return;
@@ -108,7 +116,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
     }
     _countForAd();
     final result = await ref
-        .read(discoverDeckProvider(mode).notifier)
+        .read(_deckOf(mode).notifier)
         .swipe(candidate, direction, superLike: superLike);
     if (result == null || !result.matched || !mounted) return;
     unawaited(HapticFeedback.heavyImpact());
@@ -133,8 +141,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
       context,
       candidate: candidate,
       accent: accent,
-      onBlocked: () =>
-          ref.read(discoverDeckProvider(mode).notifier).remove(candidate.id),
+      onBlocked: () => ref.read(_deckOf(mode).notifier).remove(candidate.id),
     );
     if (decision != null) await _card.swipe(decision);
   }
@@ -200,7 +207,7 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
       await showPlansPrompt(context, PlanFeature.rewind);
       return;
     }
-    final undone = await ref.read(discoverDeckProvider(mode).notifier).undo();
+    final undone = await ref.read(_deckOf(mode).notifier).undo();
     if (!undone && mounted) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(context.l10n.undoNothing)));
@@ -256,23 +263,27 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
       );
     }
 
-    final mode = ref.watch(discoverModeProvider);
+    final afterParty = _afterParty;
+    final mode = afterParty != null
+        ? AppMode.date
+        : ref.watch(discoverModeProvider);
     final enabled = ref.watch(enabledModesProvider);
     final accent = colors.accentOf(mode);
     final modeOn = enabled.contains(mode);
-    final deck = modeOn ? ref.watch(discoverDeckProvider(mode)) : null;
+    final deck = modeOn ? ref.watch(_deckOf(mode)) : null;
     final cards = deck?.value?.cards ?? const <DiscoverCandidate>[];
 
     final plan = ref.watch(entitlementsProvider).value;
-    _adsReady = ref.watch(adsReadyProvider(AdPlacement.discover));
+    _adsReady =
+        afterParty == null && ref.watch(adsReadyProvider(AdPlacement.discover));
     _adsEvery =
         ref.watch(adsConfigProvider).value?.every(AdPlacement.discover) ?? 0;
     final showAd = _showAd && _adsReady;
 
-    ref.listen(discoverDeckProvider(mode), (_, next) {
+    ref.listen(_deckOf(mode), (_, next) {
       final error = next.value?.error;
       if (error == null) return;
-      ref.read(discoverDeckProvider(mode).notifier).clearError();
+      ref.read(_deckOf(mode).notifier).clearError();
       // Plan limits open the plans prompt instead of an error.
       final feature = switch (AppFailure.from(error)) {
         LikeLimitFailure() => PlanFeature.likes,
@@ -318,13 +329,21 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
         ),
         error: (error, _) => ErrorView(
           error: error,
-          onRetry: () => ref.invalidate(discoverDeckProvider(mode)),
+          onRetry: () => ref.invalidate(_deckOf(mode)),
         ),
         data: (state) => state.cards.isEmpty
-            ? _EmptyDeck(
-                mode: mode,
-                onRetry: () => ref.invalidate(discoverDeckProvider(mode)),
-              )
+            ? afterParty != null
+                  ? EmptyView(
+                      icon: Icons.nightlife_rounded,
+                      title: l10n.afterPartyEmptyTitle,
+                      message: l10n.afterPartyEmptyBody,
+                      actionLabel: l10n.afterPartyBack,
+                      onAction: () => context.go(AppRoutes.discover),
+                    )
+                  : _EmptyDeck(
+                      mode: mode,
+                      onRetry: () => ref.invalidate(_deckOf(mode)),
+                    )
             : _CardStack(
                 myGenres: {...?ref.watch(myProfileProvider).value?.musicGenres},
                 myDjs:
@@ -359,43 +378,50 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
         child: Column(
           children: [
             SizedBox(height: spacing.sm),
-            Row(
-              children: [
-                SizedBox(width: spacing.xs),
-                IconButton(
-                  tooltip: l10n.travelTitle,
-                  onPressed: plan == null
-                      ? null
-                      : () => showTravelSheet(context, plan),
-                  icon: Icon(
-                    Icons.flight_takeoff_rounded,
-                    color: (plan?.isTraveling ?? false)
-                        ? colors.lime
-                        : colors.textSecondary,
-                  ),
-                ),
-                Expanded(
-                  child: Center(
-                    child: ModeSelector(
-                      selected: mode,
-                      onChanged: ref.read(discoverModeProvider.notifier).select,
+            if (afterParty != null)
+              _AfterPartyHeader(eventId: afterParty)
+            else
+              Row(
+                children: [
+                  SizedBox(width: spacing.xs),
+                  IconButton(
+                    tooltip: l10n.travelTitle,
+                    onPressed: plan == null
+                        ? null
+                        : () => showTravelSheet(context, plan),
+                    icon: Icon(
+                      Icons.flight_takeoff_rounded,
+                      color: (plan?.isTraveling ?? false)
+                          ? colors.lime
+                          : colors.textSecondary,
                     ),
                   ),
-                ),
-                IconButton(
-                  tooltip: l10n.boostTitle,
-                  onPressed: plan == null ? null : () => _boost(plan),
-                  icon: Icon(
-                    Icons.rocket_launch_rounded,
-                    color: (plan?.boostRunning(DateTime.now()) ?? false)
-                        ? colors.lime
-                        : colors.textSecondary,
+                  Expanded(
+                    child: Center(
+                      child: ModeSelector(
+                        selected: mode,
+                        onChanged: ref
+                            .read(discoverModeProvider.notifier)
+                            .select,
+                      ),
+                    ),
                   ),
-                ),
-                SizedBox(width: spacing.xs),
-              ],
-            ),
-            if (plan?.isTraveling ?? false)
+                  IconButton(
+                    tooltip: l10n.boostTitle,
+                    onPressed: plan == null ? null : () => _boost(plan),
+                    icon: Icon(
+                      Icons.rocket_launch_rounded,
+                      color: (plan?.boostRunning(DateTime.now()) ?? false)
+                          ? colors.lime
+                          : colors.textSecondary,
+                    ),
+                  ),
+                  SizedBox(width: spacing.xs),
+                ],
+              ),
+            if (afterParty == null && mode == AppMode.date)
+              const _AfterPartyBanner(),
+            if (afterParty == null && (plan?.isTraveling ?? false))
               Text(
                 l10n.travelBanner('${plan!.travelCity}, ${plan.travelState}'),
                 style: context.textTheme.labelSmall?.copyWith(
@@ -655,5 +681,90 @@ class _EmptyDeck extends ConsumerWidget {
     return context.reduceMotion
         ? view
         : view.animate().fadeIn(duration: 300.ms);
+  }
+}
+
+/// "Depois da festa": back button and which party it is.
+class _AfterPartyHeader extends ConsumerWidget {
+  const new({required this.eventId});
+
+  final String eventId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final party = ref
+        .watch(myAfterPartiesProvider)
+        .value
+        ?.where((p) => p.id == eventId)
+        .firstOrNull;
+    return Row(
+      children: [
+        const BackButton(),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l10n.afterPartyTitle.toUpperCase(),
+                style: context.textTheme.titleLarge,
+              ),
+              if (party != null)
+                Text(
+                  l10n.afterPartySubtitle(party.name),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: context.textTheme.bodySmall,
+                ),
+            ],
+          ),
+        ),
+        SizedBox(width: context.spacing.md),
+      ],
+    );
+  }
+}
+
+/// On the Date deck: "Você foi na X? Veja quem estava lá".
+class _AfterPartyBanner extends ConsumerWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final parties = ref.watch(myAfterPartiesProvider).value ?? const [];
+    final party = parties.where((p) => p.people > 0).firstOrNull;
+    if (party == null) return const SizedBox.shrink();
+    final colors = context.colors;
+    final spacing = context.spacing;
+    return Padding(
+      padding: EdgeInsets.fromLTRB(spacing.md, spacing.xs, spacing.md, 0),
+      child: Material(
+        color: colors.magenta.withValues(alpha: 0.16),
+        borderRadius: BorderRadius.circular(context.radii.lg),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(context.radii.lg),
+          onTap: () => context.push(AppRoutes.afterParty(party.id)),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: spacing.sm,
+              vertical: spacing.xs,
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.nightlife_rounded, color: colors.magenta),
+                SizedBox(width: spacing.sm),
+                Expanded(
+                  child: Text(
+                    context.l10n.afterPartyBanner(party.name, party.people),
+                    style: context.textTheme.bodyMedium,
+                  ),
+                ),
+                Icon(Icons.chevron_right_rounded, color: colors.magenta),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

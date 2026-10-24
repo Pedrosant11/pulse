@@ -1293,3 +1293,313 @@ abstract class _$FeaturedSales extends $Notifier<AsyncValue<void>> {
     return element.handleCreate(ref, build);
   }
 }
+
+@ProviderFor(isSaved)
+final isSavedProvider = IsSavedFamily._();
+
+final class IsSavedProvider
+    extends $FunctionalProvider<AsyncValue<bool>, bool, FutureOr<bool>>
+    with $FutureModifier<bool>, $FutureProvider<bool> {
+  IsSavedProvider._({
+    required IsSavedFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'isSavedProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$isSavedHash();
+
+  @override
+  String toString() {
+    return r'isSavedProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<bool> create(Ref ref) {
+    final argument = this.argument as String;
+    return isSaved(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is IsSavedProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$isSavedHash() => r'6f686b83de34e6124ab9fd7c6c3173f5baa02766';
+
+final class IsSavedFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<bool>, String> {
+  IsSavedFamily._()
+    : super(
+        retry: null,
+        name: r'isSavedProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  IsSavedProvider call(String eventId) =>
+      IsSavedProvider._(argument: eventId, from: this);
+
+  @override
+  String toString() => r'isSavedProvider';
+}
+
+@ProviderFor(isOn)
+final isOnProvider = IsOnFamily._();
+
+final class IsOnProvider
+    extends $FunctionalProvider<AsyncValue<bool>, bool, FutureOr<bool>>
+    with $FutureModifier<bool>, $FutureProvider<bool> {
+  IsOnProvider._({
+    required IsOnFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'isOnProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$isOnHash();
+
+  @override
+  String toString() {
+    return r'isOnProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<bool> create(Ref ref) {
+    final argument = this.argument as String;
+    return isOn(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is IsOnProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$isOnHash() => r'2a0357e60a6f9633f3708159f15aae5ed6e6dfb4';
+
+final class IsOnFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<bool>, String> {
+  IsOnFamily._()
+    : super(
+        retry: null,
+        name: r'isOnProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  IsOnProvider call(String eventId) =>
+      IsOnProvider._(argument: eventId, from: this);
+
+  @override
+  String toString() => r'isOnProvider';
+}
+
+@ProviderFor(eventOnPeople)
+final eventOnPeopleProvider = EventOnPeopleFamily._();
+
+final class EventOnPeopleProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<OnPerson>>,
+          List<OnPerson>,
+          FutureOr<List<OnPerson>>
+        >
+    with $FutureModifier<List<OnPerson>>, $FutureProvider<List<OnPerson>> {
+  EventOnPeopleProvider._({
+    required EventOnPeopleFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'eventOnPeopleProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$eventOnPeopleHash();
+
+  @override
+  String toString() {
+    return r'eventOnPeopleProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<List<OnPerson>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<OnPerson>> create(Ref ref) {
+    final argument = this.argument as String;
+    return eventOnPeople(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is EventOnPeopleProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$eventOnPeopleHash() => r'3515ec1b8507521c3141f0cf7d03c463ce193ea0';
+
+final class EventOnPeopleFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<List<OnPerson>>, String> {
+  EventOnPeopleFamily._()
+    : super(
+        retry: null,
+        name: r'eventOnPeopleProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  EventOnPeopleProvider call(String eventId) =>
+      EventOnPeopleProvider._(argument: eventId, from: this);
+
+  @override
+  String toString() => r'eventOnPeopleProvider';
+}
+
+@ProviderFor(eventSections)
+final eventSectionsProvider = EventSectionsProvider._();
+
+final class EventSectionsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<EventSections>,
+          EventSections,
+          FutureOr<EventSections>
+        >
+    with $FutureModifier<EventSections>, $FutureProvider<EventSections> {
+  EventSectionsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'eventSectionsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$eventSectionsHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<EventSections> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<EventSections> create(Ref ref) {
+    return eventSections(ref);
+  }
+}
+
+String _$eventSectionsHash() => r'a920f6cf21980515838e75321dd68c484152ff9d';
+
+/// "Salvar" and "Tô ON".
+
+@ProviderFor(EventNightEditor)
+final eventNightEditorProvider = EventNightEditorProvider._();
+
+/// "Salvar" and "Tô ON".
+final class EventNightEditorProvider
+    extends $NotifierProvider<EventNightEditor, AsyncValue<void>> {
+  /// "Salvar" and "Tô ON".
+  EventNightEditorProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'eventNightEditorProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$eventNightEditorHash();
+
+  @$internal
+  @override
+  EventNightEditor create() => EventNightEditor();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AsyncValue<void> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AsyncValue<void>>(value),
+    );
+  }
+}
+
+String _$eventNightEditorHash() => r'7b19f309e9881fc9a299505ba2bac9a01817dbe0';
+
+/// "Salvar" and "Tô ON".
+
+abstract class _$EventNightEditor extends $Notifier<AsyncValue<void>> {
+  AsyncValue<void> build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<void>, AsyncValue<void>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<void>, AsyncValue<void>>,
+              AsyncValue<void>,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}

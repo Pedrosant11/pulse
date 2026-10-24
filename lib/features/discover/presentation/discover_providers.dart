@@ -36,9 +36,9 @@ class DiscoverDeck extends _$DiscoverDeck {
   DiscoverRepository get _repository => ref.read(discoverRepositoryProvider);
 
   @override
-  Future<DeckState> build(AppMode mode) async {
+  Future<DeckState> build(AppMode mode, {String? eventId}) async {
     ref.watch(currentUserIdProvider);
-    return DeckState(cards: await _repository.feed(mode));
+    return DeckState(cards: await _repository.feed(mode, eventId: eventId));
   }
 
   /// Returns the server result, or null when it failed (the card is put
@@ -147,7 +147,7 @@ class DiscoverDeck extends _$DiscoverDeck {
 
   Future<void> _refill() async {
     try {
-      final fresh = await _repository.feed(mode);
+      final fresh = await _repository.feed(mode, eventId: eventId);
       if (!ref.mounted) return;
       final now = state.requireValue;
       final known = {for (final c in now.cards) c.id, now.lastSwiped?.id};
@@ -160,4 +160,11 @@ class DiscoverDeck extends _$DiscoverDeck {
       // Keep the current deck; the next swipe tries again.
     }
   }
+}
+
+/// Parties I went to whose "Depois da festa" is open.
+@riverpod
+Future<List<AfterParty>> myAfterParties(Ref ref) {
+  ref.watch(currentUserIdProvider);
+  return ref.watch(discoverRepositoryProvider).afterParties();
 }

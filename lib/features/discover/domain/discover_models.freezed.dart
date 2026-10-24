@@ -1218,4 +1218,286 @@ $DiscoverCandidateCopyWith<$Res>? get lastSwiped {
 }
 }
 
+
+/// @nodoc
+mixin _$AfterParty {
+
+ String get id; String get name; DateTime get endsAt; DateTime get closesAt; int get people;
+/// Create a copy of AfterParty
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$AfterPartyCopyWith<AfterParty> get copyWith => _$AfterPartyCopyWithImpl<AfterParty>(this as AfterParty, _$identity);
+
+  /// Serializes this AfterParty to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  final _this = this as AfterParty;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AfterParty&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.endsAt, _this.endsAt) || other.endsAt == _this.endsAt)&&(identical(other.closesAt, _this.closesAt) || other.closesAt == _this.closesAt)&&(identical(other.people, _this.people) || other.people == _this.people));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+  final _this = this as AfterParty;
+  return Object.hash(runtimeType,_this.id,_this.name,_this.endsAt,_this.closesAt,_this.people);
+}
+
+@override
+String toString() {
+  final _this = this as AfterParty;
+  return 'AfterParty(id: ${_this.id}, name: ${_this.name}, endsAt: ${_this.endsAt}, closesAt: ${_this.closesAt}, people: ${_this.people})';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $AfterPartyCopyWith<$Res>  {
+  factory $AfterPartyCopyWith(AfterParty value, $Res Function(AfterParty) _then) = _$AfterPartyCopyWithImpl;
+@useResult
+$Res call({
+ String id, String name, DateTime endsAt, DateTime closesAt, int people
+});
+
+
+
+
+}
+/// @nodoc
+class _$AfterPartyCopyWithImpl<$Res>
+    implements $AfterPartyCopyWith<$Res> {
+  _$AfterPartyCopyWithImpl(this._self, this._then);
+
+  final AfterParty _self;
+  final $Res Function(AfterParty) _then;
+
+/// Create a copy of AfterParty
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? endsAt = null,Object? closesAt = null,Object? people = null,}) {
+  return _then(AfterParty(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,endsAt: null == endsAt ? _self.endsAt : endsAt // ignore: cast_nullable_to_non_nullable
+as DateTime,closesAt: null == closesAt ? _self.closesAt : closesAt // ignore: cast_nullable_to_non_nullable
+as DateTime,people: null == people ? _self.people : people // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [AfterParty].
+extension AfterPartyPatterns on AfterParty {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _AfterParty value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _AfterParty() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _AfterParty value)  $default,){
+final _that = this;
+switch (_that) {
+case _AfterParty():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _AfterParty value)?  $default,){
+final _that = this;
+switch (_that) {
+case _AfterParty() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  DateTime endsAt,  DateTime closesAt,  int people)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _AfterParty() when $default != null:
+return $default(_that.id,_that.name,_that.endsAt,_that.closesAt,_that.people);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  DateTime endsAt,  DateTime closesAt,  int people)  $default,) {final _that = this;
+switch (_that) {
+case _AfterParty():
+return $default(_that.id,_that.name,_that.endsAt,_that.closesAt,_that.people);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  DateTime endsAt,  DateTime closesAt,  int people)?  $default,) {final _that = this;
+switch (_that) {
+case _AfterParty() when $default != null:
+return $default(_that.id,_that.name,_that.endsAt,_that.closesAt,_that.people);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _AfterParty implements AfterParty {
+  const _AfterParty({required this.id, required this.name, required this.endsAt, required this.closesAt, this.people = 0});
+  factory _AfterParty.fromJson(Map<String, dynamic> json) => _$AfterPartyFromJson(json);
+
+@override final  String id;
+@override final  String name;
+@override final  DateTime endsAt;
+@override final  DateTime closesAt;
+@override@JsonKey() final  int people;
+
+/// Create a copy of AfterParty
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$AfterPartyCopyWith<_AfterParty> get copyWith => __$AfterPartyCopyWithImpl<_AfterParty>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$AfterPartyToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AfterParty&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.endsAt, endsAt) || other.endsAt == endsAt)&&(identical(other.closesAt, closesAt) || other.closesAt == closesAt)&&(identical(other.people, people) || other.people == people));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+    return Object.hash(runtimeType,id,name,endsAt,closesAt,people);
+}
+
+@override
+String toString() {
+    return 'AfterParty(id: $id, name: $name, endsAt: $endsAt, closesAt: $closesAt, people: $people)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$AfterPartyCopyWith<$Res> implements $AfterPartyCopyWith<$Res> {
+  factory _$AfterPartyCopyWith(_AfterParty value, $Res Function(_AfterParty) _then) = __$AfterPartyCopyWithImpl;
+@override @useResult
+$Res call({
+ String id, String name, DateTime endsAt, DateTime closesAt, int people
+});
+
+
+
+
+}
+/// @nodoc
+class __$AfterPartyCopyWithImpl<$Res>
+    implements _$AfterPartyCopyWith<$Res> {
+  __$AfterPartyCopyWithImpl(this._self, this._then);
+
+  final _AfterParty _self;
+  final $Res Function(_AfterParty) _then;
+
+/// Create a copy of AfterParty
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? endsAt = null,Object? closesAt = null,Object? people = null,}) {
+  return _then(_AfterParty(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,endsAt: null == endsAt ? _self.endsAt : endsAt // ignore: cast_nullable_to_non_nullable
+as DateTime,closesAt: null == closesAt ? _self.closesAt : closesAt // ignore: cast_nullable_to_non_nullable
+as DateTime,people: null == people ? _self.people : people // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
 // dart format on

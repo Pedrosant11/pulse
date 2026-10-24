@@ -14,6 +14,7 @@ import 'package:pulse/features/ads/presentation/widgets/sponsored_slot.dart';
 import 'package:pulse/features/events/data/events_repository.dart';
 import 'package:pulse/features/events/domain/event.dart';
 import 'package:pulse/features/events/presentation/events_providers.dart';
+import 'package:pulse/features/events/presentation/widgets/event_sections.dart';
 import 'package:pulse/features/events/presentation/widgets/event_visuals.dart';
 import 'package:pulse/features/events/presentation/widgets/events_map_view.dart';
 import 'package:pulse/features/profile/domain/profile_enums.dart';
@@ -197,6 +198,10 @@ class _EventList extends ConsumerWidget {
         physics: const AlwaysScrollableScrollPhysics(),
         slivers: [
           if (nearby) const SliverToBoxAdapter(child: _NearbyFilters()),
+          // Em alta / Esta semana / Das casas que você segue, only on the
+          // plain list (no search or filters).
+          if (nearby && filters == const EventFilters())
+            const SliverToBoxAdapter(child: EventSectionsView()),
           ...events.when(
             loading: () => [const SliverToBoxAdapter(child: LoadingView())],
             error: (error, _) => [

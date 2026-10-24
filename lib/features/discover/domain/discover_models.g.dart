@@ -130,3 +130,20 @@ Map<String, dynamic> _$SwipeResultToJson(_SwipeResult instance) =>
       'match_id': instance.matchId,
       'conversation_id': instance.conversationId,
     };
+
+_AfterParty _$AfterPartyFromJson(Map<String, dynamic> json) => _AfterParty(
+  id: json['id'] as String,
+  name: json['name'] as String,
+  endsAt: DateTime.parse(json['ends_at'] as String),
+  closesAt: DateTime.parse(json['closes_at'] as String),
+  people: (json['people'] as num?)?.toInt() ?? 0,
+);
+
+Map<String, dynamic> _$AfterPartyToJson(_AfterParty instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'ends_at': instance.endsAt.toIso8601String(),
+      'closes_at': instance.closesAt.toIso8601String(),
+      'people': instance.people,
+    };

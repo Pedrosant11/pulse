@@ -297,3 +297,52 @@ class FeaturedSales extends _$FeaturedSales {
     ..invalidate(eventDetailProvider(eventId))
     ..invalidate(eventListProvider);
 }
+
+@riverpod
+Future<bool> isSaved(Ref ref, String eventId) =>
+    ref.watch(eventsRepositoryProvider).isSaved(_requireUserId(ref), eventId);
+
+@riverpod
+Future<bool> isOn(Ref ref, String eventId) =>
+    ref.watch(eventsRepositoryProvider).isOn(_requireUserId(ref), eventId);
+
+@riverpod
+Future<List<OnPerson>> eventOnPeople(Ref ref, String eventId) =>
+    ref.watch(eventsRepositoryProvider).onPeople(eventId);
+
+@riverpod
+Future<EventSections> eventSections(Ref ref) {
+  ref.watch(currentUserIdProvider);
+  return ref.watch(eventsRepositoryProvider).sections();
+}
+
+/// "Salvar" and "Tô ON".
+@riverpod
+class EventNightEditor extends _$EventNightEditor {
+  @override
+  AsyncValue<void> build() => const AsyncData(null);
+
+  Future<bool?> setSaved(String eventId, {required bool saved}) =>
+      runAction(ref, (s) => state = s, () async {
+        await ref
+            .read(eventsRepositoryProvider)
+            .setSaved(
+              userId: _requireUserId(ref),
+              eventId: eventId,
+              saved: saved,
+            );
+        ref
+          ..invalidate(isSavedProvider(eventId))
+          ..invalidate(eventListProvider);
+        return true;
+      });
+
+  Future<bool?> setOn(String eventId, {required bool on}) =>
+      runAction(ref, (s) => state = s, () async {
+        await ref.read(eventsRepositoryProvider).setOn(eventId, on: on);
+        ref
+          ..invalidate(isOnProvider(eventId))
+          ..invalidate(eventOnPeopleProvider(eventId));
+        return true;
+      });
+}

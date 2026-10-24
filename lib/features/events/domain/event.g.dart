@@ -74,6 +74,7 @@ _EventListEntry _$EventListEntryFromJson(Map<String, dynamic> json) =>
       isOfficial: json['is_official'] as bool? ?? false,
       isMine: json['is_mine'] as bool? ?? false,
       isGoing: json['is_going'] as bool? ?? false,
+      isSaved: json['is_saved'] as bool? ?? false,
       goingCount: (json['going_count'] as num?)?.toInt() ?? 0,
       distanceKm: (json['distance_km'] as num?)?.toDouble(),
       pinLat: (json['pin_lat'] as num?)?.toDouble(),
@@ -100,6 +101,7 @@ Map<String, dynamic> _$EventListEntryToJson(_EventListEntry instance) =>
       'is_official': instance.isOfficial,
       'is_mine': instance.isMine,
       'is_going': instance.isGoing,
+      'is_saved': instance.isSaved,
       'going_count': instance.goingCount,
       'distance_km': instance.distanceKm,
       'pin_lat': instance.pinLat,
@@ -279,4 +281,77 @@ const _$UserRoleEnumMap = {
   UserRole.curator: 'curator',
   UserRole.producer: 'producer',
   UserRole.admin: 'admin',
+};
+
+_OnPerson _$OnPersonFromJson(Map<String, dynamic> json) => _OnPerson(
+  userId: json['user_id'] as String,
+  firstName: json['first_name'] as String,
+  photoPath: json['photo_path'] as String?,
+);
+
+Map<String, dynamic> _$OnPersonToJson(_OnPerson instance) => <String, dynamic>{
+  'user_id': instance.userId,
+  'first_name': instance.firstName,
+  'photo_path': instance.photoPath,
+};
+
+_SectionEvent _$SectionEventFromJson(Map<String, dynamic> json) =>
+    _SectionEvent(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      venueName: json['venue_name'] as String,
+      city: json['city'] as String,
+      state: json['state'] as String,
+      startsAt: DateTime.parse(json['starts_at'] as String),
+      endsAt: DateTime.parse(json['ends_at'] as String),
+      coverPath: json['cover_path'] as String?,
+      genres:
+          (json['genres'] as List<dynamic>?)
+              ?.map((e) => $enumDecode(_$MusicGenreEnumMap, e))
+              .toList() ??
+          const [],
+      isOfficial: json['is_official'] as bool? ?? false,
+      goingCount: (json['going_count'] as num?)?.toInt() ?? 0,
+    );
+
+Map<String, dynamic> _$SectionEventToJson(_SectionEvent instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'venue_name': instance.venueName,
+      'city': instance.city,
+      'state': instance.state,
+      'starts_at': instance.startsAt.toIso8601String(),
+      'ends_at': instance.endsAt.toIso8601String(),
+      'cover_path': instance.coverPath,
+      'genres': instance.genres.map((e) => _$MusicGenreEnumMap[e]!).toList(),
+      'is_official': instance.isOfficial,
+      'going_count': instance.goingCount,
+    };
+
+_EventSections _$EventSectionsFromJson(Map<String, dynamic> json) =>
+    _EventSections(
+      trending:
+          (json['trending'] as List<dynamic>?)
+              ?.map((e) => SectionEvent.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      thisWeek:
+          (json['this_week'] as List<dynamic>?)
+              ?.map((e) => SectionEvent.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      followedVenues:
+          (json['followed_venues'] as List<dynamic>?)
+              ?.map((e) => SectionEvent.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$EventSectionsToJson(
+  _EventSections instance,
+) => <String, dynamic>{
+  'trending': instance.trending.map((e) => e.toJson()).toList(),
+  'this_week': instance.thisWeek.map((e) => e.toJson()).toList(),
+  'followed_venues': instance.followedVenues.map((e) => e.toJson()).toList(),
 };

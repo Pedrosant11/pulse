@@ -121,3 +121,18 @@ class MatchArgs {
   final AppMode mode;
   final String? conversationId;
 }
+
+/// A party I went to whose "Depois da festa" deck is open
+/// (`my_after_parties()`).
+@freezed
+abstract class AfterParty with _$AfterParty {
+  const factory({
+    required String id,
+    required String name,
+    required DateTime endsAt,
+    required DateTime closesAt,
+    @Default(0) int people,
+  }) = _AfterParty;
+
+  factory fromJson(Map<String, dynamic> json) => _$AfterPartyFromJson(json);
+}

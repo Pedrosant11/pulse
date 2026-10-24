@@ -74,6 +74,7 @@ sealed class AppFailure implements Exception {
       // Featured events: 5 at once per region.
       ('P0001', 'featured_limit') => FeaturedLimitFailure(error),
       ('P0001', 'account_paused') => AccountPausedFailure(error),
+      ('P0001', 'on_not_now') => OnNotNowFailure(error),
       ('P0001', 'featured_unavailable') => FeaturedUnavailableFailure(error),
       // Casas (venues migration).
       ('P0001', 'venue_unavailable') => VenueUnavailableFailure(error),
@@ -278,5 +279,10 @@ final class VenueUnavailableFailure extends AppFailure {
 
 /// Only people who went to a party at the venue can rate it.
 final class VenueReviewNotAllowedFailure extends AppFailure {
+  const new([super.cause]);
+}
+
+/// "Tô ON" only works on the night of a party the person is going to.
+final class OnNotNowFailure extends AppFailure {
   const new([super.cause]);
 }

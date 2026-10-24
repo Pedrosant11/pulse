@@ -29,6 +29,7 @@ extension AppFailureMessage on AppFailure {
       VenueReviewNotAllowedFailure() => l10n.venueRateOnlyWent,
       FeaturedLimitFailure() => l10n.errorFeaturedLimit,
       AccountPausedFailure() => l10n.errorAccountPaused,
+      OnNotNowFailure() => l10n.errorOnNotNow,
       FeaturedUnavailableFailure() => l10n.errorFeaturedUnavailable,
       LikeLimitFailure() => l10n.errorLikeLimit,
       SuperlikeLimitFailure() => l10n.errorSuperlikeLimit,

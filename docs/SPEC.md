@@ -457,3 +457,8 @@ Baseado na pesquisa de mercado (apps de relacionamento migrando para eventos pre
     - **Card para o story e "Chamar a galera"**: botão compartilhar no evento aprovado. O card 9:16 (capa, nome, data, local, line-up, estilos, cupom e "EU VOU" para quem vai) sai como imagem; "Chamar a galera" manda o texto com data, line-up, ingresso e cupom.
     - **Enquete no chat da crew**: 2 a 4 opções, aberta por 3 a 48 h; cada membro vota uma vez e pode trocar ou tirar o voto enquanto estiver aberta; votos ao vivo.
     - **% de match musical** nos cards do Descobrir: estilos em comum (peso maior) e DJs favoritos em comum.
+11. **Noite da festa e dia seguinte** (feito):
+    - **Tô ON**: no dia de uma festa com "Eu vou" (de 6 h antes até o fim), a pessoa pode marcar que está lá. Só os matches e a crew daquela festa veem (`event_on_people()`); nada público, sem localização.
+    - **Depois da festa**: por 48 h depois do fim, quem foi vê um Descobrir de Date só com quem marcou "Eu vou" naquela festa, morando onde for (`get_discover_feed(p_event)`). Banner no Descobrir, card no evento e push `after_party` 4–5 h depois do fim (festas com 3+ pessoas). Crew continua só para festas futuras.
+    - **Salvar**: guardar a festa sem "Eu vou" (selo "Salvo", aparece em "Meus eventos" e recebe o lembrete da véspera).
+    - **Seções em Próximos** (`event_sections()`, só sem busca/filtro): "Das casas que você segue", "Em alta" (mais "Eu vou" nos últimos 7 dias, perto) e "Esta semana".

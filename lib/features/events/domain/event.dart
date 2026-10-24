@@ -46,6 +46,9 @@ abstract class EventListEntry with _$EventListEntry {
     @Default(false) bool isOfficial,
     @Default(false) bool isMine,
     @Default(false) bool isGoing,
+
+    /// Saved for later ("Salvar").
+    @Default(false) bool isSaved,
     @Default(0) int goingCount,
     double? distanceKm,
 
@@ -258,4 +261,53 @@ class EventInsights {
 
   /// "18_24", "25_34", "35_plus" → people.
   final Map<String, int> ages;
+}
+
+/// A match or crew-mate who is ON at a party tonight (`event_on_people()`).
+@freezed
+abstract class OnPerson with _$OnPerson {
+  const factory({
+    required String userId,
+    required String firstName,
+    String? photoPath,
+  }) = _OnPerson;
+
+  factory fromJson(Map<String, dynamic> json) => _$OnPersonFromJson(json);
+}
+
+/// A card in the "Próximos" sections.
+@freezed
+abstract class SectionEvent with _$SectionEvent {
+  const factory({
+    required String id,
+    required String name,
+    required String venueName,
+    required String city,
+    required String state,
+    required DateTime startsAt,
+    required DateTime endsAt,
+    String? coverPath,
+    @Default([]) List<MusicGenre> genres,
+    @Default(false) bool isOfficial,
+    @Default(0) int goingCount,
+  }) = _SectionEvent;
+
+  factory fromJson(Map<String, dynamic> json) => _$SectionEventFromJson(json);
+}
+
+/// `event_sections()`: em alta, esta semana, das casas que você segue.
+@freezed
+abstract class EventSections with _$EventSections {
+  const factory({
+    @Default([]) List<SectionEvent> trending,
+    @Default([]) List<SectionEvent> thisWeek,
+    @Default([]) List<SectionEvent> followedVenues,
+  }) = _EventSections;
+
+  factory fromJson(Map<String, dynamic> json) => _$EventSectionsFromJson(json);
+
+  const new _();
+
+  bool get isEmpty =>
+      trending.isEmpty && thisWeek.isEmpty && followedVenues.isEmpty;
 }

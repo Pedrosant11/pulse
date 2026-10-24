@@ -342,7 +342,7 @@ class _LocalDeck extends DiscoverDeck {
   final DeckState _state;
 
   @override
-  Future<DeckState> build(AppMode mode) async => _state;
+  Future<DeckState> build(AppMode mode, {String? eventId}) async => _state;
 
   @override
   Future<SwipeResult?> swipe(
@@ -372,5 +372,5 @@ class _FixedDeck extends DiscoverDeck {
   final DeckState _state;
 
   @override
-  Future<DeckState> build(AppMode mode) async => _state;
+  Future<DeckState> build(AppMode mode, {String? eventId}) async => _state;
 }

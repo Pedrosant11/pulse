@@ -12,16 +12,27 @@ class DiscoverRepository {
 
   final SupabaseClient _client;
 
-  Future<List<DiscoverCandidate>> feed(AppMode mode, {int limit = 20}) =>
-      guardFailures(() async {
-        final rows = await _client.rpc<List<dynamic>>(
-          'get_discover_feed',
-          params: {'p_mode': mode.name, 'p_limit': limit},
-        );
-        return rows
-            .map((r) => DiscoverCandidate.fromJson(r as Map<String, dynamic>))
-            .toList();
-      });
+  /// With [eventId]: "Depois da festa" (only people who went to it).
+  Future<List<DiscoverCandidate>> feed(
+    AppMode mode, {
+    int limit = 20,
+    String? eventId,
+  }) => guardFailures(() async {
+    final rows = await _client.rpc<List<dynamic>>(
+      'get_discover_feed',
+      params: {'p_mode': mode.name, 'p_limit': limit, 'p_event': ?eventId},
+    );
+    return rows
+        .map((r) => DiscoverCandidate.fromJson(r as Map<String, dynamic>))
+        .toList();
+  });
+
+  Future<List<AfterParty>> afterParties() => guardFailures(() async {
+    final rows = await _client.rpc<List<dynamic>>('my_after_parties');
+    return [
+      for (final row in rows) AfterParty.fromJson(row as Map<String, dynamic>),
+    ];
+  });
 
   /// Matches are created by the database; this only reports them.
   Future<SwipeResult> swipe({

@@ -24,6 +24,7 @@ import 'package:pulse/features/events/data/events_repository.dart';
 import 'package:pulse/features/events/domain/event.dart';
 import 'package:pulse/features/events/presentation/events_providers.dart';
 import 'package:pulse/features/events/presentation/widgets/event_location.dart';
+import 'package:pulse/features/events/presentation/widgets/event_night.dart';
 import 'package:pulse/features/events/presentation/widgets/event_share.dart';
 import 'package:pulse/features/events/presentation/widgets/event_visuals.dart';
 import 'package:pulse/features/events/presentation/widgets/featured_promo.dart';
@@ -223,6 +224,9 @@ class _EventDetailBody extends ConsumerWidget {
           expandedHeight: 260,
           backgroundColor: colors.background,
           actions: [
+            // "Salvar" for later, without "Eu vou".
+            if (event.status == EventStatus.approved && !hasEnded)
+              _SaveButton(eventId: event.id),
             // Story card + "Chamar a galera".
             if (event.status == EventStatus.approved)
               IconButton(
@@ -370,6 +374,11 @@ class _EventDetailBody extends ConsumerWidget {
                 ),
               ],
               SizedBox(height: spacing.lg),
+              // Tonight: "Tô ON"; the day after: "Veja quem estava lá".
+              Padding(
+                padding: EdgeInsets.only(bottom: spacing.sm),
+                child: EventNightSection(event: event),
+              ),
               if (event.status == EventStatus.approved && !hasEnded)
                 _GoingButton(eventId: event.id),
               if (ticketUrl != null) ...[
@@ -860,6 +869,40 @@ class _CouponRow extends StatelessWidget {
           label: Text(l10n.eventCouponCopy),
         ),
       ),
+    );
+  }
+}
+
+class _SaveButton extends ConsumerWidget {
+  const new({required this.eventId});
+
+  final String eventId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final saved = ref.watch(isSavedProvider(eventId)).value ?? false;
+    final busy = ref.watch(eventNightEditorProvider).isLoading;
+    return IconButton(
+      tooltip: saved ? l10n.eventUnsave : l10n.eventSave,
+      icon: Icon(
+        saved ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
+        color: saved ? context.colors.lime : null,
+      ),
+      onPressed: busy
+          ? null
+          : () async {
+              final ok = await ref
+                  .read(eventNightEditorProvider.notifier)
+                  .setSaved(eventId, saved: !saved);
+              if (ok == true && context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(saved ? l10n.eventUnsaved : l10n.eventSaved),
+                  ),
+                );
+              }
+            },
     );
   }
 }

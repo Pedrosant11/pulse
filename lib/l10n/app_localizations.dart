@@ -2080,6 +2080,144 @@ abstract class AppLocalizations {
   /// **'Essa casa ainda não foi aprovada. Escolha outra ou aguarde a curadoria.'**
   String get errorVenueUnavailable;
 
+  /// No description provided for @onTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tô ON hoje'**
+  String get onTitle;
+
+  /// No description provided for @onHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Só seus matches e sua crew dessa festa veem. Sem localização.'**
+  String get onHint;
+
+  /// No description provided for @onPeopleOne.
+  ///
+  /// In pt, this message translates to:
+  /// **'{name} está ON'**
+  String onPeopleOne(String name);
+
+  /// No description provided for @onPeopleTwo.
+  ///
+  /// In pt, this message translates to:
+  /// **'{first} e {second} estão ON'**
+  String onPeopleTwo(String first, String second);
+
+  /// No description provided for @onPeopleMore.
+  ///
+  /// In pt, this message translates to:
+  /// **'{name} e mais {count} estão ON'**
+  String onPeopleMore(String name, int count);
+
+  /// No description provided for @errorOnNotNow.
+  ///
+  /// In pt, this message translates to:
+  /// **'O \"Tô ON\" só funciona no dia de uma festa em que você marcou \"Eu vou\".'**
+  String get errorOnNotNow;
+
+  /// No description provided for @afterPartyTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Depois da festa'**
+  String get afterPartyTitle;
+
+  /// No description provided for @afterPartySubtitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quem foi na {name}'**
+  String afterPartySubtitle(String name);
+
+  /// No description provided for @afterPartyBanner.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você foi na {name}? Veja as {count} pessoas que estavam lá'**
+  String afterPartyBanner(String name, int count);
+
+  /// No description provided for @afterPartyCardTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Veja quem estava lá'**
+  String get afterPartyCardTitle;
+
+  /// No description provided for @afterPartyCardBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Por 48 h, dê match com quem foi a essa festa.'**
+  String get afterPartyCardBody;
+
+  /// No description provided for @afterPartyEmptyTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você já viu todo mundo dessa festa'**
+  String get afterPartyEmptyTitle;
+
+  /// No description provided for @afterPartyEmptyBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seus matches estão em Chats. Na próxima, marque \"Eu vou\" de novo!'**
+  String get afterPartyEmptyBody;
+
+  /// No description provided for @afterPartyBack.
+  ///
+  /// In pt, this message translates to:
+  /// **'Voltar ao Descobrir'**
+  String get afterPartyBack;
+
+  /// No description provided for @eventSave.
+  ///
+  /// In pt, this message translates to:
+  /// **'Salvar festa'**
+  String get eventSave;
+
+  /// No description provided for @eventUnsave.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tirar dos salvos'**
+  String get eventUnsave;
+
+  /// No description provided for @eventSaved.
+  ///
+  /// In pt, this message translates to:
+  /// **'Festa salva. Ela aparece em \"Meus eventos\" e a gente lembra na véspera.'**
+  String get eventSaved;
+
+  /// No description provided for @eventUnsaved.
+  ///
+  /// In pt, this message translates to:
+  /// **'Festa tirada dos salvos.'**
+  String get eventUnsaved;
+
+  /// No description provided for @eventSavedPill.
+  ///
+  /// In pt, this message translates to:
+  /// **'Salvo'**
+  String get eventSavedPill;
+
+  /// No description provided for @sectionTrending.
+  ///
+  /// In pt, this message translates to:
+  /// **'Em alta'**
+  String get sectionTrending;
+
+  /// No description provided for @sectionThisWeek.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esta semana'**
+  String get sectionThisWeek;
+
+  /// No description provided for @sectionFollowedVenues.
+  ///
+  /// In pt, this message translates to:
+  /// **'Das casas que você segue'**
+  String get sectionFollowedVenues;
+
+  /// No description provided for @sectionAllUpcoming.
+  ///
+  /// In pt, this message translates to:
+  /// **'Todas as próximas'**
+  String get sectionAllUpcoming;
+
   /// No description provided for @pollCreateTitle.
   ///
   /// In pt, this message translates to:

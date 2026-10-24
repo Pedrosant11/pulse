@@ -1164,6 +1164,90 @@ class AppLocalizationsPt extends AppLocalizations {
       'Essa casa ainda não foi aprovada. Escolha outra ou aguarde a curadoria.';
 
   @override
+  String get onTitle => 'Tô ON hoje';
+
+  @override
+  String get onHint =>
+      'Só seus matches e sua crew dessa festa veem. Sem localização.';
+
+  @override
+  String onPeopleOne(String name) {
+    return '$name está ON';
+  }
+
+  @override
+  String onPeopleTwo(String first, String second) {
+    return '$first e $second estão ON';
+  }
+
+  @override
+  String onPeopleMore(String name, int count) {
+    return '$name e mais $count estão ON';
+  }
+
+  @override
+  String get errorOnNotNow =>
+      'O \"Tô ON\" só funciona no dia de uma festa em que você marcou \"Eu vou\".';
+
+  @override
+  String get afterPartyTitle => 'Depois da festa';
+
+  @override
+  String afterPartySubtitle(String name) {
+    return 'Quem foi na $name';
+  }
+
+  @override
+  String afterPartyBanner(String name, int count) {
+    return 'Você foi na $name? Veja as $count pessoas que estavam lá';
+  }
+
+  @override
+  String get afterPartyCardTitle => 'Veja quem estava lá';
+
+  @override
+  String get afterPartyCardBody =>
+      'Por 48 h, dê match com quem foi a essa festa.';
+
+  @override
+  String get afterPartyEmptyTitle => 'Você já viu todo mundo dessa festa';
+
+  @override
+  String get afterPartyEmptyBody =>
+      'Seus matches estão em Chats. Na próxima, marque \"Eu vou\" de novo!';
+
+  @override
+  String get afterPartyBack => 'Voltar ao Descobrir';
+
+  @override
+  String get eventSave => 'Salvar festa';
+
+  @override
+  String get eventUnsave => 'Tirar dos salvos';
+
+  @override
+  String get eventSaved =>
+      'Festa salva. Ela aparece em \"Meus eventos\" e a gente lembra na véspera.';
+
+  @override
+  String get eventUnsaved => 'Festa tirada dos salvos.';
+
+  @override
+  String get eventSavedPill => 'Salvo';
+
+  @override
+  String get sectionTrending => 'Em alta';
+
+  @override
+  String get sectionThisWeek => 'Esta semana';
+
+  @override
+  String get sectionFollowedVenues => 'Das casas que você segue';
+
+  @override
+  String get sectionAllUpcoming => 'Todas as próximas';
+
+  @override
   String get pollCreateTitle => 'Criar enquete';
 
   @override
