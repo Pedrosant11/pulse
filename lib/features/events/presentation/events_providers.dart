@@ -2,11 +2,14 @@ import 'dart:typed_data';
 
 import 'package:pulse/core/models/user_role.dart';
 import 'package:pulse/core/utils/run_action.dart';
+import 'package:pulse/features/achievements/presentation/achievements_providers.dart';
 import 'package:pulse/features/auth/presentation/session_providers.dart';
 import 'package:pulse/features/events/data/events_repository.dart';
+import 'package:pulse/features/events/domain/check_in.dart';
 import 'package:pulse/features/events/domain/event.dart';
 import 'package:pulse/features/events/domain/event_import.dart';
 import 'package:pulse/features/events/domain/featured.dart';
+import 'package:pulse/features/profile/data/location_repository.dart';
 import 'package:pulse/features/profile/presentation/profile_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -345,6 +348,57 @@ class EventNightEditor extends _$EventNightEditor {
           ..invalidate(eventOnPeopleProvider(eventId));
         return true;
       });
+}
+
+/// When I checked in at the party (`null`: not yet).
+@riverpod
+Future<DateTime?> myCheckIn(Ref ref, String eventId) =>
+    ref.watch(eventsRepositoryProvider).myCheckIn(eventId);
+
+/// The producer's QR of this minute.
+@riverpod
+Future<CheckInCode> checkInCode(Ref ref, String eventId) =>
+    ref.watch(eventsRepositoryProvider).checkInCode(eventId);
+
+/// Check-in by GPS (one precise reading) or by the producer's QR.
+@riverpod
+class CheckInEditor extends _$CheckInEditor {
+  @override
+  AsyncValue<void> build() => const AsyncData(null);
+
+  Future<bool?> byGps(String eventId) =>
+      runAction(ref, (s) => state = s, () async {
+        final position = await ref
+            .read(locationRepositoryProvider)
+            .precisePosition();
+        await ref
+            .read(eventsRepositoryProvider)
+            .checkInGps(
+              eventId,
+              lat: position.lat,
+              lng: position.lng,
+              accuracy: position.accuracy,
+              mocked: position.mocked,
+            );
+        _refresh(eventId);
+        return true;
+      });
+
+  Future<bool?> byQr(String eventId, String code) =>
+      runAction(ref, (s) => state = s, () async {
+        await ref.read(eventsRepositoryProvider).checkInQr(eventId, code);
+        _refresh(eventId);
+        return true;
+      });
+
+  void _refresh(String eventId) => ref
+    ..invalidate(myCheckInProvider(eventId))
+    ..invalidate(isAttendingProvider(eventId))
+    ..invalidate(isOnProvider(eventId))
+    ..invalidate(eventOnPeopleProvider(eventId))
+    ..invalidate(eventListProvider)
+    ..invalidate(myAchievementsProvider)
+    ..invalidate(myPassportProvider);
 }
 
 /// "Meus eventos": everything, only "Eu vou" or only saved.

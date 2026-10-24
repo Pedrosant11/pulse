@@ -25,6 +25,7 @@ evento no banco (match, mensagem, crew)
 | `venue_new` | quem segue a casa onde uma festa nova foi aprovada, em qualquer cidade (mesmo limite) | events | O evento |
 | `after_party` | quem marcou "Eu vou" numa festa que acabou há 4–5 h (3+ pessoas, usa Date) | events | Depois da festa |
 | `event_reminder` | quem marcou "Eu vou", ~24 h antes, com quantas pessoas curtidas vão | events | O evento |
+| `checkin_reminder` | quem marcou "Eu vou" e não fez check-in, ~2 h depois do início (cron :40) | events | O evento |
 
 Os textos ficam em `supabase/functions/send-push/index.ts`, porque o celular os mostra com o app fechado.
 

@@ -251,6 +251,12 @@ class _EventDetailBody extends ConsumerWidget {
             if (canCancel || canReport || canEdit || role.isAdmin)
               PopupMenuButton<void>(
                 itemBuilder: (_) => [
+                  // The rotating QR to show at the door (check_in_qr).
+                  if (canEdit && event.status == EventStatus.approved)
+                    PopupMenuItem(
+                      onTap: () => context.push(AppRoutes.checkInQr(event.id)),
+                      child: Text(l10n.eventCheckInQr),
+                    ),
                   // Next edition of a recurring party, already filled.
                   if (canEdit && role.createsApprovedEvents)
                     PopupMenuItem(

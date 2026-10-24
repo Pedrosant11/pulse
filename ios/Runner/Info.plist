@@ -50,11 +50,11 @@
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>Escolha fotos da sua galeria para o seu perfil.</string>
 		<key>NSCameraUsageDescription</key>
-		<string>Tire fotos para o seu perfil e para mandar nos chats.</string>
+		<string>Tire fotos para o seu perfil e os chats, e leia o QR de check-in das festas.</string>
 		<key>NSMicrophoneUsageDescription</key>
 		<string>Grave áudios para mandar nos chats.</string>
 		<key>NSLocationWhenInUseUsageDescription</key>
-		<string>Usamos sua localização aproximada só para sugerir sua cidade. Ela não é compartilhada.</string>
+		<string>Usamos sua localização para sugerir sua cidade e, quando você toca em "Tô aqui", para confirmar o check-in na festa. Ela não é guardada nem compartilhada.</string>
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
 		<key>UIApplicationSceneManifest</key>

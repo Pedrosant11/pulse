@@ -301,6 +301,13 @@ select
 from picks
 on conflict do nothing;
 
+-- Who went to the past Ritual (12) checked in there (Conquistas, passport).
+insert into public.event_checkins (event_id, user_id, method, created_at)
+select ea.event_id, ea.user_id, case when ea.user_id::text < '00000000-0000-4000-a000-000000000008' then 'gps' else 'qr' end,
+  e.starts_at + interval '2 hours'
+from public.event_attendance ea join public.events e on e.id = ea.event_id
+where e.id = '00000000-0000-4000-b000-000000000012';
+
 -- Plans (monetization): Elisa (5) has Pulse Black with some packs, Felipe
 -- (6) has Pulse+. Granted by "admin", so no store is needed locally.
 insert into public.subscriptions (user_id, tier, source) values

@@ -464,6 +464,12 @@ Baseado na pesquisa de mercado (apps de relacionamento migrando para eventos pre
     - **Seções em Próximos** (`event_sections()`, só sem busca/filtro): primeiro o carrossel **"Em destaque"** (destaques pagos perto, no rodízio diário, cards grandes), depois "Das casas que você segue", "Em alta" (mais "Eu vou" nos últimos 7 dias, perto) e "Esta semana". Os destaques continuam também no topo da lista e no mapa. Anúncios nos carrosséis seguem a regra da lista: um a cada N festas, ou um no fim quando há menos.
     - **Meus eventos**: filtros Todos · Vou · Salvos.
 12. **Conquistas, passaporte e duplicar festa** (feito):
-    - **Conquistas** (grátis, calculadas no banco a partir das festas já encerradas com "Eu vou" e das crews; nada é gravado): Primeira festa, Rato de balada (5), Lenda da noite (20), Fiel à casa (3 na mesma casa), Nunca vai sozinho (3 crews), Explorador (3 cidades), Eclético (5 estilos), Maratonista (3 festas de 10 h+). No próprio perfil, todas com progresso; no perfil visto pelos outros, as 3 mais raras desbloqueadas (sem dizer quais festas).
+    - **Conquistas** (grátis, calculadas no banco a partir das festas com check-in e das crews; nada é gravado): Primeira festa, Rato de balada (5), Lenda da noite (20), Fiel à casa (3 na mesma casa), Nunca vai sozinho (3 crews), Explorador (3 cidades), Eclético (5 estilos), Maratonista (3 festas de 10 h+). No próprio perfil, todas com progresso; no perfil visto pelos outros, as 3 mais raras desbloqueadas (sem dizer quais festas).
     - **Passaporte** (privado, só a pessoa vê): totais de festas, casas, cidades e estilos e as 3 últimas festas; o histórico completo é do Pulse Black.
     - **Duplicar festa** (menu ⋮ do evento, para quem pode editar): abre "Nova edição" com tudo preenchido, uma semana depois no mesmo dia e horário, mantendo a capa.
+
+13. **Check-in: prova de presença** (feito):
+    - Na noite da festa (1 h antes até o fim), o card "Check-in" no evento: **Tô aqui** lê a localização precisa uma vez e o banco confere se está a até 300 m do endereço (mais a precisão do GPS, até 200 m); localização falsa é recusada. Só o horário fica salvo, nunca as coordenadas.
+    - **QR da produção** (menu ⋮ do evento, para quem pode editar): código de 8 caracteres que muda a cada minuto (HMAC de um segredo por festa), então print em grupo não funciona; o app lê o QR ou aceita o código digitado. Serve para festas sem endereço no mapa ou com GPS ruim.
+    - **Push** ~2 h depois do início para quem marcou "Eu vou" e não fez check-in (`checkin_reminder`).
+    - O check-in também marca "Eu vou" e "Tô ON". **Conquistas e passaporte contam só festas com check-in.** O painel do evento mostra quantos fizeram check-in.

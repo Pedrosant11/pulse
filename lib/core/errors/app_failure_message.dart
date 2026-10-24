@@ -30,6 +30,7 @@ extension AppFailureMessage on AppFailure {
       FeaturedLimitFailure() => l10n.errorFeaturedLimit,
       AccountPausedFailure() => l10n.errorAccountPaused,
       OnNotNowFailure() => l10n.errorOnNotNow,
+      CheckInFailure(:final problem) => l10n.checkInError(problem.name),
       FeaturedUnavailableFailure() => l10n.errorFeaturedUnavailable,
       LikeLimitFailure() => l10n.errorLikeLimit,
       SuperlikeLimitFailure() => l10n.errorSuperlikeLimit,

@@ -54,6 +54,7 @@ class EventInsightsScreen extends ConsumerWidget {
                   _Stat(value: data.goingDate, label: l10n.insightsGoingDate),
                   _Stat(value: data.goingCrew, label: l10n.insightsGoingCrew),
                   _Stat(value: data.crews, label: l10n.insightsCrews),
+                  _Stat(value: data.checkedIn, label: l10n.insightsCheckedIn),
                 ],
               ),
               SizedBox(height: spacing.lg),

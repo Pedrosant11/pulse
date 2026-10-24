@@ -1,16 +1,23 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:pulse/app/routes.dart';
+import 'package:pulse/core/errors/app_failure_message.dart';
 import 'package:pulse/core/extensions/context_extensions.dart';
 import 'package:pulse/core/widgets/glass_card.dart';
 import 'package:pulse/features/chat/presentation/widgets/chat_avatar.dart';
+import 'package:pulse/features/events/domain/check_in.dart';
 import 'package:pulse/features/events/domain/event.dart';
 import 'package:pulse/features/events/presentation/events_providers.dart';
+import 'package:pulse/features/profile/data/location_repository.dart';
 
-/// The party's night and the day after, for who is going:
-///   * from 6 h before until the end: "Tô ON" and who of my people is ON;
-///   * for 48 h after: "Veja quem estava lá" ("Depois da festa").
+/// The party's night and the day after:
+///   * from 1 h before until the end, for anyone: the check-in (GPS or the
+///     producer's QR), which also marks "Eu vou";
+///   * from 6 h before until the end, for who is going: "Tô ON" and who of
+///     my people is ON;
+///   * for 48 h after, for who went: "Veja quem estava lá".
 class EventNightSection extends ConsumerWidget {
   const new({required this.event, this.now, super.key});
 
@@ -23,17 +30,147 @@ class EventNightSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     if (event.status != EventStatus.approved) return const SizedBox.shrink();
     final going = ref.watch(isAttendingProvider(event.id)).value ?? false;
-    if (!going) return const SizedBox.shrink();
     final now = this.now ?? DateTime.now();
     final opensAt = event.startsAt.subtract(const Duration(hours: 6));
     final afterUntil = event.endsAt.add(const Duration(hours: 48));
-    if (!now.isBefore(opensAt) && now.isBefore(event.endsAt)) {
-      return _OnCard(event: event);
+    final checkIn = checkInOpen(
+      startsAt: event.startsAt,
+      endsAt: event.endsAt,
+      now: now,
+    );
+    final on = going && !now.isBefore(opensAt) && now.isBefore(event.endsAt);
+    final after =
+        going && !now.isBefore(event.endsAt) && now.isBefore(afterUntil);
+    final cards = [
+      if (checkIn) _CheckInCard(event: event),
+      if (on) _OnCard(event: event),
+      if (after) _AfterPartyCard(event: event),
+    ];
+    if (cards.isEmpty) return const SizedBox.shrink();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      spacing: context.spacing.sm,
+      children: cards,
+    );
+  }
+}
+
+class _CheckInCard extends ConsumerWidget {
+  const new({required this.event});
+
+  final EventDetail event;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final colors = context.colors;
+    final spacing = context.spacing;
+    final at = ref.watch(myCheckInProvider(event.id)).value;
+    final busy = ref.watch(checkInEditorProvider).isLoading;
+
+    if (at != null) {
+      return GlassCard(
+        borderGradient: colors.primaryGradient,
+        child: Row(
+          children: [
+            Icon(Icons.where_to_vote_rounded, color: colors.lime),
+            SizedBox(width: spacing.sm),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.checkInDone(
+                      DateFormat.Hm('pt_BR').format(at.toLocal()),
+                    ),
+                    style: context.textTheme.titleSmall,
+                  ),
+                  Text(
+                    l10n.checkInDoneHint,
+                    style: context.textTheme.bodySmall,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
     }
-    if (!now.isBefore(event.endsAt) && now.isBefore(afterUntil)) {
-      return _AfterPartyCard(event: event);
+
+    return GlassCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.where_to_vote_outlined, color: colors.lime),
+              SizedBox(width: spacing.sm),
+              Text(l10n.checkInTitle, style: context.textTheme.titleSmall),
+            ],
+          ),
+          SizedBox(height: spacing.xs),
+          Text(l10n.checkInHint, style: context.textTheme.bodySmall),
+          SizedBox(height: spacing.sm),
+          Row(
+            spacing: spacing.sm,
+            children: [
+              Expanded(
+                child: FilledButton.icon(
+                  onPressed: busy ? null : () => _byGps(context, ref),
+                  icon: busy
+                      ? const SizedBox.square(
+                          dimension: 16,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Icon(Icons.my_location_rounded),
+                  label: Text(l10n.checkInGps),
+                ),
+              ),
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: busy ? null : () => _byQr(context, ref),
+                  icon: const Icon(Icons.qr_code_scanner_rounded),
+                  label: Text(l10n.checkInScan),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _byGps(BuildContext context, WidgetRef ref) async {
+    final ok = await ref.read(checkInEditorProvider.notifier).byGps(event.id);
+    if (context.mounted) _report(context, ref, ok);
+  }
+
+  Future<void> _byQr(BuildContext context, WidgetRef ref) async {
+    final code = await context.push<String>(AppRoutes.checkInScan(event.id));
+    if (code == null || !context.mounted) return;
+    final ok = await ref
+        .read(checkInEditorProvider.notifier)
+        .byQr(event.id, code);
+    if (context.mounted) _report(context, ref, ok);
+  }
+
+  void _report(BuildContext context, WidgetRef ref, bool? ok) {
+    final l10n = context.l10n;
+    final String message;
+    if (ok ?? false) {
+      message = l10n.checkInSuccess;
+    } else {
+      final error = ref.read(checkInEditorProvider).error;
+      if (error == null) return;
+      message = switch (error) {
+        LocationUnavailable(reason: LocationFailureReason.serviceDisabled) =>
+          l10n.locationDisabled,
+        LocationUnavailable() => l10n.locationDenied,
+        _ => friendlyErrorMessage(error, l10n),
+      };
     }
-    return const SizedBox.shrink();
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
   }
 }
 

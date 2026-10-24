@@ -2116,6 +2116,108 @@ abstract class AppLocalizations {
   /// **'O \"Tô ON\" só funciona no dia de uma festa em que você marcou \"Eu vou\".'**
   String get errorOnNotNow;
 
+  /// No description provided for @checkInTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Check-in'**
+  String get checkInTitle;
+
+  /// No description provided for @checkInHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Prove que você está na festa: vale para suas conquistas e seu passaporte. A localização é usada só agora e não fica salva.'**
+  String get checkInHint;
+
+  /// No description provided for @checkInGps.
+  ///
+  /// In pt, this message translates to:
+  /// **'Tô aqui'**
+  String get checkInGps;
+
+  /// No description provided for @checkInScan.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ler QR'**
+  String get checkInScan;
+
+  /// No description provided for @checkInDone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Check-in feito às {time}'**
+  String checkInDone(String time);
+
+  /// No description provided for @checkInDoneHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Essa festa já conta para suas conquistas.'**
+  String get checkInDoneHint;
+
+  /// No description provided for @checkInSuccess.
+  ///
+  /// In pt, this message translates to:
+  /// **'Check-in feito! Essa festa conta para suas conquistas.'**
+  String get checkInSuccess;
+
+  /// No description provided for @checkInError.
+  ///
+  /// In pt, this message translates to:
+  /// **'{problem, select, closed{O check-in abre 1 h antes da festa e vai até o fim.} mocked{Não deu para confirmar sua localização. Desative apps de localização falsa ou use o QR da produção.} noVenue{Essa festa não tem o endereço no mapa. Use o QR da produção.} tooFar{Você parece estar longe da festa. Chegando lá, tente de novo ou use o QR da produção.} badCode{Código inválido ou vencido. Leia o QR de novo.} other{Não foi possível fazer o check-in.}}'**
+  String checkInError(String problem);
+
+  /// No description provided for @checkInScanTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ler QR de check-in'**
+  String get checkInScanTitle;
+
+  /// No description provided for @checkInScanHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aponte para o QR que a produção mostra na entrada.'**
+  String get checkInScanHint;
+
+  /// No description provided for @checkInScanWrong.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esse QR não é do check-in desta festa.'**
+  String get checkInScanWrong;
+
+  /// No description provided for @checkInCodeLabel.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ou digite o código'**
+  String get checkInCodeLabel;
+
+  /// No description provided for @checkInCodeSubmit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Confirmar'**
+  String get checkInCodeSubmit;
+
+  /// No description provided for @checkInQrTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'QR de check-in'**
+  String get checkInQrTitle;
+
+  /// No description provided for @checkInQrHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mostre na entrada. O código muda a cada minuto, então print não funciona.'**
+  String get checkInQrHint;
+
+  /// No description provided for @checkInQrClosed.
+  ///
+  /// In pt, this message translates to:
+  /// **'O check-in abre 1 h antes da festa e vai até o fim.'**
+  String get checkInQrClosed;
+
+  /// No description provided for @checkInQrCount.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =0{Ninguém fez check-in ainda} =1{1 pessoa fez check-in} other{{count} pessoas fizeram check-in}}'**
+  String checkInQrCount(int count);
+
   /// No description provided for @afterPartyTitle.
   ///
   /// In pt, this message translates to:
@@ -2209,7 +2311,7 @@ abstract class AppLocalizations {
   /// No description provided for @achievementGoal.
   ///
   /// In pt, this message translates to:
-  /// **'{key, select, firstParty{Vá à sua primeira festa pelo app} partyAnimal{Vá a 5 festas} nightLegend{Vá a 20 festas} loyalToTheHouse{Vá a 3 festas na mesma casa} neverAlone{Entre em 3 crews} explorer{Vá a festas em 3 cidades} eclectic{Vá a festas de 5 estilos diferentes} marathoner{Vá a 3 festas de 10 h ou mais} other{}}'**
+  /// **'{key, select, firstParty{Faça check-in na sua primeira festa} partyAnimal{Faça check-in em 5 festas} nightLegend{Faça check-in em 20 festas} loyalToTheHouse{Faça check-in em 3 festas na mesma casa} neverAlone{Entre em 3 crews} explorer{Faça check-in em festas de 3 cidades} eclectic{Faça check-in em festas de 5 estilos} marathoner{Faça check-in em 3 festas de 10 h ou mais} other{}}'**
   String achievementGoal(String key);
 
   /// No description provided for @passportTitle.
@@ -2221,7 +2323,7 @@ abstract class AppLocalizations {
   /// No description provided for @passportPrivate.
   ///
   /// In pt, this message translates to:
-  /// **'Só você vê. Contam as festas que já rolaram e em que você marcou \"Eu vou\".'**
+  /// **'Só você vê. Contam só as festas em que você fez check-in.'**
   String get passportPrivate;
 
   /// No description provided for @passportParties.
@@ -2251,7 +2353,7 @@ abstract class AppLocalizations {
   /// No description provided for @passportEmpty.
   ///
   /// In pt, this message translates to:
-  /// **'Seu passaporte começa na primeira festa. Marque \"Eu vou\" e bora!'**
+  /// **'Seu passaporte começa no seu primeiro check-in. Na noite da festa, abra o evento e toque em \"Tô aqui\".'**
   String get passportEmpty;
 
   /// No description provided for @passportSeeAll.
@@ -5631,6 +5733,18 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Crews formadas'**
   String get insightsCrews;
+
+  /// No description provided for @insightsCheckedIn.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fizeram check-in'**
+  String get insightsCheckedIn;
+
+  /// No description provided for @eventCheckInQr.
+  ///
+  /// In pt, this message translates to:
+  /// **'QR de check-in'**
+  String get eventCheckInQr;
 
   /// No description provided for @insightsTooFew.
   ///

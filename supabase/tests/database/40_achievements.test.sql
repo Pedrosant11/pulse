@@ -11,8 +11,8 @@ select gen_random_uuid(), 'Ritual ' || n, 'Galpão 23', 'São Paulo', 'SP',
   now() - make_interval(days => 20 + n), now() - make_interval(days => 20 + n) + interval '11 hours',
   '{techno,house}', 'approved', tests.uid(2), '00000000-0000-4000-c000-000000000001'
 from generate_series(1, 2) n;
-insert into public.event_attendance (event_id, user_id)
-select e.id, tests.uid(1) from public.events e where e.name like 'Ritual _';
+insert into public.event_checkins (event_id, user_id, method)
+select e.id, tests.uid(1), 'gps' from public.events e where e.name like 'Ritual _';
 set local session_replication_role = origin;
 
 select tests.login(1);
@@ -73,8 +73,8 @@ set local session_replication_role = replica;
 insert into public.events (id, name, venue_name, city, state, starts_at, ends_at, status, created_by)
 values (gen_random_uuid(), 'Antiga', 'Outra', 'Rio de Janeiro', 'RJ', now() - interval '60 days',
   now() - interval '59 days', 'approved', tests.uid(2));
-insert into public.event_attendance (event_id, user_id)
-select id, tests.uid(1) from public.events where name = 'Antiga';
+insert into public.event_checkins (event_id, user_id, method)
+select id, tests.uid(1), 'qr' from public.events where name = 'Antiga';
 set local session_replication_role = origin;
 select tests.login(1);
 select is(

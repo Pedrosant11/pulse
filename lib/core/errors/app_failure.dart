@@ -75,6 +75,11 @@ sealed class AppFailure implements Exception {
       ('P0001', 'featured_limit') => FeaturedLimitFailure(error),
       ('P0001', 'account_paused') => AccountPausedFailure(error),
       ('P0001', 'on_not_now') => OnNotNowFailure(error),
+      ('P0001', 'checkin_closed') => CheckInFailure(.closed, error),
+      ('P0001', 'checkin_mocked') => CheckInFailure(.mocked, error),
+      ('P0001', 'checkin_no_venue') => CheckInFailure(.noVenue, error),
+      ('P0001', 'checkin_too_far') => CheckInFailure(.tooFar, error),
+      ('P0001', 'checkin_bad_code') => CheckInFailure(.badCode, error),
       ('P0001', 'featured_unavailable') => FeaturedUnavailableFailure(error),
       // Casas (venues migration).
       ('P0001', 'venue_unavailable') => VenueUnavailableFailure(error),
@@ -285,4 +290,13 @@ final class VenueReviewNotAllowedFailure extends AppFailure {
 /// "Tô ON" only works on the night of a party the person is going to.
 final class OnNotNowFailure extends AppFailure {
   const new([super.cause]);
+}
+
+/// Check-in refused: off the party night, fake GPS, far away, wrong code.
+enum CheckInProblem { closed, mocked, noVenue, tooFar, badCode }
+
+final class CheckInFailure extends AppFailure {
+  const new(this.problem, [super.cause]);
+
+  final CheckInProblem problem;
 }

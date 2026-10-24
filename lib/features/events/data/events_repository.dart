@@ -6,6 +6,7 @@ import 'package:pulse/core/errors/app_failure.dart';
 import 'package:pulse/core/supabase/supabase_providers.dart';
 import 'package:pulse/core/utils/enum_json.dart';
 import 'package:pulse/core/utils/random_id.dart';
+import 'package:pulse/features/events/domain/check_in.dart';
 import 'package:pulse/features/events/domain/event.dart';
 import 'package:pulse/features/events/domain/event_import.dart';
 import 'package:pulse/features/events/domain/featured.dart';
@@ -148,6 +149,51 @@ class EventsRepository {
   Future<void> setOn(String eventId, {required bool on}) => guardFailures(
     () => _client.rpc<void>('set_on', params: {'p_event': eventId, 'p_on': on}),
   );
+
+  /// When I checked in at the party, or `null`.
+  Future<DateTime?> myCheckIn(String eventId) => guardFailures(() async {
+    final at = await _client.rpc<String?>(
+      'my_checkin',
+      params: {'p_event': eventId},
+    );
+    return at == null ? null : DateTime.parse(at);
+  });
+
+  /// The coordinates go only to this call; the server keeps just the time.
+  Future<void> checkInGps(
+    String eventId, {
+    required double lat,
+    required double lng,
+    required double accuracy,
+    required bool mocked,
+  }) => guardFailures(
+    () => _client.rpc<void>(
+      'check_in_gps',
+      params: {
+        'p_event': eventId,
+        'p_lat': lat,
+        'p_lng': lng,
+        'p_accuracy': accuracy,
+        'p_mocked': mocked,
+      },
+    ),
+  );
+
+  Future<void> checkInQr(String eventId, String code) => guardFailures(
+    () => _client.rpc<void>(
+      'check_in_qr',
+      params: {'p_event': eventId, 'p_code': code},
+    ),
+  );
+
+  /// For who runs the party: the QR code of this minute.
+  Future<CheckInCode> checkInCode(String eventId) => guardFailures(() async {
+    final json = await _client.rpc<Map<String, dynamic>>(
+      'checkin_code',
+      params: {'p_event': eventId},
+    );
+    return CheckInCode.fromJson(json);
+  });
 
   Future<List<OnPerson>> onPeople(String eventId) => guardFailures(() async {
     final rows = await _client.rpc<List<dynamic>>(

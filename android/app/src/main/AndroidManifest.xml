@@ -5,6 +5,11 @@
     <!-- City suggestion (SPEC 6.1): approximate location is enough; we only
          keep the city and ~1 km rounded coordinates. -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- Party check-in: one precise reading at the venue, only when the
+         person taps "Tô aqui". Never in the background, never stored. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- Photos and the producer's check-in QR. -->
+    <uses-permission android:name="android.permission.CAMERA"/>
     <!-- Voice messages in chats. -->
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <application

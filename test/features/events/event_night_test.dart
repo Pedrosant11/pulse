@@ -38,6 +38,7 @@ Widget _app(
   _FakeEvents repository, {
   bool going = true,
   bool on = false,
+  DateTime? checkedInAt,
   List<OnPerson> people = const [],
   EventSections? sections,
 }) => ProviderScope(
@@ -46,6 +47,7 @@ Widget _app(
     currentUserIdProvider.overrideWithValue('me'),
     isAttendingProvider('e1').overrideWith((ref) async => going),
     isOnProvider('e1').overrideWith((ref) async => on),
+    myCheckInProvider('e1').overrideWith((ref) async => checkedInAt),
     eventOnPeopleProvider('e1').overrideWith((ref) async => people),
     if (sections != null)
       eventSectionsProvider.overrideWith((ref) async => sections),
@@ -122,7 +124,7 @@ void main() {
     expect(find.byType(Switch), findsNothing);
   });
 
-  testWidgets('nothing for who is not going', (tester) async {
+  testWidgets('who is not going: only the check-in', (tester) async {
     await tester.pumpWidget(
       _app(
         EventNightSection(event: _event, now: _start),
@@ -132,6 +134,8 @@ void main() {
     );
     await settle(tester);
     expect(find.text('Tô ON hoje'), findsNothing);
+    // The check-in is for anyone at the party (it marks "Eu vou" too).
+    expect(find.text('Tô aqui'), findsOneWidget);
   });
 
   testWidgets('sections show only the rows with parties', (tester) async {

@@ -1190,6 +1190,83 @@ class AppLocalizationsPt extends AppLocalizations {
       'O \"Tô ON\" só funciona no dia de uma festa em que você marcou \"Eu vou\".';
 
   @override
+  String get checkInTitle => 'Check-in';
+
+  @override
+  String get checkInHint =>
+      'Prove que você está na festa: vale para suas conquistas e seu passaporte. A localização é usada só agora e não fica salva.';
+
+  @override
+  String get checkInGps => 'Tô aqui';
+
+  @override
+  String get checkInScan => 'Ler QR';
+
+  @override
+  String checkInDone(String time) {
+    return 'Check-in feito às $time';
+  }
+
+  @override
+  String get checkInDoneHint => 'Essa festa já conta para suas conquistas.';
+
+  @override
+  String get checkInSuccess =>
+      'Check-in feito! Essa festa conta para suas conquistas.';
+
+  @override
+  String checkInError(String problem) {
+    String _temp0 = intl.Intl.selectLogic(problem, {
+      'closed': 'O check-in abre 1 h antes da festa e vai até o fim.',
+      'mocked': 'Não deu para confirmar sua localização. Desative apps de localização falsa ou use o QR da produção.',
+      'noVenue': 'Essa festa não tem o endereço no mapa. Use o QR da produção.',
+      'tooFar': 'Você parece estar longe da festa. Chegando lá, tente de novo ou use o QR da produção.',
+      'badCode': 'Código inválido ou vencido. Leia o QR de novo.',
+      'other': 'Não foi possível fazer o check-in.',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get checkInScanTitle => 'Ler QR de check-in';
+
+  @override
+  String get checkInScanHint =>
+      'Aponte para o QR que a produção mostra na entrada.';
+
+  @override
+  String get checkInScanWrong => 'Esse QR não é do check-in desta festa.';
+
+  @override
+  String get checkInCodeLabel => 'Ou digite o código';
+
+  @override
+  String get checkInCodeSubmit => 'Confirmar';
+
+  @override
+  String get checkInQrTitle => 'QR de check-in';
+
+  @override
+  String get checkInQrHint =>
+      'Mostre na entrada. O código muda a cada minuto, então print não funciona.';
+
+  @override
+  String get checkInQrClosed =>
+      'O check-in abre 1 h antes da festa e vai até o fim.';
+
+  @override
+  String checkInQrCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pessoas fizeram check-in',
+      one: '1 pessoa fez check-in',
+      zero: 'Ninguém fez check-in ainda',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get afterPartyTitle => 'Depois da festa';
 
   @override
@@ -1259,14 +1336,14 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String achievementGoal(String key) {
     String _temp0 = intl.Intl.selectLogic(key, {
-      'firstParty': 'Vá à sua primeira festa pelo app',
-      'partyAnimal': 'Vá a 5 festas',
-      'nightLegend': 'Vá a 20 festas',
-      'loyalToTheHouse': 'Vá a 3 festas na mesma casa',
+      'firstParty': 'Faça check-in na sua primeira festa',
+      'partyAnimal': 'Faça check-in em 5 festas',
+      'nightLegend': 'Faça check-in em 20 festas',
+      'loyalToTheHouse': 'Faça check-in em 3 festas na mesma casa',
       'neverAlone': 'Entre em 3 crews',
-      'explorer': 'Vá a festas em 3 cidades',
-      'eclectic': 'Vá a festas de 5 estilos diferentes',
-      'marathoner': 'Vá a 3 festas de 10 h ou mais',
+      'explorer': 'Faça check-in em festas de 3 cidades',
+      'eclectic': 'Faça check-in em festas de 5 estilos',
+      'marathoner': 'Faça check-in em 3 festas de 10 h ou mais',
       'other': '',
     });
     return '$_temp0';
@@ -1277,7 +1354,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get passportPrivate =>
-      'Só você vê. Contam as festas que já rolaram e em que você marcou \"Eu vou\".';
+      'Só você vê. Contam só as festas em que você fez check-in.';
 
   @override
   String get passportParties => 'festas';
@@ -1293,7 +1370,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get passportEmpty =>
-      'Seu passaporte começa na primeira festa. Marque \"Eu vou\" e bora!';
+      'Seu passaporte começa no seu primeiro check-in. Na noite da festa, abra o evento e toque em \"Tô aqui\".';
 
   @override
   String passportSeeAll(int count) {
@@ -3345,6 +3422,12 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get insightsCrews => 'Crews formadas';
+
+  @override
+  String get insightsCheckedIn => 'Fizeram check-in';
+
+  @override
+  String get eventCheckInQr => 'QR de check-in';
 
   @override
   String get insightsTooFew =>

@@ -27,6 +27,7 @@ import 'package:pulse/features/discover/domain/discover_models.dart';
 import 'package:pulse/features/discover/presentation/discover_screen.dart';
 import 'package:pulse/features/discover/presentation/match_screen.dart';
 import 'package:pulse/features/events/presentation/admin_featured_screen.dart';
+import 'package:pulse/features/events/presentation/check_in_screens.dart';
 import 'package:pulse/features/events/presentation/event_detail_screen.dart';
 import 'package:pulse/features/events/presentation/event_form_screen.dart';
 import 'package:pulse/features/events/presentation/event_insights_screen.dart';
@@ -194,6 +195,20 @@ GoRouter router(Ref ref) {
                         path: 'insights',
                         parentNavigatorKey: _rootNavigatorKey,
                         builder: (_, state) => EventInsightsScreen(
+                          eventId: state.pathParameters['eventId']!,
+                        ),
+                      ),
+                      GoRoute(
+                        path: 'check-in/scan',
+                        parentNavigatorKey: _rootNavigatorKey,
+                        builder: (_, state) => CheckInScanScreen(
+                          eventId: state.pathParameters['eventId']!,
+                        ),
+                      ),
+                      GoRoute(
+                        path: 'check-in/qr',
+                        parentNavigatorKey: _rootNavigatorKey,
+                        builder: (_, state) => CheckInQrScreen(
                           eventId: state.pathParameters['eventId']!,
                         ),
                       ),

@@ -58,6 +58,9 @@ abstract final class AppRoutes {
   static String duplicateEvent(String eventId) =>
       Uri(path: newEvent, queryParameters: {'from': eventId}).toString();
   static String eventInsights(String eventId) => '$events/$eventId/insights';
+  static String checkInScan(String eventId) =>
+      '$events/$eventId/check-in/scan';
+  static String checkInQr(String eventId) => '$events/$eventId/check-in/qr';
   static String conversation(String conversationId) => '$chats/$conversationId';
   static String editProfileSection(String section) => '$editProfile/$section';
   static String crew(String crewId) => '$crews/$crewId';

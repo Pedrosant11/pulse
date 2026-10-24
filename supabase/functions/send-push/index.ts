@@ -100,6 +100,12 @@ function textFor(kind: string, data: Record<string, unknown>): PushText | null {
         title: `Você foi na ${data.event ?? "festa"}? 👀`,
         body: "Veja quem estava lá e dê match antes que acabe (48 h).",
       };
+    case "checkin_reminder":
+      return {
+        channel: "events",
+        title: `Chegou na ${data.event ?? "festa"}? 📍`,
+        body: "Faça o check-in para a festa contar nas suas conquistas.",
+      };
     case "venue_new":
       return {
         channel: "events",

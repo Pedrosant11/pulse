@@ -1604,6 +1604,231 @@ abstract class _$EventNightEditor extends $Notifier<AsyncValue<void>> {
   }
 }
 
+/// When I checked in at the party (`null`: not yet).
+
+@ProviderFor(myCheckIn)
+final myCheckInProvider = MyCheckInFamily._();
+
+/// When I checked in at the party (`null`: not yet).
+
+final class MyCheckInProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<DateTime?>,
+          DateTime?,
+          FutureOr<DateTime?>
+        >
+    with $FutureModifier<DateTime?>, $FutureProvider<DateTime?> {
+  /// When I checked in at the party (`null`: not yet).
+  MyCheckInProvider._({
+    required MyCheckInFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'myCheckInProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$myCheckInHash();
+
+  @override
+  String toString() {
+    return r'myCheckInProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<DateTime?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<DateTime?> create(Ref ref) {
+    final argument = this.argument as String;
+    return myCheckIn(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is MyCheckInProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$myCheckInHash() => r'2a7dc732764cf254f82212bffc484e43a19fc963';
+
+/// When I checked in at the party (`null`: not yet).
+
+final class MyCheckInFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<DateTime?>, String> {
+  MyCheckInFamily._()
+    : super(
+        retry: null,
+        name: r'myCheckInProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// When I checked in at the party (`null`: not yet).
+
+  MyCheckInProvider call(String eventId) =>
+      MyCheckInProvider._(argument: eventId, from: this);
+
+  @override
+  String toString() => r'myCheckInProvider';
+}
+
+/// The producer's QR of this minute.
+
+@ProviderFor(checkInCode)
+final checkInCodeProvider = CheckInCodeFamily._();
+
+/// The producer's QR of this minute.
+
+final class CheckInCodeProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<CheckInCode>,
+          CheckInCode,
+          FutureOr<CheckInCode>
+        >
+    with $FutureModifier<CheckInCode>, $FutureProvider<CheckInCode> {
+  /// The producer's QR of this minute.
+  CheckInCodeProvider._({
+    required CheckInCodeFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'checkInCodeProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$checkInCodeHash();
+
+  @override
+  String toString() {
+    return r'checkInCodeProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<CheckInCode> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<CheckInCode> create(Ref ref) {
+    final argument = this.argument as String;
+    return checkInCode(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is CheckInCodeProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$checkInCodeHash() => r'3945d6dfd61d38b4d44fecdc26965261fc3dd996';
+
+/// The producer's QR of this minute.
+
+final class CheckInCodeFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<CheckInCode>, String> {
+  CheckInCodeFamily._()
+    : super(
+        retry: null,
+        name: r'checkInCodeProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// The producer's QR of this minute.
+
+  CheckInCodeProvider call(String eventId) =>
+      CheckInCodeProvider._(argument: eventId, from: this);
+
+  @override
+  String toString() => r'checkInCodeProvider';
+}
+
+/// Check-in by GPS (one precise reading) or by the producer's QR.
+
+@ProviderFor(CheckInEditor)
+final checkInEditorProvider = CheckInEditorProvider._();
+
+/// Check-in by GPS (one precise reading) or by the producer's QR.
+final class CheckInEditorProvider
+    extends $NotifierProvider<CheckInEditor, AsyncValue<void>> {
+  /// Check-in by GPS (one precise reading) or by the producer's QR.
+  CheckInEditorProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'checkInEditorProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$checkInEditorHash();
+
+  @$internal
+  @override
+  CheckInEditor create() => CheckInEditor();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AsyncValue<void> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AsyncValue<void>>(value),
+    );
+  }
+}
+
+String _$checkInEditorHash() => r'315d161336e4e54dbba5fd8fc818938f076f6186';
+
+/// Check-in by GPS (one precise reading) or by the producer's QR.
+
+abstract class _$CheckInEditor extends $Notifier<AsyncValue<void>> {
+  AsyncValue<void> build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<void>, AsyncValue<void>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<void>, AsyncValue<void>>,
+              AsyncValue<void>,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
 @ProviderFor(MyEventsFilterState)
 final myEventsFilterStateProvider = MyEventsFilterStateProvider._();
 

@@ -208,6 +208,7 @@ class EventInsights {
     required this.ticketClicks,
     required this.crews,
     required this.breakdownsHidden,
+    this.checkedIn = 0,
     this.genres = const [],
     this.cities = const [],
     this.genders = const {},
@@ -222,6 +223,7 @@ class EventInsights {
       goingCrew: n(json['going_crew']),
       ticketClicks: n(json['ticket_clicks']),
       crews: n(json['crews']),
+      checkedIn: n(json['checked_in']),
       breakdownsHidden: json['breakdowns_hidden'] == true,
       genres: [
         for (final g in (json['genres'] as List?) ?? const [])
@@ -248,6 +250,9 @@ class EventInsights {
   }
 
   final int going;
+
+  /// Who checked in at the party (really went).
+  final int checkedIn;
   final int goingDate;
   final int goingCrew;
   final int ticketClicks;

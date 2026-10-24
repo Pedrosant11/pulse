@@ -25,9 +25,39 @@ Future<CityIndex> cityIndex(Ref ref) async {
   ]);
 }
 
-/// Approximate device position, only used to suggest the city.
+/// Device position, read once: approximate to suggest the city, precise
+/// for a party check-in. Never tracked in the background.
 class LocationRepository {
   Future<({double lat, double lng})> approximatePosition() async {
+    await _ensurePermission();
+    final position = await Geolocator.getCurrentPosition(
+      locationSettings: const LocationSettings(
+        accuracy: LocationAccuracy.low,
+        timeLimit: Duration(seconds: 15),
+      ),
+    );
+    return (lat: position.latitude, lng: position.longitude);
+  }
+
+  /// One precise reading for the check-in, with its accuracy (meters) and
+  /// whether it came from a mock location app.
+  Future<({double lat, double lng, double accuracy, bool mocked})>
+  precisePosition() async {
+    await _ensurePermission();
+    final position = await Geolocator.getCurrentPosition(
+      locationSettings: const LocationSettings(
+        timeLimit: Duration(seconds: 20),
+      ),
+    );
+    return (
+      lat: position.latitude,
+      lng: position.longitude,
+      accuracy: position.accuracy,
+      mocked: position.isMocked,
+    );
+  }
+
+  Future<void> _ensurePermission() async {
     if (!await Geolocator.isLocationServiceEnabled()) {
       throw const LocationUnavailable(LocationFailureReason.serviceDisabled);
     }
@@ -41,13 +71,6 @@ class LocationRepository {
     if (permission == LocationPermission.denied) {
       throw const LocationUnavailable(LocationFailureReason.denied);
     }
-    final position = await Geolocator.getCurrentPosition(
-      locationSettings: const LocationSettings(
-        accuracy: LocationAccuracy.low,
-        timeLimit: Duration(seconds: 15),
-      ),
-    );
-    return (lat: position.latitude, lng: position.longitude);
   }
 }
 
