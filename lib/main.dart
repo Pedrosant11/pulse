@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -6,6 +7,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:pulse/app/app.dart';
 import 'package:pulse/core/config/env.dart';
 import 'package:pulse/core/config/env_provider.dart';
+import 'package:pulse/core/errors/crash_reporter.dart';
 import 'package:pulse/features/ads/data/ad_network.dart';
 import 'package:pulse/features/notifications/data/push_messaging.dart';
 import 'package:pulse/features/plans/data/store_purchases.dart';
@@ -20,12 +22,14 @@ Future<void> main() async {
     url: env.supabaseUrl,
     publishableKey: env.supabasePublishableKey,
   );
+  final firebase = await _startFirebase();
+  if (firebase) await _startCrashReports();
 
   runApp(
     ProviderScope(
       overrides: [
         envProvider.overrideWithValue(env),
-        if (await _startFirebase())
+        if (firebase)
           pushMessagingProvider.overrideWithValue(FirebasePushMessaging()),
         if (await _startStore(env))
           storePurchasesProvider.overrideWithValue(const RevenueCatPurchases()),
@@ -37,9 +41,35 @@ Future<void> main() async {
   );
 }
 
-/// Firebase is used only for push notifications. On Android it reads
+/// Crash reports (Firebase Crashlytics), only in release builds: Flutter
+/// and platform errors, plus unexpected server errors (`guardFailures`).
+/// Tagged with the account's random id so a report can be traced to a
+/// support request; nothing else about the person.
+Future<void> _startCrashReports() async {
+  try {
+    final crashlytics = FirebaseCrashlytics.instance;
+    await crashlytics.setCrashlyticsCollectionEnabled(kReleaseMode);
+    if (!kReleaseMode) return;
+    const reporter = FirebaseCrashReporter();
+    crashReporter = reporter;
+    FlutterError.onError = crashlytics.recordFlutterFatalError;
+    PlatformDispatcher.instance.onError = (error, stackTrace) {
+      reporter.record(error, stackTrace, fatal: true);
+      return true;
+    };
+    final auth = Supabase.instance.client.auth;
+    reporter.setUser(auth.currentUser?.id);
+    auth.onAuthStateChange.listen(
+      (state) => reporter.setUser(state.session?.user.id),
+    );
+  } on Object catch (error) {
+    debugPrint('Crashlytics unavailable: $error');
+  }
+}
+
+/// Firebase: push notifications and crash reports. On Android it reads
 /// `google-services.json`; without a config (e.g. iOS for now) the app runs
-/// without notifications.
+/// without them.
 Future<bool> _startFirebase() async {
   try {
     await Firebase.initializeApp();

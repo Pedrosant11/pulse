@@ -1,15 +1,19 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:pulse/core/errors/crash_reporter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Runs [body] converting any thrown error into an [AppFailure] (keeping the
 /// original stack trace). Repositories wrap every remote call with it.
+/// Errors that map to nothing known are bugs: they go to the crash report.
 Future<T> guardFailures<T>(Future<T> Function() body) async {
   try {
     return await body();
   } on Object catch (error, stackTrace) {
-    Error.throwWithStackTrace(AppFailure.from(error), stackTrace);
+    final failure = AppFailure.from(error);
+    if (failure is UnknownFailure) crashReporter.record(error, stackTrace);
+    Error.throwWithStackTrace(failure, stackTrace);
   }
 }
 

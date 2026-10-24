@@ -14,7 +14,7 @@ import 'package:pulse/l10n/app_localizations.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class _FakeEvents implements EventsRepository {
-  _FakeEvents({this.refuse});
+  new({this.refuse});
 
   /// Server hint to refuse with (e.g. `checkin_too_far`).
   final String? refuse;
@@ -108,7 +108,7 @@ void main() {
       expect(open(_event.endsAt), isFalse);
     });
 
-    test('reads only this party\'s QR, or a typed code', () {
+    test("reads only this party's QR, or a typed code", () {
       final payload = checkInQrPayload('e1', 'A1B2C3D4');
       expect(parseCheckInQr(payload, 'e1'), 'A1B2C3D4');
       expect(parseCheckInQr(payload, 'e2'), isNull);

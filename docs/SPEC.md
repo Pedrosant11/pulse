@@ -405,7 +405,7 @@ Toda tela precisa de estados de carregando, vazio (com ilustração ou animaçã
     - **Feito**: registros de acesso por 6 meses (`private.access_logs`, `log_access()`), e-mails do Auth em português (`supabase/templates/`, guia em `docs/EMAILS.md`).
     - **Infra e lojas**: primeiro commit e repositório privado no GitHub; chave de assinatura Android (upload key) fora do git; plano Pro do Supabase; domínio próprio no Resend; colar os modelos de e-mail no painel; Site URL do Auth; teste fechado do Google Play (12 testadores, 14 dias); iOS depois (Mac ou build na nuvem + conta Apple).
     - **Documentos legais**: preencher os marcadores (seção 5.5), revisão por advogado, publicar o site (GitHub Pages) e cadastrar as URLs nas lojas.
-    - **Recomendado**: relatório de falhas (Sentry ou Crashlytics), checar disponibilidade do nome "Pulse" (lojas e INPI), eventos reais cadastrados e quem modera as denúncias.
+    - **Recomendado**: relatório de falhas (feito: Firebase Crashlytics, só em release), checar disponibilidade do nome "Pulse" (lojas e INPI), eventos reais cadastrados e quem modera as denúncias.
 11. **Depois do MVP** (não fazer agora): verificação por selfie (selfie na hora com um gesto sorteado, revisada manualmente pela moderação; o selo cai se a pessoa trocar as fotos), fotos no chat, monetização (seção 15).
 
 ---
@@ -473,3 +473,5 @@ Baseado na pesquisa de mercado (apps de relacionamento migrando para eventos pre
     - **QR da produção** (menu ⋮ do evento, para quem pode editar): código de 8 caracteres que muda a cada minuto (HMAC de um segredo por festa), então print em grupo não funciona; o app lê o QR ou aceita o código digitado. Serve para festas sem endereço no mapa ou com GPS ruim.
     - **Push** ~2 h depois do início para quem marcou "Eu vou" e não fez check-in (`checkin_reminder`).
     - O check-in também marca "Eu vou" e "Tô ON". **Conquistas e passaporte contam só festas com check-in.** O painel do evento mostra quantos fizeram check-in.
+
+14. **Relatório de falhas** (feito): Firebase Crashlytics, só em builds de release e no Android (iOS quando o Firebase for configurado lá). Vão as falhas do Flutter e da plataforma e os erros inesperados do servidor (`guardFailures` com `UnknownFailure`); falhas esperadas (regras do banco, rede) não. Identificado só pelo id aleatório da conta. Ver no console do Firebase, em Crashlytics.

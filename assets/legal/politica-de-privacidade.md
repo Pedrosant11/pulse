@@ -27,7 +27,7 @@ Use esse canal para qualquer pedido ou dúvida sobre seus dados.
 
 - **Localização aproximada:** guardamos apenas as coordenadas da **sua cidade** (precisão de cerca de 1 km), usadas para calcular distâncias. Se você permitir, o app consulta a localização do aparelho **uma vez**, para sugerir sua cidade. Na noite de uma festa, quando você toca em "Tô aqui", o app lê a localização precisa **uma vez** e a envia só para conferir se você está no local; guardamos apenas o horário do check-in, nunca as coordenadas. **Não guardamos sua localização exata e não acompanhamos seus deslocamentos.**
 - **Atividade:** última vez em que você usou o app, confirmação de leitura das mensagens e registros de moderação sobre a sua conta (advertências, suspensões e banimentos).
-- **Dados técnicos:** endereço IP, data e hora de acesso, tipo de dispositivo e sistema, e registros de erro.
+- **Dados técnicos:** endereço IP, data e hora de acesso, tipo de dispositivo e sistema, e registros de erro. Quando o app trava ou dá um erro inesperado, um relatório técnico vai para o Firebase Crashlytics (ver item 5).
 - **Compras:** plano assinado, validade, itens avulsos comprados e saldo (superlikes e boosts). O pagamento é feito na loja (Google Play ou App Store); **não recebemos dados do seu cartão**. Se você usar o modo viagem, guardamos a cidade escolhida. Na indicação, guardamos seu código e quem entrou com ele (para pagar as recompensas); quem indicou vê só a quantidade, nunca quem foi.
 - **Ingressos:** quando você toca em "Comprar ingresso", registramos que a pessoa da sua conta tocou naquele evento, para mostrar ao produtor quantas pessoas o Pulse levou até a venda (ele vê só o número). O ingresso é comprado no site da vendedora, com as regras dela.
 - **Anúncios:** o Pulse mostra anúncios na lista de eventos e no Descobrir, sempre com o selo "Patrocinado". Nos anúncios próprios (festas e parceiros), registramos que sua conta viu ou tocou o anúncio, uma vez por dia, só para contar visualizações e toques; o anunciante vê apenas os totais. Quando não há anúncio próprio, aparecem anúncios do **Google (AdMob)**, que usa o identificador de publicidade do aparelho, endereço IP e dados técnicos para escolher, entregar e medir os anúncios. Você pode redefinir ou desativar o identificador de publicidade nas configurações do celular, e o app pede seu consentimento quando a lei exigir.
@@ -73,6 +73,7 @@ A ordem em que os perfis aparecem é definida automaticamente, considerando even
 | Supabase | Banco de dados, autenticação, armazenamento de fotos e funções do servidor | Todos os dados da conta | Brasil (São Paulo) |
 | Resend | Envio de e-mails de confirmação e recuperação de senha | E-mail e conteúdo da mensagem | Estados Unidos |
 | Google (Firebase Cloud Messaging) | Entrega das notificações no celular | Identificador de notificação do aparelho e um texto genérico (sem nomes nem conteúdo das conversas) | Estados Unidos |
+| Google (Firebase Crashlytics) | Relatórios de falhas do app, para corrigir erros | Descrição técnica do erro, modelo e sistema do aparelho, versão do app e o identificador aleatório da sua conta (sem nome, e-mail, fotos, mensagens ou dados do perfil) | Estados Unidos |
 | RevenueCat | Confirmação das compras e assinaturas feitas nas lojas | Identificador da conta no Pulse, produtos comprados, datas e status da assinatura (sem dados de cartão) | Estados Unidos |
 | Google (AdMob) | Anúncios quando não há anúncio próprio | Identificador de publicidade do aparelho, endereço IP, dados técnicos e interações com o anúncio (sem nome, fotos, mensagens ou dados do perfil) | Estados Unidos |
 | OpenFreeMap | Imagens do mapa de eventos | Endereço IP e área do mapa visualizada | Europa |
@@ -86,7 +87,7 @@ Também podemos compartilhar dados com **autoridades públicas**, quando houver 
 
 ### Transferência internacional
 
-Os dados principais ficam no Brasil. Alguns fornecedores acima (Resend, Google, incluindo o AdMob, RevenueCat, OpenFreeMap e Photon) estão fora do país. Essas transferências são necessárias para executar o serviço que você contratou (art. 33, IX, combinado com o art. 7º, V, da LGPD) e envolvem apenas os dados indicados na tabela.
+Os dados principais ficam no Brasil. Alguns fornecedores acima (Resend, Google, incluindo o AdMob e o Crashlytics, RevenueCat, OpenFreeMap e Photon) estão fora do país. Essas transferências são necessárias para executar o serviço que você contratou (art. 33, IX, combinado com o art. 7º, V, da LGPD) e envolvem apenas os dados indicados na tabela.
 
 ## 6. Por quanto tempo guardamos
 
@@ -101,6 +102,7 @@ Os dados principais ficam no Brasil. Alguns fornecedores acima (Resend, Google, 
 | Registros de acesso (IP, data e hora) | **6 meses**, conforme o art. 15 do Marco Civil da Internet. |
 | Registros de compras (produto, data e identificador da conta) | **5 anos** após a compra, para atender o Código de Defesa do Consumidor e obrigações fiscais, mesmo após a exclusão da conta. |
 | Toques em "Comprar ingresso" | Vinculados à sua conta por **90 dias**; depois fica só a contagem, sem identificar ninguém. |
+| Relatórios de falhas (Crashlytics) | **90 dias**, apagados automaticamente pelo Google. |
 | Selfie de verificação | **Apagada logo depois da análise.** O resultado (aprovado ou não, data e motivo) fica enquanto a conta existir. |
 | Cópias de segurança (backups) | Os dados excluídos podem permanecer em backups por até **[PRAZO DE BACKUP] dias**, até serem sobrescritos. |
 
