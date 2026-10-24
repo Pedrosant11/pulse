@@ -1603,3 +1603,56 @@ abstract class _$EventNightEditor extends $Notifier<AsyncValue<void>> {
     return element.handleCreate(ref, build);
   }
 }
+
+@ProviderFor(MyEventsFilterState)
+final myEventsFilterStateProvider = MyEventsFilterStateProvider._();
+
+final class MyEventsFilterStateProvider
+    extends $NotifierProvider<MyEventsFilterState, MyEventsFilter> {
+  MyEventsFilterStateProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'myEventsFilterStateProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$myEventsFilterStateHash();
+
+  @$internal
+  @override
+  MyEventsFilterState create() => MyEventsFilterState();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(MyEventsFilter value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<MyEventsFilter>(value),
+    );
+  }
+}
+
+String _$myEventsFilterStateHash() =>
+    r'36cebb8af3af4d12cf02dfa64077cf86f63d57c6';
+
+abstract class _$MyEventsFilterState extends $Notifier<MyEventsFilter> {
+  MyEventsFilter build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<MyEventsFilter, MyEventsFilter>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<MyEventsFilter, MyEventsFilter>,
+              MyEventsFilter,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}

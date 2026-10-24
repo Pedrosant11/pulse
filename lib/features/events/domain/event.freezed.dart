@@ -3300,7 +3300,8 @@ as int,
 /// @nodoc
 mixin _$EventSections {
 
- List<SectionEvent> get trending; List<SectionEvent> get thisWeek; List<SectionEvent> get followedVenues;
+/// Paid highlights near the person, in the daily rotation.
+ List<SectionEvent> get featured; List<SectionEvent> get trending; List<SectionEvent> get thisWeek; List<SectionEvent> get followedVenues;
 /// Create a copy of EventSections
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -3314,20 +3315,20 @@ $EventSectionsCopyWith<EventSections> get copyWith => _$EventSectionsCopyWithImp
 @override
 bool operator ==(Object other) {
   final _this = this as EventSections;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is EventSections&&const DeepCollectionEquality().equals(other.trending, _this.trending)&&const DeepCollectionEquality().equals(other.thisWeek, _this.thisWeek)&&const DeepCollectionEquality().equals(other.followedVenues, _this.followedVenues));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is EventSections&&const DeepCollectionEquality().equals(other.featured, _this.featured)&&const DeepCollectionEquality().equals(other.trending, _this.trending)&&const DeepCollectionEquality().equals(other.thisWeek, _this.thisWeek)&&const DeepCollectionEquality().equals(other.followedVenues, _this.followedVenues));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as EventSections;
-  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.trending),const DeepCollectionEquality().hash(_this.thisWeek),const DeepCollectionEquality().hash(_this.followedVenues));
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.featured),const DeepCollectionEquality().hash(_this.trending),const DeepCollectionEquality().hash(_this.thisWeek),const DeepCollectionEquality().hash(_this.followedVenues));
 }
 
 @override
 String toString() {
   final _this = this as EventSections;
-  return 'EventSections(trending: ${_this.trending}, thisWeek: ${_this.thisWeek}, followedVenues: ${_this.followedVenues})';
+  return 'EventSections(featured: ${_this.featured}, trending: ${_this.trending}, thisWeek: ${_this.thisWeek}, followedVenues: ${_this.followedVenues})';
 }
 
 
@@ -3338,7 +3339,7 @@ abstract mixin class $EventSectionsCopyWith<$Res>  {
   factory $EventSectionsCopyWith(EventSections value, $Res Function(EventSections) _then) = _$EventSectionsCopyWithImpl;
 @useResult
 $Res call({
- List<SectionEvent> trending, List<SectionEvent> thisWeek, List<SectionEvent> followedVenues
+ List<SectionEvent> featured, List<SectionEvent> trending, List<SectionEvent> thisWeek, List<SectionEvent> followedVenues
 });
 
 
@@ -3355,9 +3356,10 @@ class _$EventSectionsCopyWithImpl<$Res>
 
 /// Create a copy of EventSections
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? trending = null,Object? thisWeek = null,Object? followedVenues = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? featured = null,Object? trending = null,Object? thisWeek = null,Object? followedVenues = null,}) {
   return _then(EventSections(
-trending: null == trending ? _self.trending : trending // ignore: cast_nullable_to_non_nullable
+featured: null == featured ? _self.featured : featured // ignore: cast_nullable_to_non_nullable
+as List<SectionEvent>,trending: null == trending ? _self.trending : trending // ignore: cast_nullable_to_non_nullable
 as List<SectionEvent>,thisWeek: null == thisWeek ? _self.thisWeek : thisWeek // ignore: cast_nullable_to_non_nullable
 as List<SectionEvent>,followedVenues: null == followedVenues ? _self.followedVenues : followedVenues // ignore: cast_nullable_to_non_nullable
 as List<SectionEvent>,
@@ -3445,10 +3447,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<SectionEvent> trending,  List<SectionEvent> thisWeek,  List<SectionEvent> followedVenues)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<SectionEvent> featured,  List<SectionEvent> trending,  List<SectionEvent> thisWeek,  List<SectionEvent> followedVenues)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _EventSections() when $default != null:
-return $default(_that.trending,_that.thisWeek,_that.followedVenues);case _:
+return $default(_that.featured,_that.trending,_that.thisWeek,_that.followedVenues);case _:
   return orElse();
 
 }
@@ -3466,10 +3468,10 @@ return $default(_that.trending,_that.thisWeek,_that.followedVenues);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<SectionEvent> trending,  List<SectionEvent> thisWeek,  List<SectionEvent> followedVenues)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<SectionEvent> featured,  List<SectionEvent> trending,  List<SectionEvent> thisWeek,  List<SectionEvent> followedVenues)  $default,) {final _that = this;
 switch (_that) {
 case _EventSections():
-return $default(_that.trending,_that.thisWeek,_that.followedVenues);case _:
+return $default(_that.featured,_that.trending,_that.thisWeek,_that.followedVenues);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -3486,10 +3488,10 @@ return $default(_that.trending,_that.thisWeek,_that.followedVenues);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<SectionEvent> trending,  List<SectionEvent> thisWeek,  List<SectionEvent> followedVenues)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<SectionEvent> featured,  List<SectionEvent> trending,  List<SectionEvent> thisWeek,  List<SectionEvent> followedVenues)?  $default,) {final _that = this;
 switch (_that) {
 case _EventSections() when $default != null:
-return $default(_that.trending,_that.thisWeek,_that.followedVenues);case _:
+return $default(_that.featured,_that.trending,_that.thisWeek,_that.followedVenues);case _:
   return null;
 
 }
@@ -3501,8 +3503,17 @@ return $default(_that.trending,_that.thisWeek,_that.followedVenues);case _:
 @JsonSerializable()
 
 class _EventSections extends EventSections {
-  const _EventSections({ List<SectionEvent> trending = const [],  List<SectionEvent> thisWeek = const [],  List<SectionEvent> followedVenues = const []}): _trending = trending,_thisWeek = thisWeek,_followedVenues = followedVenues,super._();
+  const _EventSections({ List<SectionEvent> featured = const [],  List<SectionEvent> trending = const [],  List<SectionEvent> thisWeek = const [],  List<SectionEvent> followedVenues = const []}): _featured = featured,_trending = trending,_thisWeek = thisWeek,_followedVenues = followedVenues,super._();
   factory _EventSections.fromJson(Map<String, dynamic> json) => _$EventSectionsFromJson(json);
+
+/// Paid highlights near the person, in the daily rotation.
+ final  List<SectionEvent> _featured;
+/// Paid highlights near the person, in the daily rotation.
+@override@JsonKey() List<SectionEvent> get featured {
+  if (_featured is EqualUnmodifiableListView) return _featured;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_featured);
+}
 
  final  List<SectionEvent> _trending;
 @override@JsonKey() List<SectionEvent> get trending {
@@ -3539,18 +3550,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _EventSections&&const DeepCollectionEquality().equals(other.trending, _trending)&&const DeepCollectionEquality().equals(other.thisWeek, _thisWeek)&&const DeepCollectionEquality().equals(other.followedVenues, _followedVenues));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _EventSections&&const DeepCollectionEquality().equals(other.featured, _featured)&&const DeepCollectionEquality().equals(other.trending, _trending)&&const DeepCollectionEquality().equals(other.thisWeek, _thisWeek)&&const DeepCollectionEquality().equals(other.followedVenues, _followedVenues));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_trending),const DeepCollectionEquality().hash(_thisWeek),const DeepCollectionEquality().hash(_followedVenues));
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_featured),const DeepCollectionEquality().hash(_trending),const DeepCollectionEquality().hash(_thisWeek),const DeepCollectionEquality().hash(_followedVenues));
 }
 
 @override
 String toString() {
-    return 'EventSections(trending: $trending, thisWeek: $thisWeek, followedVenues: $followedVenues)';
+    return 'EventSections(featured: $featured, trending: $trending, thisWeek: $thisWeek, followedVenues: $followedVenues)';
 }
 
 
@@ -3561,7 +3572,7 @@ abstract mixin class _$EventSectionsCopyWith<$Res> implements $EventSectionsCopy
   factory _$EventSectionsCopyWith(_EventSections value, $Res Function(_EventSections) _then) = __$EventSectionsCopyWithImpl;
 @override @useResult
 $Res call({
- List<SectionEvent> trending, List<SectionEvent> thisWeek, List<SectionEvent> followedVenues
+ List<SectionEvent> featured, List<SectionEvent> trending, List<SectionEvent> thisWeek, List<SectionEvent> followedVenues
 });
 
 
@@ -3578,9 +3589,10 @@ class __$EventSectionsCopyWithImpl<$Res>
 
 /// Create a copy of EventSections
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? trending = null,Object? thisWeek = null,Object? followedVenues = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? featured = null,Object? trending = null,Object? thisWeek = null,Object? followedVenues = null,}) {
   return _then(_EventSections(
-trending: null == trending ? _self._trending : trending // ignore: cast_nullable_to_non_nullable
+featured: null == featured ? _self._featured : featured // ignore: cast_nullable_to_non_nullable
+as List<SectionEvent>,trending: null == trending ? _self._trending : trending // ignore: cast_nullable_to_non_nullable
 as List<SectionEvent>,thisWeek: null == thisWeek ? _self._thisWeek : thisWeek // ignore: cast_nullable_to_non_nullable
 as List<SectionEvent>,followedVenues: null == followedVenues ? _self._followedVenues : followedVenues // ignore: cast_nullable_to_non_nullable
 as List<SectionEvent>,

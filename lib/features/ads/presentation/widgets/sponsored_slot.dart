@@ -21,6 +21,7 @@ class SponsoredSlot extends ConsumerWidget {
     required this.placement,
     required this.index,
     this.expand = false,
+    this.compact = false,
     this.onUnavailable,
     super.key,
   });
@@ -28,6 +29,9 @@ class SponsoredSlot extends ConsumerWidget {
   final AdPlacement placement;
   final int index;
   final bool expand;
+
+  /// Small card for the carousels (Google's small template).
+  final bool compact;
 
   /// Called when nothing could be shown (no own ad and no Google fill).
   final VoidCallback? onUnavailable;
@@ -39,13 +43,19 @@ class SponsoredSlot extends ConsumerWidget {
     final own = config.adsFor(placement);
     if (own.isNotEmpty) {
       final ad = own[index % own.length];
-      return HouseAdView(key: ValueKey(ad.id), ad: ad, expand: expand);
+      return HouseAdView(
+        key: ValueKey(ad.id),
+        ad: ad,
+        expand: expand,
+        compact: compact,
+      );
     }
     final network = ref.watch(adNetworkProvider);
     if (network.isAvailable) {
       return _NativeAdView(
         network: network,
         expand: expand,
+        compact: compact,
         onUnavailable: onUnavailable,
       );
     }
@@ -84,10 +94,16 @@ class SponsoredTag extends StatelessWidget {
 
 /// An own ad (party or partner). Counts a view when shown and a tap.
 class HouseAdView extends ConsumerStatefulWidget {
-  const new({required this.ad, this.expand = false, super.key});
+  const new({
+    required this.ad,
+    this.expand = false,
+    this.compact = false,
+    super.key,
+  });
 
   final HouseAd ad;
   final bool expand;
+  final bool compact;
 
   @override
   ConsumerState<HouseAdView> createState() => _HouseAdViewState();
@@ -148,6 +164,59 @@ class _HouseAdViewState extends ConsumerState<HouseAdView> {
         FilledButton(onPressed: _open, child: Text(ad.cta ?? l10n.adLearnMore)),
       ],
     );
+
+    // Carousels: image on top, title and the call to action below.
+    if (widget.compact && !widget.expand) {
+      return Material(
+        color: colors.surface,
+        borderRadius: BorderRadius.circular(radius),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: _open,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(
+                height: 100,
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    image,
+                    Positioned(
+                      top: spacing.xs,
+                      left: spacing.xs,
+                      child: const SponsoredTag(),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(spacing.sm),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      ad.title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: context.textTheme.titleSmall,
+                    ),
+                    Text(
+                      ad.cta ?? l10n.adLearnMore,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: context.textTheme.labelMedium?.copyWith(
+                        color: colors.magenta,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
 
     if (widget.expand) {
       return GestureDetector(
@@ -220,10 +289,16 @@ class _HouseAdViewState extends ConsumerState<HouseAdView> {
 
 /// A Google native ad in the app's colors.
 class _NativeAdView extends StatefulWidget {
-  const new({required this.network, required this.expand, this.onUnavailable});
+  const new({
+    required this.network,
+    required this.expand,
+    this.compact = false,
+    this.onUnavailable,
+  });
 
   final AdNetwork network;
   final bool expand;
+  final bool compact;
   final VoidCallback? onUnavailable;
 
   @override
@@ -241,7 +316,7 @@ class _NativeAdViewState extends State<_NativeAdView> {
     _requested = true;
     final colors = context.colors;
     final style = NativeTemplateStyle(
-      templateType: TemplateType.medium,
+      templateType: widget.compact ? TemplateType.small : TemplateType.medium,
       mainBackgroundColor: colors.surface,
       cornerRadius: context.radii.lg,
       callToActionTextStyle: NativeTemplateTextStyle(
@@ -282,6 +357,18 @@ class _NativeAdViewState extends State<_NativeAdView> {
     final ad = _ad;
     if (ad == null) return const SizedBox.shrink();
     final view = AdWidget(ad: ad);
+    // Carousels: the small template, centered in the card.
+    if (widget.compact) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SponsoredTag(),
+          SizedBox(height: context.spacing.xxs),
+          SizedBox(height: 110, child: view),
+        ],
+      );
+    }
     final content = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: widget.expand ? MainAxisSize.max : MainAxisSize.min,

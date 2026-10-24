@@ -2194,6 +2194,42 @@ abstract class AppLocalizations {
   /// **'Salvo'**
   String get eventSavedPill;
 
+  /// No description provided for @sectionFeatured.
+  ///
+  /// In pt, this message translates to:
+  /// **'Em destaque'**
+  String get sectionFeatured;
+
+  /// No description provided for @mineAll.
+  ///
+  /// In pt, this message translates to:
+  /// **'Todos'**
+  String get mineAll;
+
+  /// No description provided for @mineGoing.
+  ///
+  /// In pt, this message translates to:
+  /// **'Vou'**
+  String get mineGoing;
+
+  /// No description provided for @mineSaved.
+  ///
+  /// In pt, this message translates to:
+  /// **'Salvos'**
+  String get mineSaved;
+
+  /// No description provided for @mineEmptySaved.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma festa salva ainda. Toque no marcador de uma festa para guardar.'**
+  String get mineEmptySaved;
+
+  /// No description provided for @mineEmptyGoing.
+  ///
+  /// In pt, this message translates to:
+  /// **'Você ainda não marcou \"Eu vou\" em nenhuma festa.'**
+  String get mineEmptyGoing;
+
   /// No description provided for @sectionTrending.
   ///
   /// In pt, this message translates to:

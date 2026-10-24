@@ -346,3 +346,16 @@ class EventNightEditor extends _$EventNightEditor {
         return true;
       });
 }
+
+/// "Meus eventos": everything, only "Eu vou" or only saved.
+enum MyEventsFilter { all, going, saved }
+
+@riverpod
+class MyEventsFilterState extends _$MyEventsFilterState {
+  @override
+  MyEventsFilter build() => MyEventsFilter.all;
+
+  // A method reads better at call sites than a setter on a notifier.
+  // ignore: use_setters_to_change_properties
+  void select(MyEventsFilter filter) => state = filter;
+}

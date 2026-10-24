@@ -1236,6 +1236,26 @@ class AppLocalizationsPt extends AppLocalizations {
   String get eventSavedPill => 'Salvo';
 
   @override
+  String get sectionFeatured => 'Em destaque';
+
+  @override
+  String get mineAll => 'Todos';
+
+  @override
+  String get mineGoing => 'Vou';
+
+  @override
+  String get mineSaved => 'Salvos';
+
+  @override
+  String get mineEmptySaved =>
+      'Nenhuma festa salva ainda. Toque no marcador de uma festa para guardar.';
+
+  @override
+  String get mineEmptyGoing =>
+      'Você ainda não marcou \"Eu vou\" em nenhuma festa.';
+
+  @override
   String get sectionTrending => 'Em alta';
 
   @override

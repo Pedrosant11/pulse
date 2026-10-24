@@ -9,6 +9,7 @@ import 'package:pulse/core/extensions/context_extensions.dart';
 import 'package:pulse/core/widgets/neon_button.dart';
 import 'package:pulse/core/widgets/state_views.dart';
 import 'package:pulse/features/ads/domain/ad_models.dart';
+import 'package:pulse/features/ads/domain/with_ads.dart';
 import 'package:pulse/features/ads/presentation/ads_providers.dart';
 import 'package:pulse/features/ads/presentation/widgets/sponsored_slot.dart';
 import 'package:pulse/features/events/data/events_repository.dart';
@@ -125,16 +126,7 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
 List<({EventListEntry? event, int? ad})> eventsWithAds(
   List<EventListEntry> events,
   int every,
-) {
-  final items = <({EventListEntry? event, int? ad})>[];
-  var ads = 0;
-  for (final (i, event) in events.indexed) {
-    items.add((event: event, ad: null));
-    if ((i + 1) % every == 0) items.add((event: null, ad: ads++));
-  }
-  if (ads == 0) items.add((event: null, ad: 0));
-  return items;
-}
+) => [for (final (:item, :ad) in withAds(events, every)) (event: item, ad: ad)];
 
 class _EventList extends ConsumerWidget {
   const new({required this.scope});
@@ -147,6 +139,7 @@ class _EventList extends ConsumerWidget {
     final spacing = context.spacing;
     final events = ref.watch(eventListProvider(scope));
     final filters = ref.watch(eventListFiltersProvider);
+    final mine = ref.watch(myEventsFilterStateProvider);
     final nearby = scope == EventListScope.nearby;
     if (nearby && ref.watch(eventsViewProvider) == EventsViewMode.map) {
       return const Column(
@@ -162,7 +155,7 @@ class _EventList extends ConsumerWidget {
     // Ads only in "Próximos".
     final adsEvery =
         ref.watch(adsConfigProvider).value?.every(AdPlacement.events) ?? 0;
-    final withAds =
+    final showAds =
         nearby &&
         adsEvery > 0 &&
         ref.watch(adsReadyProvider(AdPlacement.events));
@@ -202,6 +195,7 @@ class _EventList extends ConsumerWidget {
           // plain list (no search or filters).
           if (nearby && filters == const EventFilters())
             const SliverToBoxAdapter(child: EventSectionsView()),
+          if (!nearby) const SliverToBoxAdapter(child: _MineFilters()),
           ...events.when(
             loading: () => [const SliverToBoxAdapter(child: LoadingView())],
             error: (error, _) => [
@@ -210,13 +204,35 @@ class _EventList extends ConsumerWidget {
                 child: ErrorView(error: error, onRetry: refresh),
               ),
             ],
-            data: (events) {
+            data: (all) {
+              // "Meus eventos": Todos / Vou / Salvos.
+              final events = nearby
+                  ? all
+                  : [
+                      for (final e in all)
+                        if (switch (mine) {
+                          MyEventsFilter.all => true,
+                          MyEventsFilter.going => e.isGoing,
+                          MyEventsFilter.saved => e.isSaved,
+                        })
+                          e,
+                    ];
               if (events.isEmpty) {
                 return [
-                  SliverFillRemaining(hasScrollBody: false, child: empty()),
+                  SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: all.isNotEmpty
+                        ? EmptyView(
+                            icon: Icons.filter_list_off_rounded,
+                            title: mine == MyEventsFilter.saved
+                                ? l10n.mineEmptySaved
+                                : l10n.mineEmptyGoing,
+                          )
+                        : empty(),
+                  ),
                 ];
               }
-              final items = withAds
+              final items = showAds
                   ? eventsWithAds(events, adsEvery)
                   : [for (final e in events) (event: e, ad: null)];
               return [
@@ -433,6 +449,41 @@ class _NearbyFiltersState extends ConsumerState<_NearbyFilters> {
               },
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+/// "Meus eventos": Todos · Vou · Salvos.
+class _MineFilters extends ConsumerWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final selected = ref.watch(myEventsFilterStateProvider);
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+        context.spacing.md,
+        context.spacing.sm,
+        context.spacing.md,
+        0,
+      ),
+      child: Wrap(
+        spacing: context.spacing.xs,
+        children: [
+          for (final (filter, label) in [
+            (MyEventsFilter.all, l10n.mineAll),
+            (MyEventsFilter.going, l10n.mineGoing),
+            (MyEventsFilter.saved, l10n.mineSaved),
+          ])
+            ChoiceChip(
+              label: Text(label),
+              selected: selected == filter,
+              onSelected: (_) =>
+                  ref.read(myEventsFilterStateProvider.notifier).select(filter),
+            ),
         ],
       ),
     );

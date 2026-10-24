@@ -331,6 +331,11 @@ Map<String, dynamic> _$SectionEventToJson(_SectionEvent instance) =>
 
 _EventSections _$EventSectionsFromJson(Map<String, dynamic> json) =>
     _EventSections(
+      featured:
+          (json['featured'] as List<dynamic>?)
+              ?.map((e) => SectionEvent.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
       trending:
           (json['trending'] as List<dynamic>?)
               ?.map((e) => SectionEvent.fromJson(e as Map<String, dynamic>))
@@ -351,6 +356,7 @@ _EventSections _$EventSectionsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$EventSectionsToJson(
   _EventSections instance,
 ) => <String, dynamic>{
+  'featured': instance.featured.map((e) => e.toJson()).toList(),
   'trending': instance.trending.map((e) => e.toJson()).toList(),
   'this_week': instance.thisWeek.map((e) => e.toJson()).toList(),
   'followed_venues': instance.followedVenues.map((e) => e.toJson()).toList(),

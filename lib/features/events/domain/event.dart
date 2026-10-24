@@ -299,6 +299,8 @@ abstract class SectionEvent with _$SectionEvent {
 @freezed
 abstract class EventSections with _$EventSections {
   const factory({
+    /// Paid highlights near the person, in the daily rotation.
+    @Default([]) List<SectionEvent> featured,
     @Default([]) List<SectionEvent> trending,
     @Default([]) List<SectionEvent> thisWeek,
     @Default([]) List<SectionEvent> followedVenues,
@@ -309,5 +311,8 @@ abstract class EventSections with _$EventSections {
   const new _();
 
   bool get isEmpty =>
-      trending.isEmpty && thisWeek.isEmpty && followedVenues.isEmpty;
+      featured.isEmpty &&
+      trending.isEmpty &&
+      thisWeek.isEmpty &&
+      followedVenues.isEmpty;
 }

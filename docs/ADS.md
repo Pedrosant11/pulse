@@ -59,7 +59,7 @@ Separado dos anúncios. O **produtor** destaca a própria festa na tela do event
 - Preços: `update public.featured_prices set price_cents = 9900 where days = 3;` (o preço na loja muda no Play Console / App Store Connect).
 - O app não mostra link nem chave Pix: pelas regras das lojas, o pagamento por fora é combinado fora do app.
 
-- O evento vai para o **topo de "Próximos"**, com o selo "Destaque" e um pin maior no mapa. Os anúncios continuam no meio da lista.
+- O evento aparece **primeiro no carrossel "Em destaque"**, no topo de "Próximos" (cards grandes, acima de "Em alta" e "Esta semana"), e também no **topo da lista**, com o selo "Destaque" e um pin maior no mapa. Os anúncios continuam no meio da lista e nos carrosséis (um a cada 6 festas, ou um no fim quando há menos).
 - Com vários destaques ao mesmo tempo, todos ficam no topo em **rodízio diário**: cada pessoa vê uma ordem diferente, que muda todo dia. Assim cada produtor fica em primeiro para uma parte do público.
 - **Limite:** no máximo 5 destaques valendo ao mesmo tempo por região (50 km do evento, ou o mesmo estado). Ao tentar o sexto, o app avisa. Para mudar:
 
