@@ -1236,6 +1236,77 @@ class AppLocalizationsPt extends AppLocalizations {
   String get eventSavedPill => 'Salvo';
 
   @override
+  String achievementsTitle(int unlocked, int total) {
+    return 'Conquistas ($unlocked/$total)';
+  }
+
+  @override
+  String achievementName(String key) {
+    String _temp0 = intl.Intl.selectLogic(key, {
+      'firstParty': 'Primeira festa',
+      'partyAnimal': 'Rato de balada',
+      'nightLegend': 'Lenda da noite',
+      'loyalToTheHouse': 'Fiel à casa',
+      'neverAlone': 'Nunca vai sozinho',
+      'explorer': 'Explorador',
+      'eclectic': 'Eclético',
+      'marathoner': 'Maratonista',
+      'other': 'Conquista',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String achievementGoal(String key) {
+    String _temp0 = intl.Intl.selectLogic(key, {
+      'firstParty': 'Vá à sua primeira festa pelo app',
+      'partyAnimal': 'Vá a 5 festas',
+      'nightLegend': 'Vá a 20 festas',
+      'loyalToTheHouse': 'Vá a 3 festas na mesma casa',
+      'neverAlone': 'Entre em 3 crews',
+      'explorer': 'Vá a festas em 3 cidades',
+      'eclectic': 'Vá a festas de 5 estilos diferentes',
+      'marathoner': 'Vá a 3 festas de 10 h ou mais',
+      'other': '',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get passportTitle => 'Passaporte';
+
+  @override
+  String get passportPrivate =>
+      'Só você vê. Contam as festas que já rolaram e em que você marcou \"Eu vou\".';
+
+  @override
+  String get passportParties => 'festas';
+
+  @override
+  String get passportVenues => 'casas';
+
+  @override
+  String get passportCities => 'cidades';
+
+  @override
+  String get passportGenres => 'estilos';
+
+  @override
+  String get passportEmpty =>
+      'Seu passaporte começa na primeira festa. Marque \"Eu vou\" e bora!';
+
+  @override
+  String passportSeeAll(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Ver mais $count festas com o Pulse Black',
+      one: 'Ver mais 1 festa com o Pulse Black',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get sectionFeatured => 'Em destaque';
 
   @override
@@ -1367,6 +1438,12 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get eventInviteFooter =>
       'Marca presença no Pulse pra gente montar a crew!';
+
+  @override
+  String get eventDuplicate => 'Duplicar festa';
+
+  @override
+  String get eventDuplicateTitle => 'Nova edição';
 
   @override
   String get eventImportTitle => 'Importar de um link';

@@ -2194,6 +2194,72 @@ abstract class AppLocalizations {
   /// **'Salvo'**
   String get eventSavedPill;
 
+  /// No description provided for @achievementsTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conquistas ({unlocked}/{total})'**
+  String achievementsTitle(int unlocked, int total);
+
+  /// No description provided for @achievementName.
+  ///
+  /// In pt, this message translates to:
+  /// **'{key, select, firstParty{Primeira festa} partyAnimal{Rato de balada} nightLegend{Lenda da noite} loyalToTheHouse{Fiel à casa} neverAlone{Nunca vai sozinho} explorer{Explorador} eclectic{Eclético} marathoner{Maratonista} other{Conquista}}'**
+  String achievementName(String key);
+
+  /// No description provided for @achievementGoal.
+  ///
+  /// In pt, this message translates to:
+  /// **'{key, select, firstParty{Vá à sua primeira festa pelo app} partyAnimal{Vá a 5 festas} nightLegend{Vá a 20 festas} loyalToTheHouse{Vá a 3 festas na mesma casa} neverAlone{Entre em 3 crews} explorer{Vá a festas em 3 cidades} eclectic{Vá a festas de 5 estilos diferentes} marathoner{Vá a 3 festas de 10 h ou mais} other{}}'**
+  String achievementGoal(String key);
+
+  /// No description provided for @passportTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Passaporte'**
+  String get passportTitle;
+
+  /// No description provided for @passportPrivate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Só você vê. Contam as festas que já rolaram e em que você marcou \"Eu vou\".'**
+  String get passportPrivate;
+
+  /// No description provided for @passportParties.
+  ///
+  /// In pt, this message translates to:
+  /// **'festas'**
+  String get passportParties;
+
+  /// No description provided for @passportVenues.
+  ///
+  /// In pt, this message translates to:
+  /// **'casas'**
+  String get passportVenues;
+
+  /// No description provided for @passportCities.
+  ///
+  /// In pt, this message translates to:
+  /// **'cidades'**
+  String get passportCities;
+
+  /// No description provided for @passportGenres.
+  ///
+  /// In pt, this message translates to:
+  /// **'estilos'**
+  String get passportGenres;
+
+  /// No description provided for @passportEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seu passaporte começa na primeira festa. Marque \"Eu vou\" e bora!'**
+  String get passportEmpty;
+
+  /// No description provided for @passportSeeAll.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =1{Ver mais 1 festa com o Pulse Black} other{Ver mais {count} festas com o Pulse Black}}'**
+  String passportSeeAll(int count);
+
   /// No description provided for @sectionFeatured.
   ///
   /// In pt, this message translates to:
@@ -2391,6 +2457,18 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Marca presença no Pulse pra gente montar a crew!'**
   String get eventInviteFooter;
+
+  /// No description provided for @eventDuplicate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Duplicar festa'**
+  String get eventDuplicate;
+
+  /// No description provided for @eventDuplicateTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nova edição'**
+  String get eventDuplicateTitle;
 
   /// No description provided for @eventImportTitle.
   ///

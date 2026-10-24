@@ -248,9 +248,16 @@ class _EventDetailBody extends ConsumerWidget {
                 icon: const Icon(Icons.edit_outlined),
                 onPressed: () => context.push(AppRoutes.editEvent(event.id)),
               ),
-            if (canCancel || canReport || role.isAdmin)
+            if (canCancel || canReport || canEdit || role.isAdmin)
               PopupMenuButton<void>(
                 itemBuilder: (_) => [
+                  // Next edition of a recurring party, already filled.
+                  if (canEdit && role.createsApprovedEvents)
+                    PopupMenuItem(
+                      onTap: () =>
+                          context.push(AppRoutes.duplicateEvent(event.id)),
+                      child: Text(l10n.eventDuplicate),
+                    ),
                   if (role.isAdmin && event.status == EventStatus.approved)
                     PopupMenuItem(
                       onTap: () => _feature(context, ref),

@@ -29,19 +29,27 @@ import 'package:pulse/features/venues/presentation/widgets/venue_picker_sheet.da
 
 /// Create (curator/producer/admin), suggest (user) or edit an event
 /// (SPEC 7.2/7.3). Status and the official flag are set by the database.
+/// With [copyOfId], a new event starts filled from that one ("Duplicar
+/// festa"): same everything, a week later.
 class EventFormScreen extends ConsumerWidget {
-  const new({this.eventId, super.key});
+  const new({this.eventId, this.copyOfId, super.key});
 
   /// null = new event.
   final String? eventId;
 
+  /// "Duplicar festa": the event to copy.
+  final String? copyOfId;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final eventId = this.eventId;
+    final sourceId = eventId ?? copyOfId;
     final l10n = context.l10n;
     final role = ref.watch(currentRoleProvider);
     final title = eventId != null
         ? l10n.eventFormEditTitle
+        : copyOfId != null
+        ? l10n.eventDuplicateTitle
         : role.createsApprovedEvents
         ? l10n.eventFormCreateTitle
         : l10n.eventFormSuggestTitle;
@@ -50,17 +58,22 @@ class EventFormScreen extends ConsumerWidget {
       backgroundColor: context.colors.background,
       appBar: AppBar(title: Text(title.toUpperCase())),
       body: SafeArea(
-        child: eventId == null
+        child: sourceId == null
             ? const _EventForm(initial: null)
             : AsyncValueView(
-                value: ref.watch(eventDetailProvider(eventId)),
-                onRetry: () => ref.invalidate(eventDetailProvider(eventId)),
+                value: ref.watch(eventDetailProvider(sourceId)),
+                onRetry: () => ref.invalidate(eventDetailProvider(sourceId)),
                 data: (event) => AsyncValueView(
                   // Editors can always read the venue (RLS).
-                  value: ref.watch(eventVenueProvider(eventId)),
-                  onRetry: () => ref.invalidate(eventVenueProvider(eventId)),
-                  data: (venue) =>
-                      _EventForm(initial: event, initialVenue: venue),
+                  value: ref.watch(eventVenueProvider(sourceId)),
+                  onRetry: () => ref.invalidate(eventVenueProvider(sourceId)),
+                  data: (venue) => eventId != null
+                      ? _EventForm(initial: event, initialVenue: venue)
+                      : _EventForm(
+                          initial: null,
+                          copyOf: event,
+                          initialVenue: venue,
+                        ),
                 ),
               ),
       ),
@@ -69,9 +82,12 @@ class EventFormScreen extends ConsumerWidget {
 }
 
 class _EventForm extends ConsumerStatefulWidget {
-  const new({required this.initial, this.initialVenue});
+  const new({required this.initial, this.copyOf, this.initialVenue});
 
   final EventDetail? initial;
+
+  /// "Duplicar festa": prefills a new event.
+  final EventDetail? copyOf;
   final EventVenue? initialVenue;
 
   @override
@@ -81,43 +97,62 @@ class _EventForm extends ConsumerStatefulWidget {
 class _EventFormState extends ConsumerState<_EventForm> {
   final _formKey = GlobalKey<FormState>();
   late final EventDetail? _initial = widget.initial;
-  late final _name = TextEditingController(text: _initial?.name);
-  late final _venue = TextEditingController(text: _initial?.venueName);
-  late final _description = TextEditingController(text: _initial?.description);
-  late final _ticketUrl = TextEditingController(text: _initial?.ticketUrl);
-  late final _ticketCoupon = TextEditingController(
-    text: _initial?.ticketCoupon,
-  );
+
+  /// Prefills the form: the event being edited, or the one being
+  /// duplicated ("Duplicar festa", saved as a new event).
+  late final EventDetail? _source = widget.initial ?? widget.copyOf;
+  late final _name = TextEditingController(text: _source?.name);
+  late final _venue = TextEditingController(text: _source?.venueName);
+  late final _description = TextEditingController(text: _source?.description);
+  late final _ticketUrl = TextEditingController(text: _source?.ticketUrl);
+  late final _ticketCoupon = TextEditingController(text: _source?.ticketCoupon);
   final _artist = TextEditingController();
   late final _cityText = TextEditingController(
-    text: _initial == null ? '' : '${_initial.city}, ${_initial.state}',
+    text: _source == null ? '' : '${_source.city}, ${_source.state}',
   );
 
-  late City? _city = _initial == null
+  late City? _city = _source == null
       ? null
       : City(
-          name: _initial.city,
-          state: _initial.state,
-          lat: _initial.lat ?? 0,
-          lng: _initial.lng ?? 0,
+          name: _source.city,
+          state: _source.state,
+          lat: _source.lat ?? 0,
+          lng: _source.lng ?? 0,
         );
-  late DateTime _startsAt = _initial?.startsAt.toLocal() ?? _defaultStart();
-  late DateTime _endsAt =
-      _initial?.endsAt.toLocal() ?? _startsAt.add(const Duration(hours: 6));
-  late Set<MusicGenre> _genres = {...?_initial?.genres};
-  late final List<String> _lineup = [...?_initial?.lineup];
-  late int _minAge = _initial?.minAge ?? 18;
+  late DateTime _startsAt =
+      _initial?.startsAt.toLocal() ??
+      _nextEdition(widget.copyOf?.startsAt.toLocal()) ??
+      _defaultStart();
+  late DateTime _endsAt = _startsAt.add(
+    _source == null
+        ? const Duration(hours: 6)
+        : _source.endsAt.difference(_source.startsAt),
+  );
+  late Set<MusicGenre> _genres = {...?_source?.genres};
+  late final List<String> _lineup = [...?_source?.lineup];
+  late int _minAge = _source?.minAge ?? 18;
   late VenueChoice _venueChoice = (
     address: widget.initialVenue?.address,
     point: widget.initialVenue?.hasPoint ?? false
         ? LatLng(widget.initialVenue!.lat!, widget.initialVenue!.lng!)
         : null,
   );
-  late bool _secretLocation = _initial?.locationRevealHours != null;
-  late int _revealHours = _initial?.locationRevealHours ?? 24;
+  late bool _secretLocation = _source?.locationRevealHours != null;
+  late int _revealHours = _source?.locationRevealHours ?? 24;
   Uint8List? _cover;
 
   bool get _isNew => _initial == null;
+
+  /// "Duplicar festa": the same weekday and time, a week later (or the
+  /// first such date still ahead).
+  static DateTime? _nextEdition(DateTime? from) {
+    if (from == null) return null;
+    var next = from.add(const Duration(days: 7));
+    while (next.isBefore(DateTime.now())) {
+      next = next.add(const Duration(days: 7));
+    }
+    return next;
+  }
 
   /// Next Saturday, 23:00.
   static DateTime _defaultStart() {
@@ -193,10 +228,10 @@ class _EventFormState extends ConsumerState<_EventForm> {
 
   /// Linked casa (venues migration) and the name it had when chosen;
   /// typing another name unlinks it.
-  late String? _venueId = _initial?.venueId;
-  late String? _venueIdName = _initial?.venueId == null
+  late String? _venueId = _source?.venueId;
+  late String? _venueIdName = _source?.venueId == null
       ? null
-      : _initial?.venueName;
+      : _source?.venueName;
 
   Future<void> _chooseVenue() async {
     final venue = await showVenuePicker(context);
@@ -347,6 +382,9 @@ class _EventFormState extends ConsumerState<_EventForm> {
       'ticket_coupon': _blankToNull(_ticketCoupon.text),
       'min_age': _minAge,
       'location_reveal_hours': _secretLocation ? _revealHours : null,
+      // "Duplicar festa": keeps the cover unless a new one is picked.
+      if (_isNew && widget.copyOf?.coverPath != null)
+        'cover_path': widget.copyOf!.coverPath,
     };
   }
 
@@ -528,8 +566,8 @@ class _EventFormState extends ConsumerState<_EventForm> {
                     Image.memory(_cover!, fit: BoxFit.cover)
                   else
                     EventCover(
-                      coverPath: _initial?.coverPath,
-                      seed: _initial?.id ?? '',
+                      coverPath: _source?.coverPath,
+                      seed: _source?.id ?? '',
                     ),
                   Positioned(
                     right: spacing.sm,
@@ -538,7 +576,7 @@ class _EventFormState extends ConsumerState<_EventForm> {
                       onPressed: _pickCover,
                       icon: const Icon(Icons.image_outlined),
                       label: Text(
-                        _cover == null && _initial?.coverPath == null
+                        _cover == null && _source?.coverPath == null
                             ? l10n.eventCoverAdd
                             : l10n.eventCoverChange,
                       ),

@@ -463,3 +463,7 @@ Baseado na pesquisa de mercado (apps de relacionamento migrando para eventos pre
     - **Salvar**: guardar a festa sem "Eu vou" (selo "Salvo", aparece em "Meus eventos" e recebe o lembrete da véspera).
     - **Seções em Próximos** (`event_sections()`, só sem busca/filtro): primeiro o carrossel **"Em destaque"** (destaques pagos perto, no rodízio diário, cards grandes), depois "Das casas que você segue", "Em alta" (mais "Eu vou" nos últimos 7 dias, perto) e "Esta semana". Os destaques continuam também no topo da lista e no mapa. Anúncios nos carrosséis seguem a regra da lista: um a cada N festas, ou um no fim quando há menos.
     - **Meus eventos**: filtros Todos · Vou · Salvos.
+12. **Conquistas, passaporte e duplicar festa** (feito):
+    - **Conquistas** (grátis, calculadas no banco a partir das festas já encerradas com "Eu vou" e das crews; nada é gravado): Primeira festa, Rato de balada (5), Lenda da noite (20), Fiel à casa (3 na mesma casa), Nunca vai sozinho (3 crews), Explorador (3 cidades), Eclético (5 estilos), Maratonista (3 festas de 10 h+). No próprio perfil, todas com progresso; no perfil visto pelos outros, as 3 mais raras desbloqueadas (sem dizer quais festas).
+    - **Passaporte** (privado, só a pessoa vê): totais de festas, casas, cidades e estilos e as 3 últimas festas; o histórico completo é do Pulse Black.
+    - **Duplicar festa** (menu ⋮ do evento, para quem pode editar): abre "Nova edição" com tudo preenchido, uma semana depois no mesmo dia e horário, mantendo a capa.

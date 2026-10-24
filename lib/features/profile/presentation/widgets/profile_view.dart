@@ -3,6 +3,7 @@ import 'package:pulse/core/extensions/context_extensions.dart';
 import 'package:pulse/core/widgets/genre_chip.dart';
 import 'package:pulse/core/widgets/glass_card.dart';
 import 'package:pulse/core/widgets/text_with_badge.dart';
+import 'package:pulse/features/achievements/presentation/widgets/achievements.dart';
 import 'package:pulse/features/badges/presentation/widgets/profile_badges.dart';
 import 'package:pulse/features/profile/domain/profile.dart';
 import 'package:pulse/features/profile/presentation/profile_labels.dart';
@@ -144,6 +145,8 @@ class ProfileView extends StatelessWidget {
             ),
           ),
         ],
+        // Unlocked conquistas, rarest 3 (empty when there are none).
+        AchievementsRow(userId: p.id),
         // Answers to the profile questions (empty when there are none).
         ProfilePromptsView(userId: p.id),
         if (p.musicGenres.isNotEmpty || p.favoriteDjs.isNotEmpty) ...[

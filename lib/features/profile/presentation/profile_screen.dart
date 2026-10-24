@@ -5,6 +5,8 @@ import 'package:pulse/app/routes.dart';
 import 'package:pulse/core/extensions/context_extensions.dart';
 import 'package:pulse/core/widgets/neon_button.dart';
 import 'package:pulse/core/widgets/state_views.dart';
+import 'package:pulse/features/achievements/presentation/achievements_providers.dart';
+import 'package:pulse/features/achievements/presentation/widgets/achievements.dart';
 import 'package:pulse/features/events/presentation/widgets/event_attend_tile.dart';
 import 'package:pulse/features/profile/presentation/profile_providers.dart';
 import 'package:pulse/features/profile/presentation/widgets/profile_view.dart';
@@ -18,7 +20,9 @@ class ProfileScreen extends ConsumerWidget {
     ref
       ..invalidate(myPublicProfileProvider)
       ..invalidate(myPhotosProvider)
-      ..invalidate(myAttendingEventsProvider);
+      ..invalidate(myAttendingEventsProvider)
+      ..invalidate(myAchievementsProvider)
+      ..invalidate(myPassportProvider);
     await ref.read(myPublicProfileProvider.future);
   }
 
@@ -63,6 +67,10 @@ class ProfileScreen extends ConsumerWidget {
                   icon: Icons.edit_outlined,
                   onPressed: () => context.push(AppRoutes.editProfile),
                 ),
+                SizedBox(height: spacing.xl),
+                const AchievementsSection(),
+                SizedBox(height: spacing.xl),
+                const PassportCard(),
                 SizedBox(height: spacing.xl),
                 Text(
                   l10n.profileUpcomingEvents.toUpperCase(),

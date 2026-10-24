@@ -136,7 +136,9 @@ GoRouter router(Ref ref) {
                   GoRoute(
                     path: 'new',
                     parentNavigatorKey: _rootNavigatorKey,
-                    builder: (_, _) => const EventFormScreen(),
+                    builder: (_, state) => EventFormScreen(
+                      copyOfId: state.uri.queryParameters['from'],
+                    ),
                   ),
                   GoRoute(
                     path: 'queue',
