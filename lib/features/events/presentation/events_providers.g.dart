@@ -1807,7 +1807,7 @@ final class CheckInEditorProvider
   }
 }
 
-String _$checkInEditorHash() => r'315d161336e4e54dbba5fd8fc818938f076f6186';
+String _$checkInEditorHash() => r'72409d85ca9594a94911f12405cd794a99744192';
 
 /// Check-in by GPS (one precise reading) or by the producer's QR.
 

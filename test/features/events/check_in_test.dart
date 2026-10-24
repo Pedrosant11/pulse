@@ -140,9 +140,7 @@ void main() {
     );
   });
 
-  testWidgets('far from the party: explains and offers the QR', (
-    tester,
-  ) async {
+  testWidgets('far from the party: explains and offers the QR', (tester) async {
     await tester.pumpWidget(_app(_FakeEvents(refuse: 'checkin_too_far')));
     await settle(tester);
     await tester.tap(find.text('Tô aqui'));

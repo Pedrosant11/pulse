@@ -1267,6 +1267,90 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String get eventChatTitle => 'Chat da festa';
+
+  @override
+  String eventChatPeople(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pessoas vão',
+      one: '1 pessoa vai',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get eventChatCardBody =>
+      'Combine carona, esquenta e o rolê com quem vai.';
+
+  @override
+  String get eventChatCardEmpty => 'Ninguém escreveu ainda. Puxe o papo!';
+
+  @override
+  String eventChatCardLast(int count, String when) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count mensagens',
+      one: '1 mensagem',
+    );
+    return '$_temp0 · última: $when';
+  }
+
+  @override
+  String get eventChatJoinHint =>
+      'Marque \"Eu vou\" para entrar no chat da festa.';
+
+  @override
+  String get eventChatReadOnly =>
+      'A festa acabou: o chat fica só para leitura e some em alguns dias.';
+
+  @override
+  String get eventChatMuted => 'A produção silenciou você neste chat.';
+
+  @override
+  String get eventChatInputHint => 'Mensagem para quem vai';
+
+  @override
+  String get eventChatEmpty => 'Ninguém escreveu ainda. Puxe o papo!';
+
+  @override
+  String get eventChatTeam => 'Produção';
+
+  @override
+  String get eventChatRules =>
+      'Chat aberto para quem vai. Seja gente boa: nada de venda de ingresso, spam ou assédio. Denuncie o que passar do ponto.';
+
+  @override
+  String get eventChatLoadOlder => 'Ver mensagens anteriores';
+
+  @override
+  String get eventChatReport => 'Denunciar';
+
+  @override
+  String get eventChatMute => 'Silenciar no chat';
+
+  @override
+  String eventChatMuteDone(String name) {
+    return '$name foi silenciado(a) neste chat.';
+  }
+
+  @override
+  String get eventChatDeleteBody => 'Ela some para todo mundo do chat.';
+
+  @override
+  String eventChatError(String problem) {
+    String _temp0 = intl.Intl.selectLogic(problem, {
+      'notGoing': 'Marque \"Eu vou\" para escrever no chat.',
+      'closed': 'O chat dessa festa está fechado.',
+      'muted': 'A produção silenciou você neste chat.',
+      'other': 'Não foi possível enviar.',
+    });
+    return '$_temp0';
+  }
+
+  @override
   String get afterPartyTitle => 'Depois da festa';
 
   @override

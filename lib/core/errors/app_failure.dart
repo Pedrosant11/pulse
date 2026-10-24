@@ -84,6 +84,9 @@ sealed class AppFailure implements Exception {
       ('P0001', 'checkin_no_venue') => CheckInFailure(.noVenue, error),
       ('P0001', 'checkin_too_far') => CheckInFailure(.tooFar, error),
       ('P0001', 'checkin_bad_code') => CheckInFailure(.badCode, error),
+      ('P0001', 'event_chat_not_going') => EventChatFailure(.notGoing, error),
+      ('P0001', 'event_chat_closed') => EventChatFailure(.closed, error),
+      ('P0001', 'event_chat_muted') => EventChatFailure(.muted, error),
       ('P0001', 'featured_unavailable') => FeaturedUnavailableFailure(error),
       // Casas (venues migration).
       ('P0001', 'venue_unavailable') => VenueUnavailableFailure(error),
@@ -303,4 +306,13 @@ final class CheckInFailure extends AppFailure {
   const new(this.problem, [super.cause]);
 
   final CheckInProblem problem;
+}
+
+/// The party chat refused a message: not going, chat closed or muted.
+enum EventChatProblem { notGoing, closed, muted }
+
+final class EventChatFailure extends AppFailure {
+  const new(this.problem, [super.cause]);
+
+  final EventChatProblem problem;
 }

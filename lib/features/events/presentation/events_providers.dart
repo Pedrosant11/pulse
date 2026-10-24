@@ -9,6 +9,7 @@ import 'package:pulse/features/events/domain/check_in.dart';
 import 'package:pulse/features/events/domain/event.dart';
 import 'package:pulse/features/events/domain/event_import.dart';
 import 'package:pulse/features/events/domain/featured.dart';
+import 'package:pulse/features/events/presentation/event_chat_providers.dart';
 import 'package:pulse/features/profile/data/location_repository.dart';
 import 'package:pulse/features/profile/presentation/profile_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -88,7 +89,8 @@ void _refreshEvent(Ref ref, String eventId) {
     ..invalidate(eventAttendeesProvider(eventId))
     ..invalidate(eventAttendeeCountsProvider(eventId))
     ..invalidate(eventListProvider)
-    ..invalidate(myAttendingEventsProvider);
+    ..invalidate(myAttendingEventsProvider)
+    ..invalidate(eventChatInfoProvider(eventId));
 }
 
 /// "Eu vou" (free in any city, SPEC 15).
@@ -393,6 +395,7 @@ class CheckInEditor extends _$CheckInEditor {
 
   void _refresh(String eventId) => ref
     ..invalidate(myCheckInProvider(eventId))
+    ..invalidate(eventChatInfoProvider(eventId))
     ..invalidate(isAttendingProvider(eventId))
     ..invalidate(isOnProvider(eventId))
     ..invalidate(eventOnPeopleProvider(eventId))

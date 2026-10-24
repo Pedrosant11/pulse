@@ -23,6 +23,7 @@ import 'package:pulse/features/crews/presentation/crew_screen.dart';
 import 'package:pulse/features/events/data/events_repository.dart';
 import 'package:pulse/features/events/domain/event.dart';
 import 'package:pulse/features/events/presentation/events_providers.dart';
+import 'package:pulse/features/events/presentation/widgets/event_chat_card.dart';
 import 'package:pulse/features/events/presentation/widgets/event_location.dart';
 import 'package:pulse/features/events/presentation/widgets/event_night.dart';
 import 'package:pulse/features/events/presentation/widgets/event_share.dart';
@@ -392,6 +393,11 @@ class _EventDetailBody extends ConsumerWidget {
                 padding: EdgeInsets.only(bottom: spacing.sm),
                 child: EventNightSection(event: event),
               ),
+              if (event.status == EventStatus.approved)
+                Padding(
+                  padding: EdgeInsets.only(bottom: spacing.sm),
+                  child: EventChatCard(eventId: event.id),
+                ),
               if (event.status == EventStatus.approved && !hasEnded)
                 _GoingButton(eventId: event.id),
               if (ticketUrl != null) ...[

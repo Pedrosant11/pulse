@@ -41,10 +41,8 @@ void main() {
     );
     await expectLater(
       guardFailures<void>(
-        () async => throw const PostgrestException(
-          message: 'nope',
-          code: '42501',
-        ),
+        () async =>
+            throw const PostgrestException(message: 'nope', code: '42501'),
       ),
       throwsA(isA<AppFailure>()),
     );

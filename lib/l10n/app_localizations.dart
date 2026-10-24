@@ -2218,6 +2218,114 @@ abstract class AppLocalizations {
   /// **'{count, plural, =0{Ninguém fez check-in ainda} =1{1 pessoa fez check-in} other{{count} pessoas fizeram check-in}}'**
   String checkInQrCount(int count);
 
+  /// No description provided for @eventChatTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Chat da festa'**
+  String get eventChatTitle;
+
+  /// No description provided for @eventChatPeople.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =1{1 pessoa vai} other{{count} pessoas vão}}'**
+  String eventChatPeople(int count);
+
+  /// No description provided for @eventChatCardBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Combine carona, esquenta e o rolê com quem vai.'**
+  String get eventChatCardBody;
+
+  /// No description provided for @eventChatCardEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ninguém escreveu ainda. Puxe o papo!'**
+  String get eventChatCardEmpty;
+
+  /// No description provided for @eventChatCardLast.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =1{1 mensagem} other{{count} mensagens}} · última: {when}'**
+  String eventChatCardLast(int count, String when);
+
+  /// No description provided for @eventChatJoinHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Marque \"Eu vou\" para entrar no chat da festa.'**
+  String get eventChatJoinHint;
+
+  /// No description provided for @eventChatReadOnly.
+  ///
+  /// In pt, this message translates to:
+  /// **'A festa acabou: o chat fica só para leitura e some em alguns dias.'**
+  String get eventChatReadOnly;
+
+  /// No description provided for @eventChatMuted.
+  ///
+  /// In pt, this message translates to:
+  /// **'A produção silenciou você neste chat.'**
+  String get eventChatMuted;
+
+  /// No description provided for @eventChatInputHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mensagem para quem vai'**
+  String get eventChatInputHint;
+
+  /// No description provided for @eventChatEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ninguém escreveu ainda. Puxe o papo!'**
+  String get eventChatEmpty;
+
+  /// No description provided for @eventChatTeam.
+  ///
+  /// In pt, this message translates to:
+  /// **'Produção'**
+  String get eventChatTeam;
+
+  /// No description provided for @eventChatRules.
+  ///
+  /// In pt, this message translates to:
+  /// **'Chat aberto para quem vai. Seja gente boa: nada de venda de ingresso, spam ou assédio. Denuncie o que passar do ponto.'**
+  String get eventChatRules;
+
+  /// No description provided for @eventChatLoadOlder.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver mensagens anteriores'**
+  String get eventChatLoadOlder;
+
+  /// No description provided for @eventChatReport.
+  ///
+  /// In pt, this message translates to:
+  /// **'Denunciar'**
+  String get eventChatReport;
+
+  /// No description provided for @eventChatMute.
+  ///
+  /// In pt, this message translates to:
+  /// **'Silenciar no chat'**
+  String get eventChatMute;
+
+  /// No description provided for @eventChatMuteDone.
+  ///
+  /// In pt, this message translates to:
+  /// **'{name} foi silenciado(a) neste chat.'**
+  String eventChatMuteDone(String name);
+
+  /// No description provided for @eventChatDeleteBody.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ela some para todo mundo do chat.'**
+  String get eventChatDeleteBody;
+
+  /// No description provided for @eventChatError.
+  ///
+  /// In pt, this message translates to:
+  /// **'{problem, select, notGoing{Marque \"Eu vou\" para escrever no chat.} closed{O chat dessa festa está fechado.} muted{A produção silenciou você neste chat.} other{Não foi possível enviar.}}'**
+  String eventChatError(String problem);
+
   /// No description provided for @afterPartyTitle.
   ///
   /// In pt, this message translates to:

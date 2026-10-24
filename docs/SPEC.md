@@ -475,3 +475,5 @@ Baseado na pesquisa de mercado (apps de relacionamento migrando para eventos pre
     - O check-in também marca "Eu vou" e "Tô ON". **Conquistas e passaporte contam só festas com check-in.** O painel do evento mostra quantos fizeram check-in.
 
 14. **Relatório de falhas** (feito): Firebase Crashlytics, só em builds de release e no Android (iOS quando o Firebase for configurado lá). Vão as falhas do Flutter e da plataforma e os erros inesperados do servidor (`guardFailures` com `UnknownFailure`); falhas esperadas (regras do banco, rede) não. Identificado só pelo id aleatório da conta. Ver no console do Firebase, em Crashlytics.
+
+15. **Chat da festa** (feito): um chat de texto por festa aprovada, para quem marcou "Eu vou" e para a produção (selo "Produção"). Aberto da aprovação até 12 h depois do fim, só leitura por mais 3 dias e então apagado (cron). Até 500 caracteres, 1 mensagem a cada 2 s e 20 em 5 min. A produção apaga mensagens e silencia pessoas no chat da sua festa; denúncia reaproveita a de mensagem (com cópia do texto); bloqueados não se veem. Realtime em canal privado `event-chat:<id>`.
