@@ -94,6 +94,12 @@ function textFor(kind: string, data: Record<string, unknown>): PushText | null {
         title: `${data.dj ?? "Um DJ que você curte"} vai tocar perto de você 🎧`,
         body: `${data.event ?? "Festa nova"}. Marque presença e veja quem vai.`,
       };
+    case "venue_new":
+      return {
+        channel: "events",
+        title: `Festa nova ${data.venue ? `na ${data.venue}` : "numa casa que você segue"} 📍`,
+        body: `${data.event ?? "Tem festa nova"}. Marque presença e veja quem vai.`,
+      };
     case "event_new":
       return {
         channel: "events",

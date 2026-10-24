@@ -5,6 +5,7 @@ import 'package:pulse/core/widgets/genre_chip.dart';
 import 'package:pulse/core/widgets/text_with_badge.dart';
 import 'package:pulse/features/badges/presentation/widgets/profile_badges.dart';
 import 'package:pulse/features/discover/domain/discover_models.dart';
+import 'package:pulse/features/discover/domain/music_match.dart';
 import 'package:pulse/features/events/presentation/widgets/event_visuals.dart';
 import 'package:pulse/features/profile/domain/profile_enums.dart';
 import 'package:pulse/features/profile/presentation/profile_labels.dart';
@@ -25,6 +26,7 @@ class CandidateCard extends StatelessWidget {
     required this.accent,
     required this.onOpenProfile,
     this.myGenres = const {},
+    this.myDjs = const [],
     super.key,
   });
 
@@ -33,6 +35,9 @@ class CandidateCard extends StatelessWidget {
 
   /// The user's genres: fallback cards show the ones in common.
   final Set<MusicGenre> myGenres;
+
+  /// The user's favorite DJs (music match).
+  final List<String> myDjs;
   final Color accent;
   final VoidCallback onOpenProfile;
 
@@ -75,6 +80,28 @@ class CandidateCard extends StatelessWidget {
           )
         : null;
 
+    final match = musicMatch(
+      myGenres: myGenres,
+      myDjs: myDjs,
+      theirGenres: c.musicGenres,
+      theirDjs: c.favoriteDjs,
+    );
+    final matchRow = match == null || match == 0
+        ? null
+        : Padding(
+            padding: EdgeInsets.only(top: spacing.xxs),
+            child: Row(
+              children: [
+                Icon(Icons.graphic_eq_rounded, size: 16, color: accent),
+                SizedBox(width: spacing.xxs),
+                Text(
+                  l10n.discoverMusicMatch(match),
+                  style: context.textTheme.labelMedium?.copyWith(color: accent),
+                ),
+              ],
+            ),
+          );
+
     final location = Text(
       [
         if (c.city != null) c.city!,
@@ -116,6 +143,7 @@ class CandidateCard extends StatelessWidget {
             nameRow,
             badges,
             location,
+            ?matchRow,
             // Going solo or already with a crew for that event (SPEC 9.2).
             if (!c.isFallback)
               Padding(
@@ -187,6 +215,7 @@ class CandidateCard extends StatelessWidget {
             nameRow,
             badges,
             location,
+            ?matchRow,
             if (intent != null)
               Text(
                 l10n.discoverLookingFor(l10n.dateIntent(intent)),

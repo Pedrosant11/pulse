@@ -746,7 +746,7 @@ final class EventEditorProvider
   }
 }
 
-String _$eventEditorHash() => r'4607972d61b3f588c399822d1b5f274ca453ac56';
+String _$eventEditorHash() => r'40fc5c8726d5d452711d2696f2078df8b146d821';
 
 /// Create/edit/moderate events (SPEC 7.2/7.3).
 

@@ -647,7 +647,8 @@ as int?,
 mixin _$ChatMessage {
 
  String get id; String get conversationId; String get senderId; String get content; DateTime get createdAt; DateTime? get deletedAt; MessageKind get kind;/// `chat-media` path of a photo or voice message.
- String? get mediaPath; int? get mediaDurationMs;
+ String? get mediaPath; int? get mediaDurationMs;/// Crew poll shown by this message (kind poll).
+ String? get pollId;
 /// Create a copy of ChatMessage
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -661,20 +662,20 @@ $ChatMessageCopyWith<ChatMessage> get copyWith => _$ChatMessageCopyWithImpl<Chat
 @override
 bool operator ==(Object other) {
   final _this = this as ChatMessage;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatMessage&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.conversationId, _this.conversationId) || other.conversationId == _this.conversationId)&&(identical(other.senderId, _this.senderId) || other.senderId == _this.senderId)&&(identical(other.content, _this.content) || other.content == _this.content)&&(identical(other.createdAt, _this.createdAt) || other.createdAt == _this.createdAt)&&(identical(other.deletedAt, _this.deletedAt) || other.deletedAt == _this.deletedAt)&&(identical(other.kind, _this.kind) || other.kind == _this.kind)&&(identical(other.mediaPath, _this.mediaPath) || other.mediaPath == _this.mediaPath)&&(identical(other.mediaDurationMs, _this.mediaDurationMs) || other.mediaDurationMs == _this.mediaDurationMs));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatMessage&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.conversationId, _this.conversationId) || other.conversationId == _this.conversationId)&&(identical(other.senderId, _this.senderId) || other.senderId == _this.senderId)&&(identical(other.content, _this.content) || other.content == _this.content)&&(identical(other.createdAt, _this.createdAt) || other.createdAt == _this.createdAt)&&(identical(other.deletedAt, _this.deletedAt) || other.deletedAt == _this.deletedAt)&&(identical(other.kind, _this.kind) || other.kind == _this.kind)&&(identical(other.mediaPath, _this.mediaPath) || other.mediaPath == _this.mediaPath)&&(identical(other.mediaDurationMs, _this.mediaDurationMs) || other.mediaDurationMs == _this.mediaDurationMs)&&(identical(other.pollId, _this.pollId) || other.pollId == _this.pollId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as ChatMessage;
-  return Object.hash(runtimeType,_this.id,_this.conversationId,_this.senderId,_this.content,_this.createdAt,_this.deletedAt,_this.kind,_this.mediaPath,_this.mediaDurationMs);
+  return Object.hash(runtimeType,_this.id,_this.conversationId,_this.senderId,_this.content,_this.createdAt,_this.deletedAt,_this.kind,_this.mediaPath,_this.mediaDurationMs,_this.pollId);
 }
 
 @override
 String toString() {
   final _this = this as ChatMessage;
-  return 'ChatMessage(id: ${_this.id}, conversationId: ${_this.conversationId}, senderId: ${_this.senderId}, content: ${_this.content}, createdAt: ${_this.createdAt}, deletedAt: ${_this.deletedAt}, kind: ${_this.kind}, mediaPath: ${_this.mediaPath}, mediaDurationMs: ${_this.mediaDurationMs})';
+  return 'ChatMessage(id: ${_this.id}, conversationId: ${_this.conversationId}, senderId: ${_this.senderId}, content: ${_this.content}, createdAt: ${_this.createdAt}, deletedAt: ${_this.deletedAt}, kind: ${_this.kind}, mediaPath: ${_this.mediaPath}, mediaDurationMs: ${_this.mediaDurationMs}, pollId: ${_this.pollId})';
 }
 
 
@@ -685,7 +686,7 @@ abstract mixin class $ChatMessageCopyWith<$Res>  {
   factory $ChatMessageCopyWith(ChatMessage value, $Res Function(ChatMessage) _then) = _$ChatMessageCopyWithImpl;
 @useResult
 $Res call({
- String id, String conversationId, String senderId, String content, DateTime createdAt, DateTime? deletedAt, MessageKind kind, String? mediaPath, int? mediaDurationMs
+ String id, String conversationId, String senderId, String content, DateTime createdAt, DateTime? deletedAt, MessageKind kind, String? mediaPath, int? mediaDurationMs, String? pollId
 });
 
 
@@ -702,7 +703,7 @@ class _$ChatMessageCopyWithImpl<$Res>
 
 /// Create a copy of ChatMessage
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? conversationId = null,Object? senderId = null,Object? content = null,Object? createdAt = null,Object? deletedAt = freezed,Object? kind = null,Object? mediaPath = freezed,Object? mediaDurationMs = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? conversationId = null,Object? senderId = null,Object? content = null,Object? createdAt = null,Object? deletedAt = freezed,Object? kind = null,Object? mediaPath = freezed,Object? mediaDurationMs = freezed,Object? pollId = freezed,}) {
   return _then(ChatMessage(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,conversationId: null == conversationId ? _self.conversationId : conversationId // ignore: cast_nullable_to_non_nullable
@@ -713,7 +714,8 @@ as DateTime,deletedAt: freezed == deletedAt ? _self.deletedAt : deletedAt // ign
 as DateTime?,kind: null == kind ? _self.kind : kind // ignore: cast_nullable_to_non_nullable
 as MessageKind,mediaPath: freezed == mediaPath ? _self.mediaPath : mediaPath // ignore: cast_nullable_to_non_nullable
 as String?,mediaDurationMs: freezed == mediaDurationMs ? _self.mediaDurationMs : mediaDurationMs // ignore: cast_nullable_to_non_nullable
-as int?,
+as int?,pollId: freezed == pollId ? _self.pollId : pollId // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -798,10 +800,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String conversationId,  String senderId,  String content,  DateTime createdAt,  DateTime? deletedAt,  MessageKind kind,  String? mediaPath,  int? mediaDurationMs)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String conversationId,  String senderId,  String content,  DateTime createdAt,  DateTime? deletedAt,  MessageKind kind,  String? mediaPath,  int? mediaDurationMs,  String? pollId)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ChatMessage() when $default != null:
-return $default(_that.id,_that.conversationId,_that.senderId,_that.content,_that.createdAt,_that.deletedAt,_that.kind,_that.mediaPath,_that.mediaDurationMs);case _:
+return $default(_that.id,_that.conversationId,_that.senderId,_that.content,_that.createdAt,_that.deletedAt,_that.kind,_that.mediaPath,_that.mediaDurationMs,_that.pollId);case _:
   return orElse();
 
 }
@@ -819,10 +821,10 @@ return $default(_that.id,_that.conversationId,_that.senderId,_that.content,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String conversationId,  String senderId,  String content,  DateTime createdAt,  DateTime? deletedAt,  MessageKind kind,  String? mediaPath,  int? mediaDurationMs)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String conversationId,  String senderId,  String content,  DateTime createdAt,  DateTime? deletedAt,  MessageKind kind,  String? mediaPath,  int? mediaDurationMs,  String? pollId)  $default,) {final _that = this;
 switch (_that) {
 case _ChatMessage():
-return $default(_that.id,_that.conversationId,_that.senderId,_that.content,_that.createdAt,_that.deletedAt,_that.kind,_that.mediaPath,_that.mediaDurationMs);case _:
+return $default(_that.id,_that.conversationId,_that.senderId,_that.content,_that.createdAt,_that.deletedAt,_that.kind,_that.mediaPath,_that.mediaDurationMs,_that.pollId);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -839,10 +841,10 @@ return $default(_that.id,_that.conversationId,_that.senderId,_that.content,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String conversationId,  String senderId,  String content,  DateTime createdAt,  DateTime? deletedAt,  MessageKind kind,  String? mediaPath,  int? mediaDurationMs)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String conversationId,  String senderId,  String content,  DateTime createdAt,  DateTime? deletedAt,  MessageKind kind,  String? mediaPath,  int? mediaDurationMs,  String? pollId)?  $default,) {final _that = this;
 switch (_that) {
 case _ChatMessage() when $default != null:
-return $default(_that.id,_that.conversationId,_that.senderId,_that.content,_that.createdAt,_that.deletedAt,_that.kind,_that.mediaPath,_that.mediaDurationMs);case _:
+return $default(_that.id,_that.conversationId,_that.senderId,_that.content,_that.createdAt,_that.deletedAt,_that.kind,_that.mediaPath,_that.mediaDurationMs,_that.pollId);case _:
   return null;
 
 }
@@ -854,7 +856,7 @@ return $default(_that.id,_that.conversationId,_that.senderId,_that.content,_that
 @JsonSerializable()
 
 class _ChatMessage implements ChatMessage {
-  const _ChatMessage({required this.id, required this.conversationId, required this.senderId, required this.content, required this.createdAt, this.deletedAt, this.kind = MessageKind.text, this.mediaPath, this.mediaDurationMs});
+  const _ChatMessage({required this.id, required this.conversationId, required this.senderId, required this.content, required this.createdAt, this.deletedAt, this.kind = MessageKind.text, this.mediaPath, this.mediaDurationMs, this.pollId});
   factory _ChatMessage.fromJson(Map<String, dynamic> json) => _$ChatMessageFromJson(json);
 
 @override final  String id;
@@ -867,6 +869,8 @@ class _ChatMessage implements ChatMessage {
 /// `chat-media` path of a photo or voice message.
 @override final  String? mediaPath;
 @override final  int? mediaDurationMs;
+/// Crew poll shown by this message (kind poll).
+@override final  String? pollId;
 
 /// Create a copy of ChatMessage
 /// with the given fields replaced by the non-null parameter values.
@@ -881,18 +885,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatMessage&&(identical(other.id, id) || other.id == id)&&(identical(other.conversationId, conversationId) || other.conversationId == conversationId)&&(identical(other.senderId, senderId) || other.senderId == senderId)&&(identical(other.content, content) || other.content == content)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.deletedAt, deletedAt) || other.deletedAt == deletedAt)&&(identical(other.kind, kind) || other.kind == kind)&&(identical(other.mediaPath, mediaPath) || other.mediaPath == mediaPath)&&(identical(other.mediaDurationMs, mediaDurationMs) || other.mediaDurationMs == mediaDurationMs));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatMessage&&(identical(other.id, id) || other.id == id)&&(identical(other.conversationId, conversationId) || other.conversationId == conversationId)&&(identical(other.senderId, senderId) || other.senderId == senderId)&&(identical(other.content, content) || other.content == content)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.deletedAt, deletedAt) || other.deletedAt == deletedAt)&&(identical(other.kind, kind) || other.kind == kind)&&(identical(other.mediaPath, mediaPath) || other.mediaPath == mediaPath)&&(identical(other.mediaDurationMs, mediaDurationMs) || other.mediaDurationMs == mediaDurationMs)&&(identical(other.pollId, pollId) || other.pollId == pollId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,id,conversationId,senderId,content,createdAt,deletedAt,kind,mediaPath,mediaDurationMs);
+    return Object.hash(runtimeType,id,conversationId,senderId,content,createdAt,deletedAt,kind,mediaPath,mediaDurationMs,pollId);
 }
 
 @override
 String toString() {
-    return 'ChatMessage(id: $id, conversationId: $conversationId, senderId: $senderId, content: $content, createdAt: $createdAt, deletedAt: $deletedAt, kind: $kind, mediaPath: $mediaPath, mediaDurationMs: $mediaDurationMs)';
+    return 'ChatMessage(id: $id, conversationId: $conversationId, senderId: $senderId, content: $content, createdAt: $createdAt, deletedAt: $deletedAt, kind: $kind, mediaPath: $mediaPath, mediaDurationMs: $mediaDurationMs, pollId: $pollId)';
 }
 
 
@@ -903,7 +907,7 @@ abstract mixin class _$ChatMessageCopyWith<$Res> implements $ChatMessageCopyWith
   factory _$ChatMessageCopyWith(_ChatMessage value, $Res Function(_ChatMessage) _then) = __$ChatMessageCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String conversationId, String senderId, String content, DateTime createdAt, DateTime? deletedAt, MessageKind kind, String? mediaPath, int? mediaDurationMs
+ String id, String conversationId, String senderId, String content, DateTime createdAt, DateTime? deletedAt, MessageKind kind, String? mediaPath, int? mediaDurationMs, String? pollId
 });
 
 
@@ -920,7 +924,7 @@ class __$ChatMessageCopyWithImpl<$Res>
 
 /// Create a copy of ChatMessage
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? conversationId = null,Object? senderId = null,Object? content = null,Object? createdAt = null,Object? deletedAt = freezed,Object? kind = null,Object? mediaPath = freezed,Object? mediaDurationMs = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? conversationId = null,Object? senderId = null,Object? content = null,Object? createdAt = null,Object? deletedAt = freezed,Object? kind = null,Object? mediaPath = freezed,Object? mediaDurationMs = freezed,Object? pollId = freezed,}) {
   return _then(_ChatMessage(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,conversationId: null == conversationId ? _self.conversationId : conversationId // ignore: cast_nullable_to_non_nullable
@@ -931,7 +935,8 @@ as DateTime,deletedAt: freezed == deletedAt ? _self.deletedAt : deletedAt // ign
 as DateTime?,kind: null == kind ? _self.kind : kind // ignore: cast_nullable_to_non_nullable
 as MessageKind,mediaPath: freezed == mediaPath ? _self.mediaPath : mediaPath // ignore: cast_nullable_to_non_nullable
 as String?,mediaDurationMs: freezed == mediaDurationMs ? _self.mediaDurationMs : mediaDurationMs // ignore: cast_nullable_to_non_nullable
-as int?,
+as int?,pollId: freezed == pollId ? _self.pollId : pollId // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

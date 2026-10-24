@@ -79,6 +79,11 @@ class _EventsScreenState extends ConsumerState<EventsScreen> {
                 },
               ),
             ),
+            IconButton(
+              tooltip: l10n.venuesTitle,
+              icon: const Icon(Icons.storefront_outlined),
+              onPressed: () => context.push(AppRoutes.venues),
+            ),
             if (role.isModerator)
               IconButton(
                 tooltip: l10n.moderationQueue,

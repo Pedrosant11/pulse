@@ -99,6 +99,9 @@ abstract class EventDetail with _$EventDetail {
 
     /// Featured until this moment (admins set it).
     DateTime? featuredUntil,
+
+    /// Its casa (venues migration), when linked.
+    String? venueId,
   }) = _EventDetail;
 
   factory fromJson(Map<String, dynamic> json) => _$EventDetailFromJson(json);

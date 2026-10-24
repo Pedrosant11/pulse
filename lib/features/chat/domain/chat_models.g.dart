@@ -67,6 +67,7 @@ const _$MessageKindEnumMap = {
   MessageKind.text: 'text',
   MessageKind.image: 'image',
   MessageKind.audio: 'audio',
+  MessageKind.poll: 'poll',
 };
 
 _ConversationHeader _$ConversationHeaderFromJson(Map<String, dynamic> json) =>
@@ -123,6 +124,7 @@ _ChatMessage _$ChatMessageFromJson(Map<String, dynamic> json) => _ChatMessage(
       MessageKind.text,
   mediaPath: json['media_path'] as String?,
   mediaDurationMs: (json['media_duration_ms'] as num?)?.toInt(),
+  pollId: json['poll_id'] as String?,
 );
 
 Map<String, dynamic> _$ChatMessageToJson(_ChatMessage instance) =>
@@ -136,6 +138,7 @@ Map<String, dynamic> _$ChatMessageToJson(_ChatMessage instance) =>
       'kind': _$MessageKindEnumMap[instance.kind]!,
       'media_path': instance.mediaPath,
       'media_duration_ms': instance.mediaDurationMs,
+      'poll_id': instance.pollId,
     };
 
 _ConversationMember _$ConversationMemberFromJson(Map<String, dynamic> json) =>

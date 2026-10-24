@@ -75,6 +75,11 @@ sealed class AppFailure implements Exception {
       ('P0001', 'featured_limit') => FeaturedLimitFailure(error),
       ('P0001', 'account_paused') => AccountPausedFailure(error),
       ('P0001', 'featured_unavailable') => FeaturedUnavailableFailure(error),
+      // Casas (venues migration).
+      ('P0001', 'venue_unavailable') => VenueUnavailableFailure(error),
+      ('P0001', 'venue_review_not_allowed') => VenueReviewNotAllowedFailure(
+        error,
+      ),
       // Referral codes.
       ('P0001', 'referral_invalid') => ReferralFailure(.invalid, error),
       ('P0001', 'referral_own') => ReferralFailure(.own, error),
@@ -110,6 +115,11 @@ sealed class AppFailure implements Exception {
     final code = details is Map ? details['error'] : null;
     return switch ((error.status, code)) {
       (_, 'invalid_password') => WrongPasswordFailure(error),
+      (_, 'invalid_url') => EventLinkFailure(EventLinkProblem.invalid, error),
+      (_, 'page_unavailable') => EventLinkFailure(
+        EventLinkProblem.unavailable,
+        error,
+      ),
       (401, _) => SessionExpiredFailure(error),
       (403, _) => PermissionDeniedFailure(error),
       (429, _) => RateLimitedFailure(error),
@@ -250,4 +260,23 @@ final class ReferralFailure extends AppFailure {
   const new(this.problem, [super.cause]);
 
   final ReferralProblem problem;
+}
+
+/// Why "Importar de um link" could not read a ticket page.
+enum EventLinkProblem { invalid, unavailable, noData }
+
+final class EventLinkFailure extends AppFailure {
+  const new(this.problem, [super.cause]);
+
+  final EventLinkProblem problem;
+}
+
+/// The event points to a venue that isn't approved (or not theirs).
+final class VenueUnavailableFailure extends AppFailure {
+  const new([super.cause]);
+}
+
+/// Only people who went to a party at the venue can rate it.
+final class VenueReviewNotAllowedFailure extends AppFailure {
+  const new([super.cause]);
 }

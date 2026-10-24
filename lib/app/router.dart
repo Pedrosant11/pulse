@@ -47,6 +47,9 @@ import 'package:pulse/features/safety/presentation/blocked_users_screen.dart';
 import 'package:pulse/features/safety/presentation/safety_tips_screen.dart';
 import 'package:pulse/features/settings/presentation/delete_account_screen.dart';
 import 'package:pulse/features/settings/presentation/settings_screen.dart';
+import 'package:pulse/features/venues/presentation/venue_form_screen.dart';
+import 'package:pulse/features/venues/presentation/venue_screen.dart';
+import 'package:pulse/features/venues/presentation/venues_screen.dart';
 import 'package:pulse/features/verification/presentation/admin_verifications_screen.dart';
 import 'package:pulse/features/verification/presentation/verification_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -129,6 +132,37 @@ GoRouter router(Ref ref) {
                     path: 'queue',
                     parentNavigatorKey: _rootNavigatorKey,
                     builder: (_, _) => const ModerationQueueScreen(),
+                  ),
+                  GoRoute(
+                    path: 'venues',
+                    parentNavigatorKey: _rootNavigatorKey,
+                    builder: (_, _) => const VenuesScreen(),
+                    routes: [
+                      // Declared before ':venueId' so "new" is not an id.
+                      GoRoute(
+                        path: 'new',
+                        parentNavigatorKey: _rootNavigatorKey,
+                        builder: (_, state) => VenueFormScreen(
+                          initialName: state.uri.queryParameters['name'],
+                        ),
+                      ),
+                      GoRoute(
+                        path: ':venueId',
+                        parentNavigatorKey: _rootNavigatorKey,
+                        builder: (_, state) => VenueScreen(
+                          venueId: state.pathParameters['venueId']!,
+                        ),
+                        routes: [
+                          GoRoute(
+                            path: 'edit',
+                            parentNavigatorKey: _rootNavigatorKey,
+                            builder: (_, state) => VenueFormScreen(
+                              venueId: state.pathParameters['venueId'],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                   GoRoute(
                     path: ':eventId',

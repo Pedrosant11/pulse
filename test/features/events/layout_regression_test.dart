@@ -83,6 +83,9 @@ void main() {
   testWidgets('event form shows a tappable cover button', (tester) async {
     await pump(tester, const EventFormScreen());
     expect(tester.takeException(), isNull);
+    expect(find.text('Importar').hitTestable(), findsOneWidget);
+    await tester.drag(find.byType(ListView).first, const Offset(0, -200));
+    await tester.pumpAndSettle();
     expect(find.text('Adicionar capa').hitTestable(), findsOneWidget);
   });
 }

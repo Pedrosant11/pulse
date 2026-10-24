@@ -221,6 +221,40 @@ update public.events
 set cover_path = id || '.jpg'
 where id::text like '00000000-0000-4000-b000-%' and status = 'approved';
 
+-- Casas (venues migration), approved by the curator (2). The insert trigger
+-- needs a signed-in role, so it is skipped here. Photos in
+-- supabase/seed/venue-photos/{id}/photo.jpg.
+set session_replication_role = replica;
+insert into public.venues (
+  id, name, description, address, neighborhood, city, state, lat, lng,
+  photo_path, instagram, status, created_by, reviewed_by
+)
+select
+  format('00000000-0000-4000-c000-%s', lpad(v.n::text, 12, '0'))::uuid,
+  v.name, v.description, v.address, v.neighborhood, v.city, v.state, v.lat, v.lng,
+  format('00000000-0000-4000-c000-%s/photo.jpg', lpad(v.n::text, 12, '0')),
+  v.instagram, 'approved',
+  '00000000-0000-4000-a000-000000000002', '00000000-0000-4000-a000-000000000002'
+from (values
+  ( 1, 'Galpão 23',        'Galpão de techno com som de pista grande.',              'Rua Brigadeiro Galvão, 230', 'Barra Funda',  'São Paulo',          'SP', -23.5262, -46.6658, null),
+  ( 2, 'Clube Aurora',     'House e tech house aos domingos.',                        'Rua Guaicurus, 1200',        'Lapa',         'São Paulo',          'SP', -23.5268, -46.6747, null),
+  ( 3, 'Galpão na Mooca',  'Festas de techno em galpão, local revelado na véspera.', 'Rua da Mooca, 1000',         'Mooca',        'São Paulo',          'SP', -23.5584, -46.5967, null),
+  ( 4, 'Rooftop Centro',   'Pôr do sol no alto do centro.',                           'Av. Ipiranga, 344',          'República',    'São Paulo',          'SP', -23.5452, -46.6430, null),
+  ( 5, 'Casa Vermelha',    'Afro house e house na Augusta.',                          'Rua Augusta, 2203',          'Jardins',      'São Paulo',          'SP', -23.5617, -46.6650, null),
+  ( 6, 'Salão Glitter',    'Disco e nu-disco embaixo do globo.',                      'Rua Augusta, 657',           'Consolação',   'São Paulo',          'SP', -23.5527, -46.6512, null),
+  ( 7, 'D-EDGE Rio',       'O clube da D-EDGE no Rio, na zona portuária.',            'Av. Rodrigues Alves, 293',   'Saúde',        'Rio de Janeiro',     'RJ', -22.8963, -43.1858, 'dedgeclubrio'),
+  ( 8, 'Edifício Touring', 'Prédio histórico na Praça Mauá que recebe a BOMA.',      'Praça Mauá',                 'Centro',       'Rio de Janeiro',     'RJ', -22.8958, -43.1797, null),
+  ( 9, 'Privilege',        'Clube na Orla Bardot, em Búzios.',                        'Orla Bardot',                'Centro',       'Armação dos Búzios', 'RJ', -22.7568, -41.8863, null),
+  (10, 'Porão Botafogo',   'Drum & bass e dubstep no porão.',                         'Rua Voluntários da Pátria, 400', 'Botafogo', 'Rio de Janeiro',     'RJ', -22.9512, -43.1867, null)
+) as v (n, name, description, address, neighborhood, city, state, lat, lng, instagram);
+set session_replication_role = origin;
+
+-- Each party at its casa (event n → venue n; 12 is the past Ritual).
+update public.events e
+set venue_id = format('00000000-0000-4000-c000-%s', lpad(m.venue::text, 12, '0'))::uuid
+from (values (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9), (10, 10), (12, 1)) as m (event, venue)
+where e.id = format('00000000-0000-4000-b000-%s', lpad(m.event::text, 12, '0'))::uuid;
+
 -- Venues (approximate real coordinates of each place).
 insert into public.event_venues (event_id, address, lat, lng)
 select

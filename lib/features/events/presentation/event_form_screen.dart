@@ -12,15 +12,20 @@ import 'package:pulse/core/widgets/glass_card.dart';
 import 'package:pulse/core/widgets/neon_button.dart';
 import 'package:pulse/core/widgets/state_views.dart';
 import 'package:pulse/features/events/domain/event.dart';
+import 'package:pulse/features/events/domain/event_import.dart';
 import 'package:pulse/features/events/presentation/events_providers.dart';
 import 'package:pulse/features/events/presentation/widgets/event_location.dart';
 import 'package:pulse/features/events/presentation/widgets/event_visuals.dart';
+import 'package:pulse/features/profile/data/location_repository.dart';
 import 'package:pulse/features/profile/data/photo_picker.dart';
 import 'package:pulse/features/profile/domain/city.dart';
 import 'package:pulse/features/profile/domain/profile_enums.dart';
 import 'package:pulse/features/profile/presentation/profile_labels.dart';
 import 'package:pulse/features/profile/presentation/widgets/choice_chip_group.dart';
 import 'package:pulse/features/profile/presentation/widgets/city_picker.dart';
+import 'package:pulse/features/venues/data/venues_repository.dart';
+import 'package:pulse/features/venues/domain/venue.dart';
+import 'package:pulse/features/venues/presentation/widgets/venue_picker_sheet.dart';
 
 /// Create (curator/producer/admin), suggest (user) or edit an event
 /// (SPEC 7.2/7.3). Status and the official flag are set by the database.
@@ -183,6 +188,130 @@ class _EventFormState extends ConsumerState<_EventForm> {
     });
   }
 
+  /// Rebuilds the venue picker after an import (it keeps its own state).
+  int _venueVersion = 0;
+
+  /// Linked casa (venues migration) and the name it had when chosen;
+  /// typing another name unlinks it.
+  late String? _venueId = _initial?.venueId;
+  late String? _venueIdName = _initial?.venueId == null
+      ? null
+      : _initial?.venueName;
+
+  Future<void> _chooseVenue() async {
+    final venue = await showVenuePicker(context);
+    if (venue == null || !mounted) return;
+    final cities = await ref.read(cityIndexProvider.future);
+    if (!mounted) return;
+    _useVenue(venue, cities);
+  }
+
+  void _useVenue(Venue venue, CityIndex cities) {
+    setState(() {
+      _venueId = venue.id;
+      _venueIdName = venue.name;
+      _venue.text = venue.name;
+      if (cities.find(venue.city, venue.state) case final city?) {
+        _city = city;
+        _cityText.text = city.label;
+      }
+      if (venue.address != null || venue.lat != null) {
+        _venueChoice = (
+          address: venue.address,
+          point: venue.lat != null && venue.lng != null
+              ? LatLng(venue.lat!, venue.lng!)
+              : null,
+        );
+        _venueVersion++;
+      }
+    });
+  }
+
+  /// After an import: links the casa with the same name in that city.
+  Future<void> _matchVenue(ImportedEvent event, CityIndex cities) async {
+    final name = event.venueName;
+    if (name == null || _venueId != null) return;
+    final found = await ref.read(venuesRepositoryProvider).list(query: name);
+    String fold(String s) => normalizeForSearch(s);
+    final match = found
+        .where(
+          (v) =>
+              fold(v.name) == fold(name) &&
+              (event.city == null || fold(v.city) == fold(event.city!)),
+        )
+        .firstOrNull;
+    if (match != null && mounted) _useVenue(match, cities);
+  }
+
+  Future<void> _importFromLink() async {
+    final url = await showDialog<String>(
+      context: context,
+      builder: (_) => const _ImportLinkDialog(),
+    );
+    if (url == null || !mounted) return;
+    final result = await ref.read(eventEditorProvider.notifier).importFrom(url);
+    if (result == null || !mounted) return;
+    final cities = await ref.read(cityIndexProvider.future);
+    if (!mounted) return;
+    _apply(result.event, result.cover, cities);
+    await _matchVenue(result.event, cities);
+    if (!mounted) return;
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(context.l10n.eventImportDone)));
+  }
+
+  /// Fills the form with what the page said; the rest stays as it was.
+  void _apply(ImportedEvent event, Uint8List? cover, CityIndex cities) {
+    setState(() {
+      if (event.name case final name?) {
+        _name.text = name.length > 120 ? name.substring(0, 120) : name;
+      }
+      if (event.description case final text?) {
+        _description.text = text.length > 4000 ? text.substring(0, 4000) : text;
+      }
+      if (event.venueName case final venue?) _venue.text = venue;
+      _ticketUrl.text = event.ticketUrl;
+      final city = switch ((event.city, event.state)) {
+        (final name?, final state?) =>
+          cities.find(name, state) ??
+              cities.search(name).where((c) => c.state == state).firstOrNull,
+        _ when event.lat != null && event.lng != null => cities.nearest(
+          event.lat!,
+          event.lng!,
+        ),
+        _ => null,
+      };
+      if (city != null) {
+        _city = city;
+        _cityText.text = city.label;
+      }
+      final now = DateTime.now();
+      if (event.startsAt case final start? when start.isAfter(now)) {
+        _startsAt = start.toLocal();
+        final end = event.endsAt?.toLocal();
+        _endsAt = end != null && end.isAfter(_startsAt)
+            ? end
+            : _startsAt.add(const Duration(hours: 6));
+      }
+      for (final artist in event.lineup) {
+        if (_lineup.length < 50 && !_lineup.contains(artist)) {
+          _lineup.add(artist);
+        }
+      }
+      _genres = {..._genres, ...event.genres};
+      if (event.address != null || event.lat != null) {
+        _venueChoice = (
+          address: event.address,
+          point: event.lat != null && event.lng != null
+              ? LatLng(event.lat!, event.lng!)
+              : null,
+        );
+        _venueVersion++;
+      }
+      if (cover != null) _cover = cover;
+    });
+  }
+
   String? _blankToNull(String v) => v.trim().isEmpty ? null : v.trim();
 
   /// Venue to store, or null when there is nothing to save.
@@ -205,6 +334,7 @@ class _EventFormState extends ConsumerState<_EventForm> {
       'name': _name.text.trim(),
       'description': _blankToNull(_description.text),
       'venue_name': _venue.text.trim(),
+      'venue_id': _venueId,
       'city': city.name,
       'state': city.state,
       'lat': double.parse(city.lat.toStringAsFixed(2)),
@@ -355,6 +485,37 @@ class _EventFormState extends ConsumerState<_EventForm> {
             ),
             SizedBox(height: spacing.md),
           ],
+          if (_isNew) ...[
+            GlassCard(
+              child: Row(
+                children: [
+                  Icon(Icons.link_rounded, color: colors.cyan),
+                  SizedBox(width: spacing.sm),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          l10n.eventImportTitle,
+                          style: context.textTheme.titleSmall,
+                        ),
+                        Text(
+                          l10n.eventImportHint,
+                          style: context.textTheme.bodySmall,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: spacing.xs),
+                  FilledButton.tonal(
+                    onPressed: editor.isLoading ? null : _importFromLink,
+                    child: Text(l10n.eventImportButton),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: spacing.md),
+          ],
           // Cover.
           ClipRRect(
             borderRadius: BorderRadius.circular(context.radii.lg),
@@ -401,7 +562,25 @@ class _EventFormState extends ConsumerState<_EventForm> {
             controller: _venue,
             maxLength: 120,
             textCapitalization: TextCapitalization.words,
-            decoration: InputDecoration(labelText: l10n.fieldVenue),
+            onChanged: (text) {
+              if (_venueId != null && text.trim() != _venueIdName) {
+                setState(() => _venueId = null);
+              }
+            },
+            decoration: InputDecoration(
+              labelText: l10n.fieldVenue,
+              helperText: _venueId != null
+                  ? l10n.venueLinked
+                  : l10n.venueLinkHint,
+              suffixIcon: IconButton(
+                tooltip: l10n.venuePickTitle,
+                onPressed: _chooseVenue,
+                icon: Icon(
+                  Icons.storefront_outlined,
+                  color: _venueId != null ? colors.lime : null,
+                ),
+              ),
+            ),
             validator: required,
           ),
           SizedBox(height: spacing.sm),
@@ -418,6 +597,7 @@ class _EventFormState extends ConsumerState<_EventForm> {
           SizedBox(height: spacing.sm),
           // Where exactly (SPEC 7.4): search + pin on the map.
           VenuePicker(
+            key: ValueKey(_venueVersion),
             initial: _venueChoice,
             city: _city == null
                 ? null
@@ -627,6 +807,66 @@ class _DateTimeField extends StatelessWidget {
           child: Text(formatEventDate(context, value)),
         ),
       ),
+    );
+  }
+}
+
+/// Asks for the ticket page link; returns it, or null when dismissed.
+class _ImportLinkDialog extends StatefulWidget {
+  const new();
+
+  @override
+  State<_ImportLinkDialog> createState() => _ImportLinkDialogState();
+}
+
+class _ImportLinkDialogState extends State<_ImportLinkDialog> {
+  final _url = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _url.dispose();
+    super.dispose();
+  }
+
+  void _submit() {
+    if (_formKey.currentState!.validate()) {
+      Navigator.pop(context, _url.text.trim());
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return AlertDialog(
+      title: Text(l10n.eventImportTitle),
+      content: Form(
+        key: _formKey,
+        child: TextFormField(
+          controller: _url,
+          autofocus: true,
+          keyboardType: TextInputType.url,
+          decoration: InputDecoration(
+            labelText: l10n.eventImportField,
+            hintText: 'https://',
+          ),
+          onFieldSubmitted: (_) => _submit(),
+          validator: (v) =>
+              RegExp(
+                r'^https?://\S+\.\S+$',
+                caseSensitive: false,
+              ).hasMatch((v ?? '').trim())
+              ? null
+              : l10n.validationUrl,
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(l10n.cancel),
+        ),
+        TextButton(onPressed: _submit, child: Text(l10n.eventImportButton)),
+      ],
     );
   }
 }

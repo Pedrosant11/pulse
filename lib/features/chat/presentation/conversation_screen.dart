@@ -18,6 +18,7 @@ import 'package:pulse/features/chat/domain/chat_models.dart';
 import 'package:pulse/features/chat/presentation/chat_providers.dart';
 import 'package:pulse/features/chat/presentation/widgets/chat_avatar.dart';
 import 'package:pulse/features/chat/presentation/widgets/chat_media.dart';
+import 'package:pulse/features/chat/presentation/widgets/chat_poll.dart';
 import 'package:pulse/features/crews/presentation/widgets/start_crew_sheet.dart';
 import 'package:pulse/features/profile/data/photo_picker.dart';
 import 'package:pulse/features/profile/presentation/widgets/user_profile_sheet.dart';
@@ -468,6 +469,16 @@ class _ConversationState extends ConsumerState<_Conversation> {
                           color: colors.textSecondary,
                         ),
                       ),
+                      if (isGroup)
+                        IconButton(
+                          tooltip: l10n.pollCreateTitle,
+                          onPressed: () =>
+                              showCreatePollSheet(context, header.id),
+                          icon: Icon(
+                            Icons.poll_outlined,
+                            color: colors.textSecondary,
+                          ),
+                        ),
                       Expanded(
                         child: TextField(
                           controller: _input,
@@ -803,6 +814,14 @@ class _Bubble extends StatelessWidget {
             ChatImage(path: message?.mediaPath, bytes: pending?.bytes),
             if (text.isNotEmpty) SizedBox(height: spacing.xs),
           ],
+          if (!deleted && kind == MessageKind.poll && message?.pollId != null)
+            SizedBox(
+              width: MediaQuery.sizeOf(context).width * 0.75 - spacing.sm * 2,
+              child: PollCard(
+                pollId: message!.pollId!,
+                accent: accent ?? colors.cyan,
+              ),
+            ),
           if (!deleted && kind == MessageKind.audio)
             VoicePlayer(
               path: message?.mediaPath,
@@ -812,7 +831,7 @@ class _Bubble extends StatelessWidget {
               ),
               color: colors.textPrimary,
             ),
-          if (deleted || text.isNotEmpty)
+          if (deleted || (text.isNotEmpty && kind != MessageKind.poll))
             Align(
               alignment: Alignment.centerLeft,
               child: Text(

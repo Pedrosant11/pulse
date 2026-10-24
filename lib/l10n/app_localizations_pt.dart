@@ -963,6 +963,336 @@ class AppLocalizationsPt extends AppLocalizations {
   String get eventSaveSuggest => 'Enviar sugestão';
 
   @override
+  String get venuesTitle => 'Casas';
+
+  @override
+  String get venuesSearchHint => 'Buscar casa pelo nome';
+
+  @override
+  String venuesInState(String state) {
+    return 'Em $state';
+  }
+
+  @override
+  String get venuesEverywhere => 'Todo o Brasil';
+
+  @override
+  String get venuesEmpty => 'Nenhuma casa por aqui ainda';
+
+  @override
+  String get venuesEmptySearch =>
+      'Nenhuma casa com esse nome. Confira a grafia ou cadastre a casa.';
+
+  @override
+  String venuesPending(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count casas para aprovar',
+      one: '1 casa para aprovar',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get venueNotFound => 'Essa casa não existe mais';
+
+  @override
+  String get venueAdd => 'Cadastrar casa';
+
+  @override
+  String get venueSuggest => 'Enviar para a curadoria';
+
+  @override
+  String get venueSuggestHint =>
+      'Sua casa passa pela curadoria antes de aparecer para todo mundo. Enquanto isso, você já pode usá-la nos seus eventos.';
+
+  @override
+  String get venueCreated => 'Casa cadastrada!';
+
+  @override
+  String get venueSuggested => 'Casa enviada para a curadoria.';
+
+  @override
+  String get venueEdit => 'Editar casa';
+
+  @override
+  String get venueName => 'Nome da casa';
+
+  @override
+  String get venueNeighborhood => 'Bairro';
+
+  @override
+  String get venueInstagram => 'Instagram da casa';
+
+  @override
+  String get venueInstagramInvalid =>
+      'Use só o @ (letras, números, ponto e _).';
+
+  @override
+  String get venuePhoto => 'Foto da casa';
+
+  @override
+  String get venueFollow => 'Seguir casa';
+
+  @override
+  String get venueFollowing => 'Seguindo';
+
+  @override
+  String get venueFollowHint =>
+      'Quem segue fica sabendo das festas novas daqui.';
+
+  @override
+  String venueFollowers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count seguidores',
+      one: '1 seguidor',
+      zero: 'Nenhum seguidor',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get venueNoRatings => 'Sem avaliações';
+
+  @override
+  String venueStars(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count estrelas',
+      one: '1 estrela',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String venueUpcomingCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count festas vindo',
+      one: '1 festa vindo',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get venuePendingBanner =>
+      'Esta casa está em análise pela curadoria. Só você e a equipe a veem.';
+
+  @override
+  String venueRejectedBanner(String reason) {
+    return 'Casa recusada pela curadoria: $reason';
+  }
+
+  @override
+  String get venueWhere => 'Onde fica';
+
+  @override
+  String get venueUpcoming => 'Próximas festas';
+
+  @override
+  String get venueNoUpcoming =>
+      'Nenhuma festa marcada aqui por enquanto. Siga a casa para saber quando tiver.';
+
+  @override
+  String venuePastEvents(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count festas já rolaram aqui pelo app',
+      one: '1 festa já rolou aqui pelo app',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get venueRatings => 'Avaliações';
+
+  @override
+  String get venueRate => 'Avaliar a casa';
+
+  @override
+  String get venueRateEdit => 'Editar minha avaliação';
+
+  @override
+  String venueRateTitle(String name) {
+    return 'Como foi na $name?';
+  }
+
+  @override
+  String get venueRateComment => 'Conte como foi (opcional)';
+
+  @override
+  String get venueRateDelete => 'Apagar minha avaliação';
+
+  @override
+  String get venueRateOnlyWent =>
+      'Só quem foi a uma festa aqui pelo app pode avaliar.';
+
+  @override
+  String get venueApprove => 'Aprovar casa';
+
+  @override
+  String get venueRefuse => 'Recusar';
+
+  @override
+  String get venueRefuseTitle => 'Recusar casa';
+
+  @override
+  String get venuePickTitle => 'Escolher a casa';
+
+  @override
+  String get venuePickAdd => 'Cadastrar uma casa nova';
+
+  @override
+  String get venueLinked => 'Ligado à página da casa';
+
+  @override
+  String get venueLinkHint => 'Toque na lojinha para escolher a casa';
+
+  @override
+  String venueSee(String name) {
+    return 'Ver a página da $name';
+  }
+
+  @override
+  String get errorVenueUnavailable =>
+      'Essa casa ainda não foi aprovada. Escolha outra ou aguarde a curadoria.';
+
+  @override
+  String get pollCreateTitle => 'Criar enquete';
+
+  @override
+  String get pollQuestion => 'Pergunta';
+
+  @override
+  String get pollQuestionHint => 'Ex.: Que horas o esquenta?';
+
+  @override
+  String pollOption(int number) {
+    return 'Opção $number';
+  }
+
+  @override
+  String get pollAddOption => 'Adicionar opção';
+
+  @override
+  String get pollDuration => 'Fica aberta por';
+
+  @override
+  String pollHours(int hours) {
+    return '$hours h';
+  }
+
+  @override
+  String get pollCreate => 'Mandar enquete';
+
+  @override
+  String pollVotes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count votos',
+      one: '1 voto',
+      zero: 'Ninguém votou ainda',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pollClosesInHours(int hours) {
+    String _temp0 = intl.Intl.pluralLogic(
+      hours,
+      locale: localeName,
+      other: 'fecha em $hours h',
+      one: 'fecha em 1 h',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get pollClosesSoon => 'fecha em instantes';
+
+  @override
+  String get pollClosed => 'encerrada';
+
+  @override
+  String get eventShareTitle => 'Compartilhar festa';
+
+  @override
+  String get eventShareStory => 'Postar no story';
+
+  @override
+  String get eventInviteFriends => 'Chamar a galera';
+
+  @override
+  String get eventStoryGoing => 'EU VOU 🔥';
+
+  @override
+  String eventStoryCoupon(String code) {
+    return 'Cupom: $code';
+  }
+
+  @override
+  String get eventStoryTagline => 'Ache sua galera nas mesmas festas';
+
+  @override
+  String eventInviteHeadline(String name) {
+    return 'Bora na $name? 🎧';
+  }
+
+  @override
+  String eventInviteLineup(String artists) {
+    return 'Line-up: $artists';
+  }
+
+  @override
+  String eventInviteTicket(String url) {
+    return 'Ingresso: $url';
+  }
+
+  @override
+  String eventInviteCoupon(String code) {
+    return 'Cupom de desconto: $code';
+  }
+
+  @override
+  String get eventInviteFooter =>
+      'Marca presença no Pulse pra gente montar a crew!';
+
+  @override
+  String get eventImportTitle => 'Importar de um link';
+
+  @override
+  String get eventImportHint =>
+      'Cole o link do ingresso (Sympla, Ingresse, Shotgun…) e a gente preenche o que der.';
+
+  @override
+  String get eventImportField => 'Link da página do ingresso';
+
+  @override
+  String get eventImportButton => 'Importar';
+
+  @override
+  String get eventImportDone => 'Pronto! Confira tudo antes de salvar.';
+
+  @override
+  String eventImportError(String problem) {
+    String _temp0 = intl.Intl.selectLogic(problem, {
+      'invalid': 'Esse link não parece válido.',
+      'unavailable':
+          'Não deu para abrir essa página. Tente de novo ou preencha à mão.',
+      'noData': 'Essa página não traz os dados da festa. Preencha à mão.',
+      'other': 'Não deu para importar esse link.',
+    });
+    return '$_temp0';
+  }
+
+  @override
   String get eventSaveCreate => 'Publicar evento';
 
   @override
@@ -1106,6 +1436,11 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String discoverLookingFor(String intent) {
     return 'Busca: $intent';
+  }
+
+  @override
+  String discoverMusicMatch(int percent) {
+    return '$percent% de match musical';
   }
 
   @override

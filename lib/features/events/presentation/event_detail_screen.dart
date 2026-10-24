@@ -24,6 +24,7 @@ import 'package:pulse/features/events/data/events_repository.dart';
 import 'package:pulse/features/events/domain/event.dart';
 import 'package:pulse/features/events/presentation/events_providers.dart';
 import 'package:pulse/features/events/presentation/widgets/event_location.dart';
+import 'package:pulse/features/events/presentation/widgets/event_share.dart';
 import 'package:pulse/features/events/presentation/widgets/event_visuals.dart';
 import 'package:pulse/features/events/presentation/widgets/featured_promo.dart';
 import 'package:pulse/features/profile/presentation/profile_labels.dart';
@@ -222,6 +223,13 @@ class _EventDetailBody extends ConsumerWidget {
           expandedHeight: 260,
           backgroundColor: colors.background,
           actions: [
+            // Story card + "Chamar a galera".
+            if (event.status == EventStatus.approved)
+              IconButton(
+                tooltip: l10n.eventShareTitle,
+                icon: const Icon(Icons.ios_share_rounded),
+                onPressed: () => showEventShareSheet(context, event),
+              ),
             // Event panel: aggregated numbers (creator and moderators).
             if (role.isModerator || isCreator)
               IconButton(
@@ -334,6 +342,15 @@ class _EventDetailBody extends ConsumerWidget {
                   '${event.city}, ${event.state}',
                 ].join('\n'),
               ),
+              if (event.venueId case final venueId?)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: TextButton.icon(
+                    onPressed: () => context.push(AppRoutes.venue(venueId)),
+                    icon: const Icon(Icons.storefront_outlined),
+                    label: Text(l10n.venueSee(event.venueName)),
+                  ),
+                ),
               // Map + "Como chegar", or the secret-location notice.
               EventLocationSection(event: event),
               _InfoRow(

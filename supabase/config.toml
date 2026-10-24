@@ -137,6 +137,12 @@ public = false
 file_size_limit = "5MiB"
 allowed_mime_types = ["image/jpeg"]
 
+[storage.buckets.venue-photos]
+public = true
+file_size_limit = "5MiB"
+allowed_mime_types = ["image/jpeg"]
+objects_path = "./seed/venue-photos"
+
 [storage.buckets.ad-images]
 public = true
 file_size_limit = "5MiB"
@@ -445,6 +451,10 @@ verify_jwt = false
 
 # Called by RevenueCat with its own shared secret.
 [functions.revenuecat-webhook]
+verify_jwt = false
+
+# Validates the caller's token itself (auth.getUser).
+[functions.event-preview]
 verify_jwt = false
 
 [analytics]

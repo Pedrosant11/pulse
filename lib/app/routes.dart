@@ -44,6 +44,14 @@ abstract final class AppRoutes {
   static const adminAdForm = '/admin/ads/edit';
   static const legalPrefix = '/legal';
 
+  static const venues = '/events/venues';
+  static const newVenue = '/events/venues/new';
+  static String newVenueNamed(String name) => Uri(
+    path: newVenue,
+    queryParameters: {if (name.isNotEmpty) 'name': name},
+  ).toString();
+  static String venue(String venueId) => '$venues/$venueId';
+  static String editVenue(String venueId) => '$venues/$venueId/edit';
   static String eventDetail(String eventId) => '$events/$eventId';
   static String editEvent(String eventId) => '$events/$eventId/edit';
   static String eventInsights(String eventId) => '$events/$eventId/insights';

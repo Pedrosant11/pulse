@@ -5,6 +5,7 @@ import 'package:pulse/core/errors/app_failure.dart';
 import 'package:pulse/core/supabase/supabase_providers.dart';
 import 'package:pulse/core/utils/random_id.dart';
 import 'package:pulse/features/chat/domain/chat_models.dart';
+import 'package:pulse/features/chat/domain/poll.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -12,7 +13,7 @@ part 'chat_repository.g.dart';
 
 const _messageColumns =
     'id, conversation_id, sender_id, content, created_at, deleted_at, '
-    'kind, media_path, media_duration_ms';
+    'kind, media_path, media_duration_ms, poll_id';
 
 const _mediaBucket = 'chat-media';
 
@@ -267,6 +268,68 @@ class ChatRepository {
     return _RealtimeSubscription(_client, channel);
   }
 }
+
+/// Crew chat polls (crew_polls migration).
+class PollsRepository {
+  new(this._client);
+
+  final SupabaseClient _client;
+
+  /// Creates the poll and its chat message; returns the poll id.
+  Future<String> create({
+    required String conversationId,
+    required String question,
+    required List<String> options,
+    required int hours,
+  }) => guardFailures(
+    () => _client.rpc<String>(
+      'create_poll',
+      params: {
+        'p_conversation': conversationId,
+        'p_question': question,
+        'p_options': options,
+        'p_hours': hours,
+      },
+    ),
+  );
+
+  Future<Poll> poll(String pollId) => guardFailures(() async {
+    final row = await _client
+        .from('polls')
+        .select('id, conversation_id, question, options, closes_at, created_by')
+        .eq('id', pollId)
+        .single();
+    return Poll.fromJson(row);
+  });
+
+  /// Everyone's votes, live.
+  Stream<List<PollVote>> votes(String pollId) => _client
+      .from('poll_votes')
+      .stream(primaryKey: ['poll_id', 'user_id'])
+      .eq('poll_id', pollId)
+      .map((rows) => rows.map(PollVote.fromJson).toList());
+
+  Future<void> vote(String pollId, {required String userId, int? option}) =>
+      guardFailures(() async {
+        if (option == null) {
+          await _client
+              .from('poll_votes')
+              .delete()
+              .eq('poll_id', pollId)
+              .eq('user_id', userId);
+        } else {
+          await _client.from('poll_votes').upsert({
+            'poll_id': pollId,
+            'user_id': userId,
+            'option': option,
+          });
+        }
+      });
+}
+
+@Riverpod(keepAlive: true)
+PollsRepository pollsRepository(Ref ref) =>
+    PollsRepository(ref.watch(supabaseClientProvider));
 
 @Riverpod(keepAlive: true)
 ChatRepository chatRepository(Ref ref) =>

@@ -1792,6 +1792,468 @@ abstract class AppLocalizations {
   /// **'Enviar sugestão'**
   String get eventSaveSuggest;
 
+  /// No description provided for @venuesTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Casas'**
+  String get venuesTitle;
+
+  /// No description provided for @venuesSearchHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Buscar casa pelo nome'**
+  String get venuesSearchHint;
+
+  /// No description provided for @venuesInState.
+  ///
+  /// In pt, this message translates to:
+  /// **'Em {state}'**
+  String venuesInState(String state);
+
+  /// No description provided for @venuesEverywhere.
+  ///
+  /// In pt, this message translates to:
+  /// **'Todo o Brasil'**
+  String get venuesEverywhere;
+
+  /// No description provided for @venuesEmpty.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma casa por aqui ainda'**
+  String get venuesEmpty;
+
+  /// No description provided for @venuesEmptySearch.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma casa com esse nome. Confira a grafia ou cadastre a casa.'**
+  String get venuesEmptySearch;
+
+  /// No description provided for @venuesPending.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =1{1 casa para aprovar} other{{count} casas para aprovar}}'**
+  String venuesPending(int count);
+
+  /// No description provided for @venueNotFound.
+  ///
+  /// In pt, this message translates to:
+  /// **'Essa casa não existe mais'**
+  String get venueNotFound;
+
+  /// No description provided for @venueAdd.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cadastrar casa'**
+  String get venueAdd;
+
+  /// No description provided for @venueSuggest.
+  ///
+  /// In pt, this message translates to:
+  /// **'Enviar para a curadoria'**
+  String get venueSuggest;
+
+  /// No description provided for @venueSuggestHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sua casa passa pela curadoria antes de aparecer para todo mundo. Enquanto isso, você já pode usá-la nos seus eventos.'**
+  String get venueSuggestHint;
+
+  /// No description provided for @venueCreated.
+  ///
+  /// In pt, this message translates to:
+  /// **'Casa cadastrada!'**
+  String get venueCreated;
+
+  /// No description provided for @venueSuggested.
+  ///
+  /// In pt, this message translates to:
+  /// **'Casa enviada para a curadoria.'**
+  String get venueSuggested;
+
+  /// No description provided for @venueEdit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar casa'**
+  String get venueEdit;
+
+  /// No description provided for @venueName.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nome da casa'**
+  String get venueName;
+
+  /// No description provided for @venueNeighborhood.
+  ///
+  /// In pt, this message translates to:
+  /// **'Bairro'**
+  String get venueNeighborhood;
+
+  /// No description provided for @venueInstagram.
+  ///
+  /// In pt, this message translates to:
+  /// **'Instagram da casa'**
+  String get venueInstagram;
+
+  /// No description provided for @venueInstagramInvalid.
+  ///
+  /// In pt, this message translates to:
+  /// **'Use só o @ (letras, números, ponto e _).'**
+  String get venueInstagramInvalid;
+
+  /// No description provided for @venuePhoto.
+  ///
+  /// In pt, this message translates to:
+  /// **'Foto da casa'**
+  String get venuePhoto;
+
+  /// No description provided for @venueFollow.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seguir casa'**
+  String get venueFollow;
+
+  /// No description provided for @venueFollowing.
+  ///
+  /// In pt, this message translates to:
+  /// **'Seguindo'**
+  String get venueFollowing;
+
+  /// No description provided for @venueFollowHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Quem segue fica sabendo das festas novas daqui.'**
+  String get venueFollowHint;
+
+  /// No description provided for @venueFollowers.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =0{Nenhum seguidor} =1{1 seguidor} other{{count} seguidores}}'**
+  String venueFollowers(int count);
+
+  /// No description provided for @venueNoRatings.
+  ///
+  /// In pt, this message translates to:
+  /// **'Sem avaliações'**
+  String get venueNoRatings;
+
+  /// No description provided for @venueStars.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =1{1 estrela} other{{count} estrelas}}'**
+  String venueStars(int count);
+
+  /// No description provided for @venueUpcomingCount.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =1{1 festa vindo} other{{count} festas vindo}}'**
+  String venueUpcomingCount(int count);
+
+  /// No description provided for @venuePendingBanner.
+  ///
+  /// In pt, this message translates to:
+  /// **'Esta casa está em análise pela curadoria. Só você e a equipe a veem.'**
+  String get venuePendingBanner;
+
+  /// No description provided for @venueRejectedBanner.
+  ///
+  /// In pt, this message translates to:
+  /// **'Casa recusada pela curadoria: {reason}'**
+  String venueRejectedBanner(String reason);
+
+  /// No description provided for @venueWhere.
+  ///
+  /// In pt, this message translates to:
+  /// **'Onde fica'**
+  String get venueWhere;
+
+  /// No description provided for @venueUpcoming.
+  ///
+  /// In pt, this message translates to:
+  /// **'Próximas festas'**
+  String get venueUpcoming;
+
+  /// No description provided for @venueNoUpcoming.
+  ///
+  /// In pt, this message translates to:
+  /// **'Nenhuma festa marcada aqui por enquanto. Siga a casa para saber quando tiver.'**
+  String get venueNoUpcoming;
+
+  /// No description provided for @venuePastEvents.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =1{1 festa já rolou aqui pelo app} other{{count} festas já rolaram aqui pelo app}}'**
+  String venuePastEvents(int count);
+
+  /// No description provided for @venueRatings.
+  ///
+  /// In pt, this message translates to:
+  /// **'Avaliações'**
+  String get venueRatings;
+
+  /// No description provided for @venueRate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Avaliar a casa'**
+  String get venueRate;
+
+  /// No description provided for @venueRateEdit.
+  ///
+  /// In pt, this message translates to:
+  /// **'Editar minha avaliação'**
+  String get venueRateEdit;
+
+  /// No description provided for @venueRateTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Como foi na {name}?'**
+  String venueRateTitle(String name);
+
+  /// No description provided for @venueRateComment.
+  ///
+  /// In pt, this message translates to:
+  /// **'Conte como foi (opcional)'**
+  String get venueRateComment;
+
+  /// No description provided for @venueRateDelete.
+  ///
+  /// In pt, this message translates to:
+  /// **'Apagar minha avaliação'**
+  String get venueRateDelete;
+
+  /// No description provided for @venueRateOnlyWent.
+  ///
+  /// In pt, this message translates to:
+  /// **'Só quem foi a uma festa aqui pelo app pode avaliar.'**
+  String get venueRateOnlyWent;
+
+  /// No description provided for @venueApprove.
+  ///
+  /// In pt, this message translates to:
+  /// **'Aprovar casa'**
+  String get venueApprove;
+
+  /// No description provided for @venueRefuse.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recusar'**
+  String get venueRefuse;
+
+  /// No description provided for @venueRefuseTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Recusar casa'**
+  String get venueRefuseTitle;
+
+  /// No description provided for @venuePickTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Escolher a casa'**
+  String get venuePickTitle;
+
+  /// No description provided for @venuePickAdd.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cadastrar uma casa nova'**
+  String get venuePickAdd;
+
+  /// No description provided for @venueLinked.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ligado à página da casa'**
+  String get venueLinked;
+
+  /// No description provided for @venueLinkHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Toque na lojinha para escolher a casa'**
+  String get venueLinkHint;
+
+  /// No description provided for @venueSee.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ver a página da {name}'**
+  String venueSee(String name);
+
+  /// No description provided for @errorVenueUnavailable.
+  ///
+  /// In pt, this message translates to:
+  /// **'Essa casa ainda não foi aprovada. Escolha outra ou aguarde a curadoria.'**
+  String get errorVenueUnavailable;
+
+  /// No description provided for @pollCreateTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Criar enquete'**
+  String get pollCreateTitle;
+
+  /// No description provided for @pollQuestion.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pergunta'**
+  String get pollQuestion;
+
+  /// No description provided for @pollQuestionHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ex.: Que horas o esquenta?'**
+  String get pollQuestionHint;
+
+  /// No description provided for @pollOption.
+  ///
+  /// In pt, this message translates to:
+  /// **'Opção {number}'**
+  String pollOption(int number);
+
+  /// No description provided for @pollAddOption.
+  ///
+  /// In pt, this message translates to:
+  /// **'Adicionar opção'**
+  String get pollAddOption;
+
+  /// No description provided for @pollDuration.
+  ///
+  /// In pt, this message translates to:
+  /// **'Fica aberta por'**
+  String get pollDuration;
+
+  /// No description provided for @pollHours.
+  ///
+  /// In pt, this message translates to:
+  /// **'{hours} h'**
+  String pollHours(int hours);
+
+  /// No description provided for @pollCreate.
+  ///
+  /// In pt, this message translates to:
+  /// **'Mandar enquete'**
+  String get pollCreate;
+
+  /// No description provided for @pollVotes.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count, plural, =0{Ninguém votou ainda} =1{1 voto} other{{count} votos}}'**
+  String pollVotes(int count);
+
+  /// No description provided for @pollClosesInHours.
+  ///
+  /// In pt, this message translates to:
+  /// **'{hours, plural, =1{fecha em 1 h} other{fecha em {hours} h}}'**
+  String pollClosesInHours(int hours);
+
+  /// No description provided for @pollClosesSoon.
+  ///
+  /// In pt, this message translates to:
+  /// **'fecha em instantes'**
+  String get pollClosesSoon;
+
+  /// No description provided for @pollClosed.
+  ///
+  /// In pt, this message translates to:
+  /// **'encerrada'**
+  String get pollClosed;
+
+  /// No description provided for @eventShareTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Compartilhar festa'**
+  String get eventShareTitle;
+
+  /// No description provided for @eventShareStory.
+  ///
+  /// In pt, this message translates to:
+  /// **'Postar no story'**
+  String get eventShareStory;
+
+  /// No description provided for @eventInviteFriends.
+  ///
+  /// In pt, this message translates to:
+  /// **'Chamar a galera'**
+  String get eventInviteFriends;
+
+  /// No description provided for @eventStoryGoing.
+  ///
+  /// In pt, this message translates to:
+  /// **'EU VOU 🔥'**
+  String get eventStoryGoing;
+
+  /// No description provided for @eventStoryCoupon.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cupom: {code}'**
+  String eventStoryCoupon(String code);
+
+  /// No description provided for @eventStoryTagline.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ache sua galera nas mesmas festas'**
+  String get eventStoryTagline;
+
+  /// No description provided for @eventInviteHeadline.
+  ///
+  /// In pt, this message translates to:
+  /// **'Bora na {name}? 🎧'**
+  String eventInviteHeadline(String name);
+
+  /// No description provided for @eventInviteLineup.
+  ///
+  /// In pt, this message translates to:
+  /// **'Line-up: {artists}'**
+  String eventInviteLineup(String artists);
+
+  /// No description provided for @eventInviteTicket.
+  ///
+  /// In pt, this message translates to:
+  /// **'Ingresso: {url}'**
+  String eventInviteTicket(String url);
+
+  /// No description provided for @eventInviteCoupon.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cupom de desconto: {code}'**
+  String eventInviteCoupon(String code);
+
+  /// No description provided for @eventInviteFooter.
+  ///
+  /// In pt, this message translates to:
+  /// **'Marca presença no Pulse pra gente montar a crew!'**
+  String get eventInviteFooter;
+
+  /// No description provided for @eventImportTitle.
+  ///
+  /// In pt, this message translates to:
+  /// **'Importar de um link'**
+  String get eventImportTitle;
+
+  /// No description provided for @eventImportHint.
+  ///
+  /// In pt, this message translates to:
+  /// **'Cole o link do ingresso (Sympla, Ingresse, Shotgun…) e a gente preenche o que der.'**
+  String get eventImportHint;
+
+  /// No description provided for @eventImportField.
+  ///
+  /// In pt, this message translates to:
+  /// **'Link da página do ingresso'**
+  String get eventImportField;
+
+  /// No description provided for @eventImportButton.
+  ///
+  /// In pt, this message translates to:
+  /// **'Importar'**
+  String get eventImportButton;
+
+  /// No description provided for @eventImportDone.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pronto! Confira tudo antes de salvar.'**
+  String get eventImportDone;
+
+  /// No description provided for @eventImportError.
+  ///
+  /// In pt, this message translates to:
+  /// **'{problem, select, invalid{Esse link não parece válido.} unavailable{Não deu para abrir essa página. Tente de novo ou preencha à mão.} noData{Essa página não traz os dados da festa. Preencha à mão.} other{Não deu para importar esse link.}}'**
+  String eventImportError(String problem);
+
   /// No description provided for @eventSaveCreate.
   ///
   /// In pt, this message translates to:
@@ -2037,6 +2499,12 @@ abstract class AppLocalizations {
   /// In pt, this message translates to:
   /// **'Busca: {intent}'**
   String discoverLookingFor(String intent);
+
+  /// No description provided for @discoverMusicMatch.
+  ///
+  /// In pt, this message translates to:
+  /// **'{percent}% de match musical'**
+  String discoverMusicMatch(int percent);
 
   /// No description provided for @discoverDjs.
   ///

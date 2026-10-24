@@ -147,6 +147,7 @@ _EventDetail _$EventDetailFromJson(Map<String, dynamic> json) => _EventDetail(
   featuredUntil: json['featured_until'] == null
       ? null
       : DateTime.parse(json['featured_until'] as String),
+  venueId: json['venue_id'] as String?,
 );
 
 Map<String, dynamic> _$EventDetailToJson(_EventDetail instance) =>
@@ -173,6 +174,7 @@ Map<String, dynamic> _$EventDetailToJson(_EventDetail instance) =>
       'created_by': instance.createdBy,
       'rejection_reason': instance.rejectionReason,
       'featured_until': instance.featuredUntil?.toIso8601String(),
+      'venue_id': instance.venueId,
     };
 
 _EventVenue _$EventVenueFromJson(Map<String, dynamic> json) => _EventVenue(

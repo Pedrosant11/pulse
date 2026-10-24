@@ -11,7 +11,7 @@ part 'chat_models.g.dart';
 enum ConversationType { direct, crew }
 
 /// What a message carries (`messages.kind`).
-enum MessageKind { text, image, audio }
+enum MessageKind { text, image, audio, poll }
 
 /// Row of `list_conversations()` (SPEC 9.1).
 @freezed
@@ -86,6 +86,9 @@ abstract class ChatMessage with _$ChatMessage {
     /// `chat-media` path of a photo or voice message.
     String? mediaPath,
     int? mediaDurationMs,
+
+    /// Crew poll shown by this message (kind poll).
+    String? pollId,
   }) = _ChatMessage;
 
   factory fromJson(Map<String, dynamic> json) => _$ChatMessageFromJson(json);

@@ -428,5 +428,6 @@ String? lastMessageText(ConversationSummary c, AppLocalizations l10n) {
     MessageKind.text => text,
     MessageKind.image => text.isEmpty ? l10n.chatPhoto : '📷 $text',
     MessageKind.audio => l10n.chatVoice,
+    MessageKind.poll => '📊 $text',
   };
 }

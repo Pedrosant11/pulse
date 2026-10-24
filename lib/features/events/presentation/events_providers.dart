@@ -5,6 +5,7 @@ import 'package:pulse/core/utils/run_action.dart';
 import 'package:pulse/features/auth/presentation/session_providers.dart';
 import 'package:pulse/features/events/data/events_repository.dart';
 import 'package:pulse/features/events/domain/event.dart';
+import 'package:pulse/features/events/domain/event_import.dart';
 import 'package:pulse/features/events/domain/featured.dart';
 import 'package:pulse/features/profile/presentation/profile_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -124,6 +125,19 @@ class EventEditor extends _$EventEditor {
         .read(eventsRepositoryProvider)
         .findSimilar(name: name, startsAt: startsAt, city: city),
   );
+
+  /// "Importar de um link": what the ticket page says, plus its image as
+  /// the cover when it can be downloaded.
+  Future<({ImportedEvent event, Uint8List? cover})?> importFrom(String url) =>
+      runAction(ref, (s) => state = s, () async {
+        final repository = ref.read(eventsRepositoryProvider);
+        final event = await repository.preview(url);
+        final image = event.imageUrl;
+        final cover = image == null
+            ? null
+            : await repository.downloadCover(image);
+        return (event: event, cover: cover);
+      });
 
   /// Creates the event (and its venue), uploads the cover and marks the
   /// creator as going. [venue] has no event id yet.

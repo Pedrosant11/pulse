@@ -327,6 +327,8 @@ class _DiscoverScreenState extends ConsumerState<DiscoverScreen> {
               )
             : _CardStack(
                 myGenres: {...?ref.watch(myProfileProvider).value?.musicGenres},
+                myDjs:
+                    ref.watch(myProfileProvider).value?.favoriteDjs ?? const [],
                 state: state,
                 mode: mode,
                 accent: accent,
@@ -487,6 +489,7 @@ class _CardStack extends StatelessWidget {
     required this.accent,
     required this.controller,
     required this.myGenres,
+    required this.myDjs,
     required this.onSwiped,
     required this.onOpenProfile,
     required this.onAdDone,
@@ -498,6 +501,7 @@ class _CardStack extends StatelessWidget {
   final Color accent;
   final SwipeCardController controller;
   final Set<MusicGenre> myGenres;
+  final List<String> myDjs;
   final void Function(DiscoverCandidate, SwipeDirection) onSwiped;
   final ValueChanged<DiscoverCandidate> onOpenProfile;
 
@@ -526,6 +530,7 @@ class _CardStack extends StatelessWidget {
                   candidate: top,
                   mode: mode,
                   myGenres: myGenres,
+                  myDjs: myDjs,
                   accent: accent,
                   onOpenProfile: () {},
                 ),
@@ -563,6 +568,7 @@ class _CardStack extends StatelessWidget {
                         candidate: next,
                         mode: mode,
                         myGenres: myGenres,
+                        myDjs: myDjs,
                         accent: accent,
                         onOpenProfile: () {},
                       ),
@@ -591,6 +597,7 @@ class _CardStack extends StatelessWidget {
                       candidate: top,
                       mode: mode,
                       myGenres: myGenres,
+                      myDjs: myDjs,
                       accent: accent,
                       onOpenProfile: () => onOpenProfile(top),
                     ),

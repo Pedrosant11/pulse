@@ -534,3 +534,205 @@ final class UnreadMessageCountProvider
 
 String _$unreadMessageCountHash() =>
     r'884f045d150b8d8a328bc95d9adb047dc2ef4a7b';
+
+@ProviderFor(poll)
+final pollProvider = PollFamily._();
+
+final class PollProvider
+    extends $FunctionalProvider<AsyncValue<Poll>, Poll, FutureOr<Poll>>
+    with $FutureModifier<Poll>, $FutureProvider<Poll> {
+  PollProvider._({
+    required PollFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'pollProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$pollHash();
+
+  @override
+  String toString() {
+    return r'pollProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<Poll> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<Poll> create(Ref ref) {
+    final argument = this.argument as String;
+    return poll(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is PollProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$pollHash() => r'f58550602235d379d4f174019319c39b0c54d186';
+
+final class PollFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<Poll>, String> {
+  PollFamily._()
+    : super(
+        retry: null,
+        name: r'pollProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  PollProvider call(String pollId) =>
+      PollProvider._(argument: pollId, from: this);
+
+  @override
+  String toString() => r'pollProvider';
+}
+
+@ProviderFor(pollVotes)
+final pollVotesProvider = PollVotesFamily._();
+
+final class PollVotesProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<PollVote>>,
+          List<PollVote>,
+          Stream<List<PollVote>>
+        >
+    with $FutureModifier<List<PollVote>>, $StreamProvider<List<PollVote>> {
+  PollVotesProvider._({
+    required PollVotesFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'pollVotesProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$pollVotesHash();
+
+  @override
+  String toString() {
+    return r'pollVotesProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $StreamProviderElement<List<PollVote>> $createElement(
+    $ProviderPointer pointer,
+  ) => $StreamProviderElement(pointer);
+
+  @override
+  Stream<List<PollVote>> create(Ref ref) {
+    final argument = this.argument as String;
+    return pollVotes(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is PollVotesProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$pollVotesHash() => r'd5ecc9a43088f77fa59063d2cf0db4eb63960336';
+
+final class PollVotesFamily extends $Family
+    with $FunctionalFamilyOverride<Stream<List<PollVote>>, String> {
+  PollVotesFamily._()
+    : super(
+        retry: null,
+        name: r'pollVotesProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  PollVotesProvider call(String pollId) =>
+      PollVotesProvider._(argument: pollId, from: this);
+
+  @override
+  String toString() => r'pollVotesProvider';
+}
+
+/// Create polls and vote (null option removes the vote).
+
+@ProviderFor(PollEditor)
+final pollEditorProvider = PollEditorProvider._();
+
+/// Create polls and vote (null option removes the vote).
+final class PollEditorProvider
+    extends $NotifierProvider<PollEditor, AsyncValue<void>> {
+  /// Create polls and vote (null option removes the vote).
+  PollEditorProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'pollEditorProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$pollEditorHash();
+
+  @$internal
+  @override
+  PollEditor create() => PollEditor();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AsyncValue<void> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AsyncValue<void>>(value),
+    );
+  }
+}
+
+String _$pollEditorHash() => r'e846110212863bcc868ddd1c9da8a5df72aa17f5';
+
+/// Create polls and vote (null option removes the vote).
+
+abstract class _$PollEditor extends $Notifier<AsyncValue<void>> {
+  AsyncValue<void> build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<void>, AsyncValue<void>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<void>, AsyncValue<void>>,
+              AsyncValue<void>,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}

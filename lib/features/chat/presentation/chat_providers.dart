@@ -7,6 +7,7 @@ import 'package:pulse/core/utils/run_action.dart';
 import 'package:pulse/features/auth/presentation/session_providers.dart';
 import 'package:pulse/features/chat/data/chat_repository.dart';
 import 'package:pulse/features/chat/domain/chat_models.dart';
+import 'package:pulse/features/chat/domain/poll.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'chat_providers.g.dart';
@@ -356,4 +357,50 @@ class ChatSafety extends _$ChatSafety {
 int unreadMessageCount(Ref ref) {
   final conversations = ref.watch(conversationsProvider).value ?? const [];
   return conversations.fold(0, (sum, c) => sum + c.unreadCount);
+}
+
+@riverpod
+Future<Poll> poll(Ref ref, String pollId) =>
+    ref.watch(pollsRepositoryProvider).poll(pollId);
+
+@riverpod
+Stream<List<PollVote>> pollVotes(Ref ref, String pollId) =>
+    ref.watch(pollsRepositoryProvider).votes(pollId);
+
+/// Create polls and vote (null option removes the vote).
+@riverpod
+class PollEditor extends _$PollEditor {
+  @override
+  AsyncValue<void> build() => const AsyncData(null);
+
+  Future<String?> create({
+    required String conversationId,
+    required String question,
+    required List<String> options,
+    required int hours,
+  }) => runAction(
+    ref,
+    (s) => state = s,
+    () => ref
+        .read(pollsRepositoryProvider)
+        .create(
+          conversationId: conversationId,
+          question: question.trim(),
+          options: [
+            for (final o in options)
+              if (o.trim().isNotEmpty) o.trim(),
+          ],
+          hours: hours,
+        ),
+  );
+
+  Future<bool?> vote(String pollId, int? option) =>
+      runAction(ref, (s) => state = s, () async {
+        final userId = ref.read(currentUserIdProvider);
+        if (userId == null) throw StateError('No signed-in user');
+        await ref
+            .read(pollsRepositoryProvider)
+            .vote(pollId, userId: userId, option: option);
+        return true;
+      });
 }

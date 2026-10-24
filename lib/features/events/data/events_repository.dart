@@ -1,10 +1,13 @@
 import 'dart:typed_data';
 
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:http/http.dart' as http;
 import 'package:pulse/core/errors/app_failure.dart';
 import 'package:pulse/core/supabase/supabase_providers.dart';
 import 'package:pulse/core/utils/enum_json.dart';
 import 'package:pulse/core/utils/random_id.dart';
 import 'package:pulse/features/events/domain/event.dart';
+import 'package:pulse/features/events/domain/event_import.dart';
 import 'package:pulse/features/events/domain/featured.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -208,6 +211,38 @@ class EventsRepository {
   );
 
   /// Uploads a cover to `{event}/{random}.jpg` and stores its path.
+  /// "Importar de um link": the `event-preview` Edge Function reads the
+  /// ticket page; fails with [EventLinkFailure].
+  Future<ImportedEvent> preview(String url) => guardFailures(() async {
+    final response = await _client.functions.invoke(
+      'event-preview',
+      body: {'url': url.trim()},
+    );
+    final event = parseEventPreview(
+      Map<String, dynamic>.from(response.data as Map),
+    );
+    if (event.isEmpty) throw const EventLinkFailure(EventLinkProblem.noData);
+    return event;
+  });
+
+  /// The page's image as a JPEG for the cover (null when it can't be read).
+  Future<Uint8List?> downloadCover(String url) async {
+    try {
+      final response = await http
+          .get(Uri.parse(url))
+          .timeout(const Duration(seconds: 15));
+      if (response.statusCode != 200) return null;
+      return await FlutterImageCompress.compressWithList(
+        response.bodyBytes,
+        minWidth: 1600,
+        minHeight: 900,
+        quality: 85,
+      );
+    } on Object {
+      return null;
+    }
+  }
+
   Future<void> setCover(String eventId, Uint8List jpeg) =>
       guardFailures(() async {
         final path = '$eventId/${randomId()}.jpg';
